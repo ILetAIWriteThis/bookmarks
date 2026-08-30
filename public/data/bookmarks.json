@@ -150,6 +150,31 @@
       "position": 1,
       "parentId": "tech-ai",
       "icon": "spark"
+    },
+    {
+      "id": "travel",
+      "name": "Travel",
+      "position": 9,
+      "icon": "ticket",
+      "theme": {
+        "from": "#1f4d46",
+        "to": "#39806f",
+        "accent": "#dcfff5"
+      }
+    },
+    {
+      "id": "travel-visited-places",
+      "name": "Visited Places",
+      "position": 1,
+      "parentId": "travel",
+      "icon": "bookmark"
+    },
+    {
+      "id": "travel-visited-places-crete",
+      "name": "Crete",
+      "position": 1,
+      "parentId": "travel-visited-places",
+      "icon": "star"
     }
   ],
   "bookmarks": [
@@ -383,6 +408,17 @@
         {
           "categoryId": "youtube-entertainment",
           "position": 2
+        }
+      ]
+    },
+    {
+      "id": "cave-of-zeus",
+      "title": "Cave of Zeus",
+      "url": "https://visitlasithi.gr/en/sanaforas/cave-of-zeus/",
+      "categories": [
+        {
+          "categoryId": "travel-visited-places-crete",
+          "position": 1
         }
       ]
     }

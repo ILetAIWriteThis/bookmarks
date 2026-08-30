@@ -25,15 +25,14 @@ test('keyboard shortcut focuses search', async ({ page }) => {
 test('direct parent and child hash routes preserve hierarchy', async ({ page }) => {
   await page.goto('./#/category/youtube')
   await expect(page.getByRole('heading', { name: 'YouTube', level: 1 })).toBeVisible()
-  await expect(page.locator('a[href="#/category/youtube-security"]')).toBeVisible()
-  await expect(page.getByRole('link', { name: /YouTube Watch Later/ })).toHaveAttribute(
-    'href',
-    'https://www.youtube.com/playlist?list=WL',
-  )
+  await expect(page.locator('a[href="#/category/youtube-podcasts"]')).toBeVisible()
 
-  await page.goto('./#/category/youtube-security')
-  await expect(page.getByRole('heading', { name: 'Security', level: 1 })).toBeVisible()
-  await expect(page.getByRole('link', { name: /Black Hills Information Security/ })).toBeVisible()
+  await page.goto('./#/category/youtube-podcasts')
+  await expect(page.getByRole('heading', { name: 'Podcasts', level: 1 })).toBeVisible()
+  await expect(page.getByRole('link', { name: /LaisvėsTV/ })).toHaveAttribute(
+    'href',
+    'https://www.youtube.com/@LaisvesTV/videos',
+  )
   await expect(page.getByRole('link', { name: 'YouTube', exact: true })).toHaveAttribute('href', '#/category/youtube')
 })
 
