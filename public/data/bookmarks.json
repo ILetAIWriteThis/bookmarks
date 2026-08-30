@@ -1,0 +1,837 @@
+{
+  "categories": [
+    {
+      "id": "news",
+      "name": "News",
+      "position": 1,
+      "icon": "newspaper",
+      "theme": {
+        "from": "#17365d",
+        "to": "#3478a7",
+        "accent": "#bde3ff"
+      }
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "position": 2,
+      "icon": "play",
+      "theme": {
+        "from": "#24191b",
+        "to": "#b51f2e",
+        "accent": "#ffffff"
+      }
+    },
+    {
+      "id": "entertainment-tracking",
+      "name": "Entertainment Tracking",
+      "position": 4,
+      "icon": "ticket",
+      "theme": {
+        "from": "#33275b",
+        "to": "#7454a6",
+        "accent": "#eee4ff"
+      }
+    },
+    {
+      "id": "finance-tracking",
+      "name": "Finance Tracking",
+      "position": 5,
+      "icon": "chart",
+      "theme": {
+        "from": "#0f493f",
+        "to": "#25896f",
+        "accent": "#d2fff1"
+      }
+    },
+    {
+      "id": "security-blogs",
+      "name": "Security Blogs",
+      "position": 7,
+      "icon": "shield",
+      "theme": {
+        "from": "#312e3d",
+        "to": "#695f78",
+        "accent": "#f2eaff"
+      }
+    },
+    {
+      "id": "tech-ai",
+      "name": "Tech/AI",
+      "position": 8,
+      "icon": "spark",
+      "theme": {
+        "from": "#173e52",
+        "to": "#25849b",
+        "accent": "#d9faff"
+      }
+    },
+    {
+      "id": "entertainment",
+      "name": "Entertainment",
+      "position": 3,
+      "icon": "star",
+      "theme": {
+        "from": "#642d45",
+        "to": "#c25c69",
+        "accent": "#ffe2df"
+      }
+    },
+    {
+      "id": "taxes",
+      "name": "Taxes",
+      "position": 6,
+      "icon": "document",
+      "theme": {
+        "from": "#4c3b23",
+        "to": "#9a7537",
+        "accent": "#fff0c9"
+      }
+    },
+    {
+      "id": "youtube-entertainment",
+      "name": "Entertainment",
+      "position": 1,
+      "parentId": "youtube",
+      "icon": "star"
+    },
+    {
+      "id": "youtube-news",
+      "name": "News",
+      "position": 2,
+      "parentId": "youtube",
+      "icon": "newspaper"
+    },
+    {
+      "id": "youtube-engineering",
+      "name": "Engineering",
+      "position": 3,
+      "parentId": "youtube",
+      "icon": "chart"
+    },
+    {
+      "id": "youtube-security",
+      "name": "Security",
+      "position": 4,
+      "parentId": "youtube",
+      "icon": "shield"
+    },
+    {
+      "id": "youtube-podcasts",
+      "name": "Podcasts",
+      "position": 5,
+      "parentId": "youtube",
+      "icon": "play"
+    },
+    {
+      "id": "youtube-science",
+      "name": "Science",
+      "position": 6,
+      "parentId": "youtube",
+      "icon": "spark"
+    },
+    {
+      "id": "youtube-lithuania",
+      "name": "Lithuania",
+      "position": 7,
+      "parentId": "youtube",
+      "icon": "document"
+    }
+  ],
+  "bookmarks": [
+    {
+      "id": "youtube-watch-later",
+      "title": "YouTube Watch Later",
+      "url": "https://www.youtube.com/playlist?list=WL",
+      "dailyPosition": 1,
+      "categories": [
+        {
+          "categoryId": "youtube",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "title": "Claude",
+      "url": "https://claude.ai/new",
+      "dailyPosition": 2,
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "chatgpt",
+      "title": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "dailyPosition": 3,
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "gmail",
+      "title": "Gmail",
+      "url": "https://mail.google.com/mail/u/0/#inbox",
+      "dailyPosition": 4,
+      "categories": []
+    },
+    {
+      "id": "google-calendar",
+      "title": "Google Calendar",
+      "url": "https://calendar.google.com/calendar/u/0/r",
+      "dailyPosition": 5,
+      "categories": []
+    },
+    {
+      "id": "onedrive",
+      "title": "OneDrive",
+      "url": "https://onedrive.live.com/",
+      "dailyPosition": 6,
+      "categories": []
+    },
+    {
+      "id": "google-keep",
+      "title": "Google Keep",
+      "url": "https://keep.google.com/u/0/#home",
+      "dailyPosition": 7,
+      "categories": []
+    },
+    {
+      "id": "lrt",
+      "title": "LRT",
+      "url": "https://www.lrt.lt/",
+      "categories": [
+        {
+          "categoryId": "news",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "goodreads",
+      "title": "Goodreads",
+      "url": "https://www.goodreads.com/review/list/165123849",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "storygraph",
+      "title": "StoryGraph",
+      "url": "https://app.thestorygraph.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "imdb-watchlist",
+      "title": "IMDb Watchlist",
+      "url": "https://www.imdb.com/user/p.7z525yifhbsnosefkvnvhjri3y/watchlist/?sort=date_added%2Cdesc",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "episode-calendar",
+      "title": "Episode Calendar",
+      "url": "https://episodecalendar.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "amazon-wishlist",
+      "title": "Amazon Wishlist",
+      "url": "https://www.amazon.com/hz/wishlist/ls/1FX01SGXD597F?type=wishlist&filter=unpurchased&sort=price-asc&viewType=grid",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "amazon-digital-content",
+      "title": "Amazon Digital Content",
+      "url": "https://www.amazon.com/hz/mycd/digital-console/contentlist/allcontent/dateDsc",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "kindle-reading-insights",
+      "title": "Kindle Reading Insights",
+      "url": "https://www.amazon.com/kindle/reading/insights#2026:false:0,37,46,4,0",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "justwatch-movies-lithuania",
+      "title": "JustWatch Movies (Lithuania)",
+      "url": "https://www.justwatch.com/lt/filmai",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "finances",
+      "title": "Finances",
+      "url": "https://onedrive.live.com/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "paysera",
+      "title": "Paysera",
+      "url": "https://paysera.lt/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "dirkjanm",
+      "title": "dirkjanm.io",
+      "url": "https://dirkjanm.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "semianalysis",
+      "title": "SemiAnalysis",
+      "url": "https://newsletter.semianalysis.com/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "go3",
+      "title": "Go3",
+      "url": "https://go3.lt/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "ignitis-declaration",
+      "title": "Ignitis Declaration",
+      "url": "https://mano.ignitis.lt/declaration",
+      "categories": [
+        {
+          "categoryId": "taxes",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-laisves-tv",
+      "title": "LaisvėsTV",
+      "url": "https://www.youtube.com/channel/UCMfPBtm9CWGswAXohT5MFyQ",
+      "categories": [
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 1
+        },
+        {
+          "categoryId": "youtube-news",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-sans-isc",
+      "title": "SANS Internet Storm Center",
+      "url": "https://www.youtube.com/channel/UCGyCV0hYfv41aFeIAszil0w",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-bhis",
+      "title": "Black Hills Information Security",
+      "url": "https://www.youtube.com/channel/UCJ2U9Dq9NckqHMbcUupgF0A",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "youtube-proto-pemza",
+      "title": "Proto Pemza",
+      "url": "https://www.youtube.com/channel/UC5oYhh2fY8AjwOyl34okpcQ",
+      "categories": [
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 2
+        },
+        {
+          "categoryId": "youtube-science",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-jack-rhysider",
+      "title": "Jack Rhysider",
+      "url": "https://www.youtube.com/channel/UCMIqrmh2lMdzhlCPK5ahsAg",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 3
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-paul-weiss-podcasts",
+      "title": "Paul, Weiss Podcasts",
+      "url": "https://www.youtube.com/channel/UCZ8v32dJGs27GK3vb5W4wJQ",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "youtube-terminalas",
+      "title": "Terminalas.",
+      "url": "https://www.youtube.com/channel/UCFarrJOYbbCld7jKKuj-e_g",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 4
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 3
+        },
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "youtube-ai-security-ops",
+      "title": "AI Security Ops",
+      "url": "https://www.youtube.com/channel/UCg3Qbm6zJqcmxTxxresW9iw",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-cloud-security-podcast",
+      "title": "Cloud Security Podcast by Google",
+      "url": "https://www.youtube.com/channel/UCGzgSL-KEaKf6OpOyOHLjkQ",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 6
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "youtube-risky-business",
+      "title": "Risky Business Media",
+      "url": "https://www.youtube.com/channel/UCZzIaWixWHa96R7K4c40_Dg",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 7
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-mokslo-sriuba",
+      "title": "Mokslo sriuba",
+      "url": "https://www.youtube.com/channel/UCdOoN3WOefqtvWor9B7Yyiw",
+      "categories": [
+        {
+          "categoryId": "youtube-science",
+          "position": 2
+        },
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "youtube-politika-jakilaitis",
+      "title": "Politika. Edmundas Jakilaitis",
+      "url": "https://www.youtube.com/channel/UCJVUebRj3V_2c3NhLPImpYg",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 6
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 6
+        },
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-lietuvos-kariuomene",
+      "title": "Lietuvos kariuomenė",
+      "url": "https://www.youtube.com/channel/UCH3tFwewKmmNVbRIUCNxSgA",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 7
+        },
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "youtube-algis-ramanauskas",
+      "title": "ALGIS RAMANAUSKAS",
+      "url": "https://www.youtube.com/channel/UCQhoFLWFYsoomCHdD0JwpLw",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 6
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 7
+        },
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "youtube-coaching-for-leaders",
+      "title": "Coaching for Leaders",
+      "url": "https://www.youtube.com/channel/UCnmM41YXkTnqsG0ft_jV6pA",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "youtube-n2k-networks",
+      "title": "N2K Networks",
+      "url": "https://www.youtube.com/channel/UCIC1L2vbbyotqEF0ZLhaOdw",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 8
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "youtube-ant-lauzo",
+      "title": "ANT LAUŽO | Dominykas Kubilius",
+      "url": "https://www.youtube.com/channel/UClM43_LkNcZO3tnRJmuFuVQ",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 10
+        },
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "youtube-critical-thinking",
+      "title": "Critical Thinking - Bug Bounty Podcast",
+      "url": "https://www.youtube.com/channel/UC6zbKG1pqq2do-_oa9QFliA",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 9
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "youtube-three-buddy-problem",
+      "title": "Three Buddy Problem",
+      "url": "https://www.youtube.com/channel/UCM-MHaHEKsQJOvHiV9k8jPg",
+      "categories": [
+        {
+          "categoryId": "youtube-security",
+          "position": 10
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "youtube-redakcija",
+      "title": "Redakcija",
+      "url": "https://www.youtube.com/channel/UCLn0F5zYXi_GrK9YQaKZwbg",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 8
+        },
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 13
+        },
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "youtube-tonight-show-fallon",
+      "title": "The Tonight Show Starring Jimmy Fallon",
+      "url": "https://www.youtube.com/channel/UC8-Th83bH_thdKZDJCrn88g",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-jimmy-kimmel-live",
+      "title": "Jimmy Kimmel Live",
+      "url": "https://www.youtube.com/channel/UCa6vGFO9ty8v5KZJXQxdhaw",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "youtube-last-week-tonight",
+      "title": "LastWeekTonight",
+      "url": "https://www.youtube.com/channel/UC3XTzVzaHQEd30rQbuvCtTQ",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "youtube-seth-meyers",
+      "title": "Late Night with Seth Meyers",
+      "url": "https://www.youtube.com/channel/UCVTyTA7-g9nopHeHbeuvpRA",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "youtube-snl",
+      "title": "Saturday Night Live",
+      "url": "https://www.youtube.com/channel/UCqFzWxSCi39LnW1JKFR3efg",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-dw-news",
+      "title": "DW News",
+      "url": "https://www.youtube.com/channel/UCknLrEdhRCp1aegoMqRaCZg",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-bbc-news",
+      "title": "BBC News",
+      "url": "https://www.youtube.com/channel/UC16niRr50-MSBwiO3YDb3RA",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "youtube-lrt",
+      "title": "Lietuvos nacionalinis radijas ir televizija",
+      "url": "https://www.youtube.com/channel/UC4KnMZaxcv1KZDAJsgHXcOA",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 3
+        },
+        {
+          "categoryId": "youtube-lithuania",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "youtube-wsj",
+      "title": "The Wall Street Journal",
+      "url": "https://www.youtube.com/channel/UCK7tptUDHh-RYDsdxO1-5QQ",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "youtube-b1m",
+      "title": "The B1M",
+      "url": "https://www.youtube.com/channel/UC6n8I1UDTKP1IWjQMg6_TwA",
+      "categories": [
+        {
+          "categoryId": "youtube-engineering",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-practical-engineering",
+      "title": "Practical Engineering",
+      "url": "https://www.youtube.com/channel/UCMOqf8ab-42UUQIdVoKwjlQ",
+      "categories": [
+        {
+          "categoryId": "youtube-engineering",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "youtube-real-engineering",
+      "title": "Real Engineering",
+      "url": "https://www.youtube.com/channel/UCR1IuLEqb6UEA_zQ81kwXfg",
+      "categories": [
+        {
+          "categoryId": "youtube-engineering",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "youtube-interesting-engineering",
+      "title": "Interesting Engineering",
+      "url": "https://www.youtube.com/channel/UCEuiOszNd6msGgqsD0f9YAQ",
+      "categories": [
+        {
+          "categoryId": "youtube-engineering",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "youtube-free-documentary-engineering",
+      "title": "Free Documentary - Engineering",
+      "url": "https://www.youtube.com/channel/UCKFjNynYRgDfnSIXzELPqTA",
+      "categories": [
+        {
+          "categoryId": "youtube-engineering",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-megabuilds",
+      "title": "MegaBuilds",
+      "url": "https://www.youtube.com/channel/UC7Eef1bJ18d-ComE-V7YpJw",
+      "categories": [
+        {
+          "categoryId": "youtube-engineering",
+          "position": 6
+        }
+      ]
+    }
+  ]
+}
