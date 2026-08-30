@@ -148,6 +148,37 @@ export function validateBookmarkData(value: unknown): BookmarkData {
   reportDuplicates(categories.map(({ id }) => id), 'category', errors)
   reportDuplicates(bookmarks.map(({ id }) => id), 'bookmark', errors)
 
+  const dailyPositions = new Map<number, string>()
+  bookmarks.forEach((bookmark, index) => {
+    if (bookmark.dailyPosition === undefined) return
+    const existingBookmarkId = dailyPositions.get(bookmark.dailyPosition)
+    if (existingBookmarkId) {
+      errors.push(
+        `bookmarks[${index}].dailyPosition duplicates position ${bookmark.dailyPosition} used by "${existingBookmarkId}"`,
+      )
+    } else {
+      dailyPositions.set(bookmark.dailyPosition, bookmark.id)
+    }
+  })
+
+  const bookmarkUrls = new Map<string, string>()
+  bookmarks.forEach((bookmark, index) => {
+    let normalizedUrl: string
+    try {
+      normalizedUrl = new URL(bookmark.url).href
+    } catch {
+      return
+    }
+    const existingBookmarkId = bookmarkUrls.get(normalizedUrl)
+    if (existingBookmarkId) {
+      errors.push(
+        `bookmarks[${index}].url duplicates URL used by "${existingBookmarkId}"`,
+      )
+    } else {
+      bookmarkUrls.set(normalizedUrl, bookmark.id)
+    }
+  })
+
   const categoryById = new Map(categories.map((category) => [category.id, category]))
   categories.forEach((category, index) => {
     if (!category.parentId) return

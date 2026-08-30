@@ -182,7 +182,7 @@
       "id": "claude",
       "title": "Claude",
       "url": "https://claude.ai/new",
-      "dailyPosition": 2,
+      "dailyPosition": 3,
       "categories": [
         {
           "categoryId": "tech-ai",
@@ -194,7 +194,7 @@
       "id": "chatgpt",
       "title": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "dailyPosition": 3,
+      "dailyPosition": 4,
       "categories": [
         {
           "categoryId": "tech-ai",
@@ -206,35 +206,40 @@
       "id": "gmail",
       "title": "Gmail",
       "url": "https://mail.google.com/mail/u/0/#inbox",
-      "dailyPosition": 4,
+      "dailyPosition": 5,
       "categories": []
     },
     {
       "id": "google-calendar",
       "title": "Google Calendar",
       "url": "https://calendar.google.com/calendar/u/0/r",
-      "dailyPosition": 5,
+      "dailyPosition": 6,
       "categories": []
     },
     {
       "id": "onedrive",
       "title": "OneDrive",
       "url": "https://onedrive.live.com/",
-      "dailyPosition": 6,
-      "categories": []
+      "dailyPosition": 7,
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1
+        }
+      ]
     },
     {
       "id": "google-keep",
       "title": "Google Keep",
       "url": "https://keep.google.com/u/0/#home",
-      "dailyPosition": 7,
+      "dailyPosition": 8,
       "categories": []
     },
     {
       "id": "lrt",
       "title": "LRT",
       "url": "https://www.lrt.lt/",
-      "dailyPosition": 8,
+      "dailyPosition": 2,
       "categories": [
         {
           "categoryId": "news",
@@ -331,17 +336,6 @@
       ]
     },
     {
-      "id": "finances",
-      "title": "Finances",
-      "url": "https://onedrive.live.com/",
-      "categories": [
-        {
-          "categoryId": "finance-tracking",
-          "position": 1
-        }
-      ]
-    },
-    {
       "id": "paysera",
       "title": "Paysera",
       "url": "https://paysera.lt/",
@@ -421,6 +415,13 @@
           "position": 1
         }
       ]
+    },
+    {
+      "id": "youtube-watch-later",
+      "title": "YouTube Watch Later",
+      "url": "https://www.youtube.com/playlist?list=WL",
+      "dailyPosition": 1,
+      "categories": []
     }
   ]
 }

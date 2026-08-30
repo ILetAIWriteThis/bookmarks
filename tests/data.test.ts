@@ -57,6 +57,25 @@ describe('bookmark data', () => {
     expect(dailyBookmarks(tied).map(({ title }) => title)).toEqual(['Alpha News', 'Example Journal'])
   })
 
+  it('rejects duplicate Daily positions', () => {
+    const duplicateDailyPosition = {
+      ...testData,
+      bookmarks: testData.bookmarks.map((bookmark) => ({ ...bookmark, dailyPosition: 1 })),
+    }
+    expect(() => validateBookmarkData(duplicateDailyPosition)).toThrow(/dailyPosition duplicates position 1/)
+  })
+
+  it('rejects duplicate bookmark URLs', () => {
+    const duplicateUrl = {
+      ...testData,
+      bookmarks: [
+        ...testData.bookmarks,
+        { ...testData.bookmarks[0], id: 'duplicate', url: 'https://EXAMPLE.com/journal' },
+      ],
+    }
+    expect(() => validateBookmarkData(duplicateUrl)).toThrow(/url duplicates URL/)
+  })
+
   it('searches normalized text, hostnames, tags, and category names', () => {
     expect(searchBookmarks(testData, 'tech').map(({ id }) => id)).toEqual(['example'])
     expect(searchBookmarks(testData, 'TECH').map(({ id }) => id)).toEqual(['example'])
