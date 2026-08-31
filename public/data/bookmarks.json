@@ -91,14 +91,14 @@
     {
       "id": "youtube-entertainment",
       "name": "Entertainment",
-      "position": 1,
+      "position": 2,
       "parentId": "youtube",
       "icon": "star"
     },
     {
       "id": "youtube-news",
       "name": "News",
-      "position": 2,
+      "position": 4,
       "parentId": "youtube",
       "icon": "newspaper"
     },
@@ -112,14 +112,14 @@
     {
       "id": "youtube-security",
       "name": "Security",
-      "position": 4,
+      "position": 5,
       "parentId": "youtube",
       "icon": "shield"
     },
     {
       "id": "youtube-podcasts",
       "name": "Podcasts",
-      "position": 5,
+      "position": 1,
       "parentId": "youtube",
       "icon": "play"
     },
@@ -422,6 +422,234 @@
       "url": "https://www.youtube.com/playlist?list=WL",
       "dailyPosition": 1,
       "categories": []
+    },
+    {
+      "id": "youtube-internet-storm-center",
+      "title": "SANS Internet Storm Center",
+      "url": "https://www.youtube.com/@internetstormcenterstormca2350/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "youtube-black-hills-information-security",
+      "title": "Black Hills Information Security",
+      "url": "https://www.youtube.com/@BlackHillsInformationSecurity/streams",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 3
+        },
+        {
+          "categoryId": "youtube-security",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "youtube-proto-pemza",
+      "title": "Proto Pemza",
+      "url": "https://www.youtube.com/@protopemza/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "youtube-jack-rhysider",
+      "title": "Jack Rhysider",
+      "url": "https://www.youtube.com/@JackRhysider/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-mokslo-sriuba",
+      "title": "Mokslo sriuba",
+      "url": "https://www.youtube.com/@mokslosriuba/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 6
+        },
+        {
+          "categoryId": "youtube-science",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "youtube-paul-weiss-podcasts",
+      "title": "Paul, Weiss Podcasts",
+      "url": "https://www.youtube.com/@paulweiss-podcasts/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "youtube-terminalas",
+      "title": "Terminalas",
+      "url": "https://www.youtube.com/@Terminalas.Katkus/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "youtube-ai-security-ops",
+      "title": "AI Security Ops",
+      "url": "https://www.youtube.com/@AISecurityOps/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "youtube-risky-business-media",
+      "title": "Risky Business Media",
+      "url": "https://www.youtube.com/@riskybizmedia/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "youtube-politika-edmundas-jakilaitis",
+      "title": "Politika. Edmundas Jakilaitis",
+      "url": "https://www.youtube.com/@politika_lt/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "youtube-lietuvos-kariuomene",
+      "title": "Lietuvos kariuomenė",
+      "url": "https://www.youtube.com/@Lietuvoskariuomen%C4%97-k6b/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "youtube-algis-ramanauskas",
+      "title": "Algis Ramanauskas",
+      "url": "https://www.youtube.com/@whatlooksrightisright/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 13
+        }
+      ]
+    },
+    {
+      "id": "youtube-coaching-for-leaders",
+      "title": "Coaching for Leaders",
+      "url": "https://www.youtube.com/@CoachingforLeaders/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 14
+        }
+      ]
+    },
+    {
+      "id": "youtube-n2k-networks",
+      "title": "N2K Networks",
+      "url": "https://www.youtube.com/@n2kcyber/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 15
+        }
+      ]
+    },
+    {
+      "id": "youtube-ant-lauzo",
+      "title": "Ant Laužo",
+      "url": "https://www.youtube.com/@antlauzoTV/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 16
+        }
+      ]
+    },
+    {
+      "id": "youtube-critical-thinking-bug-bounty",
+      "title": "Critical Thinking - Bug Bounty Podcast",
+      "url": "https://www.youtube.com/@criticalthinkingpodcast/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 17
+        }
+      ]
+    },
+    {
+      "id": "youtube-three-buddy-problem",
+      "title": "Three Buddy Problem",
+      "url": "https://www.youtube.com/@ryanaraine/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 18
+        }
+      ]
+    },
+    {
+      "id": "youtube-redakcija",
+      "title": "Redakcija",
+      "url": "https://www.youtube.com/@Redakcija_LT/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 19
+        }
+      ]
+    },
+    {
+      "id": "youtube-cloud-security-podcast",
+      "title": "Cloud Security Podcast",
+      "url": "https://www.youtube.com/@cloudsecpodcast/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 20
+        }
+      ]
+    },
+    {
+      "id": "youtube-wall-street-journal",
+      "title": "The Wall Street Journal",
+      "url": "https://www.youtube.com/@wsj/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 4
+        }
+      ]
     }
   ]
 }
