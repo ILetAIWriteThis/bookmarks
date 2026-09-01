@@ -112,7 +112,7 @@
     {
       "id": "youtube-security",
       "name": "Security",
-      "position": 5,
+      "position": 11,
       "parentId": "youtube",
       "icon": "shield"
     },
@@ -126,16 +126,9 @@
     {
       "id": "youtube-science",
       "name": "Science",
-      "position": 6,
+      "position": 5,
       "parentId": "youtube",
       "icon": "spark"
-    },
-    {
-      "id": "youtube-lithuania",
-      "name": "Lithuania",
-      "position": 7,
-      "parentId": "youtube",
-      "icon": "document"
     },
     {
       "id": "security-researchers-blogs",
@@ -175,6 +168,42 @@
       "position": 1,
       "parentId": "travel-visited-places",
       "icon": "star"
+    },
+    {
+      "id": "youtube-cars",
+      "name": "Cars",
+      "position": 6,
+      "parentId": "youtube"
+    },
+    {
+      "id": "youtube-music",
+      "name": "Music",
+      "position": 7,
+      "parentId": "youtube"
+    },
+    {
+      "id": "youtube-movies-tv",
+      "name": "Movies & TV",
+      "position": 8,
+      "parentId": "youtube"
+    },
+    {
+      "id": "youtube-security-conferences",
+      "name": "Conferences",
+      "position": 1,
+      "parentId": "youtube-security"
+    },
+    {
+      "id": "youtube-politics",
+      "name": "Politics",
+      "position": 9,
+      "parentId": "youtube"
+    },
+    {
+      "id": "youtube-geography",
+      "name": "Geography",
+      "position": 10,
+      "parentId": "youtube"
     }
   ],
   "bookmarks": [
@@ -648,6 +677,208 @@
         {
           "categoryId": "youtube-news",
           "position": 4
+        }
+      ]
+    },
+    {
+      "id": "youtube-last-week-tonight",
+      "title": "Last Week Tonight",
+      "url": "https://www.youtube.com/@LastWeekTonight/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "youtube-fallon-tonight",
+      "title": "The Tonight Show Starring Jimmy Fallon",
+      "url": "https://www.youtube.com/@fallontonight/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "youtube-jimmy-kimmel-live",
+      "title": "Jimmy Kimmel Live",
+      "url": "https://www.youtube.com/@JimmyKimmelLive/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-late-night-seth",
+      "title": "Late Night with Seth Meyers",
+      "url": "https://www.youtube.com/@LateNightSeth/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "youtube-saturday-night-live",
+      "title": "Saturday Night Live",
+      "url": "https://www.youtube.com/@SaturdayNightLive/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "youtube-dw-news",
+      "title": "DW News",
+      "url": "https://www.youtube.com/@dwnews/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "youtube-bbc-news",
+      "title": "BBC News",
+      "url": "https://www.youtube.com/@BBCNews/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "youtube-lrt",
+      "title": "LRT",
+      "url": "https://www.youtube.com/@LRTinklas/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-news",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "youtube-doug-demuro",
+      "title": "Doug DeMuro",
+      "url": "https://www.youtube.com/@DougDeMuro/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-cars",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-carwow",
+      "title": "carwow",
+      "url": "https://www.youtube.com/@carwow/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-cars",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "youtube-taylor-swift",
+      "title": "Taylor Swift",
+      "url": "https://www.youtube.com/@TaylorSwift/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-music",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-cinemasins",
+      "title": "CinemaSins",
+      "url": "https://www.youtube.com/@CinemaSins/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-movies-tv",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-cinemawins",
+      "title": "CinemaWins",
+      "url": "https://www.youtube.com/@CinemaWins/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-movies-tv",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "youtube-watchmojo",
+      "title": "WatchMojo",
+      "url": "https://www.youtube.com/@WatchMojo/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-entertainment",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "youtube-wild-west-hackin-fest",
+      "title": "Wild West Hackin’ Fest",
+      "url": "https://www.youtube.com/@WildWestHackinFest/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-security-conferences",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-veritasium",
+      "title": "Veritasium",
+      "url": "https://www.youtube.com/@veritasium/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-science",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "youtube-real-life-lore",
+      "title": "RealLifeLore",
+      "url": "https://www.youtube.com/@RealLifeLore/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-politics",
+          "position": 1
+        },
+        {
+          "categoryId": "youtube-geography",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-the-b1m",
+      "title": "The B1M",
+      "url": "https://www.youtube.com/@TheB1M/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-engineering",
+          "position": 1
         }
       ]
     }
