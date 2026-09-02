@@ -881,6 +881,50 @@
           "position": 1
         }
       ]
+    },
+    {
+      "id": "amazon-send-to-kindle",
+      "title": "Send to Kindle",
+      "url": "https://www.amazon.com/sendtokindle",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "youtube-regular-car-reviews",
+      "title": "Regular Car Reviews",
+      "url": "https://www.youtube.com/@RegularCars/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-cars",
+          "position": 20
+        }
+      ]
+    },
+    {
+      "id": "i-unija",
+      "title": "i-Unija",
+      "url": "https://www.i-unija.lt/login.htm",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "seb-internet-bank",
+      "title": "SEB Internet Bank",
+      "url": "https://login.seb.lt/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 4
+        }
+      ]
     }
   ]
 }
