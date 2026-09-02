@@ -211,7 +211,7 @@
       "id": "claude",
       "title": "Claude",
       "url": "https://claude.ai/new",
-      "dailyPosition": 3,
+      "dailyPosition": 5,
       "categories": [
         {
           "categoryId": "tech-ai",
@@ -223,7 +223,7 @@
       "id": "chatgpt",
       "title": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "dailyPosition": 4,
+      "dailyPosition": 6,
       "categories": [
         {
           "categoryId": "tech-ai",
@@ -235,21 +235,21 @@
       "id": "gmail",
       "title": "Gmail",
       "url": "https://mail.google.com/mail/u/0/#inbox",
-      "dailyPosition": 5,
+      "dailyPosition": 7,
       "categories": []
     },
     {
       "id": "google-calendar",
       "title": "Google Calendar",
       "url": "https://calendar.google.com/calendar/u/0/r",
-      "dailyPosition": 6,
+      "dailyPosition": 8,
       "categories": []
     },
     {
       "id": "onedrive",
       "title": "OneDrive",
       "url": "https://onedrive.live.com/",
-      "dailyPosition": 7,
+      "dailyPosition": 9,
       "categories": [
         {
           "categoryId": "finance-tracking",
@@ -261,14 +261,14 @@
       "id": "google-keep",
       "title": "Google Keep",
       "url": "https://keep.google.com/u/0/#home",
-      "dailyPosition": 8,
+      "dailyPosition": 10,
       "categories": []
     },
     {
       "id": "lrt",
       "title": "LRT",
       "url": "https://www.lrt.lt/",
-      "dailyPosition": 2,
+      "dailyPosition": 4,
       "categories": [
         {
           "categoryId": "news",
@@ -401,6 +401,7 @@
       "id": "go3",
       "title": "Go3",
       "url": "https://go3.lt/",
+      "dailyPosition": 2,
       "categories": [
         {
           "categoryId": "entertainment",
@@ -449,7 +450,7 @@
       "id": "youtube-watch-later",
       "title": "YouTube Watch Later",
       "url": "https://www.youtube.com/playlist?list=WL",
-      "dailyPosition": 1,
+      "dailyPosition": 3,
       "categories": []
     },
     {
@@ -925,6 +926,20 @@
           "position": 4
         }
       ]
+    },
+    {
+      "id": "github-iletaiwritethis",
+      "title": "ILetAIWriteThis",
+      "url": "https://github.com/ILetAIWriteThis?tab=repositories",
+      "dailyPosition": 11,
+      "categories": []
+    },
+    {
+      "id": "disney-plus",
+      "title": "Disney+",
+      "url": "https://www.disneyplus.com/en-gb/home",
+      "dailyPosition": 1,
+      "categories": []
     }
   ]
 }
