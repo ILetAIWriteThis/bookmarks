@@ -268,7 +268,7 @@
       "id": "lrt",
       "title": "LRT",
       "url": "https://www.lrt.lt/",
-      "dailyPosition": 4,
+      "dailyPosition": 2,
       "categories": [
         {
           "categoryId": "news",
@@ -401,11 +401,10 @@
       "id": "go3",
       "title": "Go3",
       "url": "https://go3.lt/",
-      "dailyPosition": 2,
       "categories": [
         {
           "categoryId": "entertainment",
-          "position": 1
+          "position": 2
         }
       ]
     },
@@ -939,7 +938,12 @@
       "title": "Disney+",
       "url": "https://www.disneyplus.com/en-gb/home",
       "dailyPosition": 1,
-      "categories": []
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 1
+        }
+      ]
     }
   ]
 }
