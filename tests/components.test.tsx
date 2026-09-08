@@ -4,6 +4,56 @@ import { App } from '../src/App'
 import { testData } from './fixtures'
 
 describe('Bookmarks UI', () => {
+  it('saves, restores, removes, and clears temporary bookmarks on this device', async () => {
+    const user = userEvent.setup()
+    const { unmount } = render(<App data={testData} />)
+
+    expect(screen.queryByRole('heading', { name: 'Temporary inbox' })).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Open quick save' }))
+
+    await user.type(screen.getByLabelText('Link'), 'example.org/read-later')
+    await user.type(screen.getByLabelText(/Name/), 'Read this')
+    await user.click(screen.getByRole('button', { name: 'Save for later' }))
+
+    const saved = screen.getByRole('link', { name: /Read this/ })
+    expect(saved).toHaveAttribute('href', 'https://example.org/read-later')
+    expect(JSON.parse(localStorage.getItem('bookmarks-temporary-inbox-v1') ?? '[]')).toHaveLength(1)
+
+    unmount()
+    render(<App data={testData} />)
+    await user.click(screen.getByRole('button', { name: 'Open quick save' }))
+    expect(screen.getByRole('link', { name: /Read this/ })).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Remove Read this' }))
+    expect(screen.queryByRole('link', { name: /Read this/ })).not.toBeInTheDocument()
+
+    await user.type(screen.getByLabelText('Link'), 'https://another.example')
+    await user.click(screen.getByRole('button', { name: 'Save for later' }))
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true)
+    await user.click(screen.getByRole('button', { name: 'Clear all' }))
+    confirm.mockRestore()
+    expect(screen.getByText(/Links saved here stay on this device/)).toBeInTheDocument()
+    expect(localStorage.getItem('bookmarks-temporary-inbox-v1')).toBeNull()
+  })
+
+  it('rejects invalid and duplicate temporary links', async () => {
+    const user = userEvent.setup()
+    render(<App data={testData} />)
+    await user.click(screen.getByRole('button', { name: 'Open quick save' }))
+
+    await user.type(screen.getByLabelText('Link'), 'not a link')
+    await user.click(screen.getByRole('button', { name: 'Save for later' }))
+    expect(screen.getByRole('alert')).toHaveTextContent('Enter a valid web address.')
+
+    await user.clear(screen.getByLabelText('Link'))
+    await user.type(screen.getByLabelText('Link'), 'https://example.org')
+    await user.click(screen.getByRole('button', { name: 'Save for later' }))
+    await user.type(screen.getByLabelText('Link'), 'https://example.org')
+    await user.click(screen.getByRole('button', { name: 'Save for later' }))
+    expect(screen.getByRole('alert')).toHaveTextContent('already in your temporary inbox')
+    expect(screen.getAllByRole('link', { name: /example.org/ })).toHaveLength(1)
+  })
+
   it('renders Daily first with ordered bookmarks and an empty category', () => {
     render(<App data={testData} />)
     const headings = screen.getAllByRole('heading', { level: 2 })

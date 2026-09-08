@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AppHeader } from './components/AppHeader'
+import { TemporaryBookmarks } from './components/TemporaryBookmarks'
 import { validateBookmarkData } from './data'
 import { Icon } from './icons'
 import { CategoryPage } from './pages/CategoryPage'
@@ -34,6 +35,7 @@ export function App({ data: providedData }: AppProps) {
   const [data, setData] = useState<BookmarkData | null>(providedData ?? null)
   const [error, setError] = useState<string | null>(null)
   const [offlineCache, setOfflineCache] = useState(false)
+  const [inboxOpen, setInboxOpen] = useState(false)
   const route = useRoute()
   const pwa = usePwa()
 
@@ -58,7 +60,8 @@ export function App({ data: providedData }: AppProps) {
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <AppHeader onInstall={install} />
+      <AppHeader onInstall={install} onOpenInbox={() => setInboxOpen(true)} />
+      {inboxOpen && <TemporaryBookmarks onClose={() => setInboxOpen(false)} />}
       {!data && !error && <main id="main-content" className="status-page"><span className="loader" /><p>Opening your bookmarks…</p></main>}
       {error && (
         <main id="main-content" className="status-page status-page--error">

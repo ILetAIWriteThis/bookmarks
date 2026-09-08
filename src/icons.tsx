@@ -19,6 +19,7 @@ const paths: Record<string, React.ReactNode> = {
   search: <><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></>,
   external: <><path d="M13 5h6v6m0-6-8 8"/><path d="M18 14v5H5V6h5"/></>,
   close: <path d="m7 7 10 10M17 7 7 17"/>,
+  plus: <path d="M12 5v14M5 12h14"/>,
 }
 
 export function Icon({ name = 'bookmark', size = 24, className }: IconProps) {

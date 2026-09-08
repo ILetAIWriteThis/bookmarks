@@ -6,4 +6,5 @@ Object.defineProperty(window, 'scrollTo', { value: () => undefined, writable: tr
 afterEach(() => {
   window.location.hash = '#/'
   sessionStorage.clear()
+  localStorage.clear()
 })
