@@ -15,6 +15,7 @@ function usage() {
 Usage:
   npm run bookmarks -- list [--category ID]
   npm run bookmarks -- check
+  npm run bookmarks -- upsert-bookmarks --file JSON_FILE
   npm run bookmarks -- add-category --id ID --name NAME --position N [--icon NAME] [--parent ID]
   npm run bookmarks -- update-category --id ID [--name NAME] [--position N] [--icon NAME] [--parent ID]
   npm run bookmarks -- remove-category --id ID
@@ -147,7 +148,16 @@ async function run() {
     return
   }
 
-  if (command === 'add-category') {
+  if (command === 'upsert-bookmarks') {
+    const importPath = resolve(process.cwd(), required(flags, 'file'))
+    const importedValue = JSON.parse(await readFile(importPath, 'utf8')) as { bookmarks?: unknown }
+    if (!Array.isArray(importedValue.bookmarks)) {
+      throw new Error('Import file must contain a "bookmarks" array')
+    }
+    const imported = validateBookmarkData({ categories: data.categories, bookmarks: importedValue.bookmarks }).bookmarks
+    const importedIds = new Set(imported.map(({ id }) => id))
+    data.bookmarks = [...data.bookmarks.filter(({ id }) => !importedIds.has(id)), ...imported]
+  } else if (command === 'add-category') {
     const category: Category = {
       id: required(flags, 'id'), name: required(flags, 'name'), position: numberValue(required(flags, 'position'), 'position'),
     }
