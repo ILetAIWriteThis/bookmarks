@@ -269,6 +269,58 @@
       "name": "Other",
       "position": 21,
       "parentId": "youtube"
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "position": 11,
+      "icon": "document"
+    },
+    {
+      "id": "learning",
+      "name": "Learning",
+      "position": 12,
+      "icon": "spark"
+    },
+    {
+      "id": "automotive",
+      "name": "Automotive",
+      "position": 13,
+      "icon": "bookmark"
+    },
+    {
+      "id": "lifestyle",
+      "name": "Lifestyle",
+      "position": 14,
+      "icon": "star"
+    },
+    {
+      "id": "security-ctf",
+      "name": "CTF",
+      "position": 2,
+      "parentId": "security-blogs",
+      "icon": "shield"
+    },
+    {
+      "id": "learning-programming",
+      "name": "Programming",
+      "position": 1,
+      "parentId": "learning",
+      "icon": "spark"
+    },
+    {
+      "id": "entertainment-games",
+      "name": "Games",
+      "position": 1,
+      "parentId": "entertainment",
+      "icon": "star"
+    },
+    {
+      "id": "lifestyle-health",
+      "name": "Health",
+      "position": 1,
+      "parentId": "lifestyle",
+      "icon": "bookmark"
     }
   ],
   "bookmarks": [
@@ -13540,6 +13592,5647 @@
         {
           "categoryId": "youtube-music",
           "position": 113
+        }
+      ]
+    },
+    {
+      "id": "google-translate",
+      "title": "Google Translate",
+      "url": "https://translate.google.com/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "google-maps",
+      "title": "Google Maps",
+      "url": "https://www.google.lt/maps/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "youtube-music-2",
+      "title": "YouTube Music",
+      "url": "https://music.youtube.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "lrt-epika",
+      "title": "LRT Epika",
+      "url": "https://epika.lrt.lt/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "lrt-tv-shows",
+      "title": "LRT TV Shows",
+      "url": "https://www.lrt.lt/mediateka/tv-laidos",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "profitus",
+      "title": "PROFITUS",
+      "url": "https://www.profitus.lt/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "paskolu-klubas",
+      "title": "Paskolų klubas",
+      "url": "https://www.paskoluklubas.lt/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "nordstreet",
+      "title": "Nordstreet",
+      "url": "https://nordstreet.com/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "interactive-brokers",
+      "title": "Interactive Brokers",
+      "url": "https://www.interactivebrokers.com/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "keliones-ir-pramogos",
+      "title": "Kelionės ir pramogos",
+      "url": "https://kelionesirpramogos.lt/ezurnalas/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 2
+        },
+        {
+          "categoryId": "reading",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "iliustruotasis-mokslas",
+      "title": "Iliustruotasis mokslas",
+      "url": "https://www.iliustruotasismokslas.lt/",
+      "categories": [
+        {
+          "categoryId": "news",
+          "position": 2
+        },
+        {
+          "categoryId": "reading",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "national-geographic-lietuva",
+      "title": "National Geographic Lietuva",
+      "url": "https://nationalgeographic.lt/",
+      "categories": [
+        {
+          "categoryId": "news",
+          "position": 3
+        },
+        {
+          "categoryId": "reading",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "valstybe",
+      "title": "Valstybė",
+      "url": "https://www.valstybe.eu/",
+      "categories": [
+        {
+          "categoryId": "news",
+          "position": 4
+        },
+        {
+          "categoryId": "reading",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "standard-ebooks",
+      "title": "Standard Ebooks",
+      "url": "https://standardebooks.org/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "wikipedia-random-wikipedia",
+      "title": "Wikipedia:Random - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Random",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 6
+        },
+        {
+          "categoryId": "learning",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "best-sellers-books",
+      "title": "Best Sellers - Books",
+      "url": "https://www.nytimes.com/books/best-sellers/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "vilnius-central-library",
+      "title": "Vilnius Central Library",
+      "url": "https://www.vcb.lt/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "reading-length",
+      "title": "Reading Length",
+      "url": "https://www.readinglength.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "kindle-cloud-reader",
+      "title": "Kindle Cloud Reader",
+      "url": "https://read.amazon.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "project-gutenberg",
+      "title": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "orderofbooks-com-complete-list-of-all-book-series-in-order",
+      "title": "OrderOfBooks.com - Complete List of all Book Series in Order",
+      "url": "https://www.orderofbooks.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "internet-encyclopedia-of-philosophy",
+      "title": "Internet Encyclopedia of Philosophy",
+      "url": "https://iep.utm.edu/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 13
+        },
+        {
+          "categoryId": "learning",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "asmeninio-tobulejimo-blogas-saviugda-motyvacija-tobulekime-kartu-povilas",
+      "title": "Asmeninio tobulėjimo blogas | Saviugda | Motyvacija - Tobulėkime kartu | Povilas . Panavas . lt",
+      "url": "https://povilas.panavas.lt/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 14
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "pamirsta-lt",
+      "title": "Pamiršta.lt",
+      "url": "https://pamirsta.lt/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 15
+        }
+      ]
+    },
+    {
+      "id": "we-love-lithuania",
+      "title": "We Love Lithuania",
+      "url": "https://welovelithuania.com/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 3
+        },
+        {
+          "categoryId": "reading",
+          "position": 16
+        }
+      ]
+    },
+    {
+      "id": "open-culture",
+      "title": "Open Culture",
+      "url": "https://www.openculture.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 17
+        },
+        {
+          "categoryId": "learning",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "wait-but-why",
+      "title": "Wait But Why",
+      "url": "https://waitbutwhy.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 18
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "dawid-ba-ut",
+      "title": "Dawid Bałut",
+      "url": "https://dawidbalut.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 19
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 1
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "i-will-teach-you-to-be-rich",
+      "title": "I Will Teach You To Be Rich",
+      "url": "https://www.iwillteachyoutoberich.com/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 9
+        },
+        {
+          "categoryId": "reading",
+          "position": 20
+        }
+      ]
+    },
+    {
+      "id": "sesi-nuliai-finansine-kelione-milijono-link",
+      "title": "Šeši nuliai - Finansinė kelionė milijono link",
+      "url": "https://sesinuliai.lt/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 10
+        },
+        {
+          "categoryId": "reading",
+          "position": 21
+        }
+      ]
+    },
+    {
+      "id": "taupymas-ir-investavimas-investologija-lt",
+      "title": "Taupymas ir investavimas - Investologija.lt",
+      "url": "https://investologija.lt/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 11
+        },
+        {
+          "categoryId": "reading",
+          "position": 22
+        }
+      ]
+    },
+    {
+      "id": "steve-pavlina-personal-development-for-smart-pe",
+      "title": "Steve Pavlina – Personal Development for Smart Pe…",
+      "url": "https://stevepavlina.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 23
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "sparknotes",
+      "title": "SparkNotes",
+      "url": "https://www.sparknotes.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 24
+        },
+        {
+          "categoryId": "learning",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "made-in-vilnius",
+      "title": "Made in Vilnius",
+      "url": "https://madeinvilnius.lt/",
+      "categories": [
+        {
+          "categoryId": "news",
+          "position": 5
+        },
+        {
+          "categoryId": "reading",
+          "position": 25
+        }
+      ]
+    },
+    {
+      "id": "addicted2success",
+      "title": "Addicted2Success",
+      "url": "https://addicted2success.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 26
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "ali-abdaal-articles",
+      "title": "Ali Abdaal Articles",
+      "url": "https://aliabdaal.com/articles/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 27
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "amazing-marvin-blog",
+      "title": "Amazing Marvin Blog",
+      "url": "https://blog.amazingmarvin.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 28
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "baltic-mustache-finansine-nepriklausomybe-iki-40-metu-lietuvoje",
+      "title": "BALTIC MUSTACHE - Finansinė nepriklausomybė iki 40 metų Lietuvoje",
+      "url": "https://balticmustache.lt/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 12
+        },
+        {
+          "categoryId": "reading",
+          "position": 29
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "get-disciplined",
+      "title": "Get Disciplined",
+      "url": "https://www.reddit.com/r/getdisciplined/best/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 30
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "better-humans",
+      "title": "Better Humans",
+      "url": "https://betterhumans.pub/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 31
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "big-think",
+      "title": "Big Think",
+      "url": "https://bigthink.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 32
+        },
+        {
+          "categoryId": "learning",
+          "position": 5
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "what-should-i-read-next",
+      "title": "What Should I Read Next?",
+      "url": "https://www.whatshouldireadnext.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 33
+        }
+      ]
+    },
+    {
+      "id": "visuotine-lietuviu-enciklopedija",
+      "title": "Visuotinė lietuvių enciklopedija",
+      "url": "https://www.vle.lt/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 34
+        },
+        {
+          "categoryId": "learning",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "ereaderiq",
+      "title": "eReaderIQ",
+      "url": "https://www.ereaderiq.com/",
+      "categories": [
+        {
+          "categoryId": "e-shop",
+          "position": 2
+        },
+        {
+          "categoryId": "reading",
+          "position": 35
+        }
+      ]
+    },
+    {
+      "id": "tv24-lt",
+      "title": "TV24.lt",
+      "url": "https://www.tv24.lt/",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "duo-3-schedule",
+      "title": "Duo 3 Schedule",
+      "url": "https://www.duo3.ee/en/epg",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "duo-6-schedule",
+      "title": "Duo 6 Schedule",
+      "url": "https://www.duo6.ee/en/epg",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "motorsport-tv",
+      "title": "Motorsport.tv",
+      "url": "https://motorsport.tv/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "streameast",
+      "title": "Streameast",
+      "url": "https://www.streameast.live/sa/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "red-bull-tv",
+      "title": "Red Bull TV",
+      "url": "https://www.redbull.com/int-en/discover",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "thetvdb",
+      "title": "TheTVDB",
+      "url": "https://thetvdb.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 13
+        }
+      ]
+    },
+    {
+      "id": "tai-kur-toliau-mediateka-lrt",
+      "title": "Tai kur toliau? - Mediateka - LRT",
+      "url": "https://www.lrt.lt/mediateka/video/tai-kur-toliau",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "kita-puse-mediateka-lrt",
+      "title": "Kita pusė - Mediateka - LRT",
+      "url": "https://www.lrt.lt/mediateka/video/kita-puse",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "pamatyk-lietuvoje-map",
+      "title": "Pamatyk Lietuvoje Map",
+      "url": "https://pamatyklietuvoje.lt/zemelapis",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "nera-blogo-oro",
+      "title": "Nėra blogo oro",
+      "url": "https://nerablogooro.lt/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "travelfree-baltics",
+      "title": "TravelFree Baltics",
+      "url": "https://travelfree.info/category/location/baltics/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "gpsmycity",
+      "title": "GPSmyCity",
+      "url": "https://www.gpsmycity.com/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "mapmyhike",
+      "title": "MapMyHike",
+      "url": "https://www.mapmyhike.com/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "lithuania-travel",
+      "title": "Lithuania Travel",
+      "url": "https://www.lithuania.travel/lt/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "saugoma",
+      "title": "Saugoma",
+      "url": "https://saugoma.lt/lt",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "nesedek-namuose-pazintiniai-takai",
+      "title": "Nesėdėk namuose – Pažintiniai takai",
+      "url": "https://nesedeknamuose.lt/pazintiniai-takai/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "nenamisedos-cia-dvelkia-kelioniu-vejai",
+      "title": "Nenamisėdos – Čia dvelkia kelionių vėjai…",
+      "url": "https://nenamisedos.lt/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "snabb",
+      "title": "Snabb",
+      "url": "https://snabb.xyz/lt",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 13
+        }
+      ]
+    },
+    {
+      "id": "saily",
+      "title": "Saily",
+      "url": "https://saily.com/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 14
+        }
+      ]
+    },
+    {
+      "id": "kegel-exercises",
+      "title": "Kegel Exercises",
+      "url": "https://sportuojantys.lt/kegelio-pratimai/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 7
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 11
+        },
+        {
+          "categoryId": "lifestyle-health",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "myofunctional-therapy",
+      "title": "Myofunctional Therapy",
+      "url": "https://www.zalgirioklinika.lt/naujienos/miofunkcine-terapija/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 8
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 12
+        },
+        {
+          "categoryId": "lifestyle-health",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "codeabbey",
+      "title": "CodeAbbey",
+      "url": "https://www.codeabbey.com/index/task_list",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 9
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 1
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "codewars-achieve-mastery-through-coding-practice-and-developer-mentorshi",
+      "title": "Codewars - Achieve mastery through coding practice and developer mentorship",
+      "url": "https://www.codewars.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 10
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 2
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "tryhackme-tryhackme-hacktivities",
+      "title": "TryHackMe | TryHackMe | Hacktivities",
+      "url": "https://tryhackme.com/r/hacktivities",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 11
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 2
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "tcm-security-academy",
+      "title": "TCM Security Academy",
+      "url": "https://academy.tcm-sec.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 12
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "online-courses-learning-paths-and-certifications-pluralsight",
+      "title": "Online Courses, Learning Paths, and Certifications - Pluralsight",
+      "url": "https://www.pluralsight.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 13
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "project-euler",
+      "title": "Project Euler",
+      "url": "https://projecteuler.net/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 14
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 3
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "the-cryptopals-crypto-challenges",
+      "title": "The Cryptopals Crypto Challenges",
+      "url": "https://cryptopals.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 15
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 4
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "advent-of-code",
+      "title": "Advent of Code",
+      "url": "https://adventofcode.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 16
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 4
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 8
+        },
+        {
+          "categoryId": "entertainment-games",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "overthewire-wargames",
+      "title": "OverTheWire: Wargames",
+      "url": "https://overthewire.org/wargames/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 17
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 5
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "leetcode-problems",
+      "title": "LeetCode Problems",
+      "url": "https://leetcode.com/problemset/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 18
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 5
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "open-culture-free-online-courses",
+      "title": "Open Culture Free Online Courses",
+      "url": "https://www.openculture.com/freeonlinecourses",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 36
+        },
+        {
+          "categoryId": "learning",
+          "position": 19
+        }
+      ]
+    },
+    {
+      "id": "malware-traffic-analysis-net",
+      "title": "malware-traffic-analysis.net",
+      "url": "https://www.malware-traffic-analysis.net/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 20
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "malware-archaeology",
+      "title": "Malware Archaeology",
+      "url": "https://www.malwarearchaeology.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 21
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "security-certification-roadmap-paul-jerimy-media",
+      "title": "Security Certification Roadmap - Paul Jerimy Media",
+      "url": "https://pauljerimy.com/security-certification-roadmap/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 22
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "vx-underground",
+      "title": "Vx Underground",
+      "url": "https://vx-underground.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 23
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "malwarebazaar-malware-sample-exchange",
+      "title": "MalwareBazaar | Malware sample exchange",
+      "url": "https://bazaar.abuse.ch/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 24
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "opensecuritytraining2",
+      "title": "OpenSecurityTraining2",
+      "url": "https://p.ost2.fyi/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 25
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "opensecuritytraining",
+      "title": "OpenSecurityTraining",
+      "url": "https://opensecuritytraining.info/Welcome.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 26
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "online-courses-learn-anything-on-your-schedule-udemy",
+      "title": "Online Courses - Learn Anything, On Your Schedule | Udemy",
+      "url": "https://www.udemy.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 27
+        }
+      ]
+    },
+    {
+      "id": "cybrary",
+      "title": "Cybrary",
+      "url": "https://www.cybrary.it/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 28
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 13
+        }
+      ]
+    },
+    {
+      "id": "sans-cyber-aces",
+      "title": "SANS Cyber Aces",
+      "url": "https://www.cyberaces.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 29
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 14
+        }
+      ]
+    },
+    {
+      "id": "bitdegree",
+      "title": "BitDegree",
+      "url": "https://www.bitdegree.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 30
+        }
+      ]
+    },
+    {
+      "id": "linux-journey",
+      "title": "Linux Journey",
+      "url": "https://linuxjourney.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 31
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 6
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "microsoft-learn",
+      "title": "Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/training/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 32
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 7
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "elearnsecurity",
+      "title": "eLearnSecurity",
+      "url": "https://www.elearnsecurity.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 33
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 15
+        }
+      ]
+    },
+    {
+      "id": "coursera",
+      "title": "Coursera",
+      "url": "https://www.coursera.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 34
+        }
+      ]
+    },
+    {
+      "id": "edx",
+      "title": "edX",
+      "url": "https://www.edx.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 35
+        }
+      ]
+    },
+    {
+      "id": "codecademy",
+      "title": "Codecademy",
+      "url": "https://www.codecademy.com/learn",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 36
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 8
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "this-week-in-4n6-your-weekly-roundup-of-digital-forensics-and-incident-r",
+      "title": "This Week In 4n6 – Your weekly roundup of Digital Forensics and Incident Response news",
+      "url": "https://thisweekin4n6.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 16
+        }
+      ]
+    },
+    {
+      "id": "tl-dr-sec",
+      "title": "tl;dr sec",
+      "url": "https://tldrsec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 17
+        }
+      ]
+    },
+    {
+      "id": "detection-engineering-weekly",
+      "title": "Detection Engineering Weekly",
+      "url": "https://www.detectionengineering.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 18
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "cloudseclist-cloudseclist",
+      "title": "CloudSecList | CloudSecList",
+      "url": "https://cloudseclist.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 19
+        }
+      ]
+    },
+    {
+      "id": "bad-sector-labs-blog",
+      "title": "Bad Sector Labs Blog",
+      "url": "https://blog.badsectorlabs.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 20
+        }
+      ]
+    },
+    {
+      "id": "windows-incident-response",
+      "title": "Windows Incident Response",
+      "url": "https://windowsir.blogspot.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 21
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "entra-news-your-weekly-dose-of-microsoft-entra-merill-fernando-substack",
+      "title": "Entra.News - Your weekly dose of Microsoft Entra | Merill Fernando | Substack",
+      "url": "https://entra.news/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 22
+        }
+      ]
+    },
+    {
+      "id": "microsoft-siem-and-xdr-weekly-wrap-rod-trent-substack",
+      "title": "Microsoft SIEM and XDR Weekly Wrap | Rod Trent | Substack",
+      "url": "https://microsoftdefender.substack.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 23
+        }
+      ]
+    },
+    {
+      "id": "the-prompt-for-security-copilot-rod-trent-substack",
+      "title": "THE PROMPT for Security Copilot | Rod Trent | Substack",
+      "url": "https://thecfsprompt.substack.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 24
+        }
+      ]
+    },
+    {
+      "id": "kusto-insights-ugur-koc-substack",
+      "title": "Kusto Insights | Ugur Koc | Substack",
+      "url": "https://kustoinsights.substack.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 25
+        }
+      ]
+    },
+    {
+      "id": "unsupervised-learning",
+      "title": "Unsupervised Learning",
+      "url": "https://danielmiessler.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 26
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "the-dfir-report-real-intrusions-by-real-attackers-the-truth-behind-the-i",
+      "title": "The DFIR Report – Real Intrusions by Real Attackers, The Truth Behind the Intrusion",
+      "url": "https://thedfirreport.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 27
+        }
+      ]
+    },
+    {
+      "id": "dev-random",
+      "title": "/dev/random",
+      "url": "https://blog.rootshell.be/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 28
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "0patch-blog",
+      "title": "0patch Blog",
+      "url": "https://blog.0patch.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 29
+        }
+      ]
+    },
+    {
+      "id": "alexander-v-leonov-vulnerability-management-and-more",
+      "title": "Alexander V. Leonov | Vulnerability Management and more",
+      "url": "https://avleonov.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 30
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "all-things-oscp",
+      "title": "All things OSCP",
+      "url": "https://www.reddit.com/r/oscp/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 31
+        }
+      ]
+    },
+    {
+      "id": "antivirus",
+      "title": "Antivirus",
+      "url": "https://www.reddit.com/r/antivirus/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 32
+        }
+      ]
+    },
+    {
+      "id": "asknetsec",
+      "title": "AskNetsec",
+      "url": "https://www.reddit.com/r/AskNetsec/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 33
+        }
+      ]
+    },
+    {
+      "id": "avanan-blog",
+      "title": "Avanan | Blog",
+      "url": "https://www.avanan.com/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 34
+        }
+      ]
+    },
+    {
+      "id": "black-hills-information-security",
+      "title": "Black Hills Information Security",
+      "url": "https://www.blackhillsinfosec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 35
+        }
+      ]
+    },
+    {
+      "id": "blackhat-library-hacking-techniques-and-research",
+      "title": "Blackhat Library: Hacking techniques and research",
+      "url": "https://www.reddit.com/r/blackhat/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 36
+        }
+      ]
+    },
+    {
+      "id": "bleepingcomputer",
+      "title": "BleepingComputer",
+      "url": "https://www.bleepingcomputer.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 37
+        }
+      ]
+    },
+    {
+      "id": "blog-bh-consulting",
+      "title": "Blog - BH Consulting",
+      "url": "https://bhconsulting.ie/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 38
+        }
+      ]
+    },
+    {
+      "id": "blog-netspi",
+      "title": "Blog - NetSPI",
+      "url": "https://www.netspi.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 39
+        }
+      ]
+    },
+    {
+      "id": "blog-volexity",
+      "title": "Blog - Volexity",
+      "url": "https://www.volexity.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 40
+        }
+      ]
+    },
+    {
+      "id": "blog-posts",
+      "title": "Blog Posts",
+      "url": "https://www.cisecurity.org/insights/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 41
+        }
+      ]
+    },
+    {
+      "id": "blogs-at-and-t-cybersecurity",
+      "title": "Blogs | AT&T Cybersecurity",
+      "url": "https://cybersecurity.att.com/blogs",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 42
+        }
+      ]
+    },
+    {
+      "id": "breakdev-offensive-security-tools-and-research",
+      "title": "BREAKDEV - Offensive Security Tools & Research",
+      "url": "https://breakdev.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 43
+        }
+      ]
+    },
+    {
+      "id": "census-it-security-works",
+      "title": "CENSUS | IT Security Works",
+      "url": "https://census-labs.com/news/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 44
+        }
+      ]
+    },
+    {
+      "id": "cisco-talos-blog",
+      "title": "Cisco Talos Blog",
+      "url": "https://blog.talosintelligence.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 45
+        }
+      ]
+    },
+    {
+      "id": "code-white-blog",
+      "title": "CODE WHITE | Blog",
+      "url": "https://codewhitesec.blogspot.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 46
+        }
+      ]
+    },
+    {
+      "id": "computer-forensics",
+      "title": "Computer Forensics",
+      "url": "https://www.reddit.com/r/computerforensics/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 47
+        }
+      ]
+    },
+    {
+      "id": "computer-security-it-security-news-articles-and-tools",
+      "title": "Computer Security - IT security news, articles and tools",
+      "url": "https://www.reddit.com/r/ComputerSecurity/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 48
+        }
+      ]
+    },
+    {
+      "id": "cpr-check-point-research",
+      "title": "CPR - Check Point Research",
+      "url": "https://research.checkpoint.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 49
+        }
+      ]
+    },
+    {
+      "id": "cryptography",
+      "title": "cryptography",
+      "url": "https://www.reddit.com/r/cryptography/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 50
+        }
+      ]
+    },
+    {
+      "id": "cyber-arms-computer-security-cybersecurity-news-and-business-computer-ti",
+      "title": "CYBER ARMS – Computer Security – Cybersecurity News and Business Computer Tips",
+      "url": "https://cyberarms.wordpress.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 51
+        }
+      ]
+    },
+    {
+      "id": "cyber-blog-improsec-improving-security",
+      "title": "CYBER BLOG — Improsec | improving security",
+      "url": "https://improsec.com/cyber-blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 52
+        }
+      ]
+    },
+    {
+      "id": "cyber-defence-analysis-for-blue-and-purple-teams-ollie-substack",
+      "title": "Cyber Defence Analysis for Blue & Purple Teams | Ollie | Substack",
+      "url": "https://bluepurple.binaryfirefly.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 53
+        }
+      ]
+    },
+    {
+      "id": "cyber-geeks-all-things-infosec",
+      "title": "CYBER GEEKS – All Things Infosec",
+      "url": "https://cybergeeks.tech/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 54
+        }
+      ]
+    },
+    {
+      "id": "malwarebytes",
+      "title": "Malwarebytes",
+      "url": "https://www.malwarebytes.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 55
+        }
+      ]
+    },
+    {
+      "id": "cybereason-blog-cybersecurity-news-and-analysis",
+      "title": "Cybereason Blog | Cybersecurity News and Analysis",
+      "url": "https://www.cybereason.com/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 56
+        }
+      ]
+    },
+    {
+      "id": "cyberscoop",
+      "title": "CyberScoop",
+      "url": "https://cyberscoop.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 57
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity",
+      "title": "cybersecurity",
+      "url": "https://www.reddit.com/r/cybersecurity/new",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 58
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity-blog-binary-defense",
+      "title": "Cybersecurity Blog | Binary Defense",
+      "url": "https://www.binarydefense.com/resources/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 59
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity-blog-crowdstrike",
+      "title": "Cybersecurity Blog | CrowdStrike",
+      "url": "https://www.crowdstrike.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 60
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity-blog-sentinelone",
+      "title": "Cybersecurity Blog | SentinelOne",
+      "url": "https://www.sentinelone.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 61
+        }
+      ]
+    },
+    {
+      "id": "dark-reading",
+      "title": "Dark Reading",
+      "url": "https://www.darkreading.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 62
+        }
+      ]
+    },
+    {
+      "id": "databreaches-net-the-office-of-inadequate-security",
+      "title": "DataBreaches.net — “The Office of Inadequate Security”",
+      "url": "https://www.databreaches.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 63
+        }
+      ]
+    },
+    {
+      "id": "decipher",
+      "title": "Decipher",
+      "url": "https://duo.com/decipher/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 64
+        }
+      ]
+    },
+    {
+      "id": "deep-instinct",
+      "title": "Deep Instinct",
+      "url": "https://www.deepinstinct.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 65
+        }
+      ]
+    },
+    {
+      "id": "ec-council",
+      "title": "EC-Council",
+      "url": "https://www.eccouncil.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 66
+        }
+      ]
+    },
+    {
+      "id": "elcomsoft-blog",
+      "title": "ElcomSoft blog",
+      "url": "https://blog.elcomsoft.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 67
+        }
+      ]
+    },
+    {
+      "id": "eric-conrad",
+      "title": "Eric Conrad",
+      "url": "https://www.ericconrad.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 68
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "blue-team-security",
+      "title": "Blue Team Security",
+      "url": "https://www.reddit.com/r/blueteamsec/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 69
+        }
+      ]
+    },
+    {
+      "id": "fortra",
+      "title": "Fortra",
+      "url": "https://www.phishlabs.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 70
+        }
+      ]
+    },
+    {
+      "id": "google-online-security-blog",
+      "title": "Google Online Security Blog",
+      "url": "https://security.googleblog.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 71
+        }
+      ]
+    },
+    {
+      "id": "graham-cluley-cybersecurity-keynote-speaker-news-and-opinion",
+      "title": "Graham Cluley • Cybersecurity keynote speaker, news and opinion",
+      "url": "https://grahamcluley.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 72
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "gynvael-coldwind-vx",
+      "title": "gynvael.coldwind//vx",
+      "url": "https://gynvael.coldwind.pl/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 73
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "hackaday",
+      "title": "Hackaday",
+      "url": "https://hackaday.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 74
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 13
+        }
+      ]
+    },
+    {
+      "id": "r-hacking",
+      "title": "r/hacking",
+      "url": "https://www.reddit.com/r/hacking/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 75
+        }
+      ]
+    },
+    {
+      "id": "hackread-latest-cyber-crime-infosec-tech-hacking-news",
+      "title": "HackRead | Latest Cyber Crime - InfoSec- Tech - Hacking News",
+      "url": "https://www.hackread.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 76
+        }
+      ]
+    },
+    {
+      "id": "hakin9-it-security-magazine",
+      "title": "Hakin9 - IT Security Magazine",
+      "url": "https://hakin9.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 77
+        }
+      ]
+    },
+    {
+      "id": "hex-rays-blog-hex-rays",
+      "title": "Hex-Rays Blog – Hex Rays",
+      "url": "https://hex-rays.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 78
+        }
+      ]
+    },
+    {
+      "id": "hextree",
+      "title": "Hextree",
+      "url": "https://www.hextree.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 79
+        }
+      ]
+    },
+    {
+      "id": "home-active-countermeasures",
+      "title": "Home - Active Countermeasures",
+      "url": "https://www.activecountermeasures.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 80
+        }
+      ]
+    },
+    {
+      "id": "home-av-comparatives",
+      "title": "Home - AV-Comparatives",
+      "url": "https://www.av-comparatives.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 81
+        }
+      ]
+    },
+    {
+      "id": "home-checkmate",
+      "title": "Home - Checkmate",
+      "url": "https://niiconsulting.com/checkmate/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 82
+        }
+      ]
+    },
+    {
+      "id": "cisa",
+      "title": "CISA",
+      "url": "https://www.cisa.gov/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 83
+        }
+      ]
+    },
+    {
+      "id": "huntress-blog",
+      "title": "Huntress Blog",
+      "url": "https://www.huntress.com/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 84
+        }
+      ]
+    },
+    {
+      "id": "cyberark",
+      "title": "CyberArk",
+      "url": "https://www.cyberark.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 85
+        }
+      ]
+    },
+    {
+      "id": "imq-minded-security-blog",
+      "title": "IMQ Minded Security Blog",
+      "url": "https://blog.mindedsecurity.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 86
+        }
+      ]
+    },
+    {
+      "id": "information-security-blog-blumira",
+      "title": "Information Security Blog | Blumira",
+      "url": "https://www.blumira.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 87
+        }
+      ]
+    },
+    {
+      "id": "ciso-mag",
+      "title": "CISO MAG",
+      "url": "https://cisomag.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 88
+        }
+      ]
+    },
+    {
+      "id": "inteltechniques-blog",
+      "title": "IntelTechniques Blog",
+      "url": "https://inteltechniques.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 89
+        }
+      ]
+    },
+    {
+      "id": "internet-and-cloud-intelligence-blog",
+      "title": "Internet and Cloud Intelligence Blog",
+      "url": "https://www.thousandeyes.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 90
+        }
+      ]
+    },
+    {
+      "id": "kali-linux",
+      "title": "Kali Linux",
+      "url": "https://www.kali.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 91
+        }
+      ]
+    },
+    {
+      "id": "kaspersky-official-blog",
+      "title": "Kaspersky official blog",
+      "url": "https://www.kaspersky.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 92
+        }
+      ]
+    },
+    {
+      "id": "kitploit-pentest-and-hacking-tools",
+      "title": "KitPloit - PenTest & Hacking Tools",
+      "url": "https://www.kitploit.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 93
+        }
+      ]
+    },
+    {
+      "id": "krebs-on-security",
+      "title": "Krebs on Security",
+      "url": "https://krebsonsecurity.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 94
+        }
+      ]
+    },
+    {
+      "id": "medium-bug-bounty",
+      "title": "Medium: Bug Bounty",
+      "url": "https://medium.com/tag/bug-bounty/latest",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 95
+        }
+      ]
+    },
+    {
+      "id": "medium-cybersecurity",
+      "title": "Medium: Cybersecurity",
+      "url": "https://medium.com/tag/cybersecurity/latest",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 96
+        }
+      ]
+    },
+    {
+      "id": "medium-threat-hunting",
+      "title": "Medium: Threat Hunting",
+      "url": "https://medium.com/tag/threat-hunting/latest",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 97
+        }
+      ]
+    },
+    {
+      "id": "leading-cyber-security-services-company-uk-jumpsec",
+      "title": "Leading Cyber Security Services Company, UK | JUMPSEC",
+      "url": "https://www.jumpsec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 98
+        }
+      ]
+    },
+    {
+      "id": "r-malware",
+      "title": "r/Malware",
+      "url": "https://www.reddit.com/r/Malware/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 99
+        }
+      ]
+    },
+    {
+      "id": "microsoft-defender-for-endpoint",
+      "title": "Microsoft Defender for Endpoint",
+      "url": "https://www.reddit.com/r/DefenderATP/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 100
+        }
+      ]
+    },
+    {
+      "id": "microsoft-security-blog",
+      "title": "Microsoft Security Blog",
+      "url": "https://www.microsoft.com/en-us/security/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 101
+        }
+      ]
+    },
+    {
+      "id": "microsoft-security-response-center",
+      "title": "Microsoft Security Response Center",
+      "url": "https://msrc.microsoft.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 102
+        }
+      ]
+    },
+    {
+      "id": "morphisec-breach-prevention-blog",
+      "title": "Morphisec Breach Prevention Blog",
+      "url": "https://blog.morphisec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 103
+        }
+      ]
+    },
+    {
+      "id": "naked-security-computer-security-news-advice-and-research",
+      "title": "Naked Security – Computer Security News, Advice and Research",
+      "url": "https://nakedsecurity.sophos.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 104
+        }
+      ]
+    },
+    {
+      "id": "nist",
+      "title": "NIST",
+      "url": "https://www.nist.gov/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 105
+        }
+      ]
+    },
+    {
+      "id": "netsecstudents-subreddit-for-students-studying-network-security-and-its-",
+      "title": "netsecstudents: Subreddit for students studying Network Security and its related subjects",
+      "url": "https://www.reddit.com/r/netsecstudents/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 106
+        }
+      ]
+    },
+    {
+      "id": "news-archives-forensic-focus",
+      "title": "News Archives - Forensic Focus",
+      "url": "https://www.forensicfocus.com/news/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 107
+        }
+      ]
+    },
+    {
+      "id": "enisa-news",
+      "title": "ENISA News",
+      "url": "https://www.enisa.europa.eu/media/news-items#b_start=0",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 108
+        }
+      ]
+    },
+    {
+      "id": "ovhcloud-blog-innovation-for-freedom",
+      "title": "OVHcloud Blog - Innovation for Freedom",
+      "url": "https://blog.ovhcloud.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 109
+        }
+      ]
+    },
+    {
+      "id": "packet-storm",
+      "title": "Packet Storm",
+      "url": "https://packetstormsecurity.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 110
+        }
+      ]
+    },
+    {
+      "id": "panda-security-mediacenter-all-the-info-about-your-cybersecurity",
+      "title": "Panda Security Mediacenter - All the info about your cybersecurity",
+      "url": "https://www.pandasecurity.com/en/mediacenter/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 111
+        }
+      ]
+    },
+    {
+      "id": "panther-a-cloud-siem-platform-for-modern-security-teams",
+      "title": "Panther | A Cloud SIEM Platform for Modern Security Teams",
+      "url": "https://panther.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 112
+        }
+      ]
+    },
+    {
+      "id": "phishing-prevention-and-email-security-blog-cofense",
+      "title": "Phishing Prevention & Email Security Blog | Cofense",
+      "url": "https://cofense.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 113
+        }
+      ]
+    },
+    {
+      "id": "post-malware-and-hostile-servers-for-others-to-analyze",
+      "title": "Post malware and hostile servers for others to analyze",
+      "url": "https://www.reddit.com/r/MalwareAnalysis/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 114
+        }
+      ]
+    },
+    {
+      "id": "specterops-posts",
+      "title": "SpecterOps Posts",
+      "url": "https://posts.specterops.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 115
+        }
+      ]
+    },
+    {
+      "id": "jumpsec-labs",
+      "title": "JUMPSEC Labs",
+      "url": "https://labs.jumpsec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 116
+        }
+      ]
+    },
+    {
+      "id": "rapid7-cybersecurity-blog-and-latest-vulnerability-news",
+      "title": "Rapid7 Cybersecurity Blog & Latest Vulnerability News",
+      "url": "https://www.rapid7.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 117
+        }
+      ]
+    },
+    {
+      "id": "rasta-mouse-brain-farts",
+      "title": "Rasta Mouse – Brain Farts",
+      "url": "https://rastamouse.me/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 118
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "red-team-security",
+      "title": "Red Team Security",
+      "url": "https://www.reddit.com/r/redteamsec/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 119
+        }
+      ]
+    },
+    {
+      "id": "trend-micro-research",
+      "title": "Trend Micro Research",
+      "url": "https://www.trendmicro.com/en_us/research.html",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 120
+        }
+      ]
+    },
+    {
+      "id": "mandiant-blog",
+      "title": "Mandiant Blog",
+      "url": "https://www.mandiant.com/resources/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 121
+        }
+      ]
+    },
+    {
+      "id": "reverse-engineering",
+      "title": "Reverse Engineering",
+      "url": "https://www.reddit.com/r/ReverseEngineering/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 122
+        }
+      ]
+    },
+    {
+      "id": "sans-internet-storm-center",
+      "title": "SANS Internet Storm Center",
+      "url": "https://isc.sans.edu/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 123
+        }
+      ]
+    },
+    {
+      "id": "seclists",
+      "title": "SecLists",
+      "url": "https://seclists.org/#fulldisclosure",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 124
+        }
+      ]
+    },
+    {
+      "id": "security-affairs-read-think-share-security-is-everyone-s-responsibilitys",
+      "title": "Security Affairs - Read, think, share … Security is everyone's responsibilitySecurity Affairs",
+      "url": "https://securityaffairs.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 125
+        }
+      ]
+    },
+    {
+      "id": "microsoft-security-update-guide",
+      "title": "Microsoft Security Update Guide",
+      "url": "https://msrc.microsoft.com/update-guide/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 126
+        }
+      ]
+    },
+    {
+      "id": "security-compliance-and-identity-microsoft-community-hub",
+      "title": "Security, Compliance, and Identity - Microsoft Community Hub",
+      "url": "https://techcommunity.microsoft.com/t5/security-compliance-and-identity/ct-p/MicrosoftSecurityandCompliance",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 127
+        }
+      ]
+    },
+    {
+      "id": "r-securityctf",
+      "title": "r/securityCTF",
+      "url": "https://www.reddit.com/r/securityCTF/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 128
+        }
+      ]
+    },
+    {
+      "id": "securitycurrent-com",
+      "title": "securitycurrent.com",
+      "url": "https://securitycurrent.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 129
+        }
+      ]
+    },
+    {
+      "id": "sentinellabs",
+      "title": "SentinelLabs",
+      "url": "https://www.sentinelone.com/labs/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 130
+        }
+      ]
+    },
+    {
+      "id": "siem-platform-and-security-operations-center-services-logrhythm",
+      "title": "SIEM Platform & Security Operations Center Services | LogRhythm",
+      "url": "https://logrhythm.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 131
+        }
+      ]
+    },
+    {
+      "id": "soc-prime",
+      "title": "SOC Prime",
+      "url": "https://socprime.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 132
+        }
+      ]
+    },
+    {
+      "id": "social-engineering",
+      "title": "Social Engineering",
+      "url": "https://www.reddit.com/r/SocialEngineering/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 133
+        }
+      ]
+    },
+    {
+      "id": "sophos-news-the-sophos-blog",
+      "title": "Sophos News – The Sophos Blog",
+      "url": "https://news.sophos.com/en-us/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 134
+        }
+      ]
+    },
+    {
+      "id": "r-netsec",
+      "title": "r/netsec",
+      "url": "https://www.reddit.com/r/netsec/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 135
+        }
+      ]
+    },
+    {
+      "id": "the-anomali-blog",
+      "title": "The Anomali Blog",
+      "url": "https://www.anomali.com/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 136
+        }
+      ]
+    },
+    {
+      "id": "the-cyber-triage-blog-product-news-and-dfir-training",
+      "title": "The Cyber Triage Blog: Product news and DFIR training",
+      "url": "https://www.cybertriage.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 137
+        }
+      ]
+    },
+    {
+      "id": "the-hacker-news",
+      "title": "The Hacker News",
+      "url": "https://thehackernews.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 138
+        }
+      ]
+    },
+    {
+      "id": "medium-detection-engineering",
+      "title": "Medium: Detection Engineering",
+      "url": "https://medium.com/tag/detection-engineering",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 139
+        }
+      ]
+    },
+    {
+      "id": "red-canary-blog",
+      "title": "Red Canary Blog",
+      "url": "https://redcanary.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 140
+        }
+      ]
+    },
+    {
+      "id": "threat-geek-blog-fidelis-cybersecurity",
+      "title": "Threat Geek Blog - Fidelis Cybersecurity",
+      "url": "https://fidelissecurity.com/threatgeek/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 141
+        }
+      ]
+    },
+    {
+      "id": "threat-intelligence-blog-flashpoint",
+      "title": "Threat Intelligence Blog | Flashpoint",
+      "url": "https://flashpoint.io/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 142
+        }
+      ]
+    },
+    {
+      "id": "recorded-future-blog",
+      "title": "Recorded Future Blog",
+      "url": "https://www.recordedfuture.com/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 143
+        }
+      ]
+    },
+    {
+      "id": "trail-of-bits-blog",
+      "title": "Trail of Bits Blog",
+      "url": "https://blog.trailofbits.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 144
+        }
+      ]
+    },
+    {
+      "id": "tripwire-security-and-integrity-management-solutions",
+      "title": "Tripwire | Security and Integrity Management Solutions",
+      "url": "https://www.tripwire.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 145
+        }
+      ]
+    },
+    {
+      "id": "trustedsec-cybersecurity",
+      "title": "TrustedSec | Cybersecurity",
+      "url": "https://www.trustedsec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 146
+        }
+      ]
+    },
+    {
+      "id": "portswigger-blog",
+      "title": "PortSwigger Blog",
+      "url": "https://portswigger.net/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 147
+        }
+      ]
+    },
+    {
+      "id": "windows-security",
+      "title": "Windows Security",
+      "url": "https://www.reddit.com/r/WindowsSecurity/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 148
+        }
+      ]
+    },
+    {
+      "id": "nice-work-roles-and-competencies-mapping",
+      "title": "NICE Work Roles and Competencies Mapping",
+      "url": "https://www.nist.gov/document/niceframeworkksatocompetencymappingxlsx",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 149
+        }
+      ]
+    },
+    {
+      "id": "ylabs-research-and-development",
+      "title": "YLabs – Research & Development",
+      "url": "https://labs.yarix.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 150
+        }
+      ]
+    },
+    {
+      "id": "your-hacking-tutorial-by-zempirians",
+      "title": "Your Hacking Tutorial by Zempirians",
+      "url": "https://www.reddit.com/r/HowToHack/new/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 151
+        }
+      ]
+    },
+    {
+      "id": "blog-tcm-security",
+      "title": "Blog - TCM Security",
+      "url": "https://tcm-sec.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 152
+        }
+      ]
+    },
+    {
+      "id": "cyber-security-consulting-and-testing-pen-test-partners",
+      "title": "Cyber Security Consulting & Testing | Pen Test Partners",
+      "url": "https://www.pentestpartners.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 153
+        }
+      ]
+    },
+    {
+      "id": "security-cafe-security-research-and-services",
+      "title": "Security Café – Security Research and Services",
+      "url": "https://securitycafe.ro/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 154
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "security-intelligence-cybersecurity-analysis-and-insight",
+      "title": "Security Intelligence - Cybersecurity Analysis & Insight",
+      "url": "https://securityintelligence.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 155
+        }
+      ]
+    },
+    {
+      "id": "offsec",
+      "title": "OffSec",
+      "url": "https://www.offsec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 156
+        }
+      ]
+    },
+    {
+      "id": "onevinn-blog",
+      "title": "Onevinn blog",
+      "url": "https://blog.onevinn.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 157
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity-consultants-and-solutions",
+      "title": "Cybersecurity Consultants and Solutions",
+      "url": "https://www.optiv.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 158
+        }
+      ]
+    },
+    {
+      "id": "osintme-com",
+      "title": "osintme.com",
+      "url": "https://www.osintme.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 159
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 13
+        }
+      ]
+    },
+    {
+      "id": "palo-alto-networks-blog",
+      "title": "Palo Alto Networks Blog",
+      "url": "https://www.paloaltonetworks.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 160
+        }
+      ]
+    },
+    {
+      "id": "penetration-testing-and-cybersecurity-solution-securelayer7",
+      "title": "Penetration Testing and CyberSecurity Solution - SecureLayer7 -",
+      "url": "https://blog.securelayer7.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 161
+        }
+      ]
+    },
+    {
+      "id": "pentestmag",
+      "title": "Pentestmag",
+      "url": "https://pentestmag.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 162
+        }
+      ]
+    },
+    {
+      "id": "blog-hunters",
+      "title": "Blog - HUNTERS",
+      "url": "https://www.hunters.security/en/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 163
+        }
+      ]
+    },
+    {
+      "id": "information-security",
+      "title": "Information Security",
+      "url": "https://www.reddit.com/r/Information_Security/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 164
+        }
+      ]
+    },
+    {
+      "id": "nextron-systems-we-detect-hackers",
+      "title": "Nextron Systems - We Detect Hackers",
+      "url": "https://www.nextron-systems.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 165
+        }
+      ]
+    },
+    {
+      "id": "radware-blog-the-radware-blog-shares-vital-knowledge-with-it-decision-ma",
+      "title": "Radware Blog – The Radware Blog shares vital knowledge with IT decision makers on application delivery, virtualization/cloud, security and specialized service provider needs.",
+      "url": "https://www.radware.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 166
+        }
+      ]
+    },
+    {
+      "id": "qualys-security-blog-expert-network-security-guidance-and-news",
+      "title": "Qualys Security Blog | Expert network security guidance and news",
+      "url": "https://blog.qualys.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 167
+        }
+      ]
+    },
+    {
+      "id": "quarkslab-s-blog",
+      "title": "Quarkslab's blog",
+      "url": "https://blog.quarkslab.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 168
+        }
+      ]
+    },
+    {
+      "id": "sensepost-blog",
+      "title": "SensePost | Blog",
+      "url": "https://sensepost.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 169
+        }
+      ]
+    },
+    {
+      "id": "noyb",
+      "title": "noyb",
+      "url": "https://noyb.eu/en",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 170
+        }
+      ]
+    },
+    {
+      "id": "modern-ciso-fresh-thinking-for-the-modern-ciso",
+      "title": "Modern CISO | Fresh Thinking for the Modern CISO",
+      "url": "https://modernciso.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 171
+        }
+      ]
+    },
+    {
+      "id": "blog-posts-from-ad-security-experts-semperis",
+      "title": "Blog posts from AD security experts - Semperis",
+      "url": "https://www.semperis.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 172
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity-research-and-intelligence-blog-secureworks",
+      "title": "Cybersecurity, Research and Intelligence Blog | Secureworks",
+      "url": "https://www.secureworks.com/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 173
+        }
+      ]
+    },
+    {
+      "id": "blog-security-through-education",
+      "title": "Blog - Security Through Education",
+      "url": "https://www.social-engineer.org/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 174
+        }
+      ]
+    },
+    {
+      "id": "securityweek",
+      "title": "SecurityWeek",
+      "url": "https://www.securityweek.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 175
+        }
+      ]
+    },
+    {
+      "id": "securelist",
+      "title": "Securelist",
+      "url": "https://securelist.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 176
+        }
+      ]
+    },
+    {
+      "id": "silent-signal-techblog",
+      "title": "Silent Signal Techblog",
+      "url": "https://blog.silentsignal.eu/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 177
+        }
+      ]
+    },
+    {
+      "id": "skullsecurity-skullsecurity-blog",
+      "title": "SkullSecurity | SkullSecurity Blog",
+      "url": "https://www.skullsecurity.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 178
+        }
+      ]
+    },
+    {
+      "id": "website-security-news-sucuri-blog",
+      "title": "Website Security News | Sucuri Blog",
+      "url": "https://blog.sucuri.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 179
+        }
+      ]
+    },
+    {
+      "id": "blog-andrew-hay",
+      "title": "Blog – Andrew Hay",
+      "url": "https://www.andrewhay.ca/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 180
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 14
+        }
+      ]
+    },
+    {
+      "id": "blog-atredis-partners",
+      "title": "Blog — Atredis Partners",
+      "url": "https://www.atredis.com/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 181
+        }
+      ]
+    },
+    {
+      "id": "some-rough-impressions-of-worldcoin-a-few-thoughts-on-cryptographic-engi",
+      "title": "Some rough impressions of Worldcoin – A Few Thoughts on Cryptographic Engineering",
+      "url": "https://blog.cryptographyengineering.com/2023/08/21/some-rough-impressions-of-worldcoin/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 182
+        }
+      ]
+    },
+    {
+      "id": "0xpat-blog-red-purple-teamer",
+      "title": "0xPat blog – Red/purple teamer",
+      "url": "https://0xpat.github.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 183
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 15
+        }
+      ]
+    },
+    {
+      "id": "0xrick-s-blog",
+      "title": "0xRick's Blog",
+      "url": "https://0xrick.github.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 184
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 16
+        }
+      ]
+    },
+    {
+      "id": "add-xor-rol",
+      "title": "ADD / XOR / ROL",
+      "url": "https://addxorrol.blogspot.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 185
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 17
+        }
+      ]
+    },
+    {
+      "id": "adepts-of-0xcc",
+      "title": "Adepts of 0xCC",
+      "url": "https://adepts.of0x.cc/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 186
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 18
+        }
+      ]
+    },
+    {
+      "id": "bushidotoken-threat-intel",
+      "title": "@BushidoToken Threat Intel",
+      "url": "https://blog.bushidotoken.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 187
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 19
+        }
+      ]
+    },
+    {
+      "id": "sroberts",
+      "title": "@sroberts",
+      "url": "https://sroberts.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 188
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 20
+        }
+      ]
+    },
+    {
+      "id": "25-tips-for-new-developers-advice-from-a-mostly-self-taught-software-eng",
+      "title": "25 Tips for New Developers: Advice from a (Mostly) Self-Taught Software Engineer · We Learn Code",
+      "url": "https://welearncode.com/25-tips-new-devs/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 37
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 9
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 14
+        }
+      ]
+    },
+    {
+      "id": "cocomelonc",
+      "title": "cocomelonc",
+      "url": "https://cocomelonc.github.io/",
+      "categories": [
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 21
+        }
+      ]
+    },
+    {
+      "id": "the-ultimate-supercar-and-exotic-car-database-supercars-net",
+      "title": "The Ultimate Supercar & Exotic Car Database | Supercars.net",
+      "url": "https://www.supercars.net/blog/",
+      "categories": [
+        {
+          "categoryId": "automotive",
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "white-noise",
+      "title": "White Noise",
+      "url": "https://www.tomwhitenoise.com/",
+      "categories": [
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 22
+        }
+      ]
+    },
+    {
+      "id": "project-zero",
+      "title": "Project Zero",
+      "url": "https://googleprojectzero.blogspot.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 189
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 23
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "title": "Home",
+      "url": "https://connormcgarr.github.io/",
+      "categories": [
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 24
+        }
+      ]
+    },
+    {
+      "id": "swirlai-newsletter",
+      "title": "SwirlAI Newsletter",
+      "url": "https://www.newsletter.swirlai.com/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 15
+        },
+        {
+          "categoryId": "tech-ai-ai",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "the-data-ecosystem",
+      "title": "The Data Ecosystem",
+      "url": "https://thedataecosystem.substack.com/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 16
+        }
+      ]
+    },
+    {
+      "id": "duolingo",
+      "title": "Duolingo",
+      "url": "https://www.duolingo.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 38
+        }
+      ]
+    },
+    {
+      "id": "memrise",
+      "title": "Memrise",
+      "url": "https://www.memrise.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 39
+        }
+      ]
+    },
+    {
+      "id": "chess-com",
+      "title": "Chess.com",
+      "url": "https://www.chess.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 40
+        },
+        {
+          "categoryId": "entertainment-games",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "sans-free-faculty-tools",
+      "title": "SANS Free Faculty Tools",
+      "url": "https://www.sans.org/img/free-faculty-tools.pdf?msc=sans-free-lp",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 37
+        },
+        {
+          "categoryId": "learning",
+          "position": 41
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 190
+        }
+      ]
+    },
+    {
+      "id": "lolbas",
+      "title": "LOLBAS",
+      "url": "https://lolbas-project.github.io/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 42
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 10
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 191
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 17
+        }
+      ]
+    },
+    {
+      "id": "blue-team-labs-online",
+      "title": "Blue Team Labs Online",
+      "url": "https://blueteamlabs.online/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 43
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 192
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "binary-analysis-course-max-kersten",
+      "title": "Binary Analysis Course – Max Kersten",
+      "url": "https://maxkersten.nl/binary-analysis-course/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 44
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 11
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 193
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 25
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 18
+        }
+      ]
+    },
+    {
+      "id": "syswhispers2-av-edr-evasion-via-direct-system-calls",
+      "title": "SysWhispers2 - AV/EDR Evasion Via Direct System Calls",
+      "url": "https://www.kitploit.com/2021/01/syswhispers2-avedr-evasion-via-direct.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 45
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 12
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 194
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 19
+        }
+      ]
+    },
+    {
+      "id": "mr-robot-hackers-arise",
+      "title": "Mr. Robot | hackers-arise",
+      "url": "https://www.hackers-arise.com/mr-robot",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 46
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 13
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 195
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 20
+        }
+      ]
+    },
+    {
+      "id": "free-cybersecurity-tools",
+      "title": "Free Cybersecurity Tools",
+      "url": "https://www.techtarget.com/whatis/feature/17-free-cybersecurity-tools-you-should-know-about",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 47
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 14
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 196
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 21
+        }
+      ]
+    },
+    {
+      "id": "getting-started-with-exploit-development",
+      "title": "Getting Started with Exploit Development",
+      "url": "https://dayzerosec.com/blog/2021/02/02/getting-started.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 48
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 15
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 197
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 22
+        }
+      ]
+    },
+    {
+      "id": "sql-murder-mystery",
+      "title": "SQL Murder Mystery",
+      "url": "https://mystery.knightlab.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 49
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 16
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 23
+        },
+        {
+          "categoryId": "entertainment-games",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "pentester-academy-courses",
+      "title": "Pentester Academy Courses",
+      "url": "https://www.pentesteracademy.com/topics",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 50
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 198
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "blogs-feeds-guides-links-g0tmi1k",
+      "title": "Blogs, Feeds, Guides + Links - g0tmi1k",
+      "url": "https://blog.g0tmi1k.com/2011/11/blog-guides-links/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 51
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 199
+        }
+      ]
+    },
+    {
+      "id": "security-mind-maps",
+      "title": "Security Mind Maps",
+      "url": "https://www.amanhardikar.com/mindmaps.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 52
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 200
+        }
+      ]
+    },
+    {
+      "id": "russian-apt-ecosystem-map",
+      "title": "Russian APT Ecosystem Map",
+      "url": "https://apt-ecosystem.com/russia/map/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 53
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 201
+        }
+      ]
+    },
+    {
+      "id": "r-hacking-ctf-index",
+      "title": "r/hacking CTF Index",
+      "url": "https://old.reddit.com/r/hacking/wiki/index#wiki_ctfs",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 202
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "hackerone",
+      "title": "HackerOne",
+      "url": "https://www.hackerone.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 203
+        }
+      ]
+    },
+    {
+      "id": "hacktricks",
+      "title": "HackTricks",
+      "url": "https://book.hacktricks.xyz/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 204
+        }
+      ]
+    },
+    {
+      "id": "practical-security-analytics-cyber-security-and-data-analytics",
+      "title": "Practical Security Analytics – Cyber Security and Data Analytics",
+      "url": "https://practicalsecurityanalytics.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 205
+        }
+      ]
+    },
+    {
+      "id": "reverse-engineering-stack-exchange",
+      "title": "Reverse Engineering Stack Exchange",
+      "url": "https://reverseengineering.stackexchange.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 206
+        }
+      ]
+    },
+    {
+      "id": "webgoat-writeups",
+      "title": "WebGoat Writeups",
+      "url": "https://gitlab.com/BlackSheepSpicy/WebGoat",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 207
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "any-run",
+      "title": "ANY.RUN",
+      "url": "https://any.run/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 208
+        }
+      ]
+    },
+    {
+      "id": "threathunting-home",
+      "title": "ThreatHunting Home",
+      "url": "https://www.threathunting.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 209
+        }
+      ]
+    },
+    {
+      "id": "cyberseek-heat-map",
+      "title": "CyberSeek Heat Map",
+      "url": "https://www.cyberseek.org/heatmap.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 54
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 210
+        }
+      ]
+    },
+    {
+      "id": "cyberseek-career-pathway",
+      "title": "CyberSeek Career Pathway",
+      "url": "https://www.cyberseek.org/pathway.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 55
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 211
+        }
+      ]
+    },
+    {
+      "id": "markmap",
+      "title": "Markmap",
+      "url": "https://markmap.js.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 56
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 17
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 212
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 24
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity-resources",
+      "title": "Cybersecurity Resources",
+      "url": "https://github.com/Nickyie/Cybersecurity-Resources",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 57
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 213
+        }
+      ]
+    },
+    {
+      "id": "detection-engineering-maturity-matrix",
+      "title": "Detection Engineering Maturity Matrix",
+      "url": "https://detectionengineering.io/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 58
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 214
+        }
+      ]
+    },
+    {
+      "id": "ryan-stillions-the-dml-model",
+      "title": "Ryan Stillions: The DML model",
+      "url": "https://ryanstillions.blogspot.com/2014/04/the-dml-model_21.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 59
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 215
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 26
+        }
+      ]
+    },
+    {
+      "id": "kasm-workspaces",
+      "title": "Kasm Workspaces",
+      "url": "https://kasmweb.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 60
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 216
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 25
+        }
+      ]
+    },
+    {
+      "id": "rfc-editor",
+      "title": "RFC Editor",
+      "url": "https://www.rfc-editor.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 61
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 18
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 217
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 26
+        }
+      ]
+    },
+    {
+      "id": "blog-0ffset-training-solutions",
+      "title": "Blog | 0ffset Training Solutions",
+      "url": "https://www.0ffset.net/blog/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 218
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 27
+        }
+      ]
+    },
+    {
+      "id": "0x41-cf-infosec-reversing-and-more",
+      "title": "0x41.cf · InfoSec, Reversing, and more",
+      "url": "https://0x41.cf/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 219
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 28
+        }
+      ]
+    },
+    {
+      "id": "oscp-preparation-notes",
+      "title": "OSCP Preparation Notes",
+      "url": "https://oscpnotes.infosecsanyam.in/My_OSCP_Preparation_Notes.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 62
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 220
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "robtex",
+      "title": "Robtex",
+      "url": "https://www.robtex.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 221
+        }
+      ]
+    },
+    {
+      "id": "malapi",
+      "title": "MalAPI",
+      "url": "https://malapi.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 222
+        }
+      ]
+    },
+    {
+      "id": "threatminer",
+      "title": "ThreatMiner",
+      "url": "https://www.threatminer.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 223
+        }
+      ]
+    },
+    {
+      "id": "internals-red-teaming-experiments",
+      "title": "Internals - Red Teaming Experiments",
+      "url": "https://www.ired.team/miscellaneous-reversing-forensics/windows-kernel-internals",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 63
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 224
+        }
+      ]
+    },
+    {
+      "id": "malware-unicorn-resources",
+      "title": "Malware Unicorn Resources",
+      "url": "https://malwareunicorn.org/#/resources",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 64
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 225
+        }
+      ]
+    },
+    {
+      "id": "reverse-engineering-challenges",
+      "title": "Reverse Engineering challenges",
+      "url": "https://challenges.re/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 65
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 226
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "challenge-iron-scripter",
+      "title": "Challenge – Iron Scripter",
+      "url": "https://ironscripter.us/category/challenge/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 66
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 19
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 27
+        }
+      ]
+    },
+    {
+      "id": "c-c-programming-notes",
+      "title": "C/C++ Programming Notes",
+      "url": "https://yurichev.com/writings/C-notes-en.pdf",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 38
+        },
+        {
+          "categoryId": "learning",
+          "position": 67
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 20
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 28
+        }
+      ]
+    },
+    {
+      "id": "welcome-to-pwn-college-pwn-college",
+      "title": "Welcome to pwn.college! | pwn.college",
+      "url": "https://pwn.college/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 68
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 227
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "goalkicker-programming-books",
+      "title": "GoalKicker Programming Books",
+      "url": "https://goalkicker.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 69
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 21
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 29
+        }
+      ]
+    },
+    {
+      "id": "picoctf",
+      "title": "picoCTF",
+      "url": "https://picoctf.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 70
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 228
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "ringzer0-ctf",
+      "title": "RingZer0 CTF",
+      "url": "https://ringzer0ctf.com/home",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 229
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "hack-the-box",
+      "title": "Hack The Box",
+      "url": "https://www.hackthebox.eu/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 230
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 13
+        }
+      ]
+    },
+    {
+      "id": "defend-the-web",
+      "title": "Defend the Web",
+      "url": "https://defendtheweb.net/?hackthis",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 231
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 14
+        }
+      ]
+    },
+    {
+      "id": "flaws",
+      "title": "flAWS",
+      "url": "https://flaws.cloud/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 232
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 15
+        }
+      ]
+    },
+    {
+      "id": "flaws2-cloud",
+      "title": "flAWS2.cloud",
+      "url": "https://flaws2.cloud/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 233
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 16
+        }
+      ]
+    },
+    {
+      "id": "pwnable-tw",
+      "title": "pwnable.tw",
+      "url": "https://pwnable.tw/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 234
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 17
+        }
+      ]
+    },
+    {
+      "id": "vulnhub",
+      "title": "VulnHub",
+      "url": "https://www.vulnhub.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 235
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 18
+        }
+      ]
+    },
+    {
+      "id": "247-ctf-the-game-never-stops",
+      "title": "247/CTF - The game never stops",
+      "url": "https://247ctf.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 236
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 19
+        }
+      ]
+    },
+    {
+      "id": "0x0539",
+      "title": "<0x0539/>",
+      "url": "https://0x0539.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 237
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 20
+        }
+      ]
+    },
+    {
+      "id": "root-me",
+      "title": "Root Me",
+      "url": "https://www.root-me.org/?lang=en",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 238
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 21
+        }
+      ]
+    },
+    {
+      "id": "wechall",
+      "title": "WeChall",
+      "url": "https://www.wechall.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 239
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 22
+        }
+      ]
+    },
+    {
+      "id": "hacking-lab-ctf",
+      "title": "Hacking-Lab CTF",
+      "url": "https://www.hacking-lab-ctf.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 240
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 23
+        }
+      ]
+    },
+    {
+      "id": "hacker101-ctf",
+      "title": "Hacker101 CTF",
+      "url": "https://ctf.hacker101.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 241
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 24
+        }
+      ]
+    },
+    {
+      "id": "hack-this-site",
+      "title": "Hack This Site!",
+      "url": "https://www.hackthissite.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 242
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 25
+        }
+      ]
+    },
+    {
+      "id": "welcome-w3challs-hacking-challenges",
+      "title": "Welcome – W3Challs Hacking Challenges",
+      "url": "https://w3challs.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 243
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 26
+        }
+      ]
+    },
+    {
+      "id": "io-netgarage-org",
+      "title": "io.netgarage.org",
+      "url": "https://io.netgarage.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 244
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 27
+        }
+      ]
+    },
+    {
+      "id": "ctftime",
+      "title": "CTFtime",
+      "url": "https://ctftime.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 245
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 28
+        }
+      ]
+    },
+    {
+      "id": "exploit-database",
+      "title": "Exploit Database",
+      "url": "https://www.exploit-db.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 246
+        }
+      ]
+    },
+    {
+      "id": "hacker101",
+      "title": "Hacker101",
+      "url": "https://www.hacker101.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 247
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 29
+        }
+      ]
+    },
+    {
+      "id": "pwnable-kr",
+      "title": "pwnable.kr",
+      "url": "https://pwnable.kr/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 248
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 30
+        }
+      ]
+    },
+    {
+      "id": "under-the-wire",
+      "title": "Under the Wire",
+      "url": "https://www.underthewire.tech/wargames.htm",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 249
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 31
+        }
+      ]
+    },
+    {
+      "id": "ctf365-capture-the-flag-security-training-platform",
+      "title": "CTF365 - Capture The Flag | Security Training Platform",
+      "url": "https://ctf365.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 250
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 32
+        }
+      ]
+    },
+    {
+      "id": "home-hacking-lab-com",
+      "title": "Home : Hacking-Lab.com",
+      "url": "https://www.hacking-lab.com/index.html",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 251
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 33
+        }
+      ]
+    },
+    {
+      "id": "microcorruption",
+      "title": "Microcorruption",
+      "url": "https://microcorruption.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 252
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 34
+        }
+      ]
+    },
+    {
+      "id": "ctflearn",
+      "title": "CTFlearn",
+      "url": "https://ctflearn.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 253
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 35
+        }
+      ]
+    },
+    {
+      "id": "reversing-kr",
+      "title": "Reversing.Kr",
+      "url": "https://reversing.kr/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 254
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 36
+        }
+      ]
+    },
+    {
+      "id": "welcome-to-hellbound-hackers",
+      "title": "Welcome to Hellbound Hackers",
+      "url": "https://www.hellboundhackers.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 255
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 37
+        }
+      ]
+    },
+    {
+      "id": "backdoor-security-platform",
+      "title": "Backdoor - Security platform",
+      "url": "https://backdoor.sdslabs.co/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 256
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 38
+        }
+      ]
+    },
+    {
+      "id": "smashthestack-wargaming-network",
+      "title": "SmashTheStack Wargaming Network",
+      "url": "https://smashthestack.org/wargames.html",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 257
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 39
+        }
+      ]
+    },
+    {
+      "id": "hacker-test-a-site-to-test-and-learn-about-web-hacking",
+      "title": "Hacker Test: A site to test and learn about web hacking",
+      "url": "https://www.hackertest.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 258
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 40
+        }
+      ]
+    },
+    {
+      "id": "practice-ctf-list",
+      "title": "Practice CTF List",
+      "url": "https://captf.com/practice-ctf/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 259
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 41
+        }
+      ]
+    },
+    {
+      "id": "ctf-wiki-hacking-sites",
+      "title": "CTF Wiki – Hacking Sites",
+      "url": "https://csea-iitb.github.io/IITBreachers-wiki/2020/08/01/Hacking-Sites.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 71
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 260
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 42
+        }
+      ]
+    },
+    {
+      "id": "ctf-101",
+      "title": "CTF 101",
+      "url": "https://ctf101.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 72
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 261
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 43
+        }
+      ]
+    },
+    {
+      "id": "owasp-webgoat",
+      "title": "OWASP WebGoat",
+      "url": "https://owasp.org/www-project-webgoat/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 73
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 262
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 44
+        }
+      ]
+    },
+    {
+      "id": "osint-framework",
+      "title": "OSINT Framework",
+      "url": "https://osintframework.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 74
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 263
+        }
+      ]
+    },
+    {
+      "id": "mitre-att-and-ck",
+      "title": "MITRE ATT&CK",
+      "url": "https://attack.mitre.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 75
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 264
+        }
+      ]
+    },
+    {
+      "id": "alphaseclab",
+      "title": "alphaSeclab",
+      "url": "https://github.com/alphaSeclab",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 76
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 265
+        }
+      ]
+    },
+    {
+      "id": "all-infosec-news",
+      "title": "All InfoSec News",
+      "url": "https://allinfosecnews.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 77
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 266
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity-books-and-resources",
+      "title": "Cybersecurity Books and Resources",
+      "url": "https://community.turgensec.com/cyber-security-books/#Zero_Day_Exploits_Books",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 78
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 267
+        }
+      ]
+    },
+    {
+      "id": "fuzzysecurity-home",
+      "title": "FuzzySecurity | Home",
+      "url": "https://www.fuzzysecurity.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 79
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 268
+        }
+      ]
+    },
+    {
+      "id": "phrack",
+      "title": "Phrack",
+      "url": "https://www.phrack.org/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 39
+        },
+        {
+          "categoryId": "learning",
+          "position": 80
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 269
+        }
+      ]
+    },
+    {
+      "id": "awesome-ctf",
+      "title": "Awesome CTF",
+      "url": "https://github.com/apsdehal/awesome-ctf#readme",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 81
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 270
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 45
+        }
+      ]
+    },
+    {
+      "id": "bugmenot",
+      "title": "BugMeNot",
+      "url": "https://bugmenot.com/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 82
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 271
+        }
+      ]
+    },
+    {
+      "id": "kernelmode-info",
+      "title": "KernelMode.info",
+      "url": "https://www.kernelmode.info/forum/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 83
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 272
+        }
+      ]
+    },
+    {
+      "id": "crackmes",
+      "title": "Crackmes",
+      "url": "https://crackmes.one/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 84
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 273
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 46
+        }
+      ]
+    },
+    {
+      "id": "re-for-beginners",
+      "title": "RE for Beginners",
+      "url": "https://www.begin.re/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 85
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 274
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 47
+        }
+      ]
+    },
+    {
+      "id": "mit-open-learning-library",
+      "title": "MIT Open Learning Library",
+      "url": "https://openlearning.mit.edu/courses-programs/open-learning-library",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 40
+        },
+        {
+          "categoryId": "learning",
+          "position": 86
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 275
+        }
+      ]
+    },
+    {
+      "id": "binary-exploitation-areyou1or0",
+      "title": "Binary Exploitation – areyou1or0",
+      "url": "https://areyou1or0.it/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 87
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 276
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 48
+        }
+      ]
+    },
+    {
+      "id": "exercism",
+      "title": "Exercism",
+      "url": "https://exercism.org/",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 88
+        },
+        {
+          "categoryId": "learning-programming",
+          "position": 22
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 30
+        }
+      ]
+    },
+    {
+      "id": "andrius-tapinas",
+      "title": "Andrius Tapinas",
+      "url": "https://tapinas.substack.com/?sort=new",
+      "categories": [
+        {
+          "categoryId": "news",
+          "position": 6
+        },
+        {
+          "categoryId": "reading",
+          "position": 41
+        }
+      ]
+    },
+    {
+      "id": "apple-podcasts",
+      "title": "Apple Podcasts",
+      "url": "https://podcasts.apple.com/us/browse",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "radio-garden",
+      "title": "Radio Garden",
+      "url": "https://radio.garden/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 12
+        }
+      ]
+    },
+    {
+      "id": "brainbashers-puzzles",
+      "title": "BrainBashers Puzzles",
+      "url": "https://www.brainbashers.com/puzzles.asp",
+      "categories": [
+        {
+          "categoryId": "entertainment-games",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "geoguessr",
+      "title": "GeoGuessr",
+      "url": "https://www.geoguessr.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment-games",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "geografija",
+      "title": "Geografija",
+      "url": "https://g.nepo.lt/",
+      "categories": [
+        {
+          "categoryId": "entertainment-games",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "epic-games-store",
+      "title": "Epic Games Store",
+      "url": "https://store.epicgames.com/en-US/",
+      "categories": [
+        {
+          "categoryId": "e-shop",
+          "position": 3
+        },
+        {
+          "categoryId": "entertainment-games",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "title": "Steam",
+      "url": "https://store.steampowered.com/",
+      "categories": [
+        {
+          "categoryId": "e-shop",
+          "position": 4
+        },
+        {
+          "categoryId": "entertainment-games",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "howlongtobeat",
+      "title": "HowLongToBeat",
+      "url": "https://howlongtobeat.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 14
+        },
+        {
+          "categoryId": "entertainment-games",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "sumani-mama",
+      "title": "Sumani mama",
+      "url": "https://www.sumanimama.lt/",
+      "categories": [
+        {
+          "categoryId": "lifestyle",
+          "position": 13
+        },
+        {
+          "categoryId": "lifestyle-health",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "sodas-ir-darzas",
+      "title": "Sodas ir daržas",
+      "url": "https://mudubudu.lt/",
+      "categories": [
+        {
+          "categoryId": "lifestyle",
+          "position": 14
+        }
+      ]
+    },
+    {
+      "id": "fandom",
+      "title": "Fandom",
+      "url": "https://fandom.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 13
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 15
+        }
+      ]
+    },
+    {
+      "id": "meetup",
+      "title": "Meetup",
+      "url": "https://www.meetup.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 14
+        },
+        {
+          "categoryId": "lifestyle",
+          "position": 16
+        }
+      ]
+    },
+    {
+      "id": "auto-data",
+      "title": "Auto-Data",
+      "url": "https://www.auto-data.net/en/",
+      "categories": [
+        {
+          "categoryId": "automotive",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "ninjajobs",
+      "title": "NinjaJobs",
+      "url": "https://ninjajobs.org/",
+      "categories": [
+        {
+          "categoryId": "lifestyle",
+          "position": 17
+        }
+      ]
+    },
+    {
+      "id": "upwork",
+      "title": "Upwork",
+      "url": "https://www.upwork.com/",
+      "categories": [
+        {
+          "categoryId": "lifestyle",
+          "position": 18
+        }
+      ]
+    },
+    {
+      "id": "skyscanner",
+      "title": "Skyscanner",
+      "url": "https://www.skyscanner.net/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 15
+        }
+      ]
+    },
+    {
+      "id": "motointegrator",
+      "title": "Motointegrator",
+      "url": "https://motointegrator.com/lt/lt/",
+      "categories": [
+        {
+          "categoryId": "automotive",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "mlfree-website-devoted-to-car-technology-text",
+      "title": "MLfree - Website devoted to car, technology, text ...",
+      "url": "https://mlfree.com/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 31
+        },
+        {
+          "categoryId": "automotive",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "citynow",
+      "title": "CityNow",
+      "url": "https://www.citynow.org/",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 16
+        }
+      ]
+    },
+    {
+      "id": "manogarazas-lt",
+      "title": "ManoGaražas.lt",
+      "url": "https://www.manogarazas.lt/",
+      "categories": [
+        {
+          "categoryId": "automotive",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "flipboard",
+      "title": "Flipboard",
+      "url": "https://flipboard.com/",
+      "categories": [
+        {
+          "categoryId": "news",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "wikihoops",
+      "title": "Wikihoops",
+      "url": "https://wikihoops.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 15
+        },
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 15
+        }
+      ]
+    },
+    {
+      "id": "cab",
+      "title": "CAB",
+      "url": "https://www.cab.lt/",
+      "categories": [
+        {
+          "categoryId": "automotive",
+          "position": 6
+        }
+      ]
+    },
+    {
+      "id": "draudimo-ivykiai",
+      "title": "Draudimo įvykiai",
+      "url": "https://draudimoivykiai.lt/",
+      "categories": [
+        {
+          "categoryId": "automotive",
+          "position": 7
+        }
+      ]
+    },
+    {
+      "id": "aic-miegmaisiai",
+      "title": "AIC Miegmaišiai",
+      "url": "https://www.aic.lt/80-miegmaisiai",
+      "categories": [
+        {
+          "categoryId": "e-shop",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "id": "automobile-catalog",
+      "title": "Automobile-Catalog",
+      "url": "https://www.automobile-catalog.com/",
+      "categories": [
+        {
+          "categoryId": "automotive",
+          "position": 8
+        }
+      ]
+    },
+    {
+      "id": "zodle",
+      "title": "Zodle",
+      "url": "https://zodle.gdr-projects.com/daily",
+      "categories": [
+        {
+          "categoryId": "entertainment-games",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "id": "autoevolution-cars",
+      "title": "AutoEvolution Cars",
+      "url": "https://www.autoevolution.com/cars/",
+      "categories": [
+        {
+          "categoryId": "automotive",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "id": "is-ai-profitable-yet",
+      "title": "Is AI Profitable Yet?",
+      "url": "https://isaiprofitable.com/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 32
+        },
+        {
+          "categoryId": "tech-ai-ai",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "gcompris",
+      "title": "GCompris",
+      "url": "https://www.gcompris.net/index-en.html",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 89
+        },
+        {
+          "categoryId": "tech-ai",
+          "position": 33
+        },
+        {
+          "categoryId": "entertainment-games",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "id": "amazon-your-books",
+      "title": "Amazon Your Books",
+      "url": "https://www.amazon.com/your-books",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 1000
+        },
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 1000
+        }
+      ]
+    },
+    {
+      "id": "gemini",
+      "title": "Gemini",
+      "url": "https://gemini.google.com/app",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 1000
+        },
+        {
+          "categoryId": "tech-ai-ai",
+          "position": 1000
+        }
+      ]
+    },
+    {
+      "id": "instapaper",
+      "title": "Instapaper",
+      "url": "https://www.instapaper.com/u",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 1001
+        },
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 1001
+        }
+      ]
+    },
+    {
+      "id": "musudarzelis",
+      "title": "Mūsų darželis",
+      "url": "https://musudarzelis.com/",
+      "categories": [
+        {
+          "categoryId": "lifestyle",
+          "position": 1000
+        }
+      ]
+    },
+    {
+      "id": "onedrive-photos",
+      "title": "OneDrive Photos",
+      "url": "https://photos.onedrive.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 1000
+        }
+      ]
+    },
+    {
+      "id": "mano-dienynas",
+      "title": "Mano dienynas",
+      "url": "https://www.manodienynas.lt/",
+      "categories": [
+        {
+          "categoryId": "lifestyle",
+          "position": 1001
+        }
+      ]
+    },
+    {
+      "id": "luminor-internet-bank",
+      "title": "Luminor Internet Bank",
+      "url": "https://ib.luminor.lt/login.aspx?NoRedirect=1&SetLanguage=LIT",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1000
+        }
+      ]
+    },
+    {
+      "id": "paypal",
+      "title": "PayPal",
+      "url": "https://www.paypal.com/myaccount/summary",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1001
+        }
+      ]
+    },
+    {
+      "id": "paysera-web-login",
+      "title": "Paysera Web",
+      "url": "https://bank.paysera.com/lt/login",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1002
+        }
+      ]
+    },
+    {
+      "id": "seb-web",
+      "title": "SEB Web",
+      "url": "https://e.seb.lt/mainib/web.p",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1003
+        }
+      ]
+    },
+    {
+      "id": "gosavy",
+      "title": "Gosavy",
+      "url": "https://gosavy.com/lt/prisijungti/",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1004
+        }
+      ]
+    },
+    {
+      "id": "finbee",
+      "title": "FinBee",
+      "url": "https://p2p.finbee.lt/prisijungti",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1005
+        }
+      ]
+    },
+    {
+      "id": "rontgen",
+      "title": "Röntgen",
+      "url": "https://www.rontgen.lt/login",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1006
+        }
+      ]
+    },
+    {
+      "id": "sodra",
+      "title": "Sodra",
+      "url": "https://gyventojai.sodra.lt/sodra-login/select",
+      "categories": [
+        {
+          "categoryId": "finance-tracking",
+          "position": 1007
+        }
+      ]
+    },
+    {
+      "id": "lietuvon-map",
+      "title": "LIETUVON.lt Tourism Map",
+      "url": "https://www.google.com/maps/d/viewer?mid=1fsbbjLhR0yt88yeY4OPh3ODFNtA",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 1000
+        }
+      ]
+    },
+    {
+      "id": "lietuvos-pilys-ir-dvarai-map",
+      "title": "Lietuvos pilys ir dvarai",
+      "url": "https://www.google.com/maps/d/viewer?mid=1gtev355cN5qUMUd84ErxZNslfrWajgNa",
+      "categories": [
+        {
+          "categoryId": "travel",
+          "position": 1001
+        }
+      ]
+    },
+    {
+      "id": "roppers-academy",
+      "title": "Roppers Academy",
+      "url": "https://academy.hoppersroppers.org/login/index.php",
+      "categories": [
+        {
+          "categoryId": "learning",
+          "position": 1000
+        },
+        {
+          "categoryId": "security-blogs",
+          "position": 1000
+        },
+        {
+          "categoryId": "security-ctf",
+          "position": 1000
+        }
+      ]
+    },
+    {
+      "id": "olaf-hartong",
+      "title": "Olaf Hartong",
+      "url": "https://medium.com/@olafhartong",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 1001
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 1000
+        }
+      ]
+    },
+    {
+      "id": "banjooz-bandcamp",
+      "title": "Banjooz on Bandcamp",
+      "url": "https://sfera.bandcamp.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 1001
+        }
+      ]
+    },
+    {
+      "id": "banjooz-soundcloud",
+      "title": "Banjooz on SoundCloud",
+      "url": "https://soundcloud.com/banjooz-sfera-konan-mc",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 1002
+        }
+      ]
+    },
+    {
+      "id": "boardgamegeek",
+      "title": "BoardGameGeek",
+      "url": "https://boardgamegeek.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment-games",
+          "position": 1000
+        },
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 1002
+        }
+      ]
+    },
+    {
+      "id": "dokobit",
+      "title": "Dokobit",
+      "url": "https://app.dokobit.com/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 1001
+        }
+      ]
+    },
+    {
+      "id": "discord",
+      "title": "Discord",
+      "url": "https://discord.com/channels/@me",
+      "categories": [
+        {
+          "categoryId": "entertainment",
+          "position": 1003
+        }
+      ]
+    },
+    {
+      "id": "google-takeout",
+      "title": "Google Takeout",
+      "url": "https://takeout.google.com/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 1002
+        }
+      ]
+    },
+    {
+      "id": "how-long-to-read",
+      "title": "How Long to Read",
+      "url": "https://howlongtoread.com/",
+      "categories": [
+        {
+          "categoryId": "reading",
+          "position": 1002
+        }
+      ]
+    },
+    {
+      "id": "wishlistr",
+      "title": "Wishlistr",
+      "url": "https://www.wishlistr.com/",
+      "categories": [
+        {
+          "categoryId": "entertainment-tracking",
+          "position": 1003
         }
       ]
     }
