@@ -24,10 +24,17 @@ export function CategoryPage({ data, categoryId }: CategoryPageProps) {
   const parent = category.parentId ? data.categories.find((item) => item.id === category.parentId) : undefined
   const children = childCategories(data.categories, category.id)
   const bookmarks = bookmarksForCategory(data.bookmarks, category.id)
-  const totalCount = bookmarksForCategoryTree(data, category.id).length
+  const descendantBookmarks = bookmarksForCategoryTree(data, category.id)
+  const totalCount = descendantBookmarks.length
   const theme = getCategoryTheme(category)
   const backHref = parent ? `#/category/${encodeURIComponent(parent.id)}` : '#/'
   const backLabel = parent?.name ?? 'Home'
+
+  const openRandomBookmark = () => {
+    const bookmark = descendantBookmarks[Math.floor(Math.random() * descendantBookmarks.length)]
+    if (!bookmark) return
+    window.open(bookmark.url, '_blank', 'noopener,noreferrer')
+  }
 
   return (
     <main
@@ -43,6 +50,11 @@ export function CategoryPage({ data, categoryId }: CategoryPageProps) {
           <p className="eyebrow">{parent ? `${parent.name} · subcategory` : 'Category'} · {totalCount} bookmark{totalCount === 1 ? '' : 's'}</p>
           <h1>{category.name}</h1>
           <p>{children.length ? 'Choose a focused shelf, or open bookmarks filed directly here.' : 'A focused shelf for everything worth returning to.'}</p>
+          {descendantBookmarks.length > 0 && (
+            <button className="feeling-lucky-button" type="button" onClick={openRandomBookmark}>
+              <Icon name="spark" size={18} /> Feeling lucky
+            </button>
+          )}
         </header>
         <section className="category-content" aria-label={`${category.name} contents`}>
           {children.length > 0 && (

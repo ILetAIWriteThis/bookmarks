@@ -103,6 +103,31 @@ describe('Bookmarks UI', () => {
     ])
   })
 
+  it('opens a random bookmark from the current category tree', () => {
+    const nestedData = {
+      ...testData,
+      categories: [...testData.categories, { id: 'podcasts', name: 'Podcasts', position: 1, parentId: 'tech' }],
+      bookmarks: [
+        ...testData.bookmarks,
+        {
+          id: 'podcast', title: 'Podcast', url: 'https://podcast.example',
+          categories: [{ categoryId: 'podcasts', position: 1 }],
+        },
+      ],
+    }
+    const open = vi.spyOn(window, 'open').mockImplementation(() => null)
+    const random = vi.spyOn(Math, 'random').mockReturnValue(.75)
+    render(<App data={nestedData} />)
+
+    window.location.hash = '#/category/tech'
+    fireEvent(window, new HashChangeEvent('hashchange'))
+    fireEvent.click(screen.getByRole('button', { name: 'Feeling lucky' }))
+
+    expect(open).toHaveBeenCalledWith('https://podcast.example', '_blank', 'noopener,noreferrer')
+    random.mockRestore()
+    open.mockRestore()
+  })
+
   it('renders category and daily empty states', () => {
     render(<App data={{ ...testData, bookmarks: [] }} />)
     expect(screen.getByText('Your daily desk is clear')).toBeInTheDocument()

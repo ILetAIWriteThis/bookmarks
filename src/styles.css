@@ -270,6 +270,9 @@ h1, h2 { letter-spacing: -.045em; }
 .category-hero .eyebrow { color: inherit; opacity: .72; }
 .category-hero h1 { margin: 8px 0 14px; font-size: clamp(3.2rem, 9vw, 7.2rem); line-height: .88; overflow-wrap: anywhere; }
 .category-hero > p:last-child { max-width: 520px; margin: 0; opacity: .72; line-height: 1.6; }
+.feeling-lucky-button { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 10px 14px; color: var(--theme-from); background: var(--theme-accent); border: 1px solid rgba(255,255,255,.5); border-radius: 999px; box-shadow: 0 8px 18px rgba(0,0,0,.15); cursor: pointer; font-weight: 850; }
+.feeling-lucky-button:hover { transform: translateY(-1px); box-shadow: 0 11px 22px rgba(0,0,0,.2); }
+.feeling-lucky-button:focus-visible { outline: 3px solid var(--theme-accent); outline-offset: 3px; }
 .category-content { padding: 28px; color: var(--ink); background: rgba(248, 244, 235, .94); border: 1px solid rgba(255,255,255,.24); border-radius: 26px; box-shadow: 0 28px 60px rgba(0,0,0,.17); backdrop-filter: blur(10px); }
 .category-content .bookmark-card { background: #fff; }
 

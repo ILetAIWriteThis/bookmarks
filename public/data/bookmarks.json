@@ -98,7 +98,7 @@
     {
       "id": "youtube-news",
       "name": "News",
-      "position": 4,
+      "position": 5,
       "parentId": "youtube",
       "icon": "newspaper"
     },
@@ -126,7 +126,7 @@
     {
       "id": "youtube-science",
       "name": "Science",
-      "position": 5,
+      "position": 4,
       "parentId": "youtube",
       "icon": "spark"
     },
@@ -219,7 +219,7 @@
     {
       "id": "youtube-documentary",
       "name": "Documentary",
-      "position": 13,
+      "position": 5,
       "parentId": "youtube"
     },
     {
@@ -321,6 +321,12 @@
       "position": 1,
       "parentId": "lifestyle",
       "icon": "bookmark"
+    },
+    {
+      "id": "youtube-ai-vendors",
+      "name": "AI Vendors",
+      "position": 18,
+      "parentId": "tech-ai-ai"
     }
   ],
   "bookmarks": [
@@ -623,12 +629,8 @@
       "url": "https://www.youtube.com/@LaisvesTV/videos",
       "categories": [
         {
-          "categoryId": "youtube-podcasts",
-          "position": 1
-        },
-        {
           "categoryId": "youtube-entertainment",
-          "position": 2
+          "position": -4
         }
       ]
     },
@@ -649,12 +651,8 @@
       "url": "https://www.youtube.com/@mokslosriuba/videos",
       "categories": [
         {
-          "categoryId": "youtube-podcasts",
-          "position": 11
-        },
-        {
           "categoryId": "youtube-science",
-          "position": 6
+          "position": -4
         }
       ]
     },
@@ -910,8 +908,8 @@
       "url": "https://www.youtube.com/@anthropic-ai/videos",
       "categories": [
         {
-          "categoryId": "youtube-podcasts",
-          "position": 27
+          "categoryId": "youtube-ai-vendors",
+          "position": 1
         }
       ]
     },
@@ -6987,7 +6985,7 @@
       "categories": [
         {
           "categoryId": "youtube-cars",
-          "position": 2
+          "position": -8
         }
       ]
     },
@@ -6998,7 +6996,7 @@
       "categories": [
         {
           "categoryId": "youtube-cars",
-          "position": 1
+          "position": -7
         }
       ]
     },
@@ -7053,7 +7051,7 @@
       "categories": [
         {
           "categoryId": "youtube-cars",
-          "position": 4
+          "position": -5
         }
       ]
     },
@@ -7108,7 +7106,7 @@
       "categories": [
         {
           "categoryId": "youtube-cars",
-          "position": 5
+          "position": -6
         }
       ]
     },
@@ -7229,7 +7227,7 @@
       "categories": [
         {
           "categoryId": "youtube-cars",
-          "position": 3
+          "position": -4
         }
       ]
     },
@@ -7240,7 +7238,7 @@
       "categories": [
         {
           "categoryId": "youtube-cars",
-          "position": 24
+          "position": -1
         }
       ]
     },
@@ -7405,7 +7403,7 @@
       "categories": [
         {
           "categoryId": "youtube-cars",
-          "position": 39
+          "position": -2
         }
       ]
     },
@@ -7460,7 +7458,7 @@
       "categories": [
         {
           "categoryId": "youtube-cars",
-          "position": 44
+          "position": -3
         }
       ]
     },
@@ -7922,7 +7920,7 @@
       "categories": [
         {
           "categoryId": "youtube-entertainment",
-          "position": 3
+          "position": -3
         }
       ]
     },
@@ -7944,7 +7942,7 @@
       "categories": [
         {
           "categoryId": "youtube-entertainment",
-          "position": 1
+          "position": -2
         }
       ]
     },
@@ -8021,7 +8019,7 @@
       "categories": [
         {
           "categoryId": "youtube-entertainment",
-          "position": 2
+          "position": -1
         }
       ]
     },
@@ -9759,7 +9757,7 @@
       "categories": [
         {
           "categoryId": "youtube-science",
-          "position": 5
+          "position": -2
         }
       ]
     },
@@ -9836,7 +9834,7 @@
       "categories": [
         {
           "categoryId": "youtube-science",
-          "position": 11
+          "position": -3
         }
       ]
     },
@@ -9847,7 +9845,7 @@
       "categories": [
         {
           "categoryId": "youtube-science",
-          "position": 12
+          "position": -1
         }
       ]
     },
@@ -12271,7 +12269,7 @@
       "categories": [
         {
           "categoryId": "youtube-documentary",
-          "position": 11
+          "position": -1
         }
       ]
     },
