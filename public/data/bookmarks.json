@@ -1046,6 +1046,7 @@
       "id": "youtube-archaeology-podcast-network",
       "title": "Archaeology Podcast Network",
       "url": "https://www.youtube.com/@archaeologypodcastnetwork/videos",
+      "subscribed": false,
       "categories": [
         {
           "categoryId": "youtube-podcasts",
@@ -6066,6 +6067,7 @@
       "id": "youtube-joe-helle",
       "title": "Joe Helle",
       "url": "https://www.youtube.com/@iamthemayor11/videos",
+      "subscribed": false,
       "categories": [
         {
           "categoryId": "youtube-security",
@@ -6704,6 +6706,7 @@
       "id": "youtube-stacksmashing",
       "title": "stacksmashing",
       "url": "https://www.youtube.com/@stacksmashing/videos",
+      "subscribed": false,
       "categories": [
         {
           "categoryId": "youtube-security",

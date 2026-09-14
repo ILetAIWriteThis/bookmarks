@@ -91,6 +91,21 @@ describe('Bookmarks UI', () => {
     expect(screen.queryByRole('link', { name: /Alpha News/ })).not.toBeInTheDocument()
   })
 
+  it('shows the YouTube subscription tag and respects an opt-out', async () => {
+    const user = userEvent.setup()
+    const data = {
+      ...testData,
+      bookmarks: [
+        ...testData.bookmarks,
+        { id: "channel", title: "Channel", url: "https://www.youtube.com/@channel/videos", subscribed: false, categories: [] },
+      ],
+    }
+    render(<App data={data} />)
+    await user.type(screen.getByRole("searchbox"), "Channel")
+    expect(screen.getByText("Not subscribed")).toBeInTheDocument()
+    expect(screen.queryByText("Subscribed")).not.toBeInTheDocument()
+  })
+
   it('navigates to category hash routes and renders ordered bookmarks', () => {
     render(<App data={testData} />)
     window.location.hash = '#/category/news'

@@ -29,6 +29,8 @@ Bookmark options:
   --category ID:POSITION    Repeat for multiple category assignments
   --daily-position N
   --clear-daily             update-bookmark only
+  --subscribed              Mark a YouTube channel as subscribed
+  --not-subscribed          Mark a YouTube channel as not subscribed
 nCategory options:
   --parent ID               Nest below an existing category
   --clear-parent            Move an existing category to the root
@@ -48,7 +50,7 @@ function parseFlags(args: string[]): Flags {
     const token = args[index]
     if (!token.startsWith('--')) throw new Error(`Unexpected argument "${token}"`)
     const name = token.slice(2)
-    if (name === 'clear-daily' || name === 'clear-parent') {
+    if (name === 'clear-daily' || name === 'clear-parent' || name === 'subscribed' || name === 'not-subscribed') {
       flags.set(name, ['true'])
       continue
     }
@@ -113,6 +115,14 @@ function parseMemberships(flags: Flags): CategoryMembership[] | undefined {
 
 function parseTags(flags: Flags) {
   return flags.get('tag')?.flatMap((tag) => tag.split(',')).map((tag) => tag.trim()).filter(Boolean)
+}
+
+function applySubscription(bookmark: Bookmark, flags: Flags) {
+  if (has(flags, "subscribed") && has(flags, "not-subscribed")) {
+    throw new Error("Use either --subscribed or --not-subscribed, not both")
+  }
+  if (has(flags, "subscribed")) bookmark.subscribed = true
+  if (has(flags, "not-subscribed")) bookmark.subscribed = false
 }
 
 function applyTheme(category: Category, flags: Flags) {
@@ -193,6 +203,7 @@ async function run() {
     if (has(flags, 'description')) bookmark.description = required(flags, 'description')
     if (has(flags, 'tag')) bookmark.tags = parseTags(flags)
     if (has(flags, 'daily-position')) bookmark.dailyPosition = optionalNumber(flags, 'daily-position')
+    applySubscription(bookmark, flags)
     data.bookmarks.push(bookmark)
   } else if (command === 'update-bookmark') {
     const bookmark = data.bookmarks.find(({ id }) => id === required(flags, 'id'))
@@ -204,6 +215,7 @@ async function run() {
     if (has(flags, 'category')) bookmark.categories = parseMemberships(flags)!
     if (has(flags, 'daily-position')) bookmark.dailyPosition = optionalNumber(flags, 'daily-position')
     if (has(flags, 'clear-daily')) delete bookmark.dailyPosition
+    applySubscription(bookmark, flags)
   } else if (command === 'remove-bookmark') {
     const id = required(flags, 'id')
     const before = data.bookmarks.length

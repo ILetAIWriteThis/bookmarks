@@ -18,6 +18,17 @@ describe('bookmark data', () => {
     expect(dailyBookmarks(data.bookmarks).map(({ id }) => id)).toEqual(['alpha', 'example'])
   })
 
+  it('places unsubscribed channels after subscribed ones regardless of position', () => {
+    const channels = validateBookmarkData({
+      categories: [{ id: "youtube", name: "YouTube", position: 1 }],
+      bookmarks: [
+        { id: "later", title: "Later", url: "https://www.youtube.com/@later/videos", subscribed: false, categories: [{ categoryId: "youtube", position: 1 }] },
+        { id: "first", title: "First", url: "https://www.youtube.com/@first/videos", categories: [{ categoryId: "youtube", position: 2 }] },
+      ],
+    }).bookmarks
+    expect(bookmarksForCategory(channels, "youtube").map(({ id }) => id)).toEqual(["first", "later"])
+  })
+
   it('supports arbitrary category hierarchy and ancestor-aware search', () => {
     const hierarchical = validateBookmarkData({
       categories: [
@@ -74,6 +85,18 @@ describe('bookmark data', () => {
       ],
     }
     expect(() => validateBookmarkData(duplicateUrl)).toThrow(/url duplicates URL/)
+  })
+
+  it('defaults YouTube channels to subscribed and limits the field to channels', () => {
+    const youtubeChannel = validateBookmarkData({
+      categories: [],
+      bookmarks: [{ id: "channel", title: "Channel", url: "https://www.youtube.com/@channel/videos", categories: [] }],
+    }).bookmarks[0]
+    expect(youtubeChannel.subscribed).toBeUndefined()
+    expect(() => validateBookmarkData({
+      categories: [],
+      bookmarks: [{ id: "site", title: "Site", url: "https://example.com", subscribed: false, categories: [] }],
+    })).toThrow(/subscribed only applies to YouTube channel URLs/)
   })
 
   it('searches normalized text, hostnames, tags, and category names', () => {

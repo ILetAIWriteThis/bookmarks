@@ -24,6 +24,8 @@ export interface Bookmark {
   url: string
   description?: string
   tags?: string[]
+  /** Applies to YouTube channel URLs; omitted channels are subscribed by default. */
+  subscribed?: boolean
   dailyPosition?: number
   categories: CategoryMembership[]
 }

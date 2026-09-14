@@ -28,6 +28,17 @@ const optionalString = (value: unknown, path: string, errors: string[]) => {
   return value.trim()
 }
 
+const isYouTubeChannelUrl = (url: string) => {
+  try {
+    const parsed = new URL(url)
+    const hostname = parsed.hostname.replace(/^www\./, "")
+    return (hostname === "youtube.com" || hostname === "m.youtube.com")
+      && (/^\/@[^/]+/.test(parsed.pathname) || /^\/channel\/[^/]+/.test(parsed.pathname))
+  } catch {
+    return false
+  }
+}
+
 const parseTheme = (value: unknown, path: string, errors: string[]): ThemeColors | undefined => {
   if (value === undefined) return undefined
   if (!isRecord(value)) {
@@ -101,6 +112,13 @@ const parseBookmark = (value: unknown, index: number, errors: string[]): Bookmar
     dailyPosition = requiredPosition(value.dailyPosition, `${path}.dailyPosition`, errors)
   }
 
+  let subscribed: boolean | undefined
+  if (value.subscribed !== undefined) {
+    if (typeof value.subscribed !== "boolean") errors.push(path + ".subscribed must be a boolean when provided")
+    else if (!isYouTubeChannelUrl(url)) errors.push(path + ".subscribed only applies to YouTube channel URLs")
+    else subscribed = value.subscribed
+  }
+
   const memberships = Array.isArray(value.categories)
     ? value.categories
         .map((item, membershipIndex) => parseMembership(item, index, membershipIndex, errors))
@@ -114,6 +132,7 @@ const parseBookmark = (value: unknown, index: number, errors: string[]): Bookmar
     url,
     description: optionalString(value.description, `${path}.description`, errors),
     tags,
+    subscribed,
     dailyPosition,
     categories: memberships,
   }
@@ -249,13 +268,16 @@ export const dailyBookmarks = (bookmarks: Bookmark[]) =>
     .filter((bookmark) => bookmark.dailyPosition !== undefined)
     .sort((a, b) => comparePositionAndTitle(a.dailyPosition!, a.title, b.dailyPosition!, b.title))
 
+const compareSubscription = (a: Bookmark, b: Bookmark) =>
+  Number(a.subscribed === false) - Number(b.subscribed === false)
+
 export const bookmarksForCategory = (bookmarks: Bookmark[], categoryId: string) =>
   bookmarks
     .filter((bookmark) => bookmark.categories.some((membership) => membership.categoryId === categoryId))
     .sort((a, b) => {
       const aPosition = a.categories.find((membership) => membership.categoryId === categoryId)!.position
       const bPosition = b.categories.find((membership) => membership.categoryId === categoryId)!.position
-      return comparePositionAndTitle(aPosition, a.title, bPosition, b.title)
+      return compareSubscription(a, b) || comparePositionAndTitle(aPosition, a.title, bPosition, b.title)
     })
 
 export const bookmarksForCategoryTree = (data: BookmarkData, categoryId: string) => {
