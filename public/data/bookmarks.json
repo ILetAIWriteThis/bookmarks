@@ -629,6 +629,10 @@
       "url": "https://www.youtube.com/@LaisvesTV/videos",
       "categories": [
         {
+          "categoryId": "youtube-podcasts",
+          "position": 1
+        },
+        {
           "categoryId": "youtube-entertainment",
           "position": -4
         }
@@ -650,6 +654,10 @@
       "title": "Mokslo sriuba",
       "url": "https://www.youtube.com/@mokslosriuba/videos",
       "categories": [
+        {
+          "categoryId": "youtube-podcasts",
+          "position": 11
+        },
         {
           "categoryId": "youtube-science",
           "position": -4
