@@ -19799,6 +19799,28 @@
           "position": 39
         }
       ]
+    },
+    {
+      "id": "youtube-baltic-defence-review",
+      "title": "Baltic Defence Review",
+      "url": "https://www.youtube.com/@BalticDefenceReview/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-politics",
+          "position": 38
+        }
+      ]
+    },
+    {
+      "id": "youtube-dominion-defence-review",
+      "title": "Dominion Defence Review",
+      "url": "https://www.youtube.com/@dominiondefencereview/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-politics",
+          "position": 39
+        }
+      ]
     }
   ]
 }
