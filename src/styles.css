@@ -220,8 +220,6 @@ h1, h2 { letter-spacing: -.045em; }
 .bookmark-card__description { color: #666c68; font-size: .86rem; line-height: 1.45; }
 .bookmark-card__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; color: #7d817c; font-size: .72rem; }
 .tag { padding: 2px 6px; color: #465964; background: #e9eff0; border-radius: 999px; }
-.tag--subscription { color: #215f43; background: #dff3e7; font-weight: 750; }
-.tag--not-subscribed { color: #74531c; background: #f9edcf; }
 
 .empty-state { min-height: 112px; padding: 23px; display: flex; align-items: center; gap: 15px; border: 1px dashed #c8c0b2; border-radius: 18px; background: rgba(255, 255, 255, .35); }
 .empty-state__icon { width: 45px; height: 45px; flex: 0 0 auto; display: grid; place-items: center; color: #876728; background: #f6d99c; border-radius: 14px; }

@@ -91,42 +91,42 @@
     {
       "id": "youtube-entertainment",
       "name": "Entertainment",
-      "position": 2,
+      "position": 3,
       "parentId": "youtube",
       "icon": "star"
     },
     {
       "id": "youtube-news",
       "name": "News",
-      "position": 5,
+      "position": 6,
       "parentId": "youtube",
       "icon": "newspaper"
     },
     {
       "id": "youtube-engineering",
       "name": "Engineering",
-      "position": 3,
+      "position": 4,
       "parentId": "youtube",
       "icon": "chart"
     },
     {
       "id": "youtube-security",
       "name": "Security",
-      "position": 11,
+      "position": 12,
       "parentId": "youtube",
       "icon": "shield"
     },
     {
       "id": "youtube-podcasts",
       "name": "Podcasts",
-      "position": 1,
+      "position": 2,
       "parentId": "youtube",
       "icon": "play"
     },
     {
       "id": "youtube-science",
       "name": "Science",
-      "position": 4,
+      "position": 5,
       "parentId": "youtube",
       "icon": "spark"
     },
@@ -172,19 +172,19 @@
     {
       "id": "youtube-cars",
       "name": "Cars",
-      "position": 6,
+      "position": 7,
       "parentId": "youtube"
     },
     {
       "id": "youtube-music",
       "name": "Music",
-      "position": 7,
+      "position": 8,
       "parentId": "youtube"
     },
     {
       "id": "youtube-movies-tv",
       "name": "Movies & TV",
-      "position": 8,
+      "position": 9,
       "parentId": "youtube"
     },
     {
@@ -196,13 +196,13 @@
     {
       "id": "youtube-politics",
       "name": "Politics",
-      "position": 9,
+      "position": 10,
       "parentId": "youtube"
     },
     {
       "id": "youtube-geography",
       "name": "Geography",
-      "position": 10,
+      "position": 11,
       "parentId": "youtube"
     },
     {
@@ -213,61 +213,61 @@
     {
       "id": "youtube-comedy",
       "name": "Comedy",
-      "position": 12,
+      "position": 13,
       "parentId": "youtube"
     },
     {
       "id": "youtube-documentary",
       "name": "Documentary",
-      "position": 5,
+      "position": 6,
       "parentId": "youtube"
     },
     {
       "id": "youtube-history",
       "name": "History",
-      "position": 14,
+      "position": 15,
       "parentId": "youtube"
     },
     {
       "id": "youtube-tech-programming",
       "name": "Tech & Programming",
-      "position": 15,
+      "position": 16,
       "parentId": "youtube"
     },
     {
       "id": "youtube-travel",
       "name": "Travel",
-      "position": 16,
+      "position": 17,
       "parentId": "youtube"
     },
     {
       "id": "youtube-ai-machine-learning",
       "name": "AI & Machine Learning",
-      "position": 17,
+      "position": 18,
       "parentId": "youtube"
     },
     {
       "id": "youtube-self-improvement-philosophy",
       "name": "Self-Improvement & Philosophy",
-      "position": 18,
+      "position": 19,
       "parentId": "youtube"
     },
     {
       "id": "youtube-business-finance",
       "name": "Business & Finance",
-      "position": 19,
+      "position": 20,
       "parentId": "youtube"
     },
     {
       "id": "youtube-sport-motorsport",
       "name": "Sport & Motorsport",
-      "position": 20,
+      "position": 21,
       "parentId": "youtube"
     },
     {
       "id": "youtube-other",
       "name": "Other",
-      "position": 21,
+      "position": 22,
       "parentId": "youtube"
     },
     {
@@ -327,6 +327,12 @@
       "name": "AI Vendors",
       "position": 18,
       "parentId": "tech-ai-ai"
+    },
+    {
+      "id": "youtube-top",
+      "name": "Top",
+      "position": 1,
+      "parentId": "youtube"
     }
   ],
   "bookmarks": [
@@ -635,6 +641,10 @@
         {
           "categoryId": "youtube-entertainment",
           "position": -4
+        },
+        {
+          "categoryId": "youtube-top",
+          "position": 1
         }
       ]
     },
@@ -661,6 +671,10 @@
         {
           "categoryId": "youtube-science",
           "position": -4
+        },
+        {
+          "categoryId": "youtube-top",
+          "position": 5
         }
       ]
     },
@@ -7932,6 +7946,10 @@
         {
           "categoryId": "youtube-entertainment",
           "position": -3
+        },
+        {
+          "categoryId": "youtube-top",
+          "position": 2
         }
       ]
     },
@@ -9802,6 +9820,10 @@
         {
           "categoryId": "youtube-engineering",
           "position": 1
+        },
+        {
+          "categoryId": "youtube-top",
+          "position": 3
         }
       ]
     },
@@ -9846,6 +9868,10 @@
         {
           "categoryId": "youtube-science",
           "position": -3
+        },
+        {
+          "categoryId": "youtube-top",
+          "position": 4
         }
       ]
     },
@@ -19242,6 +19268,535 @@
         {
           "categoryId": "entertainment-tracking",
           "position": 1003
+        }
+      ]
+    },
+    {
+      "id": "risky-business-news",
+      "title": "Risky Business News",
+      "url": "https://news.risky.biz/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 277
+        }
+      ]
+    },
+    {
+      "id": "microsoft-defender-xdr-blog",
+      "title": "Microsoft Defender XDR Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-xdr-blog/bg-p/MicrosoftThreatProtectionBlog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 278
+        }
+      ]
+    },
+    {
+      "id": "truesec",
+      "title": "Truesec",
+      "url": "https://www.truesec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 279
+        }
+      ]
+    },
+    {
+      "id": "microsoft-defender-for-office-365-blog",
+      "title": "Microsoft Defender for Office 365 Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-for-office/bg-p/MicrosoftDefenderforOffice365Blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 280
+        }
+      ]
+    },
+    {
+      "id": "microsoft-defender-for-cloud-blog",
+      "title": "Microsoft Defender for Cloud Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-for-cloud/bg-p/MicrosoftDefenderCloudBlog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 281
+        }
+      ]
+    },
+    {
+      "id": "think-dfir",
+      "title": "Think DFIR",
+      "url": "https://thinkdfir.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 282
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 29
+        }
+      ]
+    },
+    {
+      "id": "anton-chuvakin-medium",
+      "title": "Anton Chuvakin on Medium",
+      "url": "https://medium.com/@anton.chuvakin",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 283
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 30
+        }
+      ]
+    },
+    {
+      "id": "xpn-infosec-blog",
+      "title": "XPN InfoSec Blog",
+      "url": "https://blog.xpnsec.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 284
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 31
+        }
+      ]
+    },
+    {
+      "id": "microsoft-defender-for-endpoint-blog",
+      "title": "Microsoft Defender for Endpoint Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-for-endpoint/bg-p/MicrosoftDefenderATPBlog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 285
+        }
+      ]
+    },
+    {
+      "id": "sigma-hq-blog",
+      "title": "Sigma HQ Blog",
+      "url": "https://blog.sigmahq.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 286
+        }
+      ]
+    },
+    {
+      "id": "thor-collective-dispatch",
+      "title": "THOR Collective Dispatch",
+      "url": "https://dispatch.thorcollective.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 287
+        }
+      ]
+    },
+    {
+      "id": "the-old-new-thing",
+      "title": "The Old New Thing",
+      "url": "https://devblogs.microsoft.com/oldnewthing/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 288
+        }
+      ]
+    },
+    {
+      "id": "detection-fyi",
+      "title": "Detection.FYI",
+      "url": "https://detection.fyi/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 289
+        }
+      ]
+    },
+    {
+      "id": "falconforce",
+      "title": "FalconForce",
+      "url": "https://falconforce.nl/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 290
+        }
+      ]
+    },
+    {
+      "id": "sans-blog",
+      "title": "SANS Blog",
+      "url": "https://www.sans.org/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 291
+        }
+      ]
+    },
+    {
+      "id": "microsoft-sentinel-blog",
+      "title": "Microsoft Sentinel Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/bg-p/MicrosoftSentinelBlog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 292
+        }
+      ]
+    },
+    {
+      "id": "detect-fyi",
+      "title": "Detect FYI",
+      "url": "https://detect.fyi/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 293
+        }
+      ]
+    },
+    {
+      "id": "csandker",
+      "title": "csandker.io",
+      "url": "https://csandker.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 294
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 32
+        }
+      ]
+    },
+    {
+      "id": "sector035",
+      "title": "Sector035",
+      "url": "https://sector035.nl/articles",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 295
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 33
+        }
+      ]
+    },
+    {
+      "id": "detections-digest",
+      "title": "Detections Digest",
+      "url": "https://detections-digest.rulecheck.io/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 296
+        }
+      ]
+    },
+    {
+      "id": "sysinternals-blog",
+      "title": "Sysinternals Blog",
+      "url": "https://techcommunity.microsoft.com/t5/sysinternals-blog/bg-p/Sysinternals-Blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 297
+        }
+      ]
+    },
+    {
+      "id": "microsoft-defender-vulnerability-management-blog",
+      "title": "Microsoft Defender Vulnerability Management Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-vulnerability/bg-p/Vulnerability-Management",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 298
+        }
+      ]
+    },
+    {
+      "id": "lockboxx",
+      "title": "LockBoxx",
+      "url": "https://blog.lockboxx.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 299
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 34
+        }
+      ]
+    },
+    {
+      "id": "anton-on-security",
+      "title": "Anton on Security",
+      "url": "https://medium.com/anton-on-security",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 300
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 35
+        }
+      ]
+    },
+    {
+      "id": "center-for-threat-informed-defense",
+      "title": "Center for Threat-Informed Defense",
+      "url": "https://ctid.mitre.org/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 301
+        }
+      ]
+    },
+    {
+      "id": "core-infrastructure-and-security-blog",
+      "title": "Core Infrastructure and Security Blog",
+      "url": "https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/bg-p/CoreInfrastructureandSecurityBlog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 302
+        }
+      ]
+    },
+    {
+      "id": "pavel-yosifovich",
+      "title": "Pavel Yosifovich",
+      "url": "https://scorpiosoftware.net/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 303
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 36
+        }
+      ]
+    },
+    {
+      "id": "daniel-chronlund-cloud-security-blog",
+      "title": "Daniel Chronlund Cloud Security Blog",
+      "url": "https://danielchronlund.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 304
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 37
+        }
+      ]
+    },
+    {
+      "id": "microsoft-security-copilot-blog",
+      "title": "Microsoft Security Copilot Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-security-copilot-blog/bg-p/SecurityCopilotBlog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 305
+        }
+      ]
+    },
+    {
+      "id": "detection-at-scale",
+      "title": "Detection at Scale",
+      "url": "https://www.detectionatscale.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 306
+        },
+        {
+          "categoryId": "security-researchers-blogs",
+          "position": 38
+        }
+      ]
+    },
+    {
+      "id": "microsoft-defender-threat-intelligence-blog",
+      "title": "Microsoft Defender Threat Intelligence Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-threat/bg-p/DefenderThreatIntelligence",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 307
+        }
+      ]
+    },
+    {
+      "id": "tenable-blog",
+      "title": "Tenable Blog",
+      "url": "https://www.tenable.com/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 308
+        }
+      ]
+    },
+    {
+      "id": "the-dfir-spot",
+      "title": "The DFIR Spot",
+      "url": "https://www.thedfirspot.com/blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 309
+        }
+      ]
+    },
+    {
+      "id": "windows-internals",
+      "title": "Windows Internals",
+      "url": "https://windows-internals.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 310
+        }
+      ]
+    },
+    {
+      "id": "microsoft-entra-blog",
+      "title": "Microsoft Entra Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-entra-blog/bg-p/microsoft-entra-blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 311
+        }
+      ]
+    },
+    {
+      "id": "microsoft-security-community-blog",
+      "title": "Microsoft Security Community Blog",
+      "url": "https://techcommunity.microsoft.com/t5/microsoft-security-community/bg-p/microsoft-security-blog",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 312
+        }
+      ]
+    },
+    {
+      "id": "daily-red-team",
+      "title": "Daily Red Team",
+      "url": "https://dailyredteam.substack.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 313
+        }
+      ]
+    },
+    {
+      "id": "unit-42",
+      "title": "Unit 42",
+      "url": "https://unit42.paloaltonetworks.com/",
+      "categories": [
+        {
+          "categoryId": "security-blogs",
+          "position": 314
+        }
+      ]
+    },
+    {
+      "id": "codex-cloud",
+      "title": "Codex Cloud",
+      "url": "https://chatgpt.com/codex/cloud",
+      "dailyPosition": 4,
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 34
+        }
+      ]
+    },
+    {
+      "id": "tldr",
+      "title": "TLDR",
+      "url": "https://tldr.tech/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 35
+        }
+      ]
+    },
+    {
+      "id": "tldr-devops",
+      "title": "TLDR DevOps",
+      "url": "https://tldr.tech/devops",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 36
+        }
+      ]
+    },
+    {
+      "id": "tldr-ai",
+      "title": "TLDR AI",
+      "url": "https://tldr.tech/ai",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 37
+        },
+        {
+          "categoryId": "tech-ai-ai",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "id": "tldr-dev",
+      "title": "TLDR Dev",
+      "url": "https://tldr.tech/dev",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 38
+        }
+      ]
+    },
+    {
+      "id": "google-research-blog",
+      "title": "Google Research Blog",
+      "url": "https://research.google/blog/",
+      "categories": [
+        {
+          "categoryId": "tech-ai",
+          "position": 39
         }
       ]
     }
