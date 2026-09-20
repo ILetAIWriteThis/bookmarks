@@ -11,6 +11,12 @@ npm run dev
 
 Run all non-browser checks with `npm run check`. Run `npm run test:e2e` after a production build (and after installing Chromium once with `npx playwright install chromium`). `npm run build` uses `/bookmarks/` as its production base; set `VITE_BASE_PATH` to override it.
 
+## V2 experiment
+
+Choose **Try Bookmarks V2** on the homepage, or open `/bookmarks/#/v2`. Web (`#/v2/web`) shows Daily bookmarks; YouTube (`#/v2/youtube`) shows bookmarks assigned directly to `youtube-top`. Both use a single-column list sorted by the saved position, with titles breaking ties. Filtering preserves those positions, including gaps.
+
+Tags combine existing bookmark tags with category and ancestor names; Web also adds `#daily`. Select multiple tags to match all of them, or select **All** to clear the filter. Each space remembers its selections while switching between Web and YouTube; reloading resets them. V2 reads the existing data without modifying it, and **Original home** returns to the original view.
+
 ## Manage bookmark data
 
 Do not edit `public/data/bookmarks.json` directly. All changes go through the validated manager:

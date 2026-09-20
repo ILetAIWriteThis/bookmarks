@@ -36,6 +36,7 @@ export function HomePage({ data }: HomePageProps) {
 
   return (
     <main id="main-content" className="home-page">
+      <a className="v2-quick-link" href="#/v2">Try Bookmarks V2 <Icon name="arrow" size={16} /></a>
       <section className="hero" aria-labelledby="home-title">
         <p className="eyebrow">Your corner of the web</p>
         <h1 id="home-title">Where do you want<br className="desktop-break" /> to go?</h1>

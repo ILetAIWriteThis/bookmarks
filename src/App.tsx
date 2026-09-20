@@ -5,6 +5,7 @@ import { validateBookmarkData } from './data'
 import { Icon } from './icons'
 import { CategoryPage } from './pages/CategoryPage'
 import { HomePage } from './pages/HomePage'
+import { V2Page } from './pages/V2Page'
 import { activateUpdate, usePwa } from './pwa'
 import type { BookmarkData } from './types'
 
@@ -12,9 +13,11 @@ interface AppProps {
   data?: BookmarkData
 }
 
-type Route = { page: 'home' } | { page: 'category'; categoryId: string }
+type Route = { page: 'home' } | { page: 'category'; categoryId: string } | { page: 'v2'; collection: 'web' | 'youtube' }
 
 function readRoute(): Route {
+  const v2 = window.location.hash.match(/^#\/v2(?:\/(web|youtube))?\/?$/)
+  if (v2) return { page: 'v2', collection: v2[1] === 'youtube' ? 'youtube' : 'web' }
   const match = window.location.hash.match(/^#\/category\/([^/?#]+)/)
   if (!match) return { page: 'home' }
   try { return { page: 'category', categoryId: decodeURIComponent(match[1]) } }
@@ -71,7 +74,9 @@ export function App({ data: providedData }: AppProps) {
           <button type="button" onClick={() => window.location.reload()}>Try again</button>
         </main>
       )}
-      {data && (route.page === 'home' ? <HomePage data={data} /> : <CategoryPage data={data} categoryId={route.categoryId} />)}
+      {data && (route.page === 'home' ? <HomePage data={data} />
+        : route.page === 'v2' ? <V2Page data={data} collection={route.collection} />
+          : <CategoryPage data={data} categoryId={route.categoryId} />)}
 
       {(!pwa.online || offlineCache) && <div className="notice" role="status"><span>You’re offline</span><small>Saved pages still work; external bookmarks need a connection.</small></div>}
       {pwa.update && (
