@@ -340,7 +340,10 @@
       "id": "claude",
       "title": "Claude",
       "url": "https://claude.ai/new",
-      "dailyPosition": 5,
+      "tags": [
+        "tech",
+        "daily"
+      ],
       "categories": [
         {
           "categoryId": "tech-ai",
@@ -349,14 +352,17 @@
       ],
       "placement": {
         "collection": "web",
-        "position": 5
+        "position": 7
       }
     },
     {
       "id": "chatgpt",
       "title": "ChatGPT",
       "url": "https://chatgpt.com/",
-      "dailyPosition": 6,
+      "tags": [
+        "tech",
+        "daily"
+      ],
       "categories": [
         {
           "categoryId": "tech-ai",
@@ -365,25 +371,17 @@
       ],
       "placement": {
         "collection": "web",
-        "position": 6
+        "position": 5
       }
     },
     {
       "id": "gmail",
       "title": "Gmail",
       "url": "https://mail.google.com/mail/u/0/#inbox",
-      "dailyPosition": 7,
-      "categories": [],
-      "placement": {
-        "collection": "web",
-        "position": 7
-      }
-    },
-    {
-      "id": "google-calendar",
-      "title": "Google Calendar",
-      "url": "https://calendar.google.com/calendar/u/0/r",
-      "dailyPosition": 8,
+      "tags": [
+        "productivity",
+        "daily"
+      ],
       "categories": [],
       "placement": {
         "collection": "web",
@@ -391,10 +389,27 @@
       }
     },
     {
+      "id": "google-calendar",
+      "title": "Google Calendar",
+      "url": "https://calendar.google.com/calendar/u/0/r",
+      "tags": [
+        "productivity",
+        "daily"
+      ],
+      "categories": [],
+      "placement": {
+        "collection": "web",
+        "position": 9
+      }
+    },
+    {
       "id": "onedrive",
       "title": "OneDrive",
       "url": "https://onedrive.live.com/",
-      "dailyPosition": 9,
+      "tags": [
+        "finance-tracking",
+        "daily"
+      ],
       "categories": [
         {
           "categoryId": "finance-tracking",
@@ -403,14 +418,17 @@
       ],
       "placement": {
         "collection": "web",
-        "position": 9
+        "position": 11
       }
     },
     {
       "id": "google-keep",
       "title": "Google Keep",
       "url": "https://keep.google.com/u/0/#home",
-      "dailyPosition": 10,
+      "tags": [
+        "productivity",
+        "daily"
+      ],
       "categories": [],
       "placement": {
         "collection": "web",
@@ -421,7 +439,10 @@
       "id": "lrt",
       "title": "LRT",
       "url": "https://www.lrt.lt/",
-      "dailyPosition": 2,
+      "tags": [
+        "news",
+        "daily"
+      ],
       "categories": [
         {
           "categoryId": "news",
@@ -430,96 +451,158 @@
       ],
       "placement": {
         "collection": "web",
-        "position": 2
+        "position": 1
       }
     },
     {
       "id": "goodreads",
       "title": "Goodreads",
       "url": "https://www.goodreads.com/review/list/165123849",
+      "tags": [
+        "tracking",
+        "book"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 1
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 12
+      }
     },
     {
       "id": "storygraph",
       "title": "StoryGraph",
       "url": "https://app.thestorygraph.com/",
+      "tags": [
+        "tracking",
+        "book"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 2
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 13
+      }
     },
     {
       "id": "imdb-watchlist",
       "title": "IMDb Watchlist",
       "url": "https://www.imdb.com/user/p.7z525yifhbsnosefkvnvhjri3y/watchlist/?sort=date_added%2Cdesc",
+      "tags": [
+        "tracking",
+        "tv"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 3
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 15
+      }
     },
     {
       "id": "episode-calendar",
       "title": "Episode Calendar",
       "url": "https://episodecalendar.com/",
+      "tags": [
+        "tracking",
+        "tv"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 4
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 16
+      }
     },
     {
       "id": "amazon-wishlist",
       "title": "Amazon Wishlist",
       "url": "https://www.amazon.com/hz/wishlist/ls/1FX01SGXD597F?type=wishlist&filter=unpurchased&sort=price-asc&viewType=grid",
+      "tags": [
+        "tracking",
+        "book"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 5
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 14
+      }
     },
     {
       "id": "amazon-digital-content",
       "title": "Amazon Digital Content",
       "url": "https://www.amazon.com/hz/mycd/digital-console/contentlist/allcontent/dateDsc",
+      "tags": [
+        "book"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 6
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 18
+      }
     },
     {
       "id": "kindle-reading-insights",
       "title": "Kindle Reading Insights",
       "url": "https://www.amazon.com/kindle/reading/insights#2026:false:0,37,46,4,0",
+      "tags": [
+        "book"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 7
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 20
+      }
     },
     {
       "id": "justwatch-movies-lithuania",
       "title": "JustWatch Movies (Lithuania)",
       "url": "https://www.justwatch.com/lt/filmai",
+      "tags": [
+        "tracking",
+        "tv"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 8
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 17
+      }
     },
     {
       "id": "paysera",
@@ -591,7 +674,10 @@
       "id": "youtube-watch-later",
       "title": "YouTube Watch Later",
       "url": "https://www.youtube.com/playlist?list=WL",
-      "dailyPosition": 3,
+      "tags": [
+        "entertainment",
+        "daily"
+      ],
       "categories": [],
       "placement": {
         "collection": "web",
@@ -602,12 +688,19 @@
       "id": "amazon-send-to-kindle",
       "title": "Send to Kindle",
       "url": "https://www.amazon.com/sendtokindle",
+      "tags": [
+        "book"
+      ],
       "categories": [
         {
           "categoryId": "entertainment-tracking",
           "position": 9
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 19
+      }
     },
     {
       "id": "i-unija",
@@ -635,18 +728,24 @@
       "id": "github-iletaiwritethis",
       "title": "ILetAIWriteThis",
       "url": "https://github.com/ILetAIWriteThis?tab=repositories",
-      "dailyPosition": 11,
+      "tags": [
+        "daily",
+        "dev"
+      ],
       "categories": [],
       "placement": {
         "collection": "web",
-        "position": 11
+        "position": 4
       }
     },
     {
       "id": "disney-plus",
       "title": "Disney+",
       "url": "https://www.disneyplus.com/en-gb/home",
-      "dailyPosition": 1,
+      "tags": [
+        "entertainment",
+        "daily"
+      ],
       "categories": [
         {
           "categoryId": "entertainment",
@@ -655,7 +754,7 @@
       ],
       "placement": {
         "collection": "web",
-        "position": 1
+        "position": 2
       }
     },
     {
@@ -673,6 +772,11 @@
       "id": "youtube-laisves-tv",
       "title": "LaisvėsTV",
       "url": "https://www.youtube.com/@LaisvesTV/videos",
+      "tags": [
+        "podcasts",
+        "politics",
+        "entertainment"
+      ],
       "categories": [
         {
           "categoryId": "youtube-podcasts",
@@ -686,23 +790,40 @@
           "categoryId": "youtube-top",
           "position": 1
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1
+      }
     },
     {
       "id": "youtube-internet-storm-center",
       "title": "SANS Internet Storm Center",
       "url": "https://www.youtube.com/@internetstormcenterstormca2350/videos",
+      "tags": [
+        "podcasts",
+        "security",
+        "news"
+      ],
       "categories": [
         {
           "categoryId": "youtube-podcasts",
           "position": 2
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 2
+      }
     },
     {
       "id": "youtube-mokslo-sriuba",
       "title": "Mokslo sriuba",
       "url": "https://www.youtube.com/@mokslosriuba/videos",
+      "tags": [
+        "podcasts",
+        "science"
+      ],
       "categories": [
         {
           "categoryId": "youtube-podcasts",
@@ -716,7 +837,11 @@
           "categoryId": "youtube-top",
           "position": 5
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 9
+      }
     },
     {
       "id": "youtube-anton-chuvakin",
@@ -733,6 +858,11 @@
       "id": "youtube-black-hills-information-security",
       "title": "Black Hills Information Security",
       "url": "https://www.youtube.com/@BlackHillsInformationSecurity/videos",
+      "tags": [
+        "podcasts",
+        "security",
+        "news"
+      ],
       "categories": [
         {
           "categoryId": "youtube-podcasts",
@@ -742,7 +872,11 @@
           "categoryId": "youtube-security",
           "position": 3
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 3
+      }
     },
     {
       "id": "youtube-jack-rhysider",
@@ -759,12 +893,21 @@
       "id": "youtube-proto-pemza",
       "title": "Proto Pemza",
       "url": "https://www.youtube.com/@protopemza/videos",
+      "tags": [
+        "podcasts",
+        "entertainment",
+        "true-stories"
+      ],
       "categories": [
         {
           "categoryId": "youtube-podcasts",
           "position": 4
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 4
+      }
     },
     {
       "id": "youtube-kurybinis-potencialas",
@@ -825,12 +968,20 @@
       "id": "youtube-terminalas",
       "title": "Terminalas",
       "url": "https://www.youtube.com/@Terminalas.Katkus/videos",
+      "tags": [
+        "podcasts",
+        "politics"
+      ],
       "categories": [
         {
           "categoryId": "youtube-podcasts",
           "position": 7
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 5
+      }
     },
     {
       "id": "youtube-cloud-security-podcast",
@@ -7982,6 +8133,11 @@
       "id": "youtube-last-week-tonight",
       "title": "LastWeekTonight",
       "url": "https://www.youtube.com/@LastWeekTonight/videos",
+      "tags": [
+        "entertainment",
+        "politics",
+        "show"
+      ],
       "categories": [
         {
           "categoryId": "youtube-entertainment",
@@ -7991,7 +8147,11 @@
           "categoryId": "youtube-top",
           "position": 2
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 6
+      }
     },
     {
       "id": "youtube-erb",
@@ -9856,6 +10016,9 @@
       "id": "youtube-the-b1m",
       "title": "The B1M",
       "url": "https://www.youtube.com/@TheB1M/videos",
+      "tags": [
+        "engineering"
+      ],
       "categories": [
         {
           "categoryId": "youtube-engineering",
@@ -9865,7 +10028,11 @@
           "categoryId": "youtube-top",
           "position": 3
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 7
+      }
     },
     {
       "id": "youtube-bbc-earth",
@@ -9904,6 +10071,11 @@
       "id": "youtube-veritasium",
       "title": "Veritasium",
       "url": "https://www.youtube.com/@veritasium/videos",
+      "tags": [
+        "engineering",
+        "science",
+        "education"
+      ],
       "categories": [
         {
           "categoryId": "youtube-science",
@@ -9913,7 +10085,11 @@
           "categoryId": "youtube-top",
           "position": 4
         }
-      ]
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 8
+      }
     },
     {
       "id": "youtube-undecided-with-matt-ferrell",
@@ -19773,7 +19949,10 @@
       "id": "codex-cloud",
       "title": "Codex Cloud",
       "url": "https://chatgpt.com/codex/cloud",
-      "dailyPosition": 4,
+      "tags": [
+        "tech",
+        "daily"
+      ],
       "categories": [
         {
           "categoryId": "tech-ai",
@@ -19782,7 +19961,7 @@
       ],
       "placement": {
         "collection": "web",
-        "position": 4
+        "position": 6
       }
     },
     {

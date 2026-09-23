@@ -31,8 +31,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
           <a key={space} className={`v2-space v2-space--${space}`} href={space === 'web' ? '#/' : '#/youtube'}
             aria-current={collection === space ? 'page' : undefined}>
             <span className="v2-space__icon"><Icon name={space === 'web' ? 'bookmark' : 'play'} size={25} /></span>
-            <span className="v2-space__copy"><strong>{space === 'web' ? 'Web' : 'YouTube'}</strong>
-              <small>{space === 'web' ? 'Reviewed websites' : 'Reviewed channels'}</small></span>
+            <span className="v2-space__copy"><strong>{space === 'web' ? 'Web' : 'YouTube'}</strong></span>
             <span className="v2-space__count">{collections[space].length}</span>
           </a>
         ))}

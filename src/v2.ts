@@ -13,24 +13,14 @@ const tagName = (value: string) => normalizeSearch(value).replace(/^#+/, '').rep
 
 /** Reviewed bookmarks in their explicitly chosen collection and order. */
 export function v2Bookmarks(data: BookmarkData, collection: V2Collection): V2Bookmark[] {
-  const categories = new Map(data.categories.map((category) => [category.id, category]))
   return data.bookmarks.flatMap((bookmark) => {
     if (bookmark.placement?.collection !== collection) return []
     const position = bookmark.placement.position
 
-    const tags = new Set<string>(bookmark.dailyPosition === undefined ? [] : ['daily'])
+    const tags = new Set<string>()
     for (const tag of bookmark.tags ?? []) {
       const normalized = tagName(tag)
       if (normalized) tags.add(normalized)
-    }
-    for (const membership of bookmark.categories) {
-      let category = categories.get(membership.categoryId)
-      const visited = new Set<string>()
-      while (category && !visited.has(category.id)) {
-        visited.add(category.id)
-        tags.add(tagName(category.name))
-        category = category.parentId ? categories.get(category.parentId) : undefined
-      }
     }
     return [{ bookmark, position, tags: [...tags] }]
   }).sort((a, b) => comparePositionAndTitle(a.position, a.bookmark.title, b.position, b.bookmark.title))

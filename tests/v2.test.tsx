@@ -12,7 +12,8 @@ const data: BookmarkData = {
     { id: 'science', name: 'Science', position: 2, parentId: 'youtube' },
   ],
   bookmarks: [...testData.bookmarks.map((bookmark) => ({
-    ...bookmark, placement: { collection: 'web' as const, position: bookmark.dailyPosition! },
+    ...bookmark, tags: [...(bookmark.tags ?? []), 'daily'],
+    placement: { collection: 'web' as const, position: bookmark.dailyPosition! },
   })),
     { id: 'later', title: 'Later channel', url: 'https://www.youtube.com/@later',
       placement: { collection: 'youtube', position: 8 }, categories: [{ categoryId: 'youtube-top', position: 8 }] },
@@ -34,7 +35,9 @@ it('projects the seed collections without mutating data and prioritizes position
   expect(v2Bookmarks(data, 'web').map((entry) => entry.bookmark.id)).toEqual(['alpha', 'example'])
   const youtube = v2Bookmarks(data, 'youtube')
   expect(youtube.map((entry) => entry.position)).toEqual([0, 8])
-  expect(youtube[0].tags).toEqual(['science', 'top', 'youtube'])
+  expect(youtube[0].tags).toEqual(['science'])
+  expect(youtube[1].tags).toEqual([])
+  expect(v2Bookmarks(data, 'web')[0].tags).toEqual(['daily'])
   expect(JSON.stringify(data)).toBe(original)
 })
 
@@ -45,6 +48,8 @@ it('shows reviewed Web bookmarks at the default route and filters without changi
   expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
     'https://alpha.example/news', 'https://example.com/journal',
   ])
+  expect(screen.getByRole('button', { name: '#daily' })).toBeInTheDocument()
+  expect(screen.queryByRole('button', { name: '#news' })).not.toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: '#daily' }))
   await user.click(screen.getByRole('button', { name: '#analysis' }))
   expect(within(list).getAllByRole('link')).toHaveLength(1)
@@ -70,6 +75,8 @@ it('keeps collection filters separate and supports direct YouTube routes', async
   window.location.hash = '#/youtube'
   render(<App data={data} />)
   expect(screen.getByRole('list', { name: 'YouTube bookmarks' }).children).toHaveLength(2)
+  expect(screen.queryByRole('button', { name: '#youtube' })).not.toBeInTheDocument()
+  expect(screen.queryByRole('button', { name: '#top' })).not.toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: '#science' }))
   expect(screen.getByRole('list').children).toHaveLength(1)
   navigate('#/')
