@@ -17,6 +17,20 @@ The default `/bookmarks/` page shows reviewed Web bookmarks. `#/youtube` shows r
 
 Only bookmarks with an explicit collection placement appear in the reviewed view. Bookmarks without a placement appear in the old view, including its search, categories, counts, and random picker. The original 11 Web bookmarks have been promoted; the other bookmarks remain in the old view until reviewed. Tags combine existing bookmark tags with category and ancestor names; bookmarks with a Daily position also have `#daily`. Select multiple tags to match all of them, or select **All** to clear the filter. Each space remembers its selections while switching between Web and YouTube; reloading resets them.
 
+## Personal library
+
+Open `#/library` for books and `#/library/screen` for films and TV shows together. The older `#/library/movies` and `#/library/tv` links still open Screen with the matching type selected. The library has its own storage in `public/data/media.json`; it does not use or change bookmark data. Books open first. Screen has a Movie/TV filter and a universe filter, so a film and show can share a world such as the Marvel Cinematic Universe. Series stays separate for ordered works such as Avengers films or Harry Potter books. Search, genre, series, and universe filters are visible immediately; creator, year, and language (when relevant) are under **More filters**. Filter options with more matching entries appear first; ties use alphabetical order. Counts are used for this ordering but are not shown. Sorting includes recent activity, title, publication or release date, creator, and series order. The adjacent order button reverses any sort, such as newest/oldest publication or A–Z/Z–A title order.
+
+Each library entry has a stable ID, kind (`book`, `movie`, or `tv`), title, creator names, publication or release year/date, date added, and genres. An optional `url` may point to Goodreads, IMDb, a technical PDF, or another HTTPS source; entries without a URL have no open button. Other optional fields are `completedDates` (all read or watched dates), `series` (`name` and optional one-based `position`), and `universe`. Books may have `language` when useful for distinguishing editions; no language badge is shown on cards. TV shows may have `seasons`, each with a `number` and optional `completedDates`. Dates use `YYYY-MM-DD`; publication or release may also be a four-digit year. Recent activity uses the latest date among date added and all completion dates, including season dates. The interface shows dates but no reading or watching totals. The shipped library starts empty.
+
+Add another date to `completedDates` when rereading the same book edition or rewatching the same film. For a book in another language, create a separate entry with its own ID and translated title; add `language` only if it helps distinguish the entries. You can add dates to an individual TV season when rewatching it.
+
+For example, a new book entry in `public/data/media.json` can use:
+
+```json
+{ "id": "example-book", "kind": "book", "title": "Example Book", "creators": ["Author Name"], "published": "2024", "addedOn": "2026-09-23", "completedDates": ["2026-09-23"], "genres": ["Fantasy"], "series": { "name": "Example Series", "position": 1 } }
+```
+
 ## Manage bookmark data
 
 Do not edit `public/data/bookmarks.json` directly. All changes go through the validated manager:

@@ -1,9 +1,10 @@
-const VERSION = 'bookmarks-shell-v6'
+const VERSION = 'bookmarks-shell-v11'
 const scopeUrl = new URL(self.registration.scope)
 const indexUrl = new URL('./index.html', scopeUrl)
 const dataUrl = new URL('./data/bookmarks.json', scopeUrl)
+const mediaDataUrl = new URL('./data/media.json', scopeUrl)
 const shellFiles = [
-  './', './index.html', './manifest.webmanifest', './data/bookmarks.json',
+  './', './index.html', './manifest.webmanifest', './data/bookmarks.json', './data/media.json',
   './icons/icon.svg', './icons/maskable.svg',
 ].map((path) => new URL(path, scopeUrl).href)
 
@@ -48,7 +49,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url)
   if (request.method !== 'GET' || url.origin !== self.location.origin) return
 
-  if (request.mode === 'navigate' || url.href === dataUrl.href) {
+  if (request.mode === 'navigate' || url.href === dataUrl.href || url.href === mediaDataUrl.href) {
     event.respondWith((async () => {
       try {
         const response = await fetch(request)
@@ -59,7 +60,7 @@ self.addEventListener('fetch', (event) => {
         return response
       } catch {
         const cached = await caches.match(request.mode === 'navigate' ? indexUrl : request, { ignoreVary: true })
-        if (cached) return url.href === dataUrl.href ? offlineResponse(cached) : cached
+        if (cached) return url.href === dataUrl.href || url.href === mediaDataUrl.href ? offlineResponse(cached) : cached
         if (request.mode === 'navigate') {
           const root = await caches.match(new URL('./', scopeUrl), { ignoreVary: true })
           if (root) return root
