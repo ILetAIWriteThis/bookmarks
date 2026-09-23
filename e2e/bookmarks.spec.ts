@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 test('production base path renders only root categories and the manifest', async ({ page, request }) => {
   await page.goto('./')
-  await expect(page.getByRole('list', { name: 'Web bookmarks' }).getByRole('link')).toHaveCount(11)
+  await expect(page.getByRole('list', { name: 'Web bookmarks' }).getByRole('link')).toHaveCount(20)
   await page.getByRole('link', { name: 'Old bookmarks' }).click()
   await expect(page.getByRole('searchbox')).toBeVisible()
   await expect(page.getByRole('heading', { name: /Where do you want/ })).toBeVisible()
@@ -31,10 +31,11 @@ test('direct parent and child hash routes preserve hierarchy', async ({ page }) 
 
   await page.goto('./#/old/category/youtube-podcasts')
   await expect(page.getByRole('heading', { name: 'Podcasts', level: 1 })).toBeVisible()
-  await expect(page.getByRole('link', { name: /LaisvėsTV/ })).toHaveAttribute(
+  await expect(page.getByRole('link', { name: /7 Minute Security/ })).toHaveAttribute(
     'href',
-    'https://www.youtube.com/@LaisvesTV/videos',
+    'https://www.youtube.com/@7MinuteSecurity/videos',
   )
+  await expect(page.getByRole('link', { name: /LaisvėsTV/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: 'YouTube', exact: true })).toHaveAttribute('href', '#/old/category/youtube')
 })
 

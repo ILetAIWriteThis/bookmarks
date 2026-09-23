@@ -3,8 +3,8 @@ import { expect, test } from '@playwright/test'
 test('reviewed bookmarks use the default route while the old collection stays separate', async ({ page }) => {
   await page.goto('./')
   const web = page.getByRole('list', { name: 'Web bookmarks' })
-  await expect(web.getByRole('link')).toHaveCount(11)
-  await expect(web.getByRole('link').first()).toHaveAccessibleName(/Disney\+/)
+  await expect(web.getByRole('link')).toHaveCount(20)
+  await expect(web.getByRole('link').first()).toHaveAccessibleName(/LRT/)
   const rows = await web.getByRole('link').evaluateAll((links) => links.map((link) => {
     const rect = link.getBoundingClientRect()
     return { x: rect.x, y: rect.y, bottom: rect.bottom, width: rect.width }
@@ -23,15 +23,16 @@ test('reviewed bookmarks use the default route while the old collection stays se
 
   await page.getByRole('button', { name: '#tech', exact: true }).click()
   await expect(web.getByRole('link')).toHaveCount(3)
-  await expect(web.locator('.v2-position')).toHaveText(['04', '05', '06'])
+  await expect(web.locator('.v2-position')).toHaveText(['05', '06', '07'])
   await page.getByRole('navigation', { name: 'Bookmark collections' }).getByRole('link', { name: /YouTube/ }).click()
   const youtube = page.getByRole('list', { name: 'YouTube bookmarks' })
-  await expect(youtube.getByRole('link')).toHaveCount(0)
+  await expect(youtube.getByRole('link')).toHaveCount(9)
+  await expect(youtube.getByRole('link').first()).toHaveAccessibleName(/LaisvėsTV/)
   await page.reload()
   await expect(page.getByRole('heading', { name: 'YouTube bookmarks' })).toBeVisible()
   await page.getByRole('link', { name: 'Old bookmarks' }).click()
   await expect(page.getByRole('heading', { name: 'Daily', exact: true })).toBeVisible()
   await expect(page.getByText('Your daily desk is clear')).toBeVisible()
   await page.goto('./#/old/category/youtube-top')
-  await expect(page.getByLabel('Top bookmarks').locator('.bookmark-card')).toHaveCount(5)
+  await expect(page.getByLabel('Top bookmarks').locator('.bookmark-card')).toHaveCount(0)
 })
