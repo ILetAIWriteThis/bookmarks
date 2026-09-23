@@ -14,6 +14,7 @@
 .v2-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
 .v2-heading h2 { font-size: 1.6rem; margin: 0; }
 .v2-heading > span { color: #62675f; font: .75rem ui-monospace, monospace; }
+.v2-search { max-width: none; margin-bottom: 18px; }
 .v2-filters { padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: #f0ebdf; margin-bottom: 24px; }
 .v2-filter-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin-bottom: 12px; font-size: .8rem; font-weight: 700; }
 .v2-filter-hint { color: #62675f; font-size: .73rem; font-weight: 400; }

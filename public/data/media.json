@@ -1,3 +1,24 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "id": "the-avengers-2012",
+      "kind": "movie",
+      "title": "The Avengers",
+      "creators": [
+        "Joss Whedon"
+      ],
+      "published": "2012",
+      "completedDates": [
+        "2016-07-01",
+        "2026-09-19"
+      ],
+      "addedOn": "2026-09-23",
+      "genres": [
+        "Action",
+        "Science fiction"
+      ],
+      "universe": "Marvel Cinematic Universe",
+      "url": "https://www.imdb.com/title/tt0848228/"
+    }
+  ]
 }

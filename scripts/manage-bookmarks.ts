@@ -2,11 +2,13 @@ import { createHash } from 'node:crypto'
 import { readFile, rename, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { bookmarksForCategoryTree, childCategories, validateBookmarkData } from '../src/data'
+import { validateMediaData, type MediaEntry } from '../src/media'
 import { placeBookmark, removePlacement } from '../src/placement'
 import type { Bookmark, BookmarkData, Category, CategoryMembership } from '../src/types'
 
 const dataPath = resolve(process.cwd(), 'public/data/bookmarks.json')
 const checksumPath = resolve(process.cwd(), 'public/data/bookmarks.sha256')
+const mediaPath = resolve(process.cwd(), 'public/data/media.json')
 
 type Flags = Map<string, string[]>
 
@@ -16,6 +18,7 @@ function usage() {
 Usage:
   npm run bookmarks -- list [--category ID] [--collection old|web|youtube]
   npm run bookmarks -- check
+  npm run bookmarks -- add-media --id ID --kind book|movie|tv --title TITLE --creator NAME --published YEAR --added-on DATE [options]
   npm run bookmarks -- upsert-bookmarks --file JSON_FILE
   npm run bookmarks -- add-category --id ID --name NAME --position N [--icon NAME] [--parent ID]
   npm run bookmarks -- update-category --id ID [--name NAME] [--position N] [--icon NAME] [--parent ID]
@@ -36,6 +39,11 @@ Bookmark options:
   --not-subscribed          Mark a YouTube channel as not subscribed
   --collection web|youtube --position N
                              Add directly to a reviewed collection; later positions shift
+Media options (add-media):
+  --creator NAME             Repeat for multiple creators
+  --genre NAME               Repeat for multiple genres
+  --completed-date DATE      Repeat for each read or watch date
+  --universe NAME --url HTTPS_URL
 Category options:
   --parent ID               Nest below an existing category
   --clear-parent            Move an existing category to the root
@@ -44,6 +52,7 @@ Theme options (category commands; provide all three together):
   --from COLOR --to COLOR --accent COLOR
 
 Examples:
+  npm run bookmarks -- add-media --id the-avengers-2012 --kind movie --title "The Avengers" --creator "Joss Whedon" --published 2012 --added-on 2026-09-23 --completed-date 2016-07-01 --completed-date 2026-09-19 --genre Action --universe "Marvel Cinematic Universe" --url https://www.imdb.com/title/tt0848228/
   npm run bookmarks -- add-bookmark --id example --title "Example" --url https://example.com --category news:1 --category tech-ai:3 --daily-position 1
   npm run bookmarks -- update-bookmark --id example --tag reference --tag daily --clear-daily
   npm run bookmarks -- promote-bookmark --id example --collection web --position 1
@@ -155,6 +164,25 @@ async function run() {
   const [command = 'help', ...args] = process.argv.slice(2)
   if (command === 'help' || command === '--help' || command === '-h') return usage()
   const flags = parseFlags(args)
+  if (command === 'add-media') {
+    const kind = required(flags, 'kind')
+    if (kind !== 'book' && kind !== 'movie' && kind !== 'tv') throw new Error('--kind must be book, movie, or tv')
+    const entry: MediaEntry = {
+      id: required(flags, 'id'), kind, title: required(flags, 'title'),
+      creators: flags.get('creator') ?? [], published: required(flags, 'published'),
+      addedOn: required(flags, 'added-on'), genres: flags.get('genre') ?? [],
+    }
+    if (has(flags, 'completed-date')) entry.completedDates = flags.get('completed-date')
+    if (has(flags, 'universe')) entry.universe = required(flags, 'universe')
+    if (has(flags, 'url')) entry.url = required(flags, 'url')
+    const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
+    const valid = validateMediaData({ entries: [...existing.entries, entry] })
+    const temp = resolve(dirname(mediaPath), '.media.json.tmp')
+    await writeFile(temp, `${JSON.stringify(valid, null, 2)}\n`, 'utf8')
+    await rename(temp, mediaPath)
+    console.log(`Updated ${mediaPath}`)
+    return
+  }
   const data = await readManagedData()
 
   if (command === 'check') {

@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { normalizeSearch } from '../data'
 import { Icon } from '../icons'
 import type { BookmarkData } from '../types'
 import { v2Bookmarks, type V2Collection } from '../v2'
@@ -6,16 +7,32 @@ import { v2Bookmarks, type V2Collection } from '../v2'
 export function V2Page({ data, collection }: { data: BookmarkData; collection: V2Collection }) {
   const collections = useMemo(() => ({ web: v2Bookmarks(data, 'web'), youtube: v2Bookmarks(data, 'youtube') }), [data])
   const [filters, setFilters] = useState<Record<V2Collection, string[]>>({ web: [], youtube: [] })
+  const [queries, setQueries] = useState<Record<V2Collection, string>>({ web: '', youtube: '' })
   const entries = collections[collection]
   const tags = [...new Set(entries.flatMap((entry) => entry.tags))].sort((a, b) => a.localeCompare(b))
   const selected = filters[collection]
-  const visible = entries.filter((entry) => selected.every((tag) => entry.tags.includes(tag)))
+  const query = normalizeSearch(queries[collection]).replace(/^#/, '')
+  const visible = entries.filter(({ bookmark, tags: bookmarkTags }) =>
+    selected.every((tag) => bookmarkTags.includes(tag))
+    && (!query || normalizeSearch([bookmark.title, bookmark.description ?? '', bookmark.url, ...bookmarkTags].join(' ')).includes(query)))
   const title = collection === 'web' ? 'Web' : 'YouTube'
   const toggleTag = (tag: string) => setFilters((current) => ({
     ...current,
     [collection]: current[collection].includes(tag)
       ? current[collection].filter((item) => item !== tag) : [...current[collection], tag],
   }))
+
+  useEffect(() => {
+    const focusSearch = (event: KeyboardEvent) => {
+      if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return
+      const target = event.target as HTMLElement
+      if (target.matches('input, textarea, select, [contenteditable="true"]')) return
+      event.preventDefault()
+      document.getElementById('v2-search')?.focus()
+    }
+    window.addEventListener('keydown', focusSearch)
+    return () => window.removeEventListener('keydown', focusSearch)
+  }, [])
 
   return (
     <main id="main-content" className="v2-page">
@@ -41,6 +58,16 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
         <div className="v2-heading">
           <h2 id="v2-collection-title">{title} bookmarks</h2>
           <span role="status">{visible.length} of {entries.length}</span>
+        </div>
+        <div className="v2-search search-box">
+          <Icon name="search" size={22} />
+          <label className="sr-only" htmlFor="v2-search">Search {title} bookmarks</label>
+          <input id="v2-search" type="search" value={queries[collection]}
+            onChange={(event) => setQueries((current) => ({ ...current, [collection]: event.target.value }))}
+            placeholder="Search titles, websites, or tags…" autoComplete="off" />
+          {queries[collection] && <button type="button" className="clear-search" aria-label="Clear search"
+            onClick={() => setQueries((current) => ({ ...current, [collection]: '' }))}><Icon name="close" size={19} /></button>}
+          <kbd>/</kbd>
         </div>
         <div className="v2-filters" role="group" aria-label={`Filter ${title} by tags`}>
           <div className="v2-filter-heading"><span>Filter by tags</span>
@@ -71,8 +98,8 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
           ))}
         </ol>
         {!visible.length && <div className="v2-empty">
-          <h3>{entries.length ? 'No bookmarks match these tags.' : 'No bookmarks here yet.'}</h3>
-          <p>{entries.length ? 'Select All or deselect a tag to widen your list.' : `Promote a bookmark to the ${title} collection to see it here.`}</p>
+          <h3>{entries.length ? query ? 'No bookmarks match your search and tags.' : 'No bookmarks match these tags.' : 'No bookmarks here yet.'}</h3>
+          <p>{entries.length ? query ? 'Clear your search or change the selected tags.' : 'Select All or deselect a tag to widen your list.' : `Promote a bookmark to the ${title} collection to see it here.`}</p>
         </div>}
         <p className="v2-order-note">Saved order · {title} collection</p>
       </section>

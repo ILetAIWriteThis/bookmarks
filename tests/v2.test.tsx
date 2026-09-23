@@ -87,6 +87,34 @@ it('keeps collection filters separate and supports direct YouTube routes', async
   expect(screen.getByRole('list').children).toHaveLength(1)
 })
 
+it('searches titles, descriptions, websites, and tags alongside selected tags', async () => {
+  const user = userEvent.setup()
+  window.location.hash = '#/'
+  render(<App data={data} />)
+  const list = screen.getByRole('list', { name: 'Web bookmarks' })
+  const search = screen.getByRole('searchbox', { name: 'Search Web bookmarks' })
+  await user.type(search, 'ALPHA')
+  expect(within(list).getAllByRole('link')).toHaveLength(1)
+  expect(screen.getByRole('status')).toHaveTextContent('1 of 2')
+  await user.clear(search)
+  await user.type(search, 'reporting')
+  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://example.com/journal')
+  await user.clear(search)
+  await user.type(search, 'alpha.example')
+  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://alpha.example/news')
+  await user.clear(search)
+  await user.type(search, '#analysis')
+  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://example.com/journal')
+  await user.click(screen.getByRole('button', { name: '#daily' }))
+  expect(within(list).getAllByRole('link')).toHaveLength(1)
+  await user.click(screen.getByRole('button', { name: '#analysis' }))
+  await user.clear(search)
+  await user.type(search, 'alpha')
+  expect(screen.getByText('No bookmarks match your search and tags.')).toBeInTheDocument()
+  await user.click(screen.getByRole('button', { name: 'Clear search' }))
+  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://example.com/journal')
+})
+
 it('explains empty seed collections and nonmatching filter combinations', async () => {
   const user = userEvent.setup()
   window.location.hash = '#/'

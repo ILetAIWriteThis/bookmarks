@@ -17,9 +17,13 @@ const sample = {
 
 afterEach(() => { vi.unstubAllGlobals(); window.location.hash = '#/' })
 
-it('ships an empty valid library for real entries', () => {
+it('ships the watched Avengers film with both watch dates', () => {
   const data = validateMediaData(mediaData)
-  expect(data.entries).toEqual([])
+  expect(data.entries).toEqual([expect.objectContaining({
+    id: 'the-avengers-2012', kind: 'movie', title: 'The Avengers',
+    completedDates: ['2016-07-01', '2026-09-19'],
+    url: 'https://www.imdb.com/title/tt0848228/',
+  })])
 })
 
 it('validates the separate library store and sorts series by position', () => {
