@@ -19,20 +19,20 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
 
   return (
     <main id="main-content" className="v2-page">
-      <a className="back-link" href="#/"><Icon name="back" size={17} /> Original home</a>
+      <a className="back-link" href="#/old"><Icon name="back" size={17} /> Old bookmarks</a>
       <header className="v2-hero">
-        <p className="eyebrow">Bookmarks <span className="v2-badge">V2</span></p>
+        <p className="eyebrow">Bookmarks</p>
         <h1>A little less browsing.<br />A little more finding.</h1>
-        <p>Your familiar links, one at a time. Pick a space, then narrow it down.</p>
+        <p>Your reviewed links, one at a time. Pick a space, then narrow it down.</p>
       </header>
 
       <nav className="v2-spaces" aria-label="Bookmark collections">
         {(['web', 'youtube'] as const).map((space) => (
-          <a key={space} className={`v2-space v2-space--${space}`} href={`#/v2/${space}`}
+          <a key={space} className={`v2-space v2-space--${space}`} href={space === 'web' ? '#/' : '#/youtube'}
             aria-current={collection === space ? 'page' : undefined}>
             <span className="v2-space__icon"><Icon name={space === 'web' ? 'bookmark' : 'play'} size={25} /></span>
             <span className="v2-space__copy"><strong>{space === 'web' ? 'Web' : 'YouTube'}</strong>
-              <small>{space === 'web' ? 'Your daily destinations' : 'Your top channels'}</small></span>
+              <small>{space === 'web' ? 'Reviewed websites' : 'Reviewed channels'}</small></span>
             <span className="v2-space__count">{collections[space].length}</span>
           </a>
         ))}
@@ -73,9 +73,9 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
         </ol>
         {!visible.length && <div className="v2-empty">
           <h3>{entries.length ? 'No bookmarks match these tags.' : 'No bookmarks here yet.'}</h3>
-          <p>{entries.length ? 'Select All or deselect a tag to widen your list.' : `This space uses your ${collection === 'web' ? 'Daily' : 'YouTube Top'} bookmarks.`}</p>
+          <p>{entries.length ? 'Select All or deselect a tag to widen your list.' : `Promote a bookmark to the ${title} collection to see it here.`}</p>
         </div>}
-        <p className="v2-order-note">Saved order · {collection === 'web' ? 'Daily' : 'YouTube Top'} collection</p>
+        <p className="v2-order-note">Saved order · {title} collection</p>
       </section>
     </main>
   )

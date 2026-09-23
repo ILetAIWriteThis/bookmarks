@@ -11,11 +11,11 @@ npm run dev
 
 Run all non-browser checks with `npm run check`. Run `npm run test:e2e` after a production build (and after installing Chromium once with `npx playwright install chromium`). `npm run build` uses `/bookmarks/` as its production base; set `VITE_BASE_PATH` to override it.
 
-## V2 experiment
+## Bookmark views
 
-Choose **Try Bookmarks V2** on the homepage, or open `/bookmarks/#/v2`. Web (`#/v2/web`) shows Daily bookmarks; YouTube (`#/v2/youtube`) shows bookmarks assigned directly to `youtube-top`. Both use a single-column list sorted by the saved position, with titles breaking ties. Filtering preserves those positions, including gaps.
+The default `/bookmarks/` page shows reviewed Web bookmarks. `#/youtube` shows reviewed YouTube bookmarks. Both use a single-column list sorted by their saved collection position. The old collection is at `#/old`, with categories at `#/old/category/ID`. Existing `#/category/ID` links still open the corresponding old category, and `#/v2` links still open the reviewed view.
 
-Tags combine existing bookmark tags with category and ancestor names; Web also adds `#daily`. Select multiple tags to match all of them, or select **All** to clear the filter. Each space remembers its selections while switching between Web and YouTube; reloading resets them. V2 reads the existing data without modifying it, and **Original home** returns to the original view.
+Only bookmarks with an explicit collection placement appear in the reviewed view. Bookmarks without a placement appear in the old view, including its search, categories, counts, and random picker. The original 11 Web bookmarks have been promoted; the other bookmarks remain in the old view until reviewed. Tags combine existing bookmark tags with category and ancestor names; bookmarks with a Daily position also have `#daily`. Select multiple tags to match all of them, or select **All** to clear the filter. Each space remembers its selections while switching between Web and YouTube; reloading resets them.
 
 ## Manage bookmark data
 
@@ -24,14 +24,18 @@ Do not edit `public/data/bookmarks.json` directly. All changes go through the va
 ```bash
 npm run bookmarks -- help
 npm run bookmarks -- list
-npm run bookmarks -- add-bookmark --id example --title "Example" --url https://example.com --category news:3 --category tech-ai:1 --daily-position 1
+npm run bookmarks -- add-bookmark --id example --title "Example" --url https://example.com --category news:3 --category tech-ai:1
 npm run bookmarks -- update-bookmark --id example --tag morning --tag analysis --clear-daily
+npm run bookmarks -- promote-bookmark --id example --collection web --position 11
+npm run bookmarks -- add-bookmark --id new-site --title "New Site" --url https://example.org --collection web --position 11
+npm run bookmarks -- demote-bookmark --id example
+npm run bookmarks -- list --collection old
 npm run bookmarks -- remove-bookmark --id example
 ```
 
-The CLI updates an integrity checksum atomically and CI rejects direct JSON edits. IDs must be unique, URLs must use HTTPS, and memberships must point to existing categories. Repeat `--category ID:POSITION` to assign a bookmark to multiple categories; on update, the supplied category flags replace its complete membership list.
+The CLI updates an integrity checksum atomically and CI rejects direct JSON edits. IDs must be unique, URLs must use HTTPS, and memberships must point to existing categories. Repeat `--category ID:POSITION` to assign a bookmark to multiple categories; on update, the supplied category flags replace its complete membership list. New bookmarks go to the old view unless you provide `--collection` and `--position`. Promoting or adding a bookmark at an occupied position shifts that bookmark and all later positions forward by one. Moving an already promoted bookmark closes its old slot; demoting it returns it to the old view.
 
-Daily is independent of category membership. A bookmark can have `--daily-position 1` while also belonging to one or more categories. Numeric positions sort ascending within their own section; titles break ties alphabetically.
+Daily is legacy metadata independent of category membership and reviewed placement. A bookmark can have `--daily-position 1` while also belonging to one or more categories. Numeric positions sort ascending within their own section; titles break ties alphabetically.
 
 ## Category hierarchy
 
@@ -43,7 +47,7 @@ npm run bookmarks -- update-category --id youtube-podcasts --parent media
 npm run bookmarks -- update-category --id youtube-podcasts --clear-parent
 ```
 
-Only categories without a parent appear on Home. Parent pages show their immediate children, counts include all descendants, and search matches ancestor category names. A bookmark can belong to multiple children—even children of the same parent:
+Only categories without a parent appear on the old homepage. Parent pages show their immediate children, counts include all unreviewed descendants, and old-view search matches ancestor category names. A bookmark can belong to multiple children—even children of the same parent:
 
 ```bash
 npm run bookmarks -- add-bookmark --id science-show --title "Science Show" --url https://example.com --category youtube-podcasts:2 --category youtube-science:1

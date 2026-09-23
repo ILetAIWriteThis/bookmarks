@@ -1,9 +1,5 @@
-.v2-quick-link { display: flex; align-items: center; gap: 6px; width: fit-content; margin: -24px 0 30px auto; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--cream); color: var(--blue); font-size: .8rem; font-weight: 750; text-decoration: none; }
-.v2-quick-link:hover { background: #f9e5b8; }
 .v2-page { width: min(920px, calc(100% - 40px)); margin: 0 auto; padding: 32px 0 64px; flex: 1; }
 .v2-hero { margin: 38px 0 30px; }
-.v2-hero .eyebrow { display: flex; align-items: center; gap: 10px; }
-.v2-badge { padding: 4px 7px; background: var(--yellow); color: var(--ink); border-radius: 5px; letter-spacing: .03em; }
 .v2-hero h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); line-height: 1.04; margin-bottom: 16px; }
 .v2-hero > p:last-child { color: #62675f; line-height: 1.6; font-size: .93rem; }
 .v2-spaces { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 30px 0 38px; }

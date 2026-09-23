@@ -16,7 +16,7 @@ export function CategoryPage({ data, categoryId }: CategoryPageProps) {
         <p className="eyebrow">404 · unfiled</p>
         <h1>That category isn’t here.</h1>
         <p>It may have been renamed or removed from the bookmark data.</p>
-        <a className="back-link" href="#/"><Icon name="back" size={18} /> Back home</a>
+        <a className="back-link" href="#/old"><Icon name="back" size={18} /> Back to old bookmarks</a>
       </main>
     )
   }
@@ -27,8 +27,8 @@ export function CategoryPage({ data, categoryId }: CategoryPageProps) {
   const descendantBookmarks = bookmarksForCategoryTree(data, category.id)
   const totalCount = descendantBookmarks.length
   const theme = getCategoryTheme(category)
-  const backHref = parent ? `#/category/${encodeURIComponent(parent.id)}` : '#/'
-  const backLabel = parent?.name ?? 'Home'
+  const backHref = parent ? `#/old/category/${encodeURIComponent(parent.id)}` : '#/old'
+  const backLabel = parent?.name ?? 'Old bookmarks'
 
   const openRandomBookmark = () => {
     const bookmark = descendantBookmarks[Math.floor(Math.random() * descendantBookmarks.length)]

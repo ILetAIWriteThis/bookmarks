@@ -36,13 +36,13 @@ export function HomePage({ data }: HomePageProps) {
 
   return (
     <main id="main-content" className="home-page">
-      <a className="v2-quick-link" href="#/v2">Try Bookmarks V2 <Icon name="arrow" size={16} /></a>
+      <a className="back-link" href="#/"><Icon name="back" size={17} /> Current bookmarks</a>
       <section className="hero" aria-labelledby="home-title">
-        <p className="eyebrow">Your corner of the web</p>
+        <p className="eyebrow">Old bookmarks · awaiting review</p>
         <h1 id="home-title">Where do you want<br className="desktop-break" /> to go?</h1>
         <div className="search-box">
           <Icon name="search" size={22} />
-          <label className="sr-only" htmlFor="global-search">Search all bookmarks</label>
+          <label className="sr-only" htmlFor="global-search">Search old bookmarks</label>
           <input
             id="global-search"
             type="search"
@@ -63,7 +63,7 @@ export function HomePage({ data }: HomePageProps) {
       {query.trim() ? (
         <section className="content-section search-results" aria-labelledby="search-heading" aria-live="polite">
           <div className="section-heading">
-            <div><p className="section-kicker">Across everything</p><h2 id="search-heading">Search results</h2></div>
+            <div><p className="section-kicker">Across old bookmarks</p><h2 id="search-heading">Search results</h2></div>
             <span className="result-count">{results.length} found</span>
           </div>
           {results.length ? (

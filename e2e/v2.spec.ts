@@ -1,9 +1,7 @@
 import { expect, test } from '@playwright/test'
 
-test('V2 keeps a single column, filters each collection, and returns to the original home', async ({ page }) => {
+test('reviewed bookmarks use the default route while the old collection stays separate', async ({ page }) => {
   await page.goto('./')
-  await page.getByRole('link', { name: 'Try Bookmarks V2' }).click()
-  await expect(page).toHaveURL(/#\/v2$/)
   const web = page.getByRole('list', { name: 'Web bookmarks' })
   await expect(web.getByRole('link')).toHaveCount(11)
   await expect(web.getByRole('link').first()).toHaveAccessibleName(/Disney\+/)
@@ -28,13 +26,12 @@ test('V2 keeps a single column, filters each collection, and returns to the orig
   await expect(web.locator('.v2-position')).toHaveText(['04', '05', '06'])
   await page.getByRole('navigation', { name: 'Bookmark collections' }).getByRole('link', { name: /YouTube/ }).click()
   const youtube = page.getByRole('list', { name: 'YouTube bookmarks' })
-  await expect(youtube.getByRole('link')).toHaveCount(5)
-  await page.getByRole('button', { name: '#science', exact: true }).click()
-  await expect(youtube.locator('strong')).toHaveText(['Veritasium', 'Mokslo sriuba'])
-  await expect(youtube.locator('.v2-position')).toHaveText(['04', '05'])
+  await expect(youtube.getByRole('link')).toHaveCount(0)
   await page.reload()
   await expect(page.getByRole('heading', { name: 'YouTube bookmarks' })).toBeVisible()
-  await expect(youtube.getByRole('link')).toHaveCount(5)
-  await page.getByRole('link', { name: 'Original home' }).click()
+  await page.getByRole('link', { name: 'Old bookmarks' }).click()
   await expect(page.getByRole('heading', { name: 'Daily', exact: true })).toBeVisible()
+  await expect(page.getByText('Your daily desk is clear')).toBeVisible()
+  await page.goto('./#/old/category/youtube-top')
+  await expect(page.getByLabel('Top bookmarks').locator('.bookmark-card')).toHaveCount(5)
 })

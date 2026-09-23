@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AppHeader } from './components/AppHeader'
-import { TemporaryBookmarks } from './components/TemporaryBookmarks'
 import { validateBookmarkData } from './data'
 import { Icon } from './icons'
 import { CategoryPage } from './pages/CategoryPage'
@@ -13,15 +12,20 @@ interface AppProps {
   data?: BookmarkData
 }
 
-type Route = { page: 'home' } | { page: 'category'; categoryId: string } | { page: 'v2'; collection: 'web' | 'youtube' }
+type Route = { page: 'collection'; collection: 'web' | 'youtube' }
+  | { page: 'old' }
+  | { page: 'old-category'; categoryId: string }
 
 function readRoute(): Route {
-  const v2 = window.location.hash.match(/^#\/v2(?:\/(web|youtube))?\/?$/)
-  if (v2) return { page: 'v2', collection: v2[1] === 'youtube' ? 'youtube' : 'web' }
-  const match = window.location.hash.match(/^#\/category\/([^/?#]+)/)
-  if (!match) return { page: 'home' }
-  try { return { page: 'category', categoryId: decodeURIComponent(match[1]) } }
-  catch { return { page: 'category', categoryId: match[1] } }
+  const hash = window.location.hash
+  if (/^#\/(?:old|v0\.10-old)\/?$/.test(hash)) return { page: 'old' }
+  const category = hash.match(/^#\/(?:old\/category|v0\.10-old\/category|category)\/([^/?#]+)/)
+  if (category) {
+    try { return { page: 'old-category', categoryId: decodeURIComponent(category[1]) } }
+    catch { return { page: 'old-category', categoryId: category[1] } }
+  }
+  if (/^#\/(?:youtube|v2\/youtube)\/?$/.test(hash)) return { page: 'collection', collection: 'youtube' }
+  return { page: 'collection', collection: 'web' }
 }
 
 function useRoute() {
@@ -38,9 +42,12 @@ export function App({ data: providedData }: AppProps) {
   const [data, setData] = useState<BookmarkData | null>(providedData ?? null)
   const [error, setError] = useState<string | null>(null)
   const [offlineCache, setOfflineCache] = useState(false)
-  const [inboxOpen, setInboxOpen] = useState(false)
   const route = useRoute()
   const pwa = usePwa()
+  const oldData = useMemo(() => data && ({
+    categories: data.categories,
+    bookmarks: data.bookmarks.filter((bookmark) => !bookmark.placement),
+  }), [data])
 
   useEffect(() => {
     if (providedData) return
@@ -63,8 +70,7 @@ export function App({ data: providedData }: AppProps) {
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <AppHeader onInstall={install} onOpenInbox={() => setInboxOpen(true)} />
-      {inboxOpen && <TemporaryBookmarks onClose={() => setInboxOpen(false)} />}
+      <AppHeader onInstall={install} />
       {!data && !error && <main id="main-content" className="status-page"><span className="loader" /><p>Opening your bookmarks…</p></main>}
       {error && (
         <main id="main-content" className="status-page status-page--error">
@@ -74,9 +80,9 @@ export function App({ data: providedData }: AppProps) {
           <button type="button" onClick={() => window.location.reload()}>Try again</button>
         </main>
       )}
-      {data && (route.page === 'home' ? <HomePage data={data} />
-        : route.page === 'v2' ? <V2Page data={data} collection={route.collection} />
-          : <CategoryPage data={data} categoryId={route.categoryId} />)}
+      {data && oldData && (route.page === 'collection' ? <V2Page data={data} collection={route.collection} />
+        : route.page === 'old' ? <HomePage data={oldData} />
+          : <CategoryPage data={oldData} categoryId={route.categoryId} />)}
 
       {(!pwa.online || offlineCache) && <div className="notice" role="status"><span>You’re offline</span><small>Saved pages still work; external bookmarks need a connection.</small></div>}
       {pwa.update && (

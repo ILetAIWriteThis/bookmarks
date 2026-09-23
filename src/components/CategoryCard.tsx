@@ -11,7 +11,7 @@ interface CategoryCardProps {
 export function CategoryCard({ category, data }: CategoryCardProps) {
   const theme = getCategoryTheme(category)
   const count = bookmarksForCategoryTree(data, category.id).length
-  const href = `#/category/${encodeURIComponent(category.id)}`
+  const href = `#/old/category/${encodeURIComponent(category.id)}`
 
   return (
     <a

@@ -1,4 +1,4 @@
-import type { Bookmark, BookmarkData, Category, CategoryMembership, ThemeColors } from './types'
+import type { Bookmark, BookmarkData, BookmarkPlacement, Category, CategoryMembership, ThemeColors } from './types'
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -85,6 +85,23 @@ const parseMembership = (
   }
 }
 
+const parsePlacement = (value: unknown, path: string, errors: string[]): BookmarkPlacement | undefined => {
+  if (value === undefined) return undefined
+  if (!isRecord(value)) {
+    errors.push(`${path} must be an object`)
+    return undefined
+  }
+  if (value.collection !== 'web' && value.collection !== 'youtube') {
+    errors.push(`${path}.collection must be web or youtube`)
+  }
+  const position = requiredPosition(value.position, `${path}.position`, errors)
+  if (!Number.isSafeInteger(position) || position < 0) errors.push(`${path}.position must be a non-negative safe integer`)
+  return {
+    collection: value.collection === 'youtube' ? 'youtube' : 'web',
+    position,
+  }
+}
+
 const parseBookmark = (value: unknown, index: number, errors: string[]): Bookmark | undefined => {
   const path = `bookmarks[${index}]`
   if (!isRecord(value)) {
@@ -135,6 +152,7 @@ const parseBookmark = (value: unknown, index: number, errors: string[]): Bookmar
     subscribed,
     dailyPosition,
     categories: memberships,
+    placement: parsePlacement(value.placement, `${path}.placement`, errors),
   }
 }
 
@@ -168,15 +186,26 @@ export function validateBookmarkData(value: unknown): BookmarkData {
   reportDuplicates(bookmarks.map(({ id }) => id), 'bookmark', errors)
 
   const dailyPositions = new Map<number, string>()
+  const collectionPositions = new Map<string, string>()
   bookmarks.forEach((bookmark, index) => {
-    if (bookmark.dailyPosition === undefined) return
-    const existingBookmarkId = dailyPositions.get(bookmark.dailyPosition)
-    if (existingBookmarkId) {
-      errors.push(
-        `bookmarks[${index}].dailyPosition duplicates position ${bookmark.dailyPosition} used by "${existingBookmarkId}"`,
-      )
-    } else {
-      dailyPositions.set(bookmark.dailyPosition, bookmark.id)
+    if (bookmark.dailyPosition !== undefined) {
+      const existingBookmarkId = dailyPositions.get(bookmark.dailyPosition)
+      if (existingBookmarkId) {
+        errors.push(
+          `bookmarks[${index}].dailyPosition duplicates position ${bookmark.dailyPosition} used by "${existingBookmarkId}"`,
+        )
+      } else {
+        dailyPositions.set(bookmark.dailyPosition, bookmark.id)
+      }
+    }
+    if (bookmark.placement) {
+      const key = `${bookmark.placement.collection}:${bookmark.placement.position}`
+      const existingBookmarkId = collectionPositions.get(key)
+      if (existingBookmarkId) {
+        errors.push(`bookmarks[${index}].placement duplicates ${key} used by "${existingBookmarkId}"`)
+      } else {
+        collectionPositions.set(key, bookmark.id)
+      }
     }
   })
 

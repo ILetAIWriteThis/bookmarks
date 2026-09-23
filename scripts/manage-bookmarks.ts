@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { readFile, rename, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { bookmarksForCategoryTree, childCategories, validateBookmarkData } from '../src/data'
+import { placeBookmark, removePlacement } from '../src/placement'
 import type { Bookmark, BookmarkData, Category, CategoryMembership } from '../src/types'
 
 const dataPath = resolve(process.cwd(), 'public/data/bookmarks.json')
@@ -13,7 +14,7 @@ function usage() {
   console.log(`Bookmark data manager
 
 Usage:
-  npm run bookmarks -- list [--category ID]
+  npm run bookmarks -- list [--category ID] [--collection old|web|youtube]
   npm run bookmarks -- check
   npm run bookmarks -- upsert-bookmarks --file JSON_FILE
   npm run bookmarks -- add-category --id ID --name NAME --position N [--icon NAME] [--parent ID]
@@ -21,6 +22,8 @@ Usage:
   npm run bookmarks -- remove-category --id ID
   npm run bookmarks -- add-bookmark --id ID --title TITLE --url HTTPS_URL [options]
   npm run bookmarks -- update-bookmark --id ID [options]
+  npm run bookmarks -- promote-bookmark --id ID --collection web|youtube --position N
+  npm run bookmarks -- demote-bookmark --id ID
   npm run bookmarks -- remove-bookmark --id ID
 
 Bookmark options:
@@ -31,7 +34,9 @@ Bookmark options:
   --clear-daily             update-bookmark only
   --subscribed              Mark a YouTube channel as subscribed
   --not-subscribed          Mark a YouTube channel as not subscribed
-nCategory options:
+  --collection web|youtube --position N
+                             Add directly to a reviewed collection; later positions shift
+Category options:
   --parent ID               Nest below an existing category
   --clear-parent            Move an existing category to the root
 
@@ -41,6 +46,8 @@ Theme options (category commands; provide all three together):
 Examples:
   npm run bookmarks -- add-bookmark --id example --title "Example" --url https://example.com --category news:1 --category tech-ai:3 --daily-position 1
   npm run bookmarks -- update-bookmark --id example --tag reference --tag daily --clear-daily
+  npm run bookmarks -- promote-bookmark --id example --collection web --position 1
+  npm run bookmarks -- demote-bookmark --id example
   npm run bookmarks -- list --category news`)
 }
 
@@ -117,6 +124,12 @@ function parseTags(flags: Flags) {
   return flags.get('tag')?.flatMap((tag) => tag.split(',')).map((tag) => tag.trim()).filter(Boolean)
 }
 
+function placementPosition(flags: Flags) {
+  const position = numberValue(required(flags, 'position'), 'position')
+  if (!Number.isSafeInteger(position) || position < 0) throw new Error('--position must be a non-negative safe integer')
+  return position
+}
+
 function applySubscription(bookmark: Bookmark, flags: Flags) {
   if (has(flags, "subscribed") && has(flags, "not-subscribed")) {
     throw new Error("Use either --subscribed or --not-subscribed, not both")
@@ -150,14 +163,22 @@ async function run() {
   }
   if (command === 'list') {
     const categoryId = optional(flags, 'category')
-    const bookmarks = categoryId ? bookmarksForCategoryTree(data, categoryId) : data.bookmarks
+    const collection = optional(flags, 'collection')
+    if (collection && !['old', 'web', 'youtube'].includes(collection)) {
+      throw new Error('--collection must be old, web, or youtube')
+    }
+    const inCategory = categoryId ? bookmarksForCategoryTree(data, categoryId) : data.bookmarks
+    const bookmarks = collection === 'old' ? inCategory.filter((bookmark) => !bookmark.placement)
+      : collection ? inCategory.filter((bookmark) => bookmark.placement?.collection === collection) : inCategory
+    if (collection === 'web' || collection === 'youtube') {
+      bookmarks.sort((a, b) => a.placement!.position - b.placement!.position)
+    }
     console.log(`${data.categories.length} categories`)
     printCategoryTree(data.categories)
-    console.log(`${bookmarks.length} bookmarks${categoryId ? ` in ${categoryId}` : ''}`)
-    bookmarks.forEach((bookmark) => console.log(`  ${bookmark.id}\t${bookmark.title}\t${bookmark.url}`))
+    console.log(`${bookmarks.length} bookmarks${categoryId ? ` in ${categoryId}` : ''}${collection ? ` in ${collection}` : ''}`)
+    bookmarks.forEach((bookmark) => console.log(`  ${collection === 'web' || collection === 'youtube' ? `${bookmark.placement!.position}\t` : ''}${bookmark.id}\t${bookmark.title}\t${bookmark.url}`))
     return
   }
-
   if (command === 'upsert-bookmarks') {
     const importPath = resolve(process.cwd(), required(flags, 'file'))
     const importedValue = JSON.parse(await readFile(importPath, 'utf8')) as { bookmarks?: unknown }
@@ -165,6 +186,10 @@ async function run() {
       throw new Error('Import file must contain a "bookmarks" array')
     }
     const imported = validateBookmarkData({ categories: data.categories, bookmarks: importedValue.bookmarks }).bookmarks
+    const existing = new Map(data.bookmarks.map((bookmark) => [bookmark.id, bookmark]))
+    imported.forEach((bookmark) => {
+      if (!bookmark.placement) bookmark.placement = existing.get(bookmark.id)?.placement
+    })
     const importedIds = new Set(imported.map(({ id }) => id))
     data.bookmarks = [...data.bookmarks.filter(({ id }) => !importedIds.has(id)), ...imported]
   } else if (command === 'add-category') {
@@ -204,6 +229,14 @@ async function run() {
     if (has(flags, 'tag')) bookmark.tags = parseTags(flags)
     if (has(flags, 'daily-position')) bookmark.dailyPosition = optionalNumber(flags, 'daily-position')
     applySubscription(bookmark, flags)
+    if (has(flags, 'collection') !== has(flags, 'position')) {
+      throw new Error('Adding to a reviewed collection requires both --collection and --position')
+    }
+    if (has(flags, 'collection')) {
+      const collection = required(flags, 'collection')
+      if (collection !== 'web' && collection !== 'youtube') throw new Error('--collection must be web or youtube')
+      placeBookmark(data, bookmark, collection, placementPosition(flags))
+    }
     data.bookmarks.push(bookmark)
   } else if (command === 'update-bookmark') {
     const bookmark = data.bookmarks.find(({ id }) => id === required(flags, 'id'))
@@ -216,11 +249,24 @@ async function run() {
     if (has(flags, 'daily-position')) bookmark.dailyPosition = optionalNumber(flags, 'daily-position')
     if (has(flags, 'clear-daily')) delete bookmark.dailyPosition
     applySubscription(bookmark, flags)
+  } else if (command === 'promote-bookmark') {
+    const id = required(flags, 'id')
+    const bookmark = data.bookmarks.find((item) => item.id === id)
+    if (!bookmark) throw new Error(`Bookmark "${id}" does not exist`)
+    const collection = required(flags, 'collection')
+    if (collection !== 'web' && collection !== 'youtube') throw new Error('--collection must be web or youtube')
+    placeBookmark(data, bookmark, collection, placementPosition(flags))
+  } else if (command === 'demote-bookmark') {
+    const id = required(flags, 'id')
+    const bookmark = data.bookmarks.find((item) => item.id === id)
+    if (!bookmark) throw new Error(`Bookmark "${id}" does not exist`)
+    removePlacement(data, bookmark)
   } else if (command === 'remove-bookmark') {
     const id = required(flags, 'id')
-    const before = data.bookmarks.length
-    data.bookmarks = data.bookmarks.filter((bookmark) => bookmark.id !== id)
-    if (data.bookmarks.length === before) throw new Error(`Bookmark "${id}" does not exist`)
+    const bookmark = data.bookmarks.find((item) => item.id === id)
+    if (!bookmark) throw new Error(`Bookmark "${id}" does not exist`)
+    removePlacement(data, bookmark)
+    data.bookmarks = data.bookmarks.filter((item) => item.id !== id)
   } else {
     throw new Error(`Unknown command "${command}". Run with help to see available commands.`)
   }

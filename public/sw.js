@@ -1,4 +1,4 @@
-const VERSION = 'bookmarks-shell-v5'
+const VERSION = 'bookmarks-shell-v6'
 const scopeUrl = new URL(self.registration.scope)
 const indexUrl = new URL('./index.html', scopeUrl)
 const dataUrl = new URL('./data/bookmarks.json', scopeUrl)

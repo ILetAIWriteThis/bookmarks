@@ -11,15 +11,14 @@ export interface V2Bookmark {
 
 const tagName = (value: string) => normalizeSearch(value).replace(/^#+/, '').replace(/\s+/g, '-')
 
-/** A read-only view of the original collection, ordered strictly by saved position. */
+/** Reviewed bookmarks in their explicitly chosen collection and order. */
 export function v2Bookmarks(data: BookmarkData, collection: V2Collection): V2Bookmark[] {
   const categories = new Map(data.categories.map((category) => [category.id, category]))
   return data.bookmarks.flatMap((bookmark) => {
-    const position = collection === 'web' ? bookmark.dailyPosition
-      : bookmark.categories.find((membership) => membership.categoryId === 'youtube-top')?.position
-    if (position === undefined) return []
+    if (bookmark.placement?.collection !== collection) return []
+    const position = bookmark.placement.position
 
-    const tags = new Set<string>(collection === 'web' ? ['daily'] : [])
+    const tags = new Set<string>(bookmark.dailyPosition === undefined ? [] : ['daily'])
     for (const tag of bookmark.tags ?? []) {
       const normalized = tagName(tag)
       if (normalized) tags.add(normalized)

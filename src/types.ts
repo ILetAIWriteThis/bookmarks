@@ -18,6 +18,11 @@ export interface CategoryMembership {
   position: number
 }
 
+export interface BookmarkPlacement {
+  collection: 'web' | 'youtube'
+  position: number
+}
+
 export interface Bookmark {
   id: string
   title: string
@@ -27,6 +32,8 @@ export interface Bookmark {
   /** Applies to YouTube channel URLs; omitted channels are subscribed by default. */
   subscribed?: boolean
   dailyPosition?: number
+  /** Only explicitly reviewed bookmarks appear in the main collections. */
+  placement?: BookmarkPlacement
   categories: CategoryMembership[]
 }
 

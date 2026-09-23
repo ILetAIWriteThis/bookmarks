@@ -346,7 +346,11 @@
           "categoryId": "tech-ai",
           "position": 1
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 5
+      }
     },
     {
       "id": "chatgpt",
@@ -358,21 +362,33 @@
           "categoryId": "tech-ai",
           "position": 2
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 6
+      }
     },
     {
       "id": "gmail",
       "title": "Gmail",
       "url": "https://mail.google.com/mail/u/0/#inbox",
       "dailyPosition": 7,
-      "categories": []
+      "categories": [],
+      "placement": {
+        "collection": "web",
+        "position": 7
+      }
     },
     {
       "id": "google-calendar",
       "title": "Google Calendar",
       "url": "https://calendar.google.com/calendar/u/0/r",
       "dailyPosition": 8,
-      "categories": []
+      "categories": [],
+      "placement": {
+        "collection": "web",
+        "position": 8
+      }
     },
     {
       "id": "onedrive",
@@ -384,14 +400,22 @@
           "categoryId": "finance-tracking",
           "position": 1
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 9
+      }
     },
     {
       "id": "google-keep",
       "title": "Google Keep",
       "url": "https://keep.google.com/u/0/#home",
       "dailyPosition": 10,
-      "categories": []
+      "categories": [],
+      "placement": {
+        "collection": "web",
+        "position": 10
+      }
     },
     {
       "id": "lrt",
@@ -403,7 +427,11 @@
           "categoryId": "news",
           "position": 1
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 2
+      }
     },
     {
       "id": "goodreads",
@@ -564,7 +592,11 @@
       "title": "YouTube Watch Later",
       "url": "https://www.youtube.com/playlist?list=WL",
       "dailyPosition": 3,
-      "categories": []
+      "categories": [],
+      "placement": {
+        "collection": "web",
+        "position": 3
+      }
     },
     {
       "id": "amazon-send-to-kindle",
@@ -604,7 +636,11 @@
       "title": "ILetAIWriteThis",
       "url": "https://github.com/ILetAIWriteThis?tab=repositories",
       "dailyPosition": 11,
-      "categories": []
+      "categories": [],
+      "placement": {
+        "collection": "web",
+        "position": 11
+      }
     },
     {
       "id": "disney-plus",
@@ -616,7 +652,11 @@
           "categoryId": "entertainment",
           "position": 1
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 1
+      }
     },
     {
       "id": "pigu-lt",
@@ -19739,7 +19779,11 @@
           "categoryId": "tech-ai",
           "position": 34
         }
-      ]
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 4
+      }
     },
     {
       "id": "tldr",
