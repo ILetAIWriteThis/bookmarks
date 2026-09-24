@@ -17,7 +17,7 @@
         "Action",
         "Science fiction"
       ],
-      "universe": "Marvel Cinematic Universe",
+      "franchise": "MCU",
       "url": "https://www.imdb.com/title/tt0848228/"
     },
     {
@@ -5126,6 +5126,7 @@
         "Adventure",
         "Sci-Fi"
       ],
+      "franchise": "MCU",
       "url": "https://www.imdb.com/title/tt4154796/"
     },
     {
@@ -6377,6 +6378,7 @@
         "Adventure",
         "Sci-Fi"
       ],
+      "franchise": "MCU",
       "url": "https://www.imdb.com/title/tt4154756/"
     },
     {
@@ -7099,6 +7101,7 @@
         "Crime",
         "Thriller"
       ],
+      "franchise": "Fast & Furious",
       "url": "https://www.imdb.com/title/tt1596343/"
     },
     {
@@ -7147,6 +7150,7 @@
         "Crime",
         "Thriller"
       ],
+      "franchise": "Fast & Furious",
       "url": "https://www.imdb.com/title/tt0232500/"
     },
     {
@@ -7291,6 +7295,7 @@
         "Adventure",
         "Sci-Fi"
       ],
+      "franchise": "MCU",
       "url": "https://www.imdb.com/title/tt2395427/"
     },
     {
@@ -7338,6 +7343,7 @@
       "genres": [
         "Crime"
       ],
+      "franchise": "DC",
       "url": "https://www.imdb.com/title/tt0096895/"
     },
     {
@@ -7354,6 +7360,7 @@
         "Crime",
         "Fantasy"
       ],
+      "franchise": "DC",
       "url": "https://www.imdb.com/title/tt0103776/"
     },
     {
@@ -7369,6 +7376,7 @@
         "Action",
         "Adventure"
       ],
+      "franchise": "DC",
       "url": "https://www.imdb.com/title/tt0112462/"
     },
     {
@@ -7384,6 +7392,7 @@
         "Action",
         "Sci-Fi"
       ],
+      "franchise": "DC",
       "url": "https://www.imdb.com/title/tt0118688/"
     },
     {
@@ -16989,6 +16998,7 @@
         "Mystery",
         "Thriller"
       ],
+      "franchise": "Fast & Furious",
       "url": "https://www.imdb.com/title/tt5433140/"
     },
     {

@@ -10,8 +10,8 @@ const sample = {
     { id: 'first', kind: 'book', title: 'First Book', creators: ['A. Writer'], published: '2001', addedOn: '2026-09-20', genres: ['Fantasy'], series: { name: 'Sample Saga', position: 1 }, url: 'https://example.com/first' },
     { id: 'second', kind: 'book', title: 'Second Book', creators: ['A. Writer'], published: '2002', addedOn: '2026-09-22', genres: ['Fantasy'], series: { name: 'Sample Saga', position: 2 }, url: 'https://example.com/second' },
     { id: 'other', kind: 'book', title: 'Other Book', creators: ['B. Writer'], published: '2010', addedOn: '2026-09-21', genres: ['Horror'], url: 'https://example.com/other' },
-    { id: 'film', kind: 'movie', title: 'Sample Film', creators: ['D. Director'], published: '2012', addedOn: '2026-09-23', genres: ['Action'], universe: 'Sample Universe', url: 'https://example.com/film' },
-    { id: 'show', kind: 'tv', title: 'Sample Show', creators: ['D. Director'], published: '2013', addedOn: '2026-09-23', genres: ['Action'], universe: 'Sample Universe', seasons: [{ number: 1 }, { number: 2 }], url: 'https://example.com/show' },
+    { id: 'film', kind: 'movie', title: 'Sample Film', creators: ['D. Director'], published: '2012', addedOn: '2026-09-23', genres: ['Action'], franchise: 'Sample Franchise', url: 'https://example.com/film' },
+    { id: 'show', kind: 'tv', title: 'Sample Show', creators: ['D. Director'], published: '2013', addedOn: '2026-09-23', genres: ['Action'], franchise: 'Other Franchise', seasons: [{ number: 1 }, { number: 2 }], url: 'https://example.com/show' },
   ],
 }
 
@@ -50,6 +50,9 @@ it('validates the separate library store and sorts series by position', () => {
   expect(validateMediaData({ entries: [{ ...sample.entries[4], creators: [] }] }).entries[0].creators).toEqual([])
   expect(validateMediaData({ entries: [{ ...sample.entries[3], creators: [] }] }).entries[0].creators).toEqual([])
   expect(() => validateMediaData({ entries: [{ ...sample.entries[0], creators: [] }] })).toThrow('must contain names')
+  expect(() => validateMediaData({ entries: [{ ...sample.entries[0], franchise: 'Sample Franchise' }] })).toThrow('only for screen media')
+  expect(() => validateMediaData({ entries: [{ ...sample.entries[3], series: { name: 'Sample Series' } }] })).toThrow('only for books')
+  expect(() => validateMediaData({ entries: [{ ...sample.entries[3], universe: 'Sample Universe' }] })).toThrow('replaced by franchise')
   expect(validateMediaData({ entries: [{ ...sample.entries[0], url: undefined }] }).entries[0].url).toBeUndefined()
   expect(() => validateMediaData({ entries: [{ ...sample.entries[0], url: 'http://example.com/book.pdf' }] })).toThrow('HTTPS URL')
 })
@@ -84,22 +87,42 @@ it('opens books first, ranks filter values by frequency, and combines screen med
   expect(screen.getByRole('button', { name: 'Sort order: First to last. Reverse order' })).toBeInTheDocument()
   expect(within(list).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)).toEqual(['First Book', 'Second Book'])
   expect(screen.getByRole('link', { name: 'Open First Book source in a new tab' })).toHaveAttribute('rel', 'noopener noreferrer')
+  await user.click(screen.getByRole('button', { name: 'Clear filters ×' }))
   await user.click(screen.getByRole('button', { name: 'More filters' }))
-  expect([...screen.getByLabelText('Author').querySelectorAll('option')].map((option) => option.textContent)).toEqual(['All', 'A. Writer', 'B. Writer'])
+  expect([...screen.getByLabelText('Published').querySelectorAll('option')].map((option) => option.textContent)).toEqual(['All', '2010', '2002', '2001'])
+  await user.click(screen.getByRole('button', { name: 'Author: All' }))
+  expect([...document.querySelectorAll('.media-creator-options button')].map((button) => button.textContent)).toEqual(['All', 'A. Writer', 'B. Writer'])
+  expect(screen.getByRole('searchbox', { name: 'Search author' })).toHaveFocus()
+  await user.type(screen.getByRole('searchbox', { name: 'Search author' }), 'b. wr')
+  expect([...document.querySelectorAll('.media-creator-options button')].map((button) => button.textContent)).toEqual(['All', 'B. Writer'])
+  await user.keyboard('{Enter}')
+  expect(screen.getByRole('button', { name: 'Author: B. Writer' })).toBeInTheDocument()
+  expect(within(list).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)).toEqual(['Other Book'])
+  await user.click(screen.getByRole('button', { name: 'Author: B. Writer' }))
+  expect([...document.querySelectorAll('.media-creator-options button')].map((button) => button.textContent)).toEqual(['All', 'A. Writer', 'B. Writer'])
+  await user.click(screen.getByRole('button', { name: 'All', pressed: false }))
   fireEvent.click(screen.getByRole('link', { name: 'Screen' }))
   await waitFor(() => expect(screen.getByRole('list', { name: 'Screen list' })).toBeInTheDocument())
   expect(screen.getByRole('option', { name: 'Recently watched' })).toBeInTheDocument()
   expect(screen.getByRole('heading', { name: 'Sample Film' })).toBeInTheDocument()
   expect(screen.getByRole('heading', { name: 'Sample Show' })).toBeInTheDocument()
   expect(screen.queryByRole('heading', { name: 'First Book' })).not.toBeInTheDocument()
+  expect(screen.queryByRole('option', { name: 'Series order' })).not.toBeInTheDocument()
+  expect(screen.getByText('Franchise')).toBeInTheDocument()
+  expect(screen.queryByText('Universe')).not.toBeInTheDocument()
+  await user.click(screen.getByRole('button', { name: 'Director / creator: All' }))
+  await user.type(screen.getByRole('searchbox', { name: 'Search director / creator' }), 'director')
+  expect([...document.querySelectorAll('.media-creator-options button')].map((button) => button.textContent)).toEqual(['All', 'D. Director'])
+  await user.click(screen.getByRole('button', { name: 'Hide filters' }))
   await user.click(screen.getByRole('button', { name: 'Movies' }))
   expect(screen.queryByRole('heading', { name: 'Sample Show' })).not.toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: 'TV series' }))
   expect(screen.queryByRole('heading', { name: 'Sample Film' })).not.toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: 'Clear filters ×' }))
-  await user.click(screen.getByRole('button', { name: 'Sample Universe' }))
+  await user.click(screen.getByRole('button', { name: 'Sample Franchise' }))
   expect(screen.getByRole('heading', { name: 'Sample Film' })).toBeInTheDocument()
-  expect(screen.getByRole('heading', { name: 'Sample Show' })).toBeInTheDocument()
+  expect(screen.queryByRole('heading', { name: 'Sample Show' })).not.toBeInTheDocument()
+  await user.click(screen.getByRole('button', { name: 'Clear filters ×' }))
   await user.click(screen.getByText('Seasons 1–2'))
   expect(screen.getByText('Season 1')).toBeVisible()
   expect(screen.getByText('Season 2')).toBeVisible()

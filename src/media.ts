@@ -10,7 +10,7 @@ export interface MediaEntry {
   addedOn: string
   genres: string[]
   language?: string
-  universe?: string
+  franchise?: string
   series?: { name: string; position?: number }
   seasons?: { number: number; completedDates?: string[] }[]
   url?: string
@@ -67,7 +67,9 @@ export function validateMediaData(value: unknown): MediaData {
     const completedDates = readDates(raw.completedDates, `${path}.completedDates`)
     const language = raw.language === undefined ? undefined : required('language')
     if (language && kind !== 'book') throw new Error(`${path}.language is only for books`)
-    const universe = raw.universe === undefined ? undefined : required('universe')
+    const franchise = raw.franchise === undefined ? undefined : required('franchise')
+    if (raw.universe !== undefined) throw new Error(`${path}.universe has been replaced by franchise`)
+    if (franchise && kind === 'book') throw new Error(`${path}.franchise is only for screen media`)
     const url = raw.url === undefined ? undefined : required('url')
     if (url) {
       try { if (new URL(url).protocol !== 'https:') throw new Error() }
@@ -75,6 +77,7 @@ export function validateMediaData(value: unknown): MediaData {
     }
     let series: MediaEntry['series']
     if (raw.series !== undefined) {
+      if (kind !== 'book') throw new Error(`${path}.series is only for books`)
       if (!record(raw.series) || typeof raw.series.name !== 'string' || !raw.series.name.trim()) throw new Error(`${path}.series needs a name`)
       const position = raw.series.position
       if (position !== undefined && (typeof position !== 'number' || !Number.isInteger(position) || position < 1))
@@ -94,7 +97,7 @@ export function validateMediaData(value: unknown): MediaData {
       })
     }
     return { id, kind, title: required('title'), creators: people as string[], published, completedDates, addedOn,
-      genres: genres as string[], language, universe, series, seasons, url }
+      genres: genres as string[], language, franchise, series, seasons, url }
   })
   return { entries }
 }

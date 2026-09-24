@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { sortMedia, validateMediaData, type MediaData, type MediaEntry, type MediaSort } from '../media'
 
 type Section = 'book' | 'screen'
@@ -8,11 +8,11 @@ const sections: { kind: Section; label: string; route: string; mark: string }[] 
   { kind: 'screen', label: 'Screen', route: '#/library/screen', mark: 'S' },
 ]
 
-type Facet = 'genre' | 'series' | 'universe' | 'creator' | 'year' | 'language'
+type Facet = 'genre' | 'series' | 'franchise' | 'creator' | 'year' | 'language'
 type Filters = Partial<Record<Facet, string>>
 const sectionCopy: Record<Section, { heading: string; intro: string; creator: string; date: string }> = {
   book: { heading: 'The reading shelf.', intro: 'Books, authors, and the stories that continue across volumes.', creator: 'Author', date: 'Published' },
-  screen: { heading: 'The screen shelf.', intro: 'Films and shows together, with room for series, universes, and seasons.', creator: 'Director / creator', date: 'Released / first aired' },
+  screen: { heading: 'The screen shelf.', intro: 'Films and shows together, with franchises and seasons.', creator: 'Director / creator', date: 'Released / first aired' },
 }
 const orderLabels: Record<MediaSort, [string, string]> = {
   recent: ['Newest first', 'Oldest first'],
@@ -28,6 +28,54 @@ function ranked(values: string[]): string[] {
   const counts = new Map<string, number>()
   values.forEach((value) => counts.set(value, (counts.get(value) ?? 0) + 1))
   return [...counts.keys()].sort((a, b) => counts.get(b)! - counts.get(a)! || a.localeCompare(b))
+}
+
+function CreatorFilter({ label, names, value, onChange }: {
+  label: string; names: string[]; value?: string; onChange: (value?: string) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState('')
+  const pickerRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const searchRef = useRef<HTMLInputElement>(null)
+  const matches = names.filter((name) => name.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase()))
+
+  useEffect(() => {
+    if (!open) { setSearch(''); return }
+    searchRef.current?.focus()
+    const closeOutside = (event: PointerEvent) => {
+      if (!pickerRef.current?.contains(event.target as Node)) setOpen(false)
+    }
+    document.addEventListener('pointerdown', closeOutside)
+    return () => document.removeEventListener('pointerdown', closeOutside)
+  }, [open])
+
+  const choose = (name?: string) => {
+    onChange(name)
+    setOpen(false)
+  }
+
+  return <div className="media-creator-filter" ref={pickerRef}
+    onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false) }}
+    onKeyDown={(event) => {
+      if (event.key === 'Escape') { setOpen(false); triggerRef.current?.focus(); event.stopPropagation() }
+    }}>
+    <span className="media-creator-label">{label}</span>
+    <button ref={triggerRef} className="media-creator-trigger" type="button" aria-label={`${label}: ${value ?? 'All'}`}
+      aria-expanded={open} onClick={() => setOpen((current) => !current)}>
+      <span>{value ?? 'All'}</span><span aria-hidden="true">⌄</span>
+    </button>
+    {open && <div className="media-creator-menu">
+      <input ref={searchRef} type="search" aria-label={`Search ${label.toLocaleLowerCase()}`}
+        placeholder="Type a name…" value={search} onChange={(event) => setSearch(event.target.value)}
+        onKeyDown={(event) => { if (event.key === 'Enter' && matches.length > 0) choose(matches[0]) }} />
+      <div className="media-creator-options">
+        <button type="button" aria-pressed={!value} onClick={() => choose(undefined)}>All</button>
+        {matches.map((name) => <button key={name} type="button" aria-pressed={value === name} onClick={() => choose(name)}>{name}</button>)}
+        {matches.length === 0 && <p>No matching names</p>}
+      </div>
+    </div>}
+  </div>
 }
 
 export function MediaPage({ section, initialScreenType }: { section: Section; initialScreenType?: 'movie' | 'tv' }) {
@@ -61,9 +109,9 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
   const facets = useMemo(() => ({
     genre: ranked(entries.flatMap((entry) => entry.genres)),
     series: ranked(entries.flatMap((entry) => entry.series ? [entry.series.name] : [])),
-    universe: ranked(entries.flatMap((entry) => entry.universe ? [entry.universe] : [])),
+    franchise: ranked(entries.flatMap((entry) => entry.franchise ? [entry.franchise] : [])),
     creator: ranked(entries.flatMap((entry) => entry.creators)),
-    year: ranked(entries.map((entry) => entry.published.slice(0, 4))),
+    year: [...new Set(entries.map((entry) => entry.published.slice(0, 4)))].sort((a, b) => b.localeCompare(a)),
     language: ranked(entries.flatMap((entry) => entry.language ? [entry.language] : [])),
   }), [entries])
   const query = queryBySection[section].trim().toLocaleLowerCase()
@@ -71,15 +119,18 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
     if (section === 'screen' && screenType !== 'all' && entry.kind !== screenType) return false
     if (filters.genre && !entry.genres.includes(filters.genre)) return false
     if (filters.series && entry.series?.name !== filters.series) return false
-    if (filters.universe && entry.universe !== filters.universe) return false
+    if (filters.franchise && entry.franchise !== filters.franchise) return false
     if (filters.creator && !entry.creators.includes(filters.creator)) return false
     if (filters.year && entry.published.slice(0, 4) !== filters.year) return false
     if (filters.language && entry.language !== filters.language) return false
-    return !query || [entry.title, ...entry.creators, ...entry.genres, entry.series?.name ?? '', entry.universe ?? '', entry.language ?? ''].some((part) => part.toLocaleLowerCase().includes(query))
+    return !query || [entry.title, ...entry.creators, ...entry.genres, entry.series?.name ?? '', entry.franchise ?? '', entry.language ?? ''].some((part) => part.toLocaleLowerCase().includes(query))
   }), sortBySection[section], reversedBySection[section])
 
   const setFacet = (facet: Facet, value?: string) => setFiltersBySection((current) => ({
     ...current, [section]: { ...current[section], [facet]: current[section][facet] === value ? undefined : value },
+  }))
+  const setCreator = (value?: string) => setFiltersBySection((current) => ({
+    ...current, [section]: { ...current[section], creator: value },
   }))
   const clear = () => {
     setFiltersBySection((current) => ({ ...current, [section]: {} }))
@@ -118,7 +169,7 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
               setReversedBySection((current) => ({ ...current, [section]: false }))
             }}>
               <option value="recent">{section === 'book' ? 'Recently read' : 'Recently watched'}</option><option value="title">Title</option><option value="published">Publication / release</option>
-              <option value="creator">{copy.creator}</option><option value="series">Series order</option>
+              <option value="creator">{copy.creator}</option>{section === 'book' && <option value="series">Series order</option>}
             </select>
           </label>
           <button className="media-direction" type="button" aria-label={`Sort order: ${orderLabel}. Reverse order`}
@@ -129,7 +180,7 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
       </div>
       {entries.length > 0 && <><div className="media-search-row">
         <label className="media-search"><span className="sr-only">Search {section === 'book' ? 'books' : 'screen'}</span><span aria-hidden="true">⌕</span>
-          <input type="search" placeholder={section === 'book' ? 'Search books, people, series…' : 'Search films, shows, people, universes…'} value={queryBySection[section]}
+          <input type="search" placeholder={section === 'book' ? 'Search books, people, series…' : 'Search films, shows, people, franchises…'} value={queryBySection[section]}
             onChange={(event) => setQueryBySection((current) => ({ ...current, [section]: event.target.value }))} /></label>
       </div>
       <div className="media-filters">
@@ -141,19 +192,21 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
           <button type="button" aria-pressed={!filters.genre} onClick={() => setFacet('genre', undefined)}>All</button>
           {facets.genre.map((genre) => <button key={genre} type="button" aria-pressed={filters.genre === genre} onClick={() => setFacet('genre', genre)}>{genre}</button>)}
         </div></div>
-        {facets.series.length > 0 && <div className="media-filter-line"><strong>Series</strong><div className="media-chips">
+        {section === 'book' && facets.series.length > 0 && <div className="media-filter-line"><strong>Series</strong><div className="media-chips">
           <button type="button" aria-pressed={!filters.series} onClick={() => setFacet('series', undefined)}>All</button>
           {facets.series.map((series) => <button key={series} type="button" aria-pressed={filters.series === series} onClick={() => setFacet('series', series)}>{series}</button>)}
         </div></div>}
-        {section === 'screen' && facets.universe.length > 0 && <div className="media-filter-line"><strong>Universe</strong><div className="media-chips">
-          <button type="button" aria-pressed={!filters.universe} onClick={() => setFacet('universe', undefined)}>All</button>
-          {facets.universe.map((universe) => <button key={universe} type="button" aria-pressed={filters.universe === universe} onClick={() => setFacet('universe', universe)}>{universe}</button>)}
+        {section === 'screen' && facets.franchise.length > 0 && <div className="media-filter-line"><strong>Franchise</strong><div className="media-chips">
+          <button type="button" aria-pressed={!filters.franchise} onClick={() => setFacet('franchise', undefined)}>All</button>
+          {facets.franchise.map((franchise) => <button key={franchise} type="button" aria-pressed={filters.franchise === franchise} onClick={() => setFacet('franchise', franchise)}>{franchise}</button>)}
         </div></div>}
         <button type="button" className="media-more" aria-expanded={moreFilters} onClick={() => setMoreFilters((value) => !value)}>
           {moreFilters ? 'Hide filters' : 'More filters'} <span aria-hidden="true">{moreFilters ? '−' : '+'}</span>
         </button>
         {moreFilters && <div className="media-extra-filters">
-          {(['creator', 'year', 'language'] as const).map((facet) => facets[facet].length > (facet === 'language' ? 1 : 0) && <label key={facet}>{facet === 'creator' ? copy.creator : facet === 'year' ? copy.date : 'Language'}
+          {facets.creator.length > 0 && <CreatorFilter key={section} label={copy.creator} names={facets.creator}
+            value={filters.creator} onChange={setCreator} />}
+          {(['year', 'language'] as const).map((facet) => facets[facet].length > (facet === 'language' ? 1 : 0) && <label key={facet}>{facet === 'year' ? copy.date : 'Language'}
             <select value={filters[facet] ?? ''} onChange={(event) => setFacet(facet, event.target.value || undefined)}>
               <option value="">All</option>{facets[facet].map((value) => <option key={value} value={value}>{value}</option>)}
             </select></label>)}
@@ -163,7 +216,7 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
 
       {visible.length > 0 ? <ol className="media-list" aria-label={`${sections.find((tab) => tab.kind === section)?.label} list`}>
         {visible.map((entry) => <MediaRow key={entry.id} entry={entry}
-          onSeries={() => setFacet('series', entry.series?.name)} onUniverse={() => setFacet('universe', entry.universe)} />)}
+          onSeries={() => setFacet('series', entry.series?.name)} onFranchise={() => setFacet('franchise', entry.franchise)} />)}
       </ol> : <div className="media-empty"><span aria-hidden="true">⌁</span><h3>{entries.length ? 'Nothing on this shelf matches.' : 'This shelf is ready.'}</h3>
         <p>{entries.length ? 'Try another filter or clear your search.' : section === 'book' ? 'Your books will appear here when you add them.' : 'Your films and shows will appear here when you add them.'}</p>
         {activeCount > 0 && <button type="button" onClick={clear}>Clear filters</button>}</div>}
@@ -172,7 +225,7 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
   </main>
 }
 
-function MediaRow({ entry, onSeries, onUniverse }: { entry: MediaEntry; onSeries: () => void; onUniverse: () => void }) {
+function MediaRow({ entry, onSeries, onFranchise }: { entry: MediaEntry; onSeries: () => void; onFranchise: () => void }) {
   const creatorLabel = entry.kind === 'book' ? 'Author' : entry.kind === 'movie' ? 'Director' : 'Creator'
   const dateLabel = entry.kind === 'book' ? 'Published' : entry.kind === 'movie' ? 'Released' : 'First aired'
   const finishedDates = [...(entry.completedDates ?? []), ...(entry.seasons ?? []).flatMap((season) => season.completedDates ?? [])]
@@ -187,7 +240,7 @@ function MediaRow({ entry, onSeries, onUniverse }: { entry: MediaEntry; onSeries
         {entry.url && <a href={entry.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${entry.title} source in a new tab`} className="media-external">↗</a>}
       </div>
       <div className="media-item-tags">{entry.series && <button type="button" onClick={onSeries}>↗ {entry.series.name}{entry.series.position ? ` · ${entry.series.position}` : ''}</button>}
-        {entry.universe && <button type="button" onClick={onUniverse}>⌁ {entry.universe}</button>}
+        {entry.franchise && <button type="button" onClick={onFranchise}>⌁ {entry.franchise}</button>}
         {entry.genres.map((genre) => <span key={genre}>{genre}</span>)}
       </div>
       <div className="media-item-bottom"><span>{dateLabel} {formatDate(entry.published)}</span><span>{lastFinished ? `${entry.kind === 'book' ? 'Last read' : 'Last watched'} ${formatDate(lastFinished)}` : seasons.length ? 'Watched seasons recorded' : `${entry.kind === 'book' ? 'Read' : 'Watch'} date not set`}</span></div>

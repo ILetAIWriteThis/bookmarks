@@ -21,6 +21,7 @@ Usage:
   npm run bookmarks -- add-media --id ID --kind book|movie|tv --title TITLE --creator NAME --published YEAR --added-on DATE [options]
   npm run bookmarks -- update-media --id ID --completed-date DATE
   npm run bookmarks -- update-media --id ID --set-completed-date DATE
+  npm run bookmarks -- update-media --id ID --franchise NAME
   npm run bookmarks -- import-media --file JSON_FILE
   npm run bookmarks -- export-markdown --file MARKDOWN_FILE
   npm run bookmarks -- upsert-bookmarks --file JSON_FILE
@@ -47,10 +48,13 @@ Media options (add-media):
   --creator NAME             Repeat for multiple creators
   --genre NAME               Repeat for multiple genres
   --completed-date DATE      Repeat for each read or watch date
-  --universe NAME --url HTTPS_URL
+  --franchise NAME            Screen media only
+  --url HTTPS_URL
 Media options (update-media):
   --completed-date DATE      Append a read or watch date; repeat for multiple dates
   --set-completed-date DATE  Replace read or watch dates; repeat for multiple dates
+  --franchise NAME           Set a screen media franchise
+  --clear-franchise          Remove a screen media franchise
 Media import:
   --file JSON_FILE           JSON object with an entries array; adds validated entries atomically
 Category options:
@@ -62,7 +66,7 @@ Theme options (category commands; provide all three together):
 
 Examples:
   npm run bookmarks -- export-markdown --file /tmp/bookmarks.md
-  npm run bookmarks -- add-media --id the-avengers-2012 --kind movie --title "The Avengers" --creator "Joss Whedon" --published 2012 --added-on 2026-09-23 --completed-date 2016-07-01 --completed-date 2026-09-19 --genre Action --universe "Marvel Cinematic Universe" --url https://www.imdb.com/title/tt0848228/
+  npm run bookmarks -- add-media --id the-avengers-2012 --kind movie --title "The Avengers" --creator "Joss Whedon" --published 2012 --added-on 2026-09-23 --completed-date 2016-07-01 --completed-date 2026-09-19 --genre Action --franchise MCU --url https://www.imdb.com/title/tt0848228/
   npm run bookmarks -- add-bookmark --id example --title "Example" --url https://example.com --category news:1 --category tech-ai:3 --daily-position 1
   npm run bookmarks -- update-bookmark --id example --tag reference --tag daily --clear-daily
   npm run bookmarks -- promote-bookmark --id example --collection web --position 1
@@ -76,7 +80,7 @@ function parseFlags(args: string[]): Flags {
     const token = args[index]
     if (!token.startsWith('--')) throw new Error(`Unexpected argument "${token}"`)
     const name = token.slice(2)
-    if (name === 'clear-daily' || name === 'clear-parent' || name === 'subscribed' || name === 'not-subscribed') {
+    if (name === 'clear-daily' || name === 'clear-parent' || name === 'clear-franchise' || name === 'subscribed' || name === 'not-subscribed') {
       flags.set(name, ['true'])
       continue
     }
@@ -213,6 +217,7 @@ async function run() {
   if (command === 'help' || command === '--help' || command === '-h') return usage()
   const flags = parseFlags(args)
   if (command === 'add-media') {
+    if (has(flags, 'universe')) throw new Error('--universe has been replaced by --franchise')
     const kind = required(flags, 'kind')
     if (kind !== 'book' && kind !== 'movie' && kind !== 'tv') throw new Error('--kind must be book, movie, or tv')
     const entry: MediaEntry = {
@@ -221,21 +226,28 @@ async function run() {
       addedOn: required(flags, 'added-on'), genres: flags.get('genre') ?? [],
     }
     if (has(flags, 'completed-date')) entry.completedDates = flags.get('completed-date')
-    if (has(flags, 'universe')) entry.universe = required(flags, 'universe')
+    if (has(flags, 'franchise')) entry.franchise = required(flags, 'franchise')
     if (has(flags, 'url')) entry.url = required(flags, 'url')
     const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
     await writeMediaData([...existing.entries, entry])
     return
   }
   if (command === 'update-media') {
+    if (has(flags, 'universe')) throw new Error('--universe has been replaced by --franchise')
     const dates = flags.get('completed-date')
     const replacementDates = flags.get('set-completed-date')
-    if (!dates?.length && !replacementDates?.length) throw new Error('Provide --completed-date or --set-completed-date')
+    const franchise = optional(flags, 'franchise')
+    const clearFranchise = has(flags, 'clear-franchise')
+    if (!dates?.length && !replacementDates?.length && !franchise && !clearFranchise)
+      throw new Error('Provide --completed-date, --set-completed-date, --franchise, or --clear-franchise')
     if (dates?.length && replacementDates?.length) throw new Error('Use either --completed-date or --set-completed-date')
+    if (franchise && clearFranchise) throw new Error('Use either --franchise or --clear-franchise')
     const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
     const entry = existing.entries.find((item) => item.id === required(flags, 'id'))
     if (!entry) throw new Error(`Unknown library id: ${required(flags, 'id')}`)
-    entry.completedDates = replacementDates ?? [...(entry.completedDates ?? []), ...dates!]
+    if (dates?.length || replacementDates?.length)
+      entry.completedDates = replacementDates ?? [...(entry.completedDates ?? []), ...dates!]
+    if (franchise || clearFranchise) entry.franchise = clearFranchise ? undefined : franchise
     await writeMediaData(existing.entries)
     return
   }
