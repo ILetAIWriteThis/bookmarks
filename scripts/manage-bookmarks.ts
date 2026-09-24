@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto'
 import { readFile, rename, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
-import { bookmarksForCategoryTree, childCategories, validateBookmarkData } from '../src/data'
+import { bookmarksForCategory, bookmarksForCategoryTree, childCategories, validateBookmarkData } from '../src/data'
 import { validateMediaData, type MediaEntry } from '../src/media'
 import { placeBookmark, removePlacement } from '../src/placement'
 import type { Bookmark, BookmarkData, Category, CategoryMembership } from '../src/types'
@@ -19,6 +19,10 @@ Usage:
   npm run bookmarks -- list [--category ID] [--collection old|web|youtube]
   npm run bookmarks -- check
   npm run bookmarks -- add-media --id ID --kind book|movie|tv --title TITLE --creator NAME --published YEAR --added-on DATE [options]
+  npm run bookmarks -- update-media --id ID --completed-date DATE
+  npm run bookmarks -- update-media --id ID --set-completed-date DATE
+  npm run bookmarks -- import-media --file JSON_FILE
+  npm run bookmarks -- export-markdown --file MARKDOWN_FILE
   npm run bookmarks -- upsert-bookmarks --file JSON_FILE
   npm run bookmarks -- add-category --id ID --name NAME --position N [--icon NAME] [--parent ID]
   npm run bookmarks -- update-category --id ID [--name NAME] [--position N] [--icon NAME] [--parent ID]
@@ -44,6 +48,11 @@ Media options (add-media):
   --genre NAME               Repeat for multiple genres
   --completed-date DATE      Repeat for each read or watch date
   --universe NAME --url HTTPS_URL
+Media options (update-media):
+  --completed-date DATE      Append a read or watch date; repeat for multiple dates
+  --set-completed-date DATE  Replace read or watch dates; repeat for multiple dates
+Media import:
+  --file JSON_FILE           JSON object with an entries array; adds validated entries atomically
 Category options:
   --parent ID               Nest below an existing category
   --clear-parent            Move an existing category to the root
@@ -52,6 +61,7 @@ Theme options (category commands; provide all three together):
   --from COLOR --to COLOR --accent COLOR
 
 Examples:
+  npm run bookmarks -- export-markdown --file /tmp/bookmarks.md
   npm run bookmarks -- add-media --id the-avengers-2012 --kind movie --title "The Avengers" --creator "Joss Whedon" --published 2012 --added-on 2026-09-23 --completed-date 2016-07-01 --completed-date 2026-09-19 --genre Action --universe "Marvel Cinematic Universe" --url https://www.imdb.com/title/tt0848228/
   npm run bookmarks -- add-bookmark --id example --title "Example" --url https://example.com --category news:1 --category tech-ai:3 --daily-position 1
   npm run bookmarks -- update-bookmark --id example --tag reference --tag daily --clear-daily
@@ -160,6 +170,44 @@ function printCategoryTree(categories: Category[], parentId?: string, depth = 0)
   })
 }
 
+function markdownLink(bookmark: Bookmark) {
+  const title = bookmark.title.replaceAll('\\', '\\\\').replaceAll(']', '\\]').replace(/\s+/g, ' ')
+  return `- [${title}](<${bookmark.url}>)`
+}
+
+function appendCategoryMarkdown(lines: string[], data: BookmarkData, parentId?: string, depth = 0) {
+  childCategories(data.categories, parentId).forEach((category) => {
+    lines.push(`${'#'.repeat(depth + 1)} ${category.name}`, '')
+    bookmarksForCategory(data.bookmarks, category.id).forEach((bookmark) => lines.push(markdownLink(bookmark)))
+    if (lines.at(-1) !== '') lines.push('')
+    appendCategoryMarkdown(lines, data, category.id, depth + 1)
+  })
+}
+
+function exportMarkdown(data: BookmarkData) {
+  const lines: string[] = []
+  appendCategoryMarkdown(lines, data)
+
+  const uncategorized = data.bookmarks
+    .filter((bookmark) => bookmark.categories.length === 0)
+    .sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }))
+  if (uncategorized.length) {
+    lines.push('# Uncategorized', '')
+    uncategorized.forEach((bookmark) => lines.push(markdownLink(bookmark)))
+    lines.push('')
+  }
+
+  return lines.join('\n')
+}
+
+async function writeMediaData(entries: MediaEntry[]) {
+  const valid = validateMediaData({ entries })
+  const temp = resolve(dirname(mediaPath), '.media.json.tmp')
+  await writeFile(temp, `${JSON.stringify(valid, null, 2)}\n`, 'utf8')
+  await rename(temp, mediaPath)
+  console.log(`Updated ${mediaPath}`)
+}
+
 async function run() {
   const [command = 'help', ...args] = process.argv.slice(2)
   if (command === 'help' || command === '--help' || command === '-h') return usage()
@@ -176,11 +224,32 @@ async function run() {
     if (has(flags, 'universe')) entry.universe = required(flags, 'universe')
     if (has(flags, 'url')) entry.url = required(flags, 'url')
     const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
-    const valid = validateMediaData({ entries: [...existing.entries, entry] })
-    const temp = resolve(dirname(mediaPath), '.media.json.tmp')
-    await writeFile(temp, `${JSON.stringify(valid, null, 2)}\n`, 'utf8')
-    await rename(temp, mediaPath)
-    console.log(`Updated ${mediaPath}`)
+    await writeMediaData([...existing.entries, entry])
+    return
+  }
+  if (command === 'update-media') {
+    const dates = flags.get('completed-date')
+    const replacementDates = flags.get('set-completed-date')
+    if (!dates?.length && !replacementDates?.length) throw new Error('Provide --completed-date or --set-completed-date')
+    if (dates?.length && replacementDates?.length) throw new Error('Use either --completed-date or --set-completed-date')
+    const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
+    const entry = existing.entries.find((item) => item.id === required(flags, 'id'))
+    if (!entry) throw new Error(`Unknown library id: ${required(flags, 'id')}`)
+    entry.completedDates = replacementDates ?? [...(entry.completedDates ?? []), ...dates!]
+    await writeMediaData(existing.entries)
+    return
+  }
+  if (command === 'import-media') {
+    const incoming = validateMediaData(JSON.parse(await readFile(resolve(required(flags, 'file')), 'utf8')) as unknown)
+    const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
+    const existingUrls = new Set(existing.entries.map((entry) => entry.url).filter(Boolean))
+    for (const entry of incoming.entries) {
+      if (!entry.url) continue
+      if (existingUrls.has(entry.url)) throw new Error(`Library source already exists: ${entry.url}`)
+      existingUrls.add(entry.url)
+    }
+    await writeMediaData([...existing.entries, ...incoming.entries])
+    console.log(`Imported ${incoming.entries.length} media entries.`)
     return
   }
   const data = await readManagedData()
@@ -207,6 +276,16 @@ async function run() {
     bookmarks.forEach((bookmark) => console.log(`  ${collection === 'web' || collection === 'youtube' ? `${bookmark.placement!.position}\t` : ''}${bookmark.id}\t${bookmark.title}\t${bookmark.url}`))
     return
   }
+  if (command === 'export-markdown') {
+    const outputPath = resolve(process.cwd(), required(flags, 'file'))
+    if (outputPath === dataPath || outputPath === checksumPath) {
+      throw new Error('Markdown export cannot overwrite managed bookmark data files')
+    }
+    await writeFile(outputPath, exportMarkdown(data), 'utf8')
+    console.log(`Exported ${data.bookmarks.length} bookmarks to ${outputPath}`)
+    return
+  }
+
   if (command === 'upsert-bookmarks') {
     const importPath = resolve(process.cwd(), required(flags, 'file'))
     const importedValue = JSON.parse(await readFile(importPath, 'utf8')) as { bookmarks?: unknown }

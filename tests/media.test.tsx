@@ -19,11 +19,21 @@ afterEach(() => { vi.unstubAllGlobals(); window.location.hash = '#/' })
 
 it('ships the watched Avengers film with both watch dates', () => {
   const data = validateMediaData(mediaData)
-  expect(data.entries).toEqual([expect.objectContaining({
+  expect(data.entries).toContainEqual(expect.objectContaining({
     id: 'the-avengers-2012', kind: 'movie', title: 'The Avengers',
     completedDates: ['2016-07-01', '2026-09-19'],
     url: 'https://www.imdb.com/title/tt0848228/',
-  })])
+  }))
+})
+
+it('sorts recent books by read date and puts books without one last', () => {
+  const books = [
+    { ...sample.entries[0], addedOn: '2026-09-24', completedDates: ['2026-09-13'] },
+    { ...sample.entries[1], addedOn: '2026-09-24', completedDates: ['2026-08-31'] },
+    { ...sample.entries[2], addedOn: '2026-09-24' },
+  ]
+  expect(sortMedia(validateMediaData({ entries: books }).entries, 'recent').map((entry) => entry.id)).toEqual(['first', 'second', 'other'])
+  expect(sortMedia(validateMediaData({ entries: books }).entries, 'recent', true).map((entry) => entry.id)).toEqual(['second', 'first', 'other'])
 })
 
 it('validates the separate library store and sorts series by position', () => {
@@ -37,6 +47,9 @@ it('validates the separate library store and sorts series by position', () => {
   expect(() => validateMediaData({ entries: [{ ...sample.entries[0], completedDates: ['2026-02-30'] }] })).toThrow('ISO dates')
   expect(() => validateMediaData({ entries: [{ ...sample.entries[0], completedDates: ['2026-02-01', '2026-02-01'] }] })).toThrow('duplicate date')
   expect(() => validateMediaData({ entries: [{ ...sample.entries[3], language: 'Lithuanian' }] })).toThrow('only for books')
+  expect(validateMediaData({ entries: [{ ...sample.entries[4], creators: [] }] }).entries[0].creators).toEqual([])
+  expect(validateMediaData({ entries: [{ ...sample.entries[3], creators: [] }] }).entries[0].creators).toEqual([])
+  expect(() => validateMediaData({ entries: [{ ...sample.entries[0], creators: [] }] })).toThrow('must contain names')
   expect(validateMediaData({ entries: [{ ...sample.entries[0], url: undefined }] }).entries[0].url).toBeUndefined()
   expect(() => validateMediaData({ entries: [{ ...sample.entries[0], url: 'http://example.com/book.pdf' }] })).toThrow('HTTPS URL')
 })
@@ -57,7 +70,8 @@ it('opens books first, ranks filter values by frequency, and combines screen med
   window.location.hash = '#/library'
   render(<App data={testData} />)
   const list = await screen.findByRole('list', { name: 'Books list' })
-  expect(within(list).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)).toEqual(['Second Book', 'Other Book', 'First Book'])
+  expect(screen.getByRole('option', { name: 'Recently read' })).toBeInTheDocument()
+  expect(within(list).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)).toEqual(['First Book', 'Other Book', 'Second Book'])
   const genreOptions = screen.getByText('Genre').parentElement!.querySelectorAll('button')
   expect([...genreOptions].map((button) => button.textContent)).toEqual(['All', 'Fantasy', 'Horror'])
   await user.selectOptions(screen.getByLabelText('Sort by'), 'published')
@@ -74,6 +88,7 @@ it('opens books first, ranks filter values by frequency, and combines screen med
   expect([...screen.getByLabelText('Author').querySelectorAll('option')].map((option) => option.textContent)).toEqual(['All', 'A. Writer', 'B. Writer'])
   fireEvent.click(screen.getByRole('link', { name: 'Screen' }))
   await waitFor(() => expect(screen.getByRole('list', { name: 'Screen list' })).toBeInTheDocument())
+  expect(screen.getByRole('option', { name: 'Recently watched' })).toBeInTheDocument()
   expect(screen.getByRole('heading', { name: 'Sample Film' })).toBeInTheDocument()
   expect(screen.getByRole('heading', { name: 'Sample Show' })).toBeInTheDocument()
   expect(screen.queryByRole('heading', { name: 'First Book' })).not.toBeInTheDocument()

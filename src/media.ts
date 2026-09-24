@@ -32,8 +32,8 @@ function readDates(value: unknown, path: string): string[] | undefined {
   return value
 }
 
-export function latestActivity(entry: MediaEntry): string {
-  return [entry.addedOn, ...(entry.completedDates ?? []), ...(entry.seasons ?? []).flatMap((season) => season.completedDates ?? [])]
+function latestCompletion(entry: MediaEntry): string | undefined {
+  return [...(entry.completedDates ?? []), ...(entry.seasons ?? []).flatMap((season) => season.completedDates ?? [])]
     .sort((a, b) => b.localeCompare(a))[0]
 }
 
@@ -54,8 +54,8 @@ export function validateMediaData(value: unknown): MediaData {
     if (raw.kind !== 'book' && raw.kind !== 'movie' && raw.kind !== 'tv') throw new Error(`${path}.kind is invalid`)
     const kind = raw.kind
     const people = raw.creators
-    if (!Array.isArray(people) || !people.length || people.some((item) => typeof item !== 'string' || !item.trim()))
-      throw new Error(`${path}.creators must contain names`)
+    if (!Array.isArray(people) || (kind === 'book' && !people.length) || people.some((item) => typeof item !== 'string' || !item.trim()))
+      throw new Error(`${path}.creators must contain names${kind === 'book' ? '' : ' or be empty'}`)
     const genres = raw.genres
     if (!Array.isArray(genres) || genres.some((item) => typeof item !== 'string' || !item.trim()))
       throw new Error(`${path}.genres must be an array of names`)
@@ -104,10 +104,15 @@ export type MediaSort = 'recent' | 'title' | 'published' | 'creator' | 'series'
 export function sortMedia(entries: MediaEntry[], sort: MediaSort, reversed = false): MediaEntry[] {
   const direction = reversed ? -1 : 1
   return [...entries].sort((a, b) => {
-    if (sort === 'recent') return (latestActivity(b).localeCompare(latestActivity(a))
-      || b.published.localeCompare(a.published)) * direction || a.title.localeCompare(b.title)
+    if (sort === 'recent') {
+      const aCompleted = latestCompletion(a)
+      const bCompleted = latestCompletion(b)
+      if (!aCompleted || !bCompleted) return Number(Boolean(bCompleted)) - Number(Boolean(aCompleted)) || a.title.localeCompare(b.title)
+      return bCompleted.localeCompare(aCompleted) * direction || a.title.localeCompare(b.title)
+    }
     if (sort === 'published') return b.published.localeCompare(a.published) * direction || a.title.localeCompare(b.title)
-    if (sort === 'creator') return a.creators[0].localeCompare(b.creators[0]) * direction || a.title.localeCompare(b.title)
+    if (sort === 'creator') return Number(!a.creators.length) - Number(!b.creators.length)
+      || (a.creators[0] ?? '').localeCompare(b.creators[0] ?? '') * direction || a.title.localeCompare(b.title)
     if (sort === 'series') return ((a.series?.name ?? a.title).localeCompare(b.series?.name ?? b.title)
       || (a.series?.position ?? 0) - (b.series?.position ?? 0)) * direction || a.title.localeCompare(b.title)
     return a.title.localeCompare(b.title) * direction

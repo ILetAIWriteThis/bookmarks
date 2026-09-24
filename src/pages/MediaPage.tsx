@@ -117,7 +117,7 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
               setSortBySection((current) => ({ ...current, [section]: event.target.value as MediaSort }))
               setReversedBySection((current) => ({ ...current, [section]: false }))
             }}>
-              <option value="recent">Recent activity</option><option value="title">Title</option><option value="published">Publication / release</option>
+              <option value="recent">{section === 'book' ? 'Recently read' : 'Recently watched'}</option><option value="title">Title</option><option value="published">Publication / release</option>
               <option value="creator">{copy.creator}</option><option value="series">Series order</option>
             </select>
           </label>
@@ -167,7 +167,7 @@ export function MediaPage({ section, initialScreenType }: { section: Section; in
       </ol> : <div className="media-empty"><span aria-hidden="true">⌁</span><h3>{entries.length ? 'Nothing on this shelf matches.' : 'This shelf is ready.'}</h3>
         <p>{entries.length ? 'Try another filter or clear your search.' : section === 'book' ? 'Your books will appear here when you add them.' : 'Your films and shows will appear here when you add them.'}</p>
         {activeCount > 0 && <button type="button" onClick={clear}>Clear filters</button>}</div>}
-      {entries.length > 0 && <p className="media-footnote">Recent activity uses the latest added or finished date, including season dates.</p>}
+      {entries.length > 0 && <p className="media-footnote">{section === 'book' ? 'Books without a read date' : 'Screen entries without a watch date'} appear after dated entries.</p>}
     </>}
   </main>
 }
@@ -183,14 +183,14 @@ function MediaRow({ entry, onSeries, onUniverse }: { entry: MediaEntry; onSeries
     <div className={`media-cover media-cover--${entry.kind}`} aria-hidden="true"><span>{entry.kind === 'book' ? 'BOOK' : entry.kind === 'movie' ? 'FILM' : 'SERIES'}</span><strong>{entry.title.split(/\s+/).slice(0, 3).map((word) => word[0]).join('')}</strong><i /></div>
     <div className="media-item-body">
       <div className="media-item-top"><div><span className="media-item-kicker">{entry.kind === 'book' ? 'BOOK' : entry.kind === 'movie' ? 'FILM' : 'TV SERIES'} <span>·</span> {entry.published.slice(0, 4)}</span>
-        <h3>{entry.title}</h3><p>{creatorLabel}: {entry.creators.join(', ')}</p></div>
+        <h3>{entry.title}</h3>{entry.creators.length > 0 && <p>{creatorLabel}: {entry.creators.join(', ')}</p>}</div>
         {entry.url && <a href={entry.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${entry.title} source in a new tab`} className="media-external">↗</a>}
       </div>
       <div className="media-item-tags">{entry.series && <button type="button" onClick={onSeries}>↗ {entry.series.name}{entry.series.position ? ` · ${entry.series.position}` : ''}</button>}
         {entry.universe && <button type="button" onClick={onUniverse}>⌁ {entry.universe}</button>}
         {entry.genres.map((genre) => <span key={genre}>{genre}</span>)}
       </div>
-      <div className="media-item-bottom"><span>{dateLabel} {formatDate(entry.published)}</span><span>{lastFinished ? `${entry.kind === 'book' ? 'Last read' : 'Last watched'} ${formatDate(lastFinished)}` : `${entry.kind === 'book' ? 'Read' : 'Watch'} date not set`}</span></div>
+      <div className="media-item-bottom"><span>{dateLabel} {formatDate(entry.published)}</span><span>{lastFinished ? `${entry.kind === 'book' ? 'Last read' : 'Last watched'} ${formatDate(lastFinished)}` : seasons.length ? 'Watched seasons recorded' : `${entry.kind === 'book' ? 'Read' : 'Watch'} date not set`}</span></div>
       {entry.completedDates && entry.completedDates.length > 1 && <details className="media-history"><summary>{entry.kind === 'book' ? 'Reading' : 'Watching'} dates</summary>
         <span>{[...entry.completedDates].sort((a, b) => b.localeCompare(a)).map(formatDate).join(' · ')}</span>
       </details>}
