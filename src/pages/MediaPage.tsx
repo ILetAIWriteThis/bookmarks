@@ -230,7 +230,6 @@ function MediaRow({ entry, onSeries, onFranchise }: { entry: MediaEntry; onSerie
   const dateLabel = entry.kind === 'book' ? 'Published' : entry.kind === 'movie' ? 'Released' : 'First aired'
   const finishedDates = [...(entry.completedDates ?? []), ...(entry.seasons ?? []).flatMap((season) => season.completedDates ?? [])]
     .sort((a, b) => b.localeCompare(a))
-  const lastFinished = finishedDates[0]
   const seasons = [...(entry.seasons ?? [])].sort((a, b) => a.number - b.number)
   return <li className="media-item">
     <div className={`media-cover media-cover--${entry.kind}`} aria-hidden="true"><span>{entry.kind === 'book' ? 'BOOK' : entry.kind === 'movie' ? 'FILM' : 'SERIES'}</span><strong>{entry.title.split(/\s+/).slice(0, 3).map((word) => word[0]).join('')}</strong><i /></div>
@@ -243,9 +242,9 @@ function MediaRow({ entry, onSeries, onFranchise }: { entry: MediaEntry; onSerie
         {entry.franchise && <button type="button" onClick={onFranchise}>⌁ {entry.franchise}</button>}
         {entry.genres.map((genre) => <span key={genre}>{genre}</span>)}
       </div>
-      <div className="media-item-bottom"><span>{dateLabel} {formatDate(entry.published)}</span><span>{lastFinished ? `${entry.kind === 'book' ? 'Last read' : 'Last watched'} ${formatDate(lastFinished)}` : seasons.length ? 'Watched seasons recorded' : `${entry.kind === 'book' ? 'Read' : 'Watch'} date not set`}</span></div>
-      {entry.completedDates && entry.completedDates.length > 1 && <details className="media-history"><summary>{entry.kind === 'book' ? 'Reading' : 'Watching'} dates</summary>
-        <span>{[...entry.completedDates].sort((a, b) => b.localeCompare(a)).map(formatDate).join(' · ')}</span>
+      <div className="media-item-bottom"><span>{dateLabel} {formatDate(entry.published)}</span></div>
+      {finishedDates.length > 0 && <details className="media-history"><summary>{entry.kind === 'book' ? 'Reading' : 'Watching'} dates</summary>
+        <span>{finishedDates.map(formatDate).join(' · ')}</span>
       </details>}
       {seasons.length > 0 && <details className="media-seasons"><summary>Seasons {seasons[0].number}–{seasons[seasons.length - 1].number}</summary>
         <ul>{seasons.map((season) => <li key={season.number}><strong>Season {season.number}</strong><span>{season.completedDates?.length

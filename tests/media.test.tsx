@@ -157,3 +157,38 @@ it('filters book editions by language and shows reread dates on one entry', asyn
   expect(screen.queryByRole('heading', { name: 'First Book' })).not.toBeInTheDocument()
   expect(screen.queryByRole('link', { name: 'Open Pirma knyga source in a new tab' })).not.toBeInTheDocument()
 })
+
+it('keeps single and repeat completion dates inside expandable sections', async () => {
+  const user = userEvent.setup()
+  const entries = [
+    { ...sample.entries[0], completedDates: ['2026-09-13'] },
+    { ...sample.entries[3], completedDates: ['2016-07-01', '2026-09-19'] },
+    { ...sample.entries[4], seasons: [{ number: 1, completedDates: ['2026-09-18'] }] },
+  ]
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => ({ entries }) }))
+  window.location.hash = '#/library'
+  render(<App data={testData} />)
+
+  const book = (await screen.findByRole('heading', { name: 'First Book' })).closest('li')!
+  const readingDates = within(book).getByText('Reading dates').closest('details')!
+  expect(book.querySelector('.media-item-bottom')).toHaveTextContent('Published 2001')
+  expect(book.querySelector('.media-item-bottom')).not.toHaveTextContent('Sep 13, 2026')
+  expect(readingDates).not.toHaveAttribute('open')
+  await user.click(within(book).getByText('Reading dates'))
+  expect(readingDates).toHaveAttribute('open')
+  expect(within(readingDates).getByText('Sep 13, 2026')).toBeVisible()
+
+  await user.click(screen.getByRole('link', { name: 'Screen' }))
+  const film = (await screen.findByRole('heading', { name: 'Sample Film' })).closest('li')!
+  const watchingDates = within(film).getByText('Watching dates').closest('details')!
+  expect(film.querySelector('.media-item-bottom')).not.toHaveTextContent('Sep 19, 2026')
+  expect(watchingDates).not.toHaveAttribute('open')
+  await user.click(within(film).getByText('Watching dates'))
+  expect(within(watchingDates).getByText('Sep 19, 2026 · Jul 1, 2016')).toBeVisible()
+
+  const show = screen.getByRole('heading', { name: 'Sample Show' }).closest('li')!
+  const showDates = within(show).getByText('Watching dates').closest('details')!
+  expect(showDates).not.toHaveAttribute('open')
+  await user.click(within(show).getByText('Watching dates'))
+  expect(within(showDates).getByText('Sep 18, 2026')).toBeVisible()
+})
