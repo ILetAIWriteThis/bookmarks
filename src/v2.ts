@@ -1,7 +1,7 @@
 import { comparePositionAndTitle, normalizeSearch } from './data'
 import type { Bookmark, BookmarkData } from './types'
 
-export type V2Collection = 'web' | 'youtube'
+export type V2Collection = 'web' | 'youtube' | 'media' | 'travel'
 
 export interface V2Bookmark {
   bookmark: Bookmark

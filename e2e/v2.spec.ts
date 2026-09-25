@@ -36,3 +36,22 @@ test('reviewed bookmarks use the default route while the old collection stays se
   await page.goto('./#/old/category/youtube-top')
   await expect(page.getByLabel('Top bookmarks').locator('.bookmark-card')).toHaveCount(0)
 })
+
+test('Media and Travel routes search and filter migrated bookmarks', async ({ page }) => {
+  await page.goto('./#/media')
+  const media = page.getByRole('list', { name: 'Media bookmarks' })
+  await expect(media.getByRole('link')).toHaveCount(1260)
+  await expect(page.getByRole('navigation', { name: 'Bookmark collections' }).getByText('1260')).toHaveCount(0)
+  await expect(page.getByText('1260 of 1260')).toHaveCount(0)
+  await page.getByRole('button', { name: '#book', exact: true }).click()
+  await expect(media.getByRole('link')).toHaveCount(269)
+  await page.getByRole('searchbox', { name: 'Search Media bookmarks' }).fill('Dune')
+  await expect(media.getByRole('link').first()).toHaveAttribute('href', /goodreads\.com\/book\/show\//)
+
+  await page.goto('./#/travel')
+  const travel = page.getByRole('list', { name: 'Travel bookmarks' })
+  await expect(travel.getByRole('link')).toHaveCount(1)
+  await page.getByRole('searchbox', { name: 'Search Travel bookmarks' }).fill('Puckoriu')
+  await expect(travel.getByRole('link')).toHaveCount(1)
+  await expect(travel.getByRole('link').first()).toHaveAttribute('href', 'https://maps.app.goo.gl/ZkdmJcYNHzzY6LqZ6')
+})

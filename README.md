@@ -13,23 +13,13 @@ Run all non-browser checks with `npm run check`. Run `npm run test:e2e` after a 
 
 ## Bookmark views
 
-The default `/bookmarks/` page shows reviewed Web bookmarks. `#/youtube` shows reviewed YouTube bookmarks. Both use a single-column list sorted by their saved collection position. The old collection is at `#/old`, with categories at `#/old/category/ID`. Existing `#/category/ID` links still open the corresponding old category, and `#/v2` links still open the reviewed view.
+The default `/bookmarks/` page shows reviewed Web bookmarks. `#/youtube`, `#/media`, and `#/travel` open the other reviewed collections. Each uses a single-column list sorted by saved position, with search and multi-select tag filters. The old collection is at `#/old`, with categories at `#/old/category/ID`. Existing `#/category/ID` links still open the corresponding old category, and `#/v2` links still open the reviewed view.
 
-Only bookmarks with an explicit collection placement appear in the reviewed view. Bookmarks without a placement appear in the old view, including its search, categories, counts, and random picker. The original 11 Web bookmarks have been promoted; the other bookmarks remain in the old view until reviewed. Tags combine existing bookmark tags with category and ancestor names; bookmarks with a Daily position also have `#daily`. Select multiple tags to match all of them, or select **All** to clear the filter. Each space remembers its selections while switching between Web and YouTube; reloading resets them.
+Only bookmarks with an explicit collection placement appear in the reviewed view. Bookmarks without a placement appear in the old view, including its search, categories, and random picker. Tags use the bookmark's saved tags; select multiple tags to match all of them, or select **All** to clear the filter. Each collection remembers its selections while switching; reloading resets them. Collection totals are not shown.
 
-## Personal library
+Media entries now live in the bookmark store. Books link to Goodreads and films and shows link to IMDb. Their tags distinguish `book`, `movie`, and `tv-series`; existing genres use `genre:...`, franchises use `franchise:...`, and explicit numbered book series use `series:...`. Reading, watching, release, and added dates were discarded during migration. The duplicate Brigade/Law of the Lawless TV listing was merged into one bookmark.
 
-Open `#/library` for books and `#/library/screen` for films and TV shows together. The older `#/library/movies` and `#/library/tv` links still open Screen with the matching type selected. The library has its own storage in `public/data/media.json`; it does not use or change bookmark data. Books open first. Screen has a Movie/TV filter and a universe filter, so a film and show can share a world such as the Marvel Cinematic Universe. Series stays separate for ordered works such as Avengers films or Harry Potter books. Search, genre, series, and universe filters are visible immediately; creator, year, and language (when relevant) are under **More filters**. Filter options with more matching entries appear first; ties use alphabetical order. Counts are used for this ordering but are not shown. Sorting includes recent activity, title, publication or release date, creator, and series order. The adjacent order button reverses any sort, such as newest/oldest publication or A–Z/Z–A title order.
-
-Each library entry has a stable ID, kind (`book`, `movie`, or `tv`), title, creator names, publication or release year/date, date added, and genres. An optional `url` may point to Goodreads, IMDb, a technical PDF, or another HTTPS source; entries without a URL have no open button. Other optional fields are `completedDates` (all read or watched dates), `series` (`name` and optional one-based `position`), and `universe`. Books may have `language` when useful for distinguishing editions; no language badge is shown on cards. TV shows may have `seasons`, each with a `number` and optional `completedDates`. Dates use `YYYY-MM-DD`; publication or release may also be a four-digit year. Recent activity uses the latest date among date added and all completion dates, including season dates. The interface shows dates but no reading or watching totals. The shipped library starts empty.
-
-Add another date to `completedDates` when rereading the same book edition or rewatching the same film. For a book in another language, create a separate entry with its own ID and translated title; add `language` only if it helps distinguish the entries. You can add dates to an individual TV season when rewatching it.
-
-For example, a new book entry in `public/data/media.json` can use:
-
-```json
-{ "id": "example-book", "kind": "book", "title": "Example Book", "creators": ["Author Name"], "published": "2024", "addedOn": "2026-09-23", "completedDates": ["2026-09-23"], "genres": ["Fantasy"], "series": { "name": "Example Series", "position": 1 } }
-```
+The Travel collection is for places visited and saved from Maps. It currently contains Pūčkorių piliakalnis under the existing Visited Places category, tagged `europe`, `lithuania`, `nature`, and `hiking`. The 19 existing travel websites and older bookmarks remain in the old collection. Travel uses the same search and tag filters as the other reviewed collections.
 
 ## Manage bookmark data
 
@@ -44,6 +34,8 @@ npm run bookmarks -- promote-bookmark --id example --collection web --position 1
 npm run bookmarks -- add-bookmark --id new-site --title "New Site" --url https://example.org --collection web --position 11
 npm run bookmarks -- demote-bookmark --id example
 npm run bookmarks -- list --collection old
+npm run bookmarks -- list --collection media
+npm run bookmarks -- add-bookmark --id example-film --title "Example Film" --url https://www.imdb.com/title/tt1234567/ --tag movie --tag genre:action --category media:1 --collection media --position 1
 npm run bookmarks -- remove-bookmark --id example
 ```
 

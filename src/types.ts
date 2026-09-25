@@ -19,7 +19,7 @@ export interface CategoryMembership {
 }
 
 export interface BookmarkPlacement {
-  collection: 'web' | 'youtube'
+  collection: 'web' | 'youtube' | 'media' | 'travel'
   position: number
 }
 

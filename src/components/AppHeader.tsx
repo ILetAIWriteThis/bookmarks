@@ -12,7 +12,7 @@ export function AppHeader({ onInstall }: AppHeaderProps) {
         <span>Bookmarks</span>
       </a>
       <div className="header-actions">
-        <nav className="header-nav" aria-label="Main navigation"><a href="#/">Bookmarks</a><a href="#/library">Library</a></nav>
+        <nav className="header-nav" aria-label="Main navigation"><a href="#/">Bookmarks</a></nav>
         {onInstall && <button className="install-button" type="button" onClick={onInstall}>Install app</button>}
       </div>
     </header>

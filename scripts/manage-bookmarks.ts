@@ -2,13 +2,11 @@ import { createHash } from 'node:crypto'
 import { readFile, rename, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { bookmarksForCategory, bookmarksForCategoryTree, childCategories, validateBookmarkData } from '../src/data'
-import { validateMediaData, type MediaEntry } from '../src/media'
 import { placeBookmark, removePlacement } from '../src/placement'
 import type { Bookmark, BookmarkData, Category, CategoryMembership } from '../src/types'
 
 const dataPath = resolve(process.cwd(), 'public/data/bookmarks.json')
 const checksumPath = resolve(process.cwd(), 'public/data/bookmarks.sha256')
-const mediaPath = resolve(process.cwd(), 'public/data/media.json')
 
 type Flags = Map<string, string[]>
 
@@ -16,13 +14,8 @@ function usage() {
   console.log(`Bookmark data manager
 
 Usage:
-  npm run bookmarks -- list [--category ID] [--collection old|web|youtube]
+  npm run bookmarks -- list [--category ID] [--collection old|web|youtube|media|travel]
   npm run bookmarks -- check
-  npm run bookmarks -- add-media --id ID --kind book|movie|tv --title TITLE --creator NAME --published YEAR --added-on DATE [options]
-  npm run bookmarks -- update-media --id ID --completed-date DATE
-  npm run bookmarks -- update-media --id ID --set-completed-date DATE
-  npm run bookmarks -- update-media --id ID --franchise NAME
-  npm run bookmarks -- import-media --file JSON_FILE
   npm run bookmarks -- export-markdown --file MARKDOWN_FILE
   npm run bookmarks -- upsert-bookmarks --file JSON_FILE
   npm run bookmarks -- add-category --id ID --name NAME --position N [--icon NAME] [--parent ID]
@@ -30,7 +23,7 @@ Usage:
   npm run bookmarks -- remove-category --id ID
   npm run bookmarks -- add-bookmark --id ID --title TITLE --url HTTPS_URL [options]
   npm run bookmarks -- update-bookmark --id ID [options]
-  npm run bookmarks -- promote-bookmark --id ID --collection web|youtube --position N
+  npm run bookmarks -- promote-bookmark --id ID --collection web|youtube|media|travel --position N
   npm run bookmarks -- demote-bookmark --id ID
   npm run bookmarks -- remove-bookmark --id ID
 
@@ -42,21 +35,8 @@ Bookmark options:
   --clear-daily             update-bookmark only
   --subscribed              Mark a YouTube channel as subscribed
   --not-subscribed          Mark a YouTube channel as not subscribed
-  --collection web|youtube --position N
+  --collection web|youtube|media|travel --position N
                              Add directly to a reviewed collection; later positions shift
-Media options (add-media):
-  --creator NAME             Repeat for multiple creators
-  --genre NAME               Repeat for multiple genres
-  --completed-date DATE      Repeat for each read or watch date
-  --franchise NAME            Screen media only
-  --url HTTPS_URL
-Media options (update-media):
-  --completed-date DATE      Append a read or watch date; repeat for multiple dates
-  --set-completed-date DATE  Replace read or watch dates; repeat for multiple dates
-  --franchise NAME           Set a screen media franchise
-  --clear-franchise          Remove a screen media franchise
-Media import:
-  --file JSON_FILE           JSON object with an entries array; adds validated entries atomically
 Category options:
   --parent ID               Nest below an existing category
   --clear-parent            Move an existing category to the root
@@ -66,7 +46,6 @@ Theme options (category commands; provide all three together):
 
 Examples:
   npm run bookmarks -- export-markdown --file /tmp/bookmarks.md
-  npm run bookmarks -- add-media --id the-avengers-2012 --kind movie --title "The Avengers" --creator "Joss Whedon" --published 2012 --added-on 2026-09-23 --completed-date 2016-07-01 --completed-date 2026-09-19 --genre Action --franchise MCU --url https://www.imdb.com/title/tt0848228/
   npm run bookmarks -- add-bookmark --id example --title "Example" --url https://example.com --category news:1 --category tech-ai:3 --daily-position 1
   npm run bookmarks -- update-bookmark --id example --tag reference --tag daily --clear-daily
   npm run bookmarks -- promote-bookmark --id example --collection web --position 1
@@ -80,7 +59,7 @@ function parseFlags(args: string[]): Flags {
     const token = args[index]
     if (!token.startsWith('--')) throw new Error(`Unexpected argument "${token}"`)
     const name = token.slice(2)
-    if (name === 'clear-daily' || name === 'clear-parent' || name === 'clear-franchise' || name === 'subscribed' || name === 'not-subscribed') {
+    if (name === 'clear-daily' || name === 'clear-parent' || name === 'subscribed' || name === 'not-subscribed') {
       flags.set(name, ['true'])
       continue
     }
@@ -204,66 +183,10 @@ function exportMarkdown(data: BookmarkData) {
   return lines.join('\n')
 }
 
-async function writeMediaData(entries: MediaEntry[]) {
-  const valid = validateMediaData({ entries })
-  const temp = resolve(dirname(mediaPath), '.media.json.tmp')
-  await writeFile(temp, `${JSON.stringify(valid, null, 2)}\n`, 'utf8')
-  await rename(temp, mediaPath)
-  console.log(`Updated ${mediaPath}`)
-}
-
 async function run() {
   const [command = 'help', ...args] = process.argv.slice(2)
   if (command === 'help' || command === '--help' || command === '-h') return usage()
   const flags = parseFlags(args)
-  if (command === 'add-media') {
-    if (has(flags, 'universe')) throw new Error('--universe has been replaced by --franchise')
-    const kind = required(flags, 'kind')
-    if (kind !== 'book' && kind !== 'movie' && kind !== 'tv') throw new Error('--kind must be book, movie, or tv')
-    const entry: MediaEntry = {
-      id: required(flags, 'id'), kind, title: required(flags, 'title'),
-      creators: flags.get('creator') ?? [], published: required(flags, 'published'),
-      addedOn: required(flags, 'added-on'), genres: flags.get('genre') ?? [],
-    }
-    if (has(flags, 'completed-date')) entry.completedDates = flags.get('completed-date')
-    if (has(flags, 'franchise')) entry.franchise = required(flags, 'franchise')
-    if (has(flags, 'url')) entry.url = required(flags, 'url')
-    const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
-    await writeMediaData([...existing.entries, entry])
-    return
-  }
-  if (command === 'update-media') {
-    if (has(flags, 'universe')) throw new Error('--universe has been replaced by --franchise')
-    const dates = flags.get('completed-date')
-    const replacementDates = flags.get('set-completed-date')
-    const franchise = optional(flags, 'franchise')
-    const clearFranchise = has(flags, 'clear-franchise')
-    if (!dates?.length && !replacementDates?.length && !franchise && !clearFranchise)
-      throw new Error('Provide --completed-date, --set-completed-date, --franchise, or --clear-franchise')
-    if (dates?.length && replacementDates?.length) throw new Error('Use either --completed-date or --set-completed-date')
-    if (franchise && clearFranchise) throw new Error('Use either --franchise or --clear-franchise')
-    const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
-    const entry = existing.entries.find((item) => item.id === required(flags, 'id'))
-    if (!entry) throw new Error(`Unknown library id: ${required(flags, 'id')}`)
-    if (dates?.length || replacementDates?.length)
-      entry.completedDates = replacementDates ?? [...(entry.completedDates ?? []), ...dates!]
-    if (franchise || clearFranchise) entry.franchise = clearFranchise ? undefined : franchise
-    await writeMediaData(existing.entries)
-    return
-  }
-  if (command === 'import-media') {
-    const incoming = validateMediaData(JSON.parse(await readFile(resolve(required(flags, 'file')), 'utf8')) as unknown)
-    const existing = validateMediaData(JSON.parse(await readFile(mediaPath, 'utf8')) as unknown)
-    const existingUrls = new Set(existing.entries.map((entry) => entry.url).filter(Boolean))
-    for (const entry of incoming.entries) {
-      if (!entry.url) continue
-      if (existingUrls.has(entry.url)) throw new Error(`Library source already exists: ${entry.url}`)
-      existingUrls.add(entry.url)
-    }
-    await writeMediaData([...existing.entries, ...incoming.entries])
-    console.log(`Imported ${incoming.entries.length} media entries.`)
-    return
-  }
   const data = await readManagedData()
 
   if (command === 'check') {
@@ -273,19 +196,19 @@ async function run() {
   if (command === 'list') {
     const categoryId = optional(flags, 'category')
     const collection = optional(flags, 'collection')
-    if (collection && !['old', 'web', 'youtube'].includes(collection)) {
-      throw new Error('--collection must be old, web, or youtube')
+    if (collection && !['old', 'web', 'youtube', 'media', 'travel'].includes(collection)) {
+      throw new Error('--collection must be old, web, youtube, media, or travel')
     }
     const inCategory = categoryId ? bookmarksForCategoryTree(data, categoryId) : data.bookmarks
     const bookmarks = collection === 'old' ? inCategory.filter((bookmark) => !bookmark.placement)
       : collection ? inCategory.filter((bookmark) => bookmark.placement?.collection === collection) : inCategory
-    if (collection === 'web' || collection === 'youtube') {
+    if (collection && collection !== 'old') {
       bookmarks.sort((a, b) => a.placement!.position - b.placement!.position)
     }
     console.log(`${data.categories.length} categories`)
     printCategoryTree(data.categories)
     console.log(`${bookmarks.length} bookmarks${categoryId ? ` in ${categoryId}` : ''}${collection ? ` in ${collection}` : ''}`)
-    bookmarks.forEach((bookmark) => console.log(`  ${collection === 'web' || collection === 'youtube' ? `${bookmark.placement!.position}\t` : ''}${bookmark.id}\t${bookmark.title}\t${bookmark.url}`))
+    bookmarks.forEach((bookmark) => console.log(`  ${collection && collection !== 'old' ? `${bookmark.placement!.position}\t` : ''}${bookmark.id}\t${bookmark.title}\t${bookmark.url}`))
     return
   }
   if (command === 'export-markdown') {
@@ -353,7 +276,7 @@ async function run() {
     }
     if (has(flags, 'collection')) {
       const collection = required(flags, 'collection')
-      if (collection !== 'web' && collection !== 'youtube') throw new Error('--collection must be web or youtube')
+      if (collection !== 'web' && collection !== 'youtube' && collection !== 'media' && collection !== 'travel') throw new Error('--collection must be web, youtube, media, or travel')
       placeBookmark(data, bookmark, collection, placementPosition(flags))
     }
     data.bookmarks.push(bookmark)
@@ -373,7 +296,7 @@ async function run() {
     const bookmark = data.bookmarks.find((item) => item.id === id)
     if (!bookmark) throw new Error(`Bookmark "${id}" does not exist`)
     const collection = required(flags, 'collection')
-    if (collection !== 'web' && collection !== 'youtube') throw new Error('--collection must be web or youtube')
+    if (collection !== 'web' && collection !== 'youtube' && collection !== 'media' && collection !== 'travel') throw new Error('--collection must be web, youtube, media, or travel')
     placeBookmark(data, bookmark, collection, placementPosition(flags))
   } else if (command === 'demote-bookmark') {
     const id = required(flags, 'id')

@@ -54,7 +54,7 @@ it('shows reviewed Web bookmarks at the default route and filters without changi
   await user.click(screen.getByRole('button', { name: '#analysis' }))
   expect(within(list).getAllByRole('link')).toHaveLength(1)
   expect(within(list).getByLabelText('Position 2')).toBeInTheDocument()
-  expect(screen.getByRole('status')).toHaveTextContent('1 of 2')
+  expect(screen.queryByText('1 of 2')).not.toBeInTheDocument()
   expect(within(list).getByRole('link')).toHaveAttribute('rel', 'noopener noreferrer')
   await user.click(screen.getByRole('button', { name: 'All' }))
   expect(within(list).getAllByRole('link')).toHaveLength(2)
@@ -95,7 +95,7 @@ it('searches titles, descriptions, websites, and tags alongside selected tags', 
   const search = screen.getByRole('searchbox', { name: 'Search Web bookmarks' })
   await user.type(search, 'ALPHA')
   expect(within(list).getAllByRole('link')).toHaveLength(1)
-  expect(screen.getByRole('status')).toHaveTextContent('1 of 2')
+  expect(screen.queryByText('1 of 2')).not.toBeInTheDocument()
   await user.clear(search)
   await user.type(search, 'reporting')
   expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://example.com/journal')
@@ -127,4 +127,32 @@ it('explains empty seed collections and nonmatching filter combinations', async 
   expect(screen.getByText('No bookmarks match these tags.')).toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: 'All' }))
   expect(screen.getByRole('list').children).toHaveLength(2)
+})
+
+it('opens Media and Travel as searchable collections with tag filters', async () => {
+  const user = userEvent.setup()
+  const expanded: BookmarkData = {
+    ...data,
+    bookmarks: [...data.bookmarks,
+      { id: 'film', title: 'Sample Film', url: 'https://www.imdb.com/title/tt1234567/',
+        tags: ['movie', 'genre:action'], placement: { collection: 'media', position: 0 }, categories: [] },
+      { id: 'book', title: 'Sample Book', url: 'https://www.goodreads.com/book/show/12345',
+        tags: ['book', 'series:sample'], placement: { collection: 'media', position: 1 }, categories: [] },
+      { id: 'place', title: 'Pūčkorių piliakalnis', url: 'https://maps.app.goo.gl/ZkdmJcYNHzzY6LqZ6',
+        tags: ['europe', 'lithuania', 'nature'], placement: { collection: 'travel', position: 0 }, categories: [] },
+    ],
+  }
+  window.location.hash = '#/media'
+  render(<App data={expanded} />)
+  const media = screen.getByRole('list', { name: 'Media bookmarks' })
+  expect(within(media).getAllByRole('link')).toHaveLength(2)
+  await user.click(screen.getByRole('button', { name: '#book' }))
+  expect(within(media).getAllByRole('link')).toHaveLength(1)
+  expect(within(media).getByRole('link')).toHaveAttribute('href', 'https://www.goodreads.com/book/show/12345')
+  navigate('#/travel')
+  const travel = screen.getByRole('list', { name: 'Travel bookmarks' })
+  await user.type(screen.getByRole('searchbox', { name: 'Search Travel bookmarks' }), 'Puckoriu')
+  expect(within(travel).getByRole('link')).toHaveAttribute('href', 'https://maps.app.goo.gl/ZkdmJcYNHzzY6LqZ6')
+  await user.click(screen.getByRole('button', { name: '#nature' }))
+  expect(within(travel).getAllByRole('link')).toHaveLength(1)
 })

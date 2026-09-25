@@ -91,13 +91,13 @@ const parsePlacement = (value: unknown, path: string, errors: string[]): Bookmar
     errors.push(`${path} must be an object`)
     return undefined
   }
-  if (value.collection !== 'web' && value.collection !== 'youtube') {
-    errors.push(`${path}.collection must be web or youtube`)
+  if (value.collection !== 'web' && value.collection !== 'youtube' && value.collection !== 'media' && value.collection !== 'travel') {
+    errors.push(`${path}.collection must be web, youtube, media, or travel`)
   }
   const position = requiredPosition(value.position, `${path}.position`, errors)
   if (!Number.isSafeInteger(position) || position < 0) errors.push(`${path}.position must be a non-negative safe integer`)
   return {
-    collection: value.collection === 'youtube' ? 'youtube' : 'web',
+    collection: value.collection === 'youtube' || value.collection === 'media' || value.collection === 'travel' ? value.collection : 'web',
     position,
   }
 }
