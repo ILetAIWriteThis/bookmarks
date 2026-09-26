@@ -8,15 +8,15 @@ it('keeps migrated media and travel in the reviewed bookmark store', () => {
 
   expect(media).toHaveLength(1260)
   expect(media.filter((bookmark) => bookmark.tags?.includes('book'))).toHaveLength(269)
-  expect(media.filter((bookmark) => bookmark.tags?.includes('tv-series'))).toHaveLength(72)
+  expect(media.filter((bookmark) => bookmark.tags?.includes('tv'))).toHaveLength(72)
   expect(media.filter((bookmark) => bookmark.tags?.includes('movie'))).toHaveLength(919)
   expect(media.find((bookmark) => bookmark.id === 'the-avengers-2012')).toMatchObject({
     url: 'https://www.imdb.com/title/tt0848228/',
-    tags: expect.arrayContaining(['movie', 'genre:action', 'franchise:mcu']),
+    tags: ['movie'],
   })
   expect(media.find((bookmark) => bookmark.id === 'goodreads-43419431')).toMatchObject({
     url: 'https://www.goodreads.com/book/show/43419431',
-    tags: expect.arrayContaining(['book', 'series:dune']),
+    tags: ['book'],
   })
   expect(media.every((bookmark) => !Object.keys(bookmark).some((key) => /date|published|creator|season|language/i.test(key)))).toBe(true)
 

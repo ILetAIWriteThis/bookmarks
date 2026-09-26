@@ -17,7 +17,7 @@ The default `/bookmarks/` page shows reviewed Web bookmarks. `#/youtube`, `#/med
 
 Only bookmarks with an explicit collection placement appear in the reviewed view. Bookmarks without a placement appear in the old view, including its search, categories, and random picker. Tags use the bookmark's saved tags; select multiple tags to match all of them, or select **All** to clear the filter. Each collection remembers its selections while switching; reloading resets them. Collection totals are not shown.
 
-Media entries now live in the bookmark store. Books link to Goodreads and films and shows link to IMDb. Their tags distinguish `book`, `movie`, and `tv-series`; existing genres use `genre:...`, franchises use `franchise:...`, and explicit numbered book series use `series:...`. Reading, watching, release, and added dates were discarded during migration. The duplicate Brigade/Law of the Lawless TV listing was merged into one bookmark.
+Media entries now live in the bookmark store. Books link to Goodreads and films and shows link to IMDb. Media tags are limited to `book`, `tv`, and `movie`. Book titles use `Title — Author`, with authors sourced from the Goodreads exports. Reading, watching, release, and added dates were discarded during migration. The duplicate Brigade/Law of the Lawless TV listing was merged into one bookmark.
 
 The Travel collection is for places visited and saved from Maps. It currently contains Pūčkorių piliakalnis under the existing Visited Places category, tagged `europe`, `lithuania`, `nature`, and `hiking`. The 19 existing travel websites and older bookmarks remain in the old collection. Travel uses the same search and tag filters as the other reviewed collections.
 
@@ -35,7 +35,7 @@ npm run bookmarks -- add-bookmark --id new-site --title "New Site" --url https:/
 npm run bookmarks -- demote-bookmark --id example
 npm run bookmarks -- list --collection old
 npm run bookmarks -- list --collection media
-npm run bookmarks -- add-bookmark --id example-film --title "Example Film" --url https://www.imdb.com/title/tt1234567/ --tag movie --tag genre:action --category media:1 --collection media --position 1
+npm run bookmarks -- add-bookmark --id example-film --title "Example Film" --url https://www.imdb.com/title/tt1234567/ --tag movie --category media:1 --collection media --position 1
 npm run bookmarks -- remove-bookmark --id example
 ```
 
