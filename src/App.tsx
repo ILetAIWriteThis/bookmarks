@@ -1,9 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AppHeader } from './components/AppHeader'
 import { validateBookmarkData } from './data'
 import { Icon } from './icons'
-import { CategoryPage } from './pages/CategoryPage'
-import { HomePage } from './pages/HomePage'
 import { V2Page } from './pages/V2Page'
 import { activateUpdate, usePwa } from './pwa'
 import type { BookmarkData } from './types'
@@ -12,22 +10,14 @@ interface AppProps {
   data?: BookmarkData
 }
 
-type Route = { page: 'collection'; collection: 'web' | 'youtube' | 'media' | 'travel' }
-  | { page: 'old' }
-  | { page: 'old-category'; categoryId: string }
+type Route = 'web' | 'youtube' | 'media' | 'travel'
 
 function readRoute(): Route {
   const hash = window.location.hash
-  if (/^#\/(?:old|v0\.10-old)\/?$/.test(hash)) return { page: 'old' }
-  const category = hash.match(/^#\/(?:old\/category|v0\.10-old\/category|category)\/([^/?#]+)/)
-  if (category) {
-    try { return { page: 'old-category', categoryId: decodeURIComponent(category[1]) } }
-    catch { return { page: 'old-category', categoryId: category[1] } }
-  }
-  if (/^#\/(?:youtube|v2\/youtube)\/?$/.test(hash)) return { page: 'collection', collection: 'youtube' }
-  if (/^#\/media\/?$/.test(hash)) return { page: 'collection', collection: 'media' }
-  if (/^#\/travel\/?$/.test(hash)) return { page: 'collection', collection: 'travel' }
-  return { page: 'collection', collection: 'web' }
+  if (/^#\/(?:youtube|v2\/youtube)\/?$/.test(hash)) return 'youtube'
+  if (/^#\/media\/?$/.test(hash)) return 'media'
+  if (/^#\/travel\/?$/.test(hash)) return 'travel'
+  return 'web'
 }
 
 function useRoute() {
@@ -46,10 +36,6 @@ export function App({ data: providedData }: AppProps) {
   const [offlineCache, setOfflineCache] = useState(false)
   const route = useRoute()
   const pwa = usePwa()
-  const oldData = useMemo(() => data && ({
-    categories: data.categories,
-    bookmarks: data.bookmarks.filter((bookmark) => !bookmark.placement),
-  }), [data])
 
   useEffect(() => {
     if (providedData || data) return
@@ -82,9 +68,7 @@ export function App({ data: providedData }: AppProps) {
           <button type="button" onClick={() => window.location.reload()}>Try again</button>
         </main>
       )}
-      {data && oldData && (route.page === 'collection' ? <V2Page data={data} collection={route.collection} />
-        : route.page === 'old' ? <HomePage data={oldData} />
-          : <CategoryPage data={oldData} categoryId={route.categoryId} />)}
+      {data && <V2Page data={data} collection={route} />}
 
       {(!pwa.online || offlineCache) && <div className="notice" role="status"><span>You’re offline</span><small>Saved pages still work; external bookmarks need a connection.</small></div>}
       {pwa.update && (

@@ -21,10 +21,25 @@ it('keeps migrated media and travel in the reviewed bookmark store', () => {
   expect(media.every((bookmark) => !Object.keys(bookmark).some((key) => /date|published|creator|season|language/i.test(key)))).toBe(true)
 
   expect(travel).toHaveLength(1)
-  expect(data.bookmarks.filter((bookmark) => !bookmark.placement && bookmark.categories.some((membership) => membership.categoryId.startsWith('travel')))).toHaveLength(19)
+  expect(data.bookmarks.filter((bookmark) => !bookmark.placement)).toHaveLength(0)
+  expect(data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'web' && bookmark.categories.some((membership) => membership.categoryId.startsWith('travel')))).toHaveLength(19)
   expect(travel.find((bookmark) => bookmark.id === 'puckoriu-piliakalnis')).toMatchObject({
     url: 'https://maps.app.goo.gl/ZkdmJcYNHzzY6LqZ6',
     tags: expect.arrayContaining(['europe', 'lithuania', 'nature']),
     categories: [{ categoryId: 'travel-visited-places', position: 1 }],
+  })
+})
+
+it('migrates category lineage into tags and places old bookmarks without losing reviewed entries', () => {
+  const data = validateBookmarkData(bookmarkData)
+  expect(data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'web')).toHaveLength(500)
+  expect(data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'youtube')).toHaveLength(1179)
+  expect(data.bookmarks.find((bookmark) => bookmark.id === 'youtube-baltic-defence-review')).toMatchObject({
+    tags: ['youtube', 'politics'],
+    placement: { collection: 'youtube' },
+  })
+  expect(data.bookmarks.find((bookmark) => bookmark.id === 'cave-of-zeus')).toMatchObject({
+    tags: ['travel', 'visited-places', 'crete'],
+    placement: { collection: 'web' },
   })
 })

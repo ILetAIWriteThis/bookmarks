@@ -43,11 +43,10 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
 
   return (
     <main id="main-content" className="v2-page">
-      <a className="back-link" href="#/old"><Icon name="back" size={17} /> Old bookmarks</a>
       <header className="v2-hero">
         <p className="eyebrow">Bookmarks</p>
         <h1>A little less browsing.<br />A little more finding.</h1>
-        <p>{collection === 'travel' ? 'Places you’ve visited, saved from Maps. Find them by name or location tags.' : 'Your reviewed links, one at a time. Pick a space, then narrow it down.'}</p>
+        <p>{collection === 'travel' ? 'Places you’ve visited, saved from Maps. Find them by name or location tags.' : 'Your links, one at a time. Pick a space, then narrow it down.'}</p>
       </header>
 
       <nav className="v2-spaces" aria-label="Bookmark collections">

@@ -59,15 +59,10 @@ it('shows reviewed Web bookmarks at the default route and filters without changi
   await user.click(screen.getByRole('button', { name: 'All' }))
   expect(within(list).getAllByRole('link')).toHaveLength(2)
   navigate('#/old')
-  expect(screen.getByRole('heading', { name: 'Daily' })).toBeInTheDocument()
-  expect(screen.queryByRole('link', { name: /Alpha News/ })).not.toBeInTheDocument()
-  await user.type(screen.getByRole('searchbox'), 'alpha')
-  expect(screen.getByText('0 found')).toBeInTheDocument()
-  await user.click(screen.getByRole('button', { name: 'Clear search' }))
-  navigate('#/old/category/news')
-  expect(screen.queryByRole('link', { name: /Alpha News/ })).not.toBeInTheDocument()
+  expect(screen.getByRole('list', { name: 'Web bookmarks' })).toBeInTheDocument()
+  expect(screen.queryByRole('link', { name: 'Old bookmarks' })).not.toBeInTheDocument()
   navigate('#/old/category/science')
-  expect(screen.getByRole('link', { name: /Outside Top/ })).toBeInTheDocument()
+  expect(screen.getByRole('list', { name: 'Web bookmarks' })).toBeInTheDocument()
 })
 
 it('keeps collection filters separate and supports direct YouTube routes', async () => {

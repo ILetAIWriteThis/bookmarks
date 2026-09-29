@@ -3,6 +3,7 @@ import { readFile, rename, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { bookmarksForCategory, bookmarksForCategoryTree, childCategories, validateBookmarkData } from '../src/data'
 import { placeBookmark, removePlacement } from '../src/placement'
+import { migrateOldBookmarks } from '../src/migration'
 import type { Bookmark, BookmarkData, Category, CategoryMembership } from '../src/types'
 
 const dataPath = resolve(process.cwd(), 'public/data/bookmarks.json')
@@ -14,17 +15,17 @@ function usage() {
   console.log(`Bookmark data manager
 
 Usage:
-  npm run bookmarks -- list [--category ID] [--collection old|web|youtube|media|travel]
+  npm run bookmarks -- list [--category ID] [--collection web|youtube|media|travel]
   npm run bookmarks -- check
   npm run bookmarks -- export-markdown --file MARKDOWN_FILE
   npm run bookmarks -- upsert-bookmarks --file JSON_FILE
+  npm run bookmarks -- migrate-old
   npm run bookmarks -- add-category --id ID --name NAME --position N [--icon NAME] [--parent ID]
   npm run bookmarks -- update-category --id ID [--name NAME] [--position N] [--icon NAME] [--parent ID]
   npm run bookmarks -- remove-category --id ID
   npm run bookmarks -- add-bookmark --id ID --title TITLE --url HTTPS_URL [options]
   npm run bookmarks -- update-bookmark --id ID [options]
   npm run bookmarks -- promote-bookmark --id ID --collection web|youtube|media|travel --position N
-  npm run bookmarks -- demote-bookmark --id ID
   npm run bookmarks -- remove-bookmark --id ID
 
 Bookmark options:
@@ -36,7 +37,7 @@ Bookmark options:
   --subscribed              Mark a YouTube channel as subscribed
   --not-subscribed          Mark a YouTube channel as not subscribed
   --collection web|youtube|media|travel --position N
-                             Add directly to a reviewed collection; later positions shift
+                             Choose a collection and position; later positions shift
 Category options:
   --parent ID               Nest below an existing category
   --clear-parent            Move an existing category to the root
@@ -196,19 +197,18 @@ async function run() {
   if (command === 'list') {
     const categoryId = optional(flags, 'category')
     const collection = optional(flags, 'collection')
-    if (collection && !['old', 'web', 'youtube', 'media', 'travel'].includes(collection)) {
-      throw new Error('--collection must be old, web, youtube, media, or travel')
+    if (collection && !['web', 'youtube', 'media', 'travel'].includes(collection)) {
+      throw new Error('--collection must be web, youtube, media, or travel')
     }
     const inCategory = categoryId ? bookmarksForCategoryTree(data, categoryId) : data.bookmarks
-    const bookmarks = collection === 'old' ? inCategory.filter((bookmark) => !bookmark.placement)
-      : collection ? inCategory.filter((bookmark) => bookmark.placement?.collection === collection) : inCategory
-    if (collection && collection !== 'old') {
+    const bookmarks = collection ? inCategory.filter((bookmark) => bookmark.placement?.collection === collection) : inCategory
+    if (collection) {
       bookmarks.sort((a, b) => a.placement!.position - b.placement!.position)
     }
     console.log(`${data.categories.length} categories`)
     printCategoryTree(data.categories)
     console.log(`${bookmarks.length} bookmarks${categoryId ? ` in ${categoryId}` : ''}${collection ? ` in ${collection}` : ''}`)
-    bookmarks.forEach((bookmark) => console.log(`  ${collection && collection !== 'old' ? `${bookmark.placement!.position}\t` : ''}${bookmark.id}\t${bookmark.title}\t${bookmark.url}`))
+    bookmarks.forEach((bookmark) => console.log(`  ${collection ? `${bookmark.placement!.position}\t` : ''}${bookmark.id}\t${bookmark.title}\t${bookmark.url}`))
     return
   }
   if (command === 'export-markdown') {
@@ -221,7 +221,10 @@ async function run() {
     return
   }
 
-  if (command === 'upsert-bookmarks') {
+  if (command === 'migrate-old') {
+    const migrated = migrateOldBookmarks(data)
+    console.log(`Migrated ${migrated.youtube} YouTube and ${migrated.web} Web bookmarks.`)
+  } else if (command === 'upsert-bookmarks') {
     const importPath = resolve(process.cwd(), required(flags, 'file'))
     const importedValue = JSON.parse(await readFile(importPath, 'utf8')) as { bookmarks?: unknown }
     if (!Array.isArray(importedValue.bookmarks)) {
@@ -272,12 +275,15 @@ async function run() {
     if (has(flags, 'daily-position')) bookmark.dailyPosition = optionalNumber(flags, 'daily-position')
     applySubscription(bookmark, flags)
     if (has(flags, 'collection') !== has(flags, 'position')) {
-      throw new Error('Adding to a reviewed collection requires both --collection and --position')
+      throw new Error('Explicit collection placement requires both --collection and --position')
     }
     if (has(flags, 'collection')) {
       const collection = required(flags, 'collection')
       if (collection !== 'web' && collection !== 'youtube' && collection !== 'media' && collection !== 'travel') throw new Error('--collection must be web, youtube, media, or travel')
       placeBookmark(data, bookmark, collection, placementPosition(flags))
+    } else {
+      const nextPosition = Math.max(-1, ...data.bookmarks.filter((item) => item.placement?.collection === 'web').map((item) => item.placement!.position)) + 1
+      placeBookmark(data, bookmark, 'web', nextPosition)
     }
     data.bookmarks.push(bookmark)
   } else if (command === 'update-bookmark') {
@@ -298,11 +304,6 @@ async function run() {
     const collection = required(flags, 'collection')
     if (collection !== 'web' && collection !== 'youtube' && collection !== 'media' && collection !== 'travel') throw new Error('--collection must be web, youtube, media, or travel')
     placeBookmark(data, bookmark, collection, placementPosition(flags))
-  } else if (command === 'demote-bookmark') {
-    const id = required(flags, 'id')
-    const bookmark = data.bookmarks.find((item) => item.id === id)
-    if (!bookmark) throw new Error(`Bookmark "${id}" does not exist`)
-    removePlacement(data, bookmark)
   } else if (command === 'remove-bookmark') {
     const id = required(flags, 'id')
     const bookmark = data.bookmarks.find((item) => item.id === id)

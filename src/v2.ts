@@ -11,7 +11,7 @@ export interface V2Bookmark {
 
 const tagName = (value: string) => normalizeSearch(value).replace(/^#+/, '').replace(/\s+/g, '-')
 
-/** Reviewed bookmarks in their explicitly chosen collection and order. */
+/** Bookmarks in their chosen collection and saved order. */
 export function v2Bookmarks(data: BookmarkData, collection: V2Collection): V2Bookmark[] {
   return data.bookmarks.flatMap((bookmark) => {
     if (bookmark.placement?.collection !== collection) return []

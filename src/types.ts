@@ -32,7 +32,7 @@ export interface Bookmark {
   /** Applies to YouTube channel URLs; omitted channels are subscribed by default. */
   subscribed?: boolean
   dailyPosition?: number
-  /** Only explicitly reviewed bookmarks appear in the main collections. */
+  /** Determines which collection displays the bookmark. */
   placement?: BookmarkPlacement
   categories: CategoryMembership[]
 }
