@@ -48,6 +48,10 @@ it('shows reviewed Web bookmarks at the default route and filters without changi
   expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
     'https://alpha.example/news', 'https://example.com/journal',
   ])
+  const filters = screen.getByText('Filter by tags').closest('details')!
+  expect(filters).not.toHaveAttribute('open')
+  await user.click(screen.getByText('Filter by tags'))
+  expect(filters).toHaveAttribute('open')
   expect(screen.getByRole('button', { name: '#daily' })).toBeInTheDocument()
   expect(screen.queryByRole('button', { name: '#news' })).not.toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: '#daily' }))
@@ -70,6 +74,7 @@ it('keeps collection filters separate and supports direct YouTube routes', async
   window.location.hash = '#/youtube'
   render(<App data={data} />)
   expect(screen.getByRole('list', { name: 'YouTube bookmarks' }).children).toHaveLength(2)
+  await user.click(screen.getByText('Filter by tags'))
   expect(screen.queryByRole('button', { name: '#youtube' })).not.toBeInTheDocument()
   expect(screen.queryByRole('button', { name: '#top' })).not.toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: '#science' }))
@@ -100,6 +105,7 @@ it('searches titles, descriptions, websites, and tags alongside selected tags', 
   await user.clear(search)
   await user.type(search, '#analysis')
   expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://example.com/journal')
+  await user.click(screen.getByText('Filter by tags'))
   await user.click(screen.getByRole('button', { name: '#daily' }))
   expect(within(list).getAllByRole('link')).toHaveLength(1)
   await user.click(screen.getByRole('button', { name: '#analysis' }))
@@ -117,6 +123,7 @@ it('explains empty seed collections and nonmatching filter combinations', async 
   expect(screen.getByText('No bookmarks here yet.')).toBeInTheDocument()
   unmount()
   render(<App data={{ ...data, bookmarks: data.bookmarks.map((bookmark) => bookmark.id === 'alpha' ? { ...bookmark, tags: ['exclusive'] } : bookmark) }} />)
+  await user.click(screen.getByText('Filter by tags'))
   await user.click(screen.getByRole('button', { name: '#exclusive' }))
   await user.click(screen.getByRole('button', { name: '#analysis' }))
   expect(screen.getByText('No bookmarks match these tags.')).toBeInTheDocument()
@@ -141,6 +148,7 @@ it('opens Media and Travel as searchable collections with tag filters', async ()
   render(<App data={expanded} />)
   const media = screen.getByRole('list', { name: 'Media bookmarks' })
   expect(within(media).getAllByRole('link')).toHaveLength(2)
+  await user.click(screen.getByText('Filter by tags'))
   await user.click(screen.getByRole('button', { name: '#book' }))
   expect(within(media).getAllByRole('link')).toHaveLength(1)
   expect(within(media).getByRole('link')).toHaveAttribute('href', 'https://www.goodreads.com/book/show/12345')

@@ -21,6 +21,10 @@ test('migrated bookmarks use the Web and YouTube routes', async ({ page }) => {
   expect(fonts.title).not.toBe(fonts.tags)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
 
+  const filters = page.locator('details.v2-filters')
+  await expect(filters).not.toHaveAttribute('open', '')
+  await expect(page.getByRole('button', { name: '#tech', exact: true })).toBeHidden()
+  await filters.locator('summary').click()
   await page.getByRole('button', { name: '#tech', exact: true }).click()
   await expect(web.getByRole('link')).toHaveCount(44)
   await page.getByRole('navigation', { name: 'Bookmark collections' }).getByRole('link', { name: /YouTube/ }).click()
@@ -38,6 +42,7 @@ test('Media and Travel routes search and filter migrated bookmarks', async ({ pa
   await expect(media.getByRole('link')).toHaveCount(1260)
   await expect(page.getByRole('navigation', { name: 'Bookmark collections' }).getByText('1260')).toHaveCount(0)
   await expect(page.getByText('1260 of 1260')).toHaveCount(0)
+  await page.locator('details.v2-filters summary').click()
   await page.getByRole('button', { name: '#book', exact: true }).click()
   await expect(media.getByRole('link')).toHaveCount(269)
   await page.getByRole('searchbox', { name: 'Search Media bookmarks' }).fill('Dune')

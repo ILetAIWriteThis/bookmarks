@@ -73,10 +73,10 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
             onClick={() => setQueries((current) => ({ ...current, [collection]: '' }))}><Icon name="close" size={19} /></button>}
           <kbd>/</kbd>
         </div>
-        <div className="v2-filters" role="group" aria-label={`Filter ${title} by tags`}>
-          <div className="v2-filter-heading"><span>Filter by tags</span>
-            <span className="v2-filter-hint">{selected.length ? 'Matching all selected tags' : 'Choose any tags to focus your list'}</span>
-          </div>
+        <details className="v2-filters">
+          <summary className="v2-filter-heading"><span>Filter by tags</span>
+            <span className="v2-filter-hint">{selected.length ? `${selected.length} selected · Matching all selected tags` : 'Choose any tags to focus your list'}</span>
+          </summary>
           <div className="v2-filter-options">
             <button type="button" className="v2-filter" aria-pressed={selected.length === 0}
               onClick={() => setFilters((current) => ({ ...current, [collection]: [] }))}>All</button>
@@ -84,7 +84,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
               <button type="button" key={tag} className="v2-filter" aria-pressed={selected.includes(tag)} onClick={() => toggleTag(tag)}>#{tag}</button>
             ))}
           </div>
-        </div>
+        </details>
 
         <div className="v2-list-heading" aria-hidden="true"><span>Position</span><span>Bookmark & tags</span><span>Open</span></div>
         <ol className="v2-list" aria-label={`${title} bookmarks`}>
