@@ -1,8 +1,11 @@
 import { expect, test } from '@playwright/test'
+import bookmarkData from '../public/data/bookmarks.json' with { type: 'json' }
+
+const webBookmarkCount = bookmarkData.bookmarks.filter(({ placement }) => placement.collection === 'web').length
 
 test('production base path renders migrated Web bookmarks and the manifest', async ({ page, request }) => {
   await page.goto('./')
-  await expect(page.getByRole('list', { name: 'Web bookmarks' }).getByRole('link')).toHaveCount(481)
+  await expect(page.getByRole('list', { name: 'Web bookmarks' }).getByRole('link')).toHaveCount(webBookmarkCount)
   await expect(page.getByRole('link', { name: 'Old bookmarks' })).toHaveCount(0)
   await expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', './manifest.webmanifest')
   expect((await request.get('./manifest.webmanifest')).ok()).toBeTruthy()
