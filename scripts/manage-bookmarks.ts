@@ -27,6 +27,7 @@ Usage:
   npm run bookmarks -- update-bookmark --id ID [options]
   npm run bookmarks -- promote-bookmark --id ID --collection web|youtube|media|travel --position N
   npm run bookmarks -- remove-bookmark --id ID
+  npm run bookmarks -- remove-bookmarks --id ID [--id ID ...]
 
 Bookmark options:
   --description TEXT
@@ -304,6 +305,16 @@ async function run() {
     const collection = required(flags, 'collection')
     if (collection !== 'web' && collection !== 'youtube' && collection !== 'media' && collection !== 'travel') throw new Error('--collection must be web, youtube, media, or travel')
     placeBookmark(data, bookmark, collection, placementPosition(flags))
+  } else if (command === 'remove-bookmarks') {
+    const ids = new Set(flags.get('id') ?? [])
+    if (!ids.size) throw new Error('Provide at least one --id to remove bookmarks')
+    const existingIds = new Set(data.bookmarks.map(({ id }) => id))
+    for (const id of ids) {
+      if (!existingIds.has(id)) throw new Error(`Bookmark "${id}" does not exist`)
+    }
+    data.bookmarks.filter(({ id }) => ids.has(id)).forEach((bookmark) => removePlacement(data, bookmark))
+    data.bookmarks = data.bookmarks.filter(({ id }) => !ids.has(id))
+    console.log(`Removed ${ids.size} bookmarks.`)
   } else if (command === 'remove-bookmark') {
     const id = required(flags, 'id')
     const bookmark = data.bookmarks.find((item) => item.id === id)

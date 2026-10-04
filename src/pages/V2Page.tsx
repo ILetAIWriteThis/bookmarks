@@ -7,14 +7,12 @@ import { v2Bookmarks, type V2Collection } from '../v2'
 const spaces: { id: V2Collection; title: string; icon: string; href: string }[] = [
   { id: 'web', title: 'Web', icon: 'bookmark', href: '#/' },
   { id: 'youtube', title: 'YouTube', icon: 'play', href: '#/youtube' },
-  { id: 'media', title: 'Media', icon: 'ticket', href: '#/media' },
-  { id: 'travel', title: 'Travel', icon: 'spark', href: '#/travel' },
 ]
 
 export function V2Page({ data, collection }: { data: BookmarkData; collection: V2Collection }) {
   const collections = useMemo(() => Object.fromEntries(spaces.map(({ id }) => [id, v2Bookmarks(data, id)])) as Record<V2Collection, ReturnType<typeof v2Bookmarks>>, [data])
-  const [filters, setFilters] = useState<Record<V2Collection, string[]>>({ web: [], youtube: [], media: [], travel: [] })
-  const [queries, setQueries] = useState<Record<V2Collection, string>>({ web: '', youtube: '', media: '', travel: '' })
+  const [filters, setFilters] = useState<Record<V2Collection, string[]>>({ web: [], youtube: [] })
+  const [queries, setQueries] = useState<Record<V2Collection, string>>({ web: '', youtube: '' })
   const entries = collections[collection]
   const tags = [...new Set(entries.flatMap((entry) => entry.tags))].sort((a, b) => a.localeCompare(b))
   const selected = filters[collection]
@@ -46,7 +44,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
       <header className="v2-hero">
         <p className="eyebrow">Bookmarks</p>
         <h1>A little less browsing.<br />A little more finding.</h1>
-        <p>{collection === 'travel' ? 'Places you’ve visited, saved from Maps. Find them by name or location tags.' : 'Your links, one at a time. Pick a space, then narrow it down.'}</p>
+        <p>Your links, one at a time. Pick a space, then narrow it down.</p>
       </header>
 
       <nav className="v2-spaces" aria-label="Bookmark collections">
@@ -103,7 +101,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
         </ol>
         {!visible.length && <div className="v2-empty">
           <h3>{entries.length ? query ? 'No bookmarks match your search and tags.' : 'No bookmarks match these tags.' : 'No bookmarks here yet.'}</h3>
-          <p>{entries.length ? query ? 'Clear your search or change the selected tags.' : 'Select All or deselect a tag to widen your list.' : collection === 'travel' ? 'Add a place you visited from Maps to see it here.' : `Promote a bookmark to the ${title} collection to see it here.`}</p>
+          <p>{entries.length ? query ? 'Clear your search or change the selected tags.' : 'Select All or deselect a tag to widen your list.' : `Promote a bookmark to the ${title} collection to see it here.`}</p>
         </div>}
         <p className="v2-order-note">Saved order · {title} collection</p>
       </section>

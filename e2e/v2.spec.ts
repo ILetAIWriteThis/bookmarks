@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 test('migrated bookmarks use the Web and YouTube routes', async ({ page }) => {
   await page.goto('./')
   const web = page.getByRole('list', { name: 'Web bookmarks' })
-  await expect(web.getByRole('link')).toHaveCount(500)
+  await expect(web.getByRole('link')).toHaveCount(481)
   await expect(web.getByRole('link').first()).toHaveAccessibleName(/LRT/)
   const rows = await web.getByRole('link').evaluateAll((links) => links.map((link) => {
     const rect = link.getBoundingClientRect()
@@ -36,22 +36,23 @@ test('migrated bookmarks use the Web and YouTube routes', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Old bookmarks' })).toHaveCount(0)
 })
 
-test('Media and Travel routes search and filter migrated bookmarks', async ({ page }) => {
-  await page.goto('./#/media')
-  const media = page.getByRole('list', { name: 'Media bookmarks' })
-  await expect(media.getByRole('link')).toHaveCount(1260)
-  await expect(page.getByRole('navigation', { name: 'Bookmark collections' }).getByText('1260')).toHaveCount(0)
-  await expect(page.getByText('1260 of 1260')).toHaveCount(0)
+test('removed collections fall back to Web and remaining bookmarks filter by review tag', async ({ page }) => {
+  for (const route of ['media', 'travel']) {
+    await page.goto(`./#/${route}`)
+    await page.reload()
+    const web = page.getByRole('list', { name: 'Web bookmarks' })
+    await expect(web.getByRole('link')).toHaveCount(481)
+    const navigation = page.getByRole('navigation', { name: 'Bookmark collections' })
+    await expect(navigation.getByRole('link')).toHaveCount(2)
+    await expect(navigation.getByRole('link', { name: 'Media' })).toHaveCount(0)
+    await expect(navigation.getByRole('link', { name: 'Travel' })).toHaveCount(0)
+    await page.locator('details.v2-filters summary').click()
+    await page.getByRole('button', { name: '#not-reviewed', exact: true }).click()
+    await expect(web.getByRole('link')).toHaveCount(481)
+  }
+  await page.goto('./#/youtube')
+  await page.reload()
   await page.locator('details.v2-filters summary').click()
-  await page.getByRole('button', { name: '#book', exact: true }).click()
-  await expect(media.getByRole('link')).toHaveCount(269)
-  await page.getByRole('searchbox', { name: 'Search Media bookmarks' }).fill('Dune')
-  await expect(media.getByRole('link').first()).toHaveAttribute('href', /goodreads\.com\/book\/show\//)
-
-  await page.goto('./#/travel')
-  const travel = page.getByRole('list', { name: 'Travel bookmarks' })
-  await expect(travel.getByRole('link')).toHaveCount(1)
-  await page.getByRole('searchbox', { name: 'Search Travel bookmarks' }).fill('Puckoriu')
-  await expect(travel.getByRole('link')).toHaveCount(1)
-  await expect(travel.getByRole('link').first()).toHaveAttribute('href', 'https://maps.app.goo.gl/ZkdmJcYNHzzY6LqZ6')
+  await page.getByRole('button', { name: '#not-reviewed', exact: true }).click()
+  await expect(page.getByRole('list', { name: 'YouTube bookmarks' }).getByRole('link')).toHaveCount(1179)
 })

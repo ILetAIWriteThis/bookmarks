@@ -1,45 +1,24 @@
 import bookmarkData from '../public/data/bookmarks.json'
 import { validateBookmarkData } from '../src/data'
 
-it('keeps migrated media and travel in the reviewed bookmark store', () => {
+it('removes Media and Travel categories and their bookmarks and tags every survivor', () => {
   const data = validateBookmarkData(bookmarkData)
-  const media = data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'media')
-  const travel = data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'travel')
-
-  expect(media).toHaveLength(1260)
-  expect(media.filter((bookmark) => bookmark.tags?.includes('book'))).toHaveLength(269)
-  expect(media.filter((bookmark) => bookmark.tags?.includes('tv'))).toHaveLength(72)
-  expect(media.filter((bookmark) => bookmark.tags?.includes('movie'))).toHaveLength(919)
-  expect(media.find((bookmark) => bookmark.id === 'the-avengers-2012')).toMatchObject({
-    url: 'https://www.imdb.com/title/tt0848228/',
-    tags: ['movie'],
-  })
-  expect(media.find((bookmark) => bookmark.id === 'goodreads-43419431')).toMatchObject({
-    url: 'https://www.goodreads.com/book/show/43419431',
-    tags: ['book'],
-  })
-  expect(media.every((bookmark) => !Object.keys(bookmark).some((key) => /date|published|creator|season|language/i.test(key)))).toBe(true)
-
-  expect(travel).toHaveLength(1)
+  expect(data.categories.some(({ id }) => id === 'media' || id === 'travel' || id.startsWith('travel-'))).toBe(false)
+  expect(data.bookmarks.some((bookmark) => bookmark.placement?.collection === 'media' || bookmark.placement?.collection === 'travel')).toBe(false)
+  expect(data.bookmarks.some((bookmark) => bookmark.categories.some(({ categoryId }) => categoryId === 'media' || categoryId === 'travel' || categoryId.startsWith('travel-')))).toBe(false)
+  expect(data.bookmarks).toHaveLength(1660)
+  expect(data.bookmarks.every((bookmark) => bookmark.tags?.includes('not-reviewed'))).toBe(true)
   expect(data.bookmarks.filter((bookmark) => !bookmark.placement)).toHaveLength(0)
-  expect(data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'web' && bookmark.categories.some((membership) => membership.categoryId.startsWith('travel')))).toHaveLength(19)
-  expect(travel.find((bookmark) => bookmark.id === 'puckoriu-piliakalnis')).toMatchObject({
-    url: 'https://maps.app.goo.gl/ZkdmJcYNHzzY6LqZ6',
-    tags: expect.arrayContaining(['europe', 'lithuania', 'nature']),
-    categories: [{ categoryId: 'travel-visited-places', position: 1 }],
-  })
+  expect(data.bookmarks.some(({ id }) => id === 'cave-of-zeus' || id === 'puckoriu-piliakalnis' || id === 'the-avengers-2012')).toBe(false)
 })
 
-it('migrates category lineage into tags and places old bookmarks without losing reviewed entries', () => {
+it('preserves Web and YouTube placements and existing tags', () => {
   const data = validateBookmarkData(bookmarkData)
-  expect(data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'web')).toHaveLength(500)
+  expect(data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'web')).toHaveLength(481)
   expect(data.bookmarks.filter((bookmark) => bookmark.placement?.collection === 'youtube')).toHaveLength(1179)
   expect(data.bookmarks.find((bookmark) => bookmark.id === 'youtube-baltic-defence-review')).toMatchObject({
-    tags: ['youtube', 'politics'],
+    tags: ['youtube', 'politics', 'not-reviewed'],
     placement: { collection: 'youtube' },
   })
-  expect(data.bookmarks.find((bookmark) => bookmark.id === 'cave-of-zeus')).toMatchObject({
-    tags: ['travel', 'visited-places', 'crete'],
-    placement: { collection: 'web' },
-  })
+  expect(data.categories.some(({ id }) => id === 'youtube-travel')).toBe(true)
 })

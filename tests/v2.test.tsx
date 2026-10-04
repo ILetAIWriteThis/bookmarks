@@ -131,31 +131,12 @@ it('explains empty seed collections and nonmatching filter combinations', async 
   expect(screen.getByRole('list').children).toHaveLength(2)
 })
 
-it('opens Media and Travel as searchable collections with tag filters', async () => {
-  const user = userEvent.setup()
-  const expanded: BookmarkData = {
-    ...data,
-    bookmarks: [...data.bookmarks,
-      { id: 'film', title: 'Sample Film', url: 'https://www.imdb.com/title/tt1234567/',
-        tags: ['movie', 'genre:action'], placement: { collection: 'media', position: 0 }, categories: [] },
-      { id: 'book', title: 'Sample Book', url: 'https://www.goodreads.com/book/show/12345',
-        tags: ['book', 'series:sample'], placement: { collection: 'media', position: 1 }, categories: [] },
-      { id: 'place', title: 'Pūčkorių piliakalnis', url: 'https://maps.app.goo.gl/ZkdmJcYNHzzY6LqZ6',
-        tags: ['europe', 'lithuania', 'nature'], placement: { collection: 'travel', position: 0 }, categories: [] },
-    ],
-  }
-  window.location.hash = '#/media'
-  render(<App data={expanded} />)
-  const media = screen.getByRole('list', { name: 'Media bookmarks' })
-  expect(within(media).getAllByRole('link')).toHaveLength(2)
-  await user.click(screen.getByText('Filter by tags'))
-  await user.click(screen.getByRole('button', { name: '#book' }))
-  expect(within(media).getAllByRole('link')).toHaveLength(1)
-  expect(within(media).getByRole('link')).toHaveAttribute('href', 'https://www.goodreads.com/book/show/12345')
-  navigate('#/travel')
-  const travel = screen.getByRole('list', { name: 'Travel bookmarks' })
-  await user.type(screen.getByRole('searchbox', { name: 'Search Travel bookmarks' }), 'Puckoriu')
-  expect(within(travel).getByRole('link')).toHaveAttribute('href', 'https://maps.app.goo.gl/ZkdmJcYNHzzY6LqZ6')
-  await user.click(screen.getByRole('button', { name: '#nature' }))
-  expect(within(travel).getAllByRole('link')).toHaveLength(1)
+it.each(['#/media', '#/travel'])('falls back to Web for removed route %s', (hash) => {
+  window.location.hash = hash
+  render(<App data={data} />)
+  expect(screen.getByRole('list', { name: 'Web bookmarks' }).children).toHaveLength(2)
+  const navigation = screen.getByRole('navigation', { name: 'Bookmark collections' })
+  expect(within(navigation).getAllByRole('link')).toHaveLength(2)
+  expect(within(navigation).queryByRole('link', { name: 'Media' })).not.toBeInTheDocument()
+  expect(within(navigation).queryByRole('link', { name: 'Travel' })).not.toBeInTheDocument()
 })
