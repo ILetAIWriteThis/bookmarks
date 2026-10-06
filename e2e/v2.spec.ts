@@ -41,7 +41,7 @@ test('migrated bookmarks use the Web and YouTube routes', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Old bookmarks' })).toHaveCount(0)
 })
 
-test('removed collections fall back to Web and remaining bookmarks filter by review tag', async ({ page }) => {
+test('removed collections fall back to Web and collection tags filter bookmarks', async ({ page }) => {
   for (const route of ['media', 'travel']) {
     await page.goto(`./#/${route}`)
     await page.reload()
@@ -59,9 +59,14 @@ test('removed collections fall back to Web and remaining bookmarks filter by rev
   }
   await page.goto('./#/youtube')
   await page.reload()
+  const youtube = page.getByRole('list', { name: 'YouTube bookmarks' })
+  await expect(youtube.getByRole('link')).toHaveCount(youtubeBookmarks.length)
   await page.locator('details.v2-filters summary').click()
-  await page.getByRole('button', { name: '#not-reviewed', exact: true }).click()
-  await expect(page.getByRole('list', { name: 'YouTube bookmarks' }).getByRole('link')).toHaveCount(unreviewedCount(youtubeBookmarks))
-  expect(await page.getByRole('list', { name: 'YouTube bookmarks' }).getByRole('link').evaluateAll((links) => links.map((link) => link.getAttribute('href')).sort()))
-    .toEqual(youtubeBookmarks.filter(({ tags }) => tags?.includes('not-reviewed')).map(({ url }) => url).sort())
+  await expect(page.getByRole('button', { name: '#not-reviewed', exact: true }))
+    .toHaveCount(unreviewedCount(youtubeBookmarks) > 0 ? 1 : 0)
+  await page.getByRole('button', { name: '#security', exact: true }).click()
+  const securityBookmarks = youtubeBookmarks.filter(({ tags }) => tags?.includes('security'))
+  await expect(youtube.getByRole('link')).toHaveCount(securityBookmarks.length)
+  expect(await youtube.getByRole('link').evaluateAll((links) => links.map((link) => link.getAttribute('href')).sort()))
+    .toEqual(securityBookmarks.map(({ url }) => url).sort())
 })
