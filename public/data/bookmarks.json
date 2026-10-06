@@ -543,8 +543,8 @@
       "url": "https://www.goodreads.com/review/list/165123849",
       "tags": [
         "tracking",
-        "book",
-        "not-reviewed"
+        "reading",
+        "book-recommendations"
       ],
       "categories": [
         {
@@ -563,8 +563,8 @@
       "url": "https://app.thestorygraph.com/",
       "tags": [
         "tracking",
-        "book",
-        "not-reviewed"
+        "reading",
+        "book-recommendations"
       ],
       "categories": [
         {
@@ -583,8 +583,7 @@
       "url": "https://www.imdb.com/user/p.7z525yifhbsnosefkvnvhjri3y/watchlist/?sort=date_added%2Cdesc",
       "tags": [
         "tracking",
-        "tv",
-        "not-reviewed"
+        "movies-tv"
       ],
       "categories": [
         {
@@ -603,8 +602,7 @@
       "url": "https://episodecalendar.com/",
       "tags": [
         "tracking",
-        "tv",
-        "not-reviewed"
+        "movies-tv"
       ],
       "categories": [
         {
@@ -623,8 +621,7 @@
       "url": "https://www.amazon.com/hz/wishlist/ls/1FX01SGXD597F?type=wishlist&filter=unpurchased&sort=price-asc&viewType=grid",
       "tags": [
         "tracking",
-        "book",
-        "not-reviewed"
+        "reading"
       ],
       "categories": [
         {
@@ -642,8 +639,8 @@
       "title": "Amazon Digital Content",
       "url": "https://www.amazon.com/hz/mycd/digital-console/contentlist/allcontent/dateDsc",
       "tags": [
-        "book",
-        "not-reviewed"
+        "reading",
+        "ebooks"
       ],
       "categories": [
         {
@@ -661,8 +658,7 @@
       "title": "Kindle Reading Insights",
       "url": "https://www.amazon.com/kindle/reading/insights#2026:false:0,37,46,4,0",
       "tags": [
-        "book",
-        "not-reviewed"
+        "reading"
       ],
       "categories": [
         {
@@ -681,8 +677,8 @@
       "url": "https://www.justwatch.com/lt/filmai",
       "tags": [
         "tracking",
-        "tv",
-        "not-reviewed"
+        "movies-tv",
+        "streaming"
       ],
       "categories": [
         {
@@ -700,8 +696,9 @@
       "title": "Paysera",
       "url": "https://paysera.lt/",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "banking",
+        "payments"
       ],
       "categories": [
         {
@@ -721,7 +718,9 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "active-directory",
+        "cloud-security",
+        "vulnerability-research"
       ],
       "categories": [
         {
@@ -740,8 +739,9 @@
       "url": "https://newsletter.semianalysis.com/",
       "tags": [
         "tech",
-        "ai",
-        "not-reviewed"
+        "ai-machine-learning",
+        "semiconductors",
+        "research"
       ],
       "categories": [
         {
@@ -759,8 +759,7 @@
       "title": "Go3",
       "url": "https://go3.lt/",
       "tags": [
-        "entertainment",
-        "not-reviewed"
+        "entertainment"
       ],
       "categories": [
         {
@@ -778,8 +777,8 @@
       "title": "Ignitis Declaration",
       "url": "https://mano.ignitis.lt/declaration",
       "tags": [
-        "taxes",
-        "not-reviewed"
+        "utilities",
+        "bills"
       ],
       "categories": [
         {
@@ -797,8 +796,8 @@
       "title": "Send to Kindle",
       "url": "https://www.amazon.com/sendtokindle",
       "tags": [
-        "book",
-        "not-reviewed"
+        "reading",
+        "ebooks"
       ],
       "categories": [
         {
@@ -816,8 +815,8 @@
       "title": "i-Unija",
       "url": "https://www.i-unija.lt/login.htm",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "banking"
       ],
       "categories": [
         {
@@ -835,8 +834,8 @@
       "title": "SEB Internet Bank",
       "url": "https://login.seb.lt/",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "banking"
       ],
       "categories": [
         {
@@ -854,8 +853,7 @@
       "title": "Pigu.lt",
       "url": "https://pigu.lt/lt/",
       "tags": [
-        "e-shop",
-        "not-reviewed"
+        "e-shop"
       ],
       "categories": [
         {
@@ -1235,9 +1233,9 @@
       "url": "https://www.youtube.com/@anthropic-ai/videos",
       "tags": [
         "tech",
-        "ai",
-        "ai-vendors",
-        "not-reviewed"
+        "ai-machine-learning",
+        "vendor",
+        "research"
       ],
       "categories": [
         {
@@ -23943,7 +23941,8 @@
       "url": "https://translate.google.com/",
       "tags": [
         "tech",
-        "not-reviewed"
+        "languages",
+        "translation"
       ],
       "categories": [
         {
@@ -23962,7 +23961,8 @@
       "url": "https://music.youtube.com/",
       "tags": [
         "entertainment",
-        "not-reviewed"
+        "music",
+        "streaming"
       ],
       "categories": [
         {
@@ -23981,7 +23981,8 @@
       "url": "https://epika.lrt.lt/",
       "tags": [
         "entertainment",
-        "not-reviewed"
+        "movies-tv",
+        "streaming"
       ],
       "categories": [
         {
@@ -24000,7 +24001,8 @@
       "url": "https://www.lrt.lt/mediateka/tv-laidos",
       "tags": [
         "entertainment",
-        "not-reviewed"
+        "movies-tv",
+        "streaming"
       ],
       "categories": [
         {
@@ -24018,8 +24020,10 @@
       "title": "PROFITUS",
       "url": "https://www.profitus.lt/",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "investing",
+        "real-estate",
+        "crowdfunding"
       ],
       "categories": [
         {
@@ -24037,8 +24041,9 @@
       "title": "Paskolų klubas",
       "url": "https://www.paskoluklubas.lt/",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "lending",
+        "investing"
       ],
       "categories": [
         {
@@ -24056,8 +24061,10 @@
       "title": "Nordstreet",
       "url": "https://nordstreet.com/",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "investing",
+        "real-estate",
+        "crowdfunding"
       ],
       "categories": [
         {
@@ -24075,8 +24082,9 @@
       "title": "Interactive Brokers",
       "url": "https://www.interactivebrokers.com/",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "investing",
+        "trading"
       ],
       "categories": [
         {
@@ -24096,7 +24104,7 @@
       "tags": [
         "news",
         "reading",
-        "not-reviewed"
+        "science"
       ],
       "categories": [
         {
@@ -24120,7 +24128,9 @@
       "tags": [
         "news",
         "reading",
-        "not-reviewed"
+        "nature",
+        "geography",
+        "science"
       ],
       "categories": [
         {
@@ -24144,7 +24154,8 @@
       "tags": [
         "news",
         "reading",
-        "not-reviewed"
+        "politics",
+        "economics"
       ],
       "categories": [
         {
@@ -24167,7 +24178,7 @@
       "url": "https://standardebooks.org/",
       "tags": [
         "reading",
-        "not-reviewed"
+        "ebooks"
       ],
       "categories": [
         {
@@ -24187,7 +24198,7 @@
       "tags": [
         "reading",
         "learning",
-        "not-reviewed"
+        "reference"
       ],
       "categories": [
         {
@@ -24209,8 +24220,7 @@
       "title": "Best Sellers - Books",
       "url": "https://www.nytimes.com/books/best-sellers/",
       "tags": [
-        "reading",
-        "not-reviewed"
+        "reading"
       ],
       "categories": [
         {
@@ -24229,7 +24239,7 @@
       "url": "https://www.vcb.lt/",
       "tags": [
         "reading",
-        "not-reviewed"
+        "library"
       ],
       "categories": [
         {
@@ -24247,8 +24257,7 @@
       "title": "Reading Length",
       "url": "https://www.readinglength.com/",
       "tags": [
-        "reading",
-        "not-reviewed"
+        "reading"
       ],
       "categories": [
         {
@@ -24267,7 +24276,7 @@
       "url": "https://read.amazon.com/",
       "tags": [
         "reading",
-        "not-reviewed"
+        "ebooks"
       ],
       "categories": [
         {
@@ -24286,7 +24295,7 @@
       "url": "https://www.gutenberg.org/",
       "tags": [
         "reading",
-        "not-reviewed"
+        "ebooks"
       ],
       "categories": [
         {
@@ -24305,7 +24314,7 @@
       "url": "https://www.orderofbooks.com/",
       "tags": [
         "reading",
-        "not-reviewed"
+        "book-recommendations"
       ],
       "categories": [
         {
@@ -24325,7 +24334,8 @@
       "tags": [
         "reading",
         "learning",
-        "not-reviewed"
+        "philosophy",
+        "reference"
       ],
       "categories": [
         {
@@ -24349,7 +24359,9 @@
       "tags": [
         "reading",
         "lifestyle",
-        "not-reviewed"
+        "self-improvement-philosophy",
+        "personal-finance",
+        "investing"
       ],
       "categories": [
         {
@@ -24371,8 +24383,9 @@
       "title": "Pamiršta.lt",
       "url": "https://pamirsta.lt/",
       "tags": [
-        "reading",
-        "not-reviewed"
+        "travel",
+        "urban-exploration",
+        "photography"
       ],
       "categories": [
         {
@@ -24392,7 +24405,8 @@
       "tags": [
         "reading",
         "learning",
-        "not-reviewed"
+        "culture",
+        "education"
       ],
       "categories": [
         {
@@ -24416,7 +24430,7 @@
       "tags": [
         "reading",
         "lifestyle",
-        "not-reviewed"
+        "blogs"
       ],
       "categories": [
         {
@@ -24441,7 +24455,8 @@
         "security",
         "researchers-blogs",
         "reading",
-        "not-reviewed"
+        "leadership",
+        "cloud-security"
       ],
       "categories": [
         {
@@ -24467,9 +24482,8 @@
       "title": "I Will Teach You To Be Rich",
       "url": "https://www.iwillteachyoutoberich.com/",
       "tags": [
-        "finance-tracking",
-        "reading",
-        "not-reviewed"
+        "personal-finance",
+        "reading"
       ],
       "categories": [
         {
@@ -24491,9 +24505,10 @@
       "title": "Šeši nuliai - Finansinė kelionė milijono link",
       "url": "https://sesinuliai.lt/",
       "tags": [
-        "finance-tracking",
+        "personal-finance",
+        "investing",
         "reading",
-        "not-reviewed"
+        "blogs"
       ],
       "categories": [
         {
@@ -24515,9 +24530,10 @@
       "title": "Taupymas ir investavimas - Investologija.lt",
       "url": "https://investologija.lt/",
       "tags": [
-        "finance-tracking",
+        "personal-finance",
+        "investing",
         "reading",
-        "not-reviewed"
+        "blogs"
       ],
       "categories": [
         {
@@ -24541,7 +24557,7 @@
       "tags": [
         "reading",
         "lifestyle",
-        "not-reviewed"
+        "self-improvement-philosophy"
       ],
       "categories": [
         {
@@ -24564,8 +24580,7 @@
       "url": "https://www.sparknotes.com/",
       "tags": [
         "reading",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -24589,7 +24604,7 @@
       "tags": [
         "news",
         "reading",
-        "not-reviewed"
+        "local-news"
       ],
       "categories": [
         {
@@ -24613,7 +24628,8 @@
       "tags": [
         "reading",
         "lifestyle",
-        "not-reviewed"
+        "self-improvement-philosophy",
+        "motivation"
       ],
       "categories": [
         {
@@ -24636,8 +24652,7 @@
       "url": "https://aliabdaal.com/articles/",
       "tags": [
         "reading",
-        "lifestyle",
-        "not-reviewed"
+        "lifestyle"
       ],
       "categories": [
         {
@@ -24661,7 +24676,8 @@
       "tags": [
         "reading",
         "lifestyle",
-        "not-reviewed"
+        "productivity",
+        "psychology"
       ],
       "categories": [
         {
@@ -24683,10 +24699,9 @@
       "title": "BALTIC MUSTACHE - Finansinė nepriklausomybė iki 40 metų Lietuvoje",
       "url": "https://balticmustache.lt/",
       "tags": [
-        "finance-tracking",
+        "personal-finance",
         "reading",
-        "lifestyle",
-        "not-reviewed"
+        "lifestyle"
       ],
       "categories": [
         {
@@ -24713,8 +24728,7 @@
       "url": "https://www.reddit.com/r/getdisciplined/best/",
       "tags": [
         "reading",
-        "lifestyle",
-        "not-reviewed"
+        "lifestyle"
       ],
       "categories": [
         {
@@ -24737,8 +24751,7 @@
       "url": "https://betterhumans.pub/",
       "tags": [
         "reading",
-        "lifestyle",
-        "not-reviewed"
+        "lifestyle"
       ],
       "categories": [
         {
@@ -24763,7 +24776,9 @@
         "reading",
         "learning",
         "lifestyle",
-        "not-reviewed"
+        "philosophy",
+        "science",
+        "psychology"
       ],
       "categories": [
         {
@@ -24790,7 +24805,7 @@
       "url": "https://www.whatshouldireadnext.com/",
       "tags": [
         "reading",
-        "not-reviewed"
+        "book-recommendations"
       ],
       "categories": [
         {
@@ -24810,7 +24825,7 @@
       "tags": [
         "reading",
         "learning",
-        "not-reviewed"
+        "reference"
       ],
       "categories": [
         {
@@ -24833,8 +24848,7 @@
       "url": "https://www.ereaderiq.com/",
       "tags": [
         "e-shop",
-        "reading",
-        "not-reviewed"
+        "reading"
       ],
       "categories": [
         {
@@ -24856,8 +24870,9 @@
       "title": "TV24.lt",
       "url": "https://www.tv24.lt/",
       "tags": [
-        "entertainment-tracking",
-        "not-reviewed"
+        "tracking",
+        "movies-tv",
+        "tv-schedules"
       ],
       "categories": [
         {
@@ -24875,8 +24890,9 @@
       "title": "Duo 3 Schedule",
       "url": "https://www.duo3.ee/en/epg",
       "tags": [
-        "entertainment-tracking",
-        "not-reviewed"
+        "tracking",
+        "movies-tv",
+        "tv-schedules"
       ],
       "categories": [
         {
@@ -24894,8 +24910,9 @@
       "title": "Duo 6 Schedule",
       "url": "https://www.duo6.ee/en/epg",
       "tags": [
-        "entertainment-tracking",
-        "not-reviewed"
+        "tracking",
+        "movies-tv",
+        "tv-schedules"
       ],
       "categories": [
         {
@@ -24913,8 +24930,7 @@
       "title": "Motorsport.tv",
       "url": "https://motorsport.tv/",
       "tags": [
-        "entertainment",
-        "not-reviewed"
+        "entertainment"
       ],
       "categories": [
         {
@@ -24932,8 +24948,7 @@
       "title": "Streameast",
       "url": "https://www.streameast.live/sa/",
       "tags": [
-        "entertainment",
-        "not-reviewed"
+        "entertainment"
       ],
       "categories": [
         {
@@ -24951,8 +24966,7 @@
       "title": "Red Bull TV",
       "url": "https://www.redbull.com/int-en/discover",
       "tags": [
-        "entertainment",
-        "not-reviewed"
+        "entertainment"
       ],
       "categories": [
         {
@@ -24970,8 +24984,9 @@
       "title": "TheTVDB",
       "url": "https://thetvdb.com/",
       "tags": [
-        "entertainment-tracking",
-        "not-reviewed"
+        "tracking",
+        "movies-tv",
+        "reference"
       ],
       "categories": [
         {
@@ -24990,7 +25005,8 @@
       "url": "https://www.lrt.lt/mediateka/video/tai-kur-toliau",
       "tags": [
         "entertainment",
-        "not-reviewed"
+        "travel",
+        "documentary"
       ],
       "categories": [
         {
@@ -25009,7 +25025,8 @@
       "url": "https://www.lrt.lt/mediateka/video/kita-puse",
       "tags": [
         "entertainment",
-        "not-reviewed"
+        "travel",
+        "documentary"
       ],
       "categories": [
         {
@@ -25030,7 +25047,7 @@
         "learning",
         "lifestyle",
         "health",
-        "not-reviewed"
+        "fitness"
       ],
       "categories": [
         {
@@ -25059,7 +25076,7 @@
         "learning",
         "lifestyle",
         "health",
-        "not-reviewed"
+        "dentistry"
       ],
       "categories": [
         {
@@ -25087,8 +25104,7 @@
       "tags": [
         "tech",
         "learning",
-        "programming",
-        "not-reviewed"
+        "programming"
       ],
       "categories": [
         {
@@ -25117,7 +25133,7 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "coding-practice"
       ],
       "categories": [
         {
@@ -25145,8 +25161,7 @@
       "tags": [
         "security",
         "learning",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -25174,7 +25189,9 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "pentesting",
+        "education",
+        "certifications"
       ],
       "categories": [
         {
@@ -25198,7 +25215,9 @@
       "tags": [
         "tech",
         "learning",
-        "not-reviewed"
+        "education",
+        "cloud-computing",
+        "certifications"
       ],
       "categories": [
         {
@@ -25222,8 +25241,7 @@
       "tags": [
         "tech",
         "learning",
-        "programming",
-        "not-reviewed"
+        "programming"
       ],
       "categories": [
         {
@@ -25252,7 +25270,7 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "cryptography"
       ],
       "categories": [
         {
@@ -25283,7 +25301,7 @@
         "learning",
         "programming",
         "games",
-        "not-reviewed"
+        "coding-practice"
       ],
       "categories": [
         {
@@ -25316,7 +25334,8 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "linux",
+        "pentesting"
       ],
       "categories": [
         {
@@ -25344,8 +25363,7 @@
       "tags": [
         "tech",
         "learning",
-        "programming",
-        "not-reviewed"
+        "programming"
       ],
       "categories": [
         {
@@ -25373,7 +25391,7 @@
       "tags": [
         "reading",
         "learning",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -25397,7 +25415,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "malware-analysis",
+        "network-security"
       ],
       "categories": [
         {
@@ -25421,7 +25440,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "malware-analysis",
+        "detection-engineering"
       ],
       "categories": [
         {
@@ -25444,8 +25464,7 @@
       "url": "https://pauljerimy.com/security-certification-roadmap/",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -25468,8 +25487,7 @@
       "url": "https://vx-underground.org/",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -25493,7 +25511,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "malware-analysis",
+        "cti"
       ],
       "categories": [
         {
@@ -25517,7 +25536,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "reverse-engineering",
+        "education"
       ],
       "categories": [
         {
@@ -25540,8 +25560,7 @@
       "url": "https://opensecuritytraining.info/Welcome.html",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -25563,8 +25582,7 @@
       "title": "Online Courses - Learn Anything, On Your Schedule | Udemy",
       "url": "https://www.udemy.com/",
       "tags": [
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -25584,7 +25602,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "education",
+        "certifications"
       ],
       "categories": [
         {
@@ -25607,8 +25626,7 @@
       "url": "https://www.cyberaces.org/",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -25631,7 +25649,8 @@
       "url": "https://www.bitdegree.org/",
       "tags": [
         "learning",
-        "not-reviewed"
+        "cryptocurrency",
+        "web3"
       ],
       "categories": [
         {
@@ -25651,8 +25670,7 @@
       "tags": [
         "tech",
         "learning",
-        "programming",
-        "not-reviewed"
+        "programming"
       ],
       "categories": [
         {
@@ -25681,7 +25699,8 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "education",
+        "vendor"
       ],
       "categories": [
         {
@@ -25709,7 +25728,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "education",
+        "certifications"
       ],
       "categories": [
         {
@@ -25732,7 +25752,8 @@
       "url": "https://www.coursera.org/",
       "tags": [
         "learning",
-        "not-reviewed"
+        "education",
+        "certifications"
       ],
       "categories": [
         {
@@ -25751,7 +25772,8 @@
       "url": "https://www.edx.org/",
       "tags": [
         "learning",
-        "not-reviewed"
+        "education",
+        "certifications"
       ],
       "categories": [
         {
@@ -25772,7 +25794,8 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "education",
+        "coding-practice"
       ],
       "categories": [
         {
@@ -25799,7 +25822,8 @@
       "url": "https://thisweekin4n6.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "dfir",
+        "news"
       ],
       "categories": [
         {
@@ -25818,7 +25842,8 @@
       "url": "https://tldrsec.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "newsletters",
+        "research"
       ],
       "categories": [
         {
@@ -25838,7 +25863,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "detection-engineering",
+        "newsletters"
       ],
       "categories": [
         {
@@ -25861,7 +25887,8 @@
       "url": "https://cloudseclist.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "cloud-security",
+        "newsletters"
       ],
       "categories": [
         {
@@ -25880,7 +25907,8 @@
       "url": "https://blog.badsectorlabs.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news",
+        "blogs"
       ],
       "categories": [
         {
@@ -25900,7 +25928,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "dfir",
+        "windows-security"
       ],
       "categories": [
         {
@@ -25923,7 +25952,8 @@
       "url": "https://entra.news/",
       "tags": [
         "security",
-        "not-reviewed"
+        "identity-access-management",
+        "newsletters"
       ],
       "categories": [
         {
@@ -25942,7 +25972,9 @@
       "url": "https://microsoftdefender.substack.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "siem",
+        "xdr",
+        "newsletters"
       ],
       "categories": [
         {
@@ -25960,8 +25992,7 @@
       "title": "THE PROMPT for Security Copilot | Rod Trent | Substack",
       "url": "https://thecfsprompt.substack.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -25980,7 +26011,9 @@
       "url": "https://kustoinsights.substack.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "kql",
+        "data-analytics",
+        "newsletters"
       ],
       "categories": [
         {
@@ -26000,7 +26033,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "ai-machine-learning",
+        "blogs"
       ],
       "categories": [
         {
@@ -26023,7 +26057,9 @@
       "url": "https://thedfirreport.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "dfir",
+        "cti",
+        "detection-engineering"
       ],
       "categories": [
         {
@@ -26043,7 +26079,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "malware-analysis",
+        "blogs"
       ],
       "categories": [
         {
@@ -26066,7 +26103,10 @@
       "url": "https://blog.0patch.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "patch-management",
+        "windows-security",
+        "vendor",
+        "blogs"
       ],
       "categories": [
         {
@@ -26086,7 +26126,7 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "vulnerability-management"
       ],
       "categories": [
         {
@@ -26108,8 +26148,7 @@
       "title": "All things OSCP",
       "url": "https://www.reddit.com/r/oscp/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26127,8 +26166,7 @@
       "title": "Antivirus",
       "url": "https://www.reddit.com/r/antivirus/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26146,8 +26184,7 @@
       "title": "AskNetsec",
       "url": "https://www.reddit.com/r/AskNetsec/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26165,8 +26202,7 @@
       "title": "Avanan | Blog",
       "url": "https://www.avanan.com/blog",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26185,7 +26221,8 @@
       "url": "https://www.blackhillsinfosec.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "pentesting",
+        "vendor"
       ],
       "categories": [
         {
@@ -26203,8 +26240,7 @@
       "title": "Blackhat Library: Hacking techniques and research",
       "url": "https://www.reddit.com/r/blackhat/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26222,8 +26258,7 @@
       "title": "BleepingComputer",
       "url": "https://www.bleepingcomputer.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26242,7 +26277,9 @@
       "url": "https://bhconsulting.ie/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "privacy",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -26261,7 +26298,10 @@
       "url": "https://www.netspi.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "pentesting",
+        "vulnerability-research",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -26280,7 +26320,11 @@
       "url": "https://www.volexity.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "cti",
+        "dfir",
+        "malware-analysis",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -26299,7 +26343,8 @@
       "url": "https://www.cisecurity.org/insights/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -26317,8 +26362,7 @@
       "title": "Blogs | AT&T Cybersecurity",
       "url": "https://cybersecurity.att.com/blogs",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26337,7 +26381,9 @@
       "url": "https://breakdev.org/",
       "tags": [
         "security",
-        "not-reviewed"
+        "offensive-security",
+        "red-team",
+        "phishing"
       ],
       "categories": [
         {
@@ -26356,7 +26402,10 @@
       "url": "https://census-labs.com/news/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vulnerability-research",
+        "reverse-engineering",
+        "research",
+        "vendor"
       ],
       "categories": [
         {
@@ -26374,8 +26423,7 @@
       "title": "Cisco Talos Blog",
       "url": "https://blog.talosintelligence.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26394,7 +26442,10 @@
       "url": "https://codewhitesec.blogspot.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "offensive-security",
+        "exploit-development",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -26412,8 +26463,7 @@
       "title": "Computer Forensics",
       "url": "https://www.reddit.com/r/computerforensics/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26431,8 +26481,7 @@
       "title": "Computer Security - IT security news, articles and tools",
       "url": "https://www.reddit.com/r/ComputerSecurity/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26451,7 +26500,10 @@
       "url": "https://research.checkpoint.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vulnerability-research",
+        "malware-analysis",
+        "research",
+        "vendor"
       ],
       "categories": [
         {
@@ -26469,8 +26521,7 @@
       "title": "cryptography",
       "url": "https://www.reddit.com/r/cryptography/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26489,7 +26540,9 @@
       "url": "https://cyberarms.wordpress.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "offensive-security",
+        "ai-security",
+        "blogs"
       ],
       "categories": [
         {
@@ -26508,7 +26561,9 @@
       "url": "https://improsec.com/cyber-blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "tech",
+        "sysadmin",
+        "vendor"
       ],
       "categories": [
         {
@@ -26527,7 +26582,8 @@
       "url": "https://bluepurple.binaryfirefly.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blue-team",
+        "newsletters"
       ],
       "categories": [
         {
@@ -26545,8 +26601,7 @@
       "title": "CYBER GEEKS – All Things Infosec",
       "url": "https://cybergeeks.tech/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26565,7 +26620,9 @@
       "url": "https://www.malwarebytes.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "antivirus",
+        "endpoint-security",
+        "vendor"
       ],
       "categories": [
         {
@@ -26584,7 +26641,9 @@
       "url": "https://www.cybereason.com/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "news",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -26603,7 +26662,7 @@
       "url": "https://cyberscoop.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news"
       ],
       "categories": [
         {
@@ -26621,8 +26680,7 @@
       "title": "cybersecurity",
       "url": "https://www.reddit.com/r/cybersecurity/new",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26641,7 +26699,9 @@
       "url": "https://www.binarydefense.com/resources/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor",
+        "soc"
       ],
       "categories": [
         {
@@ -26660,7 +26720,9 @@
       "url": "https://www.crowdstrike.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor",
+        "endpoint-security"
       ],
       "categories": [
         {
@@ -26679,7 +26741,9 @@
       "url": "https://www.sentinelone.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor",
+        "endpoint-security"
       ],
       "categories": [
         {
@@ -26697,8 +26761,7 @@
       "title": "Dark Reading",
       "url": "https://www.darkreading.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26717,7 +26780,9 @@
       "url": "https://www.databreaches.net/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news",
+        "data-breaches",
+        "privacy"
       ],
       "categories": [
         {
@@ -26736,7 +26801,7 @@
       "url": "https://duo.com/decipher/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news"
       ],
       "categories": [
         {
@@ -26755,7 +26820,9 @@
       "url": "https://www.deepinstinct.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "ai-security",
+        "endpoint-security"
       ],
       "categories": [
         {
@@ -26774,7 +26841,8 @@
       "url": "https://www.eccouncil.org/",
       "tags": [
         "security",
-        "not-reviewed"
+        "education",
+        "certifications"
       ],
       "categories": [
         {
@@ -26793,7 +26861,9 @@
       "url": "https://blog.elcomsoft.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "dfir",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -26813,7 +26883,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "certifications",
+        "blue-team"
       ],
       "categories": [
         {
@@ -26835,8 +26906,7 @@
       "title": "Blue Team Security",
       "url": "https://www.reddit.com/r/blueteamsec/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26854,8 +26924,7 @@
       "title": "Fortra",
       "url": "https://www.phishlabs.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26874,7 +26943,8 @@
       "url": "https://security.googleblog.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -26894,7 +26964,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "podcasts",
+        "conferences"
       ],
       "categories": [
         {
@@ -26918,7 +26989,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "programming",
+        "vulnerability-research"
       ],
       "categories": [
         {
@@ -26940,9 +27012,11 @@
       "title": "Hackaday",
       "url": "https://hackaday.com/",
       "tags": [
-        "security",
         "tech",
-        "not-reviewed"
+        "hardware",
+        "electronics",
+        "diy",
+        "engineering"
       ],
       "categories": [
         {
@@ -26964,8 +27038,7 @@
       "title": "r/hacking",
       "url": "https://www.reddit.com/r/hacking/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -26984,7 +27057,8 @@
       "url": "https://www.hackread.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news",
+        "cybercrime"
       ],
       "categories": [
         {
@@ -27003,7 +27077,8 @@
       "url": "https://hakin9.org/",
       "tags": [
         "security",
-        "not-reviewed"
+        "education",
+        "reading"
       ],
       "categories": [
         {
@@ -27022,7 +27097,10 @@
       "url": "https://hex-rays.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "reverse-engineering",
+        "malware-analysis",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -27041,7 +27119,8 @@
       "url": "https://www.hextree.io/",
       "tags": [
         "security",
-        "not-reviewed"
+        "education",
+        "ctf"
       ],
       "categories": [
         {
@@ -27059,8 +27138,7 @@
       "title": "Home - Active Countermeasures",
       "url": "https://www.activecountermeasures.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27079,7 +27157,8 @@
       "url": "https://www.av-comparatives.org/",
       "tags": [
         "security",
-        "not-reviewed"
+        "antivirus",
+        "research"
       ],
       "categories": [
         {
@@ -27098,7 +27177,8 @@
       "url": "https://niiconsulting.com/checkmate/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -27117,7 +27197,8 @@
       "url": "https://www.cisa.gov/",
       "tags": [
         "security",
-        "not-reviewed"
+        "government",
+        "industrial-security"
       ],
       "categories": [
         {
@@ -27136,7 +27217,10 @@
       "url": "https://www.huntress.com/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor",
+        "threat-hunting",
+        "incident-response"
       ],
       "categories": [
         {
@@ -27155,7 +27239,8 @@
       "url": "https://www.cyberark.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "identity-access-management",
+        "vendor"
       ],
       "categories": [
         {
@@ -27174,7 +27259,10 @@
       "url": "https://blog.mindedsecurity.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "application-security",
+        "research",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -27193,7 +27281,9 @@
       "url": "https://www.blumira.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor",
+        "soc"
       ],
       "categories": [
         {
@@ -27211,8 +27301,7 @@
       "title": "CISO MAG",
       "url": "https://cisomag.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27231,7 +27320,9 @@
       "url": "https://inteltechniques.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "osint",
+        "privacy",
+        "blogs"
       ],
       "categories": [
         {
@@ -27249,8 +27340,7 @@
       "title": "Internet and Cloud Intelligence Blog",
       "url": "https://www.thousandeyes.com/blog/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27269,7 +27359,9 @@
       "url": "https://www.kali.org/",
       "tags": [
         "security",
-        "not-reviewed"
+        "linux",
+        "pentesting",
+        "open-source"
       ],
       "categories": [
         {
@@ -27288,7 +27380,9 @@
       "url": "https://www.kaspersky.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor",
+        "antivirus"
       ],
       "categories": [
         {
@@ -27307,7 +27401,8 @@
       "url": "https://www.kitploit.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "pentesting",
+        "tools"
       ],
       "categories": [
         {
@@ -27326,7 +27421,8 @@
       "url": "https://krebsonsecurity.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news",
+        "cybercrime"
       ],
       "categories": [
         {
@@ -27344,8 +27440,7 @@
       "title": "Medium: Bug Bounty",
       "url": "https://medium.com/tag/bug-bounty/latest",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27363,8 +27458,7 @@
       "title": "Medium: Cybersecurity",
       "url": "https://medium.com/tag/cybersecurity/latest",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27382,8 +27476,7 @@
       "title": "Medium: Threat Hunting",
       "url": "https://medium.com/tag/threat-hunting/latest",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27402,7 +27495,9 @@
       "url": "https://www.jumpsec.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "pentesting",
+        "incident-response"
       ],
       "categories": [
         {
@@ -27420,8 +27515,7 @@
       "title": "r/Malware",
       "url": "https://www.reddit.com/r/Malware/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27439,8 +27533,7 @@
       "title": "Microsoft Defender for Endpoint",
       "url": "https://www.reddit.com/r/DefenderATP/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27458,8 +27551,7 @@
       "title": "Microsoft Security Blog",
       "url": "https://www.microsoft.com/en-us/security/blog/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27477,8 +27569,7 @@
       "title": "Microsoft Security Response Center",
       "url": "https://msrc.microsoft.com/blog/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27497,7 +27588,9 @@
       "url": "https://blog.morphisec.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "ransomware"
       ],
       "categories": [
         {
@@ -27515,8 +27608,7 @@
       "title": "Naked Security – Computer Security News, Advice and Research",
       "url": "https://nakedsecurity.sophos.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27535,7 +27627,9 @@
       "url": "https://www.nist.gov/",
       "tags": [
         "security",
-        "not-reviewed"
+        "science",
+        "standards",
+        "government"
       ],
       "categories": [
         {
@@ -27553,8 +27647,7 @@
       "title": "netsecstudents: Subreddit for students studying Network Security and its related subjects",
       "url": "https://www.reddit.com/r/netsecstudents/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27572,8 +27665,7 @@
       "title": "News Archives - Forensic Focus",
       "url": "https://www.forensicfocus.com/news/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27591,8 +27683,7 @@
       "title": "ENISA News",
       "url": "https://www.enisa.europa.eu/media/news-items#b_start=0",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27610,8 +27701,10 @@
       "title": "OVHcloud Blog - Innovation for Freedom",
       "url": "https://blog.ovhcloud.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "tech",
+        "cloud-computing",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -27630,7 +27723,9 @@
       "url": "https://packetstormsecurity.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "exploit-development",
+        "tools",
+        "news"
       ],
       "categories": [
         {
@@ -27649,7 +27744,9 @@
       "url": "https://www.pandasecurity.com/en/mediacenter/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vendor",
+        "security-awareness"
       ],
       "categories": [
         {
@@ -27668,7 +27765,10 @@
       "url": "https://panther.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "siem",
+        "soc",
+        "detection-engineering"
       ],
       "categories": [
         {
@@ -27687,7 +27787,10 @@
       "url": "https://cofense.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "phishing",
+        "email-security"
       ],
       "categories": [
         {
@@ -27705,8 +27808,7 @@
       "title": "Post malware and hostile servers for others to analyze",
       "url": "https://www.reddit.com/r/MalwareAnalysis/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27725,7 +27827,11 @@
       "url": "https://posts.specterops.io/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "red-team",
+        "detection-engineering",
+        "identity-access-management"
       ],
       "categories": [
         {
@@ -27744,7 +27850,10 @@
       "url": "https://labs.jumpsec.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "research",
+        "pentesting",
+        "vulnerability-research"
       ],
       "categories": [
         {
@@ -27763,7 +27872,9 @@
       "url": "https://www.rapid7.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "vulnerability-management"
       ],
       "categories": [
         {
@@ -27783,7 +27894,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "red-team",
+        "offensive-security"
       ],
       "categories": [
         {
@@ -27805,8 +27917,7 @@
       "title": "Red Team Security",
       "url": "https://www.reddit.com/r/redteamsec/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27825,7 +27936,9 @@
       "url": "https://www.trendmicro.com/en_us/research.html",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "research",
+        "cti"
       ],
       "categories": [
         {
@@ -27844,7 +27957,9 @@
       "url": "https://www.mandiant.com/resources/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "cti",
+        "incident-response"
       ],
       "categories": [
         {
@@ -27862,8 +27977,7 @@
       "title": "Reverse Engineering",
       "url": "https://www.reddit.com/r/ReverseEngineering/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27882,7 +27996,8 @@
       "url": "https://isc.sans.edu/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news",
+        "cti"
       ],
       "categories": [
         {
@@ -27901,7 +28016,8 @@
       "url": "https://seclists.org/#fulldisclosure",
       "tags": [
         "security",
-        "not-reviewed"
+        "mailing-lists",
+        "reference"
       ],
       "categories": [
         {
@@ -27920,7 +28036,7 @@
       "url": "https://securityaffairs.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news"
       ],
       "categories": [
         {
@@ -27938,8 +28054,7 @@
       "title": "Microsoft Security Update Guide",
       "url": "https://msrc.microsoft.com/update-guide/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27957,8 +28072,7 @@
       "title": "Security, Compliance, and Identity - Microsoft Community Hub",
       "url": "https://techcommunity.microsoft.com/t5/security-compliance-and-identity/ct-p/MicrosoftSecurityandCompliance",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27976,8 +28090,7 @@
       "title": "r/securityCTF",
       "url": "https://www.reddit.com/r/securityCTF/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -27995,8 +28108,7 @@
       "title": "securitycurrent.com",
       "url": "https://securitycurrent.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28015,7 +28127,10 @@
       "url": "https://www.sentinelone.com/labs/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "research",
+        "cti",
+        "malware-analysis"
       ],
       "categories": [
         {
@@ -28033,8 +28148,7 @@
       "title": "SIEM Platform & Security Operations Center Services | LogRhythm",
       "url": "https://logrhythm.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28053,7 +28167,9 @@
       "url": "https://socprime.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "detection-engineering",
+        "siem"
       ],
       "categories": [
         {
@@ -28071,8 +28187,7 @@
       "title": "Social Engineering",
       "url": "https://www.reddit.com/r/SocialEngineering/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28090,8 +28205,7 @@
       "title": "Sophos News – The Sophos Blog",
       "url": "https://news.sophos.com/en-us/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28109,8 +28223,7 @@
       "title": "r/netsec",
       "url": "https://www.reddit.com/r/netsec/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28129,7 +28242,10 @@
       "url": "https://www.anomali.com/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "cti",
+        "siem"
       ],
       "categories": [
         {
@@ -28147,8 +28263,7 @@
       "title": "The Cyber Triage Blog: Product news and DFIR training",
       "url": "https://www.cybertriage.com/blog/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28167,7 +28282,8 @@
       "url": "https://thehackernews.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "news",
+        "cti"
       ],
       "categories": [
         {
@@ -28185,8 +28301,7 @@
       "title": "Medium: Detection Engineering",
       "url": "https://medium.com/tag/detection-engineering",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28205,7 +28320,9 @@
       "url": "https://redcanary.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "cloud-security"
       ],
       "categories": [
         {
@@ -28223,8 +28340,7 @@
       "title": "Threat Geek Blog - Fidelis Cybersecurity",
       "url": "https://fidelissecurity.com/threatgeek/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28243,7 +28359,9 @@
       "url": "https://flashpoint.io/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "cti"
       ],
       "categories": [
         {
@@ -28262,7 +28380,9 @@
       "url": "https://www.recordedfuture.com/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "research"
       ],
       "categories": [
         {
@@ -28281,7 +28401,10 @@
       "url": "https://blog.trailofbits.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "application-security",
+        "research"
       ],
       "categories": [
         {
@@ -28299,8 +28422,7 @@
       "title": "Tripwire | Security and Integrity Management Solutions",
       "url": "https://www.tripwire.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28319,7 +28441,8 @@
       "url": "https://www.trustedsec.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "pentesting"
       ],
       "categories": [
         {
@@ -28338,7 +28461,9 @@
       "url": "https://portswigger.net/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "application-security"
       ],
       "categories": [
         {
@@ -28356,8 +28481,7 @@
       "title": "Windows Security",
       "url": "https://www.reddit.com/r/WindowsSecurity/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28375,8 +28499,7 @@
       "title": "NICE Work Roles and Competencies Mapping",
       "url": "https://www.nist.gov/document/niceframeworkksatocompetencymappingxlsx",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28395,7 +28518,8 @@
       "url": "https://labs.yarix.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "research",
+        "cti"
       ],
       "categories": [
         {
@@ -28413,8 +28537,7 @@
       "title": "Your Hacking Tutorial by Zempirians",
       "url": "https://www.reddit.com/r/HowToHack/new/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28433,7 +28556,10 @@
       "url": "https://tcm-sec.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "pentesting",
+        "careers"
       ],
       "categories": [
         {
@@ -28452,7 +28578,8 @@
       "url": "https://www.pentestpartners.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "pentesting"
       ],
       "categories": [
         {
@@ -28472,7 +28599,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "vulnerability-research",
+        "pentesting"
       ],
       "categories": [
         {
@@ -28494,8 +28622,7 @@
       "title": "Security Intelligence - Cybersecurity Analysis & Insight",
       "url": "https://securityintelligence.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28514,7 +28641,9 @@
       "url": "https://www.offsec.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "education",
+        "certifications",
+        "pentesting"
       ],
       "categories": [
         {
@@ -28533,7 +28662,9 @@
       "url": "https://blog.onevinn.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "microsoft-365"
       ],
       "categories": [
         {
@@ -28552,7 +28683,7 @@
       "url": "https://www.optiv.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor"
       ],
       "categories": [
         {
@@ -28572,7 +28703,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "osint",
+        "privacy"
       ],
       "categories": [
         {
@@ -28595,7 +28727,9 @@
       "url": "https://www.paloaltonetworks.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "ai-security"
       ],
       "categories": [
         {
@@ -28613,8 +28747,7 @@
       "title": "Penetration Testing and CyberSecurity Solution - SecureLayer7 -",
       "url": "https://blog.securelayer7.net/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28633,7 +28766,9 @@
       "url": "https://pentestmag.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "pentesting",
+        "reading",
+        "education"
       ],
       "categories": [
         {
@@ -28652,7 +28787,10 @@
       "url": "https://www.hunters.security/en/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "soc",
+        "threat-hunting"
       ],
       "categories": [
         {
@@ -28670,8 +28808,7 @@
       "title": "Information Security",
       "url": "https://www.reddit.com/r/Information_Security/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28690,7 +28827,10 @@
       "url": "https://www.nextron-systems.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "dfir",
+        "malware-analysis",
+        "detection-engineering"
       ],
       "categories": [
         {
@@ -28708,8 +28848,7 @@
       "title": "Radware Blog – The Radware Blog shares vital knowledge with IT decision makers on application delivery, virtualization/cloud, security and specialized service provider needs.",
       "url": "https://www.radware.com/blog/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28728,7 +28867,9 @@
       "url": "https://blog.qualys.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "vulnerability-management"
       ],
       "categories": [
         {
@@ -28747,7 +28888,9 @@
       "url": "https://blog.quarkslab.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "vulnerability-research"
       ],
       "categories": [
         {
@@ -28766,7 +28909,10 @@
       "url": "https://sensepost.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "pentesting",
+        "offensive-security"
       ],
       "categories": [
         {
@@ -28784,8 +28930,8 @@
       "title": "noyb",
       "url": "https://noyb.eu/en",
       "tags": [
-        "security",
-        "not-reviewed"
+        "privacy",
+        "digital-rights"
       ],
       "categories": [
         {
@@ -28804,7 +28950,8 @@
       "url": "https://modernciso.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "leadership",
+        "blogs"
       ],
       "categories": [
         {
@@ -28823,7 +28970,10 @@
       "url": "https://www.semperis.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "active-directory",
+        "identity-access-management"
       ],
       "categories": [
         {
@@ -28841,8 +28991,7 @@
       "title": "Cybersecurity, Research and Intelligence Blog | Secureworks",
       "url": "https://www.secureworks.com/blog",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28861,7 +29010,9 @@
       "url": "https://www.social-engineer.org/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "social-engineering",
+        "security-awareness",
+        "blogs"
       ],
       "categories": [
         {
@@ -28879,8 +29030,7 @@
       "title": "SecurityWeek",
       "url": "https://www.securityweek.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -28899,7 +29049,10 @@
       "url": "https://securelist.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "research",
+        "cti",
+        "malware-analysis"
       ],
       "categories": [
         {
@@ -28918,7 +29071,9 @@
       "url": "https://blog.silentsignal.eu/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "vulnerability-research",
+        "exploit-development"
       ],
       "categories": [
         {
@@ -28937,7 +29092,9 @@
       "url": "https://www.skullsecurity.org/",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "ctf",
+        "exploit-development"
       ],
       "categories": [
         {
@@ -28956,7 +29113,10 @@
       "url": "https://blog.sucuri.net/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "application-security",
+        "malware-analysis"
       ],
       "categories": [
         {
@@ -28975,8 +29135,7 @@
       "url": "https://www.andrewhay.ca/blog",
       "tags": [
         "security",
-        "researchers-blogs",
-        "not-reviewed"
+        "researchers-blogs"
       ],
       "categories": [
         {
@@ -28999,7 +29158,9 @@
       "url": "https://www.atredis.com/blog/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "vulnerability-research"
       ],
       "categories": [
         {
@@ -29018,7 +29179,9 @@
       "url": "https://blog.cryptographyengineering.com/2023/08/21/some-rough-impressions-of-worldcoin/",
       "tags": [
         "security",
-        "not-reviewed"
+        "cryptography",
+        "privacy",
+        "cryptocurrency"
       ],
       "categories": [
         {
@@ -29038,7 +29201,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "red-team",
+        "malware-analysis"
       ],
       "categories": [
         {
@@ -29062,7 +29226,7 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "reverse-engineering"
       ],
       "categories": [
         {
@@ -29086,7 +29250,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "reverse-engineering",
+        "mathematics"
       ],
       "categories": [
         {
@@ -29110,7 +29275,7 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "reverse-engineering"
       ],
       "categories": [
         {
@@ -29134,7 +29299,9 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "cti",
+        "osint",
+        "cybercrime"
       ],
       "categories": [
         {
@@ -29158,7 +29325,9 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "cti",
+        "incident-response",
+        "ai-machine-learning"
       ],
       "categories": [
         {
@@ -29183,7 +29352,7 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "careers"
       ],
       "categories": [
         {
@@ -29211,7 +29380,9 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "red-team",
+        "malware-analysis",
+        "cryptography"
       ],
       "categories": [
         {
@@ -29229,8 +29400,9 @@
       "title": "The Ultimate Supercar & Exotic Car Database | Supercars.net",
       "url": "https://www.supercars.net/blog/",
       "tags": [
-        "automotive",
-        "not-reviewed"
+        "cars",
+        "news",
+        "reference"
       ],
       "categories": [
         {
@@ -29248,9 +29420,9 @@
       "title": "White Noise",
       "url": "https://www.tomwhitenoise.com/",
       "tags": [
-        "security",
-        "researchers-blogs",
-        "not-reviewed"
+        "reading",
+        "writing",
+        "blogs"
       ],
       "categories": [
         {
@@ -29270,7 +29442,10 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "vulnerability-research",
+        "exploit-development",
+        "research",
+        "vendor"
       ],
       "categories": [
         {
@@ -29294,7 +29469,9 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "programming",
+        "windows-internals",
+        "vulnerability-research"
       ],
       "categories": [
         {
@@ -29313,8 +29490,9 @@
       "url": "https://www.newsletter.swirlai.com/",
       "tags": [
         "tech",
-        "ai",
-        "not-reviewed"
+        "ai-machine-learning",
+        "data-engineering",
+        "newsletters"
       ],
       "categories": [
         {
@@ -29337,7 +29515,9 @@
       "url": "https://thedataecosystem.substack.com/",
       "tags": [
         "tech",
-        "not-reviewed"
+        "ai-machine-learning",
+        "data-science",
+        "newsletters"
       ],
       "categories": [
         {
@@ -29356,7 +29536,8 @@
       "url": "https://www.duolingo.com/",
       "tags": [
         "learning",
-        "not-reviewed"
+        "languages",
+        "education"
       ],
       "categories": [
         {
@@ -29375,7 +29556,8 @@
       "url": "https://www.memrise.com/",
       "tags": [
         "learning",
-        "not-reviewed"
+        "languages",
+        "education"
       ],
       "categories": [
         {
@@ -29396,7 +29578,7 @@
         "entertainment",
         "learning",
         "games",
-        "not-reviewed"
+        "chess"
       ],
       "categories": [
         {
@@ -29420,8 +29602,7 @@
       "tags": [
         "security",
         "reading",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -29451,7 +29632,9 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "red-team",
+        "windows-security",
+        "reference"
       ],
       "categories": [
         {
@@ -29484,7 +29667,9 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "blue-team",
+        "dfir",
+        "education"
       ],
       "categories": [
         {
@@ -29515,7 +29700,9 @@
         "researchers-blogs",
         "learning",
         "programming",
-        "not-reviewed"
+        "reverse-engineering",
+        "malware-analysis",
+        "education"
       ],
       "categories": [
         {
@@ -29553,7 +29740,9 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "red-team",
+        "endpoint-security",
+        "tools"
       ],
       "categories": [
         {
@@ -29586,8 +29775,7 @@
         "security",
         "tech",
         "learning",
-        "programming",
-        "not-reviewed"
+        "programming"
       ],
       "categories": [
         {
@@ -29620,8 +29808,8 @@
         "security",
         "tech",
         "learning",
-        "programming",
-        "not-reviewed"
+        "tools",
+        "reference"
       ],
       "categories": [
         {
@@ -29655,7 +29843,7 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "exploit-development"
       ],
       "categories": [
         {
@@ -29690,7 +29878,8 @@
         "learning",
         "programming",
         "games",
-        "not-reviewed"
+        "sql",
+        "coding-practice"
       ],
       "categories": [
         {
@@ -29722,8 +29911,7 @@
       "tags": [
         "security",
         "learning",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -29751,7 +29939,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "pentesting",
+        "reference"
       ],
       "categories": [
         {
@@ -29775,7 +29964,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "mind-mapping",
+        "reference"
       ],
       "categories": [
         {
@@ -29798,8 +29988,7 @@
       "url": "https://apt-ecosystem.com/russia/map/",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -29822,8 +30011,7 @@
       "url": "https://old.reddit.com/r/hacking/wiki/index#wiki_ctfs",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -29846,7 +30034,9 @@
       "url": "https://www.hackerone.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "bug-bounty",
+        "vendor",
+        "vulnerability-management"
       ],
       "categories": [
         {
@@ -29865,7 +30055,9 @@
       "url": "https://book.hacktricks.xyz/",
       "tags": [
         "security",
-        "not-reviewed"
+        "pentesting",
+        "red-team",
+        "reference"
       ],
       "categories": [
         {
@@ -29883,8 +30075,7 @@
       "title": "Practical Security Analytics – Cyber Security and Data Analytics",
       "url": "https://practicalsecurityanalytics.com/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -29903,7 +30094,8 @@
       "url": "https://reverseengineering.stackexchange.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "reverse-engineering",
+        "community"
       ],
       "categories": [
         {
@@ -29923,7 +30115,8 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "application-security",
+        "writeups"
       ],
       "categories": [
         {
@@ -29946,7 +30139,8 @@
       "url": "https://any.run/",
       "tags": [
         "security",
-        "not-reviewed"
+        "malware-analysis",
+        "vendor"
       ],
       "categories": [
         {
@@ -29965,7 +30159,8 @@
       "url": "https://www.threathunting.net/",
       "tags": [
         "security",
-        "not-reviewed"
+        "threat-hunting",
+        "blue-team"
       ],
       "categories": [
         {
@@ -29985,7 +30180,7 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "careers"
       ],
       "categories": [
         {
@@ -30009,7 +30204,7 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "careers"
       ],
       "categories": [
         {
@@ -30031,11 +30226,10 @@
       "title": "Markmap",
       "url": "https://markmap.js.org/",
       "tags": [
-        "security",
         "tech",
-        "learning",
-        "programming",
-        "not-reviewed"
+        "productivity",
+        "mind-mapping",
+        "open-source"
       ],
       "categories": [
         {
@@ -30067,7 +30261,7 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "reference"
       ],
       "categories": [
         {
@@ -30091,7 +30285,7 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "detection-engineering"
       ],
       "categories": [
         {
@@ -30116,7 +30310,7 @@
         "security",
         "researchers-blogs",
         "learning",
-        "not-reviewed"
+        "detection-engineering"
       ],
       "categories": [
         {
@@ -30145,7 +30339,9 @@
         "security",
         "tech",
         "learning",
-        "not-reviewed"
+        "virtualization",
+        "osint",
+        "vendor"
       ],
       "categories": [
         {
@@ -30171,11 +30367,11 @@
       "title": "RFC Editor",
       "url": "https://www.rfc-editor.org/",
       "tags": [
-        "security",
         "tech",
         "learning",
-        "programming",
-        "not-reviewed"
+        "networking",
+        "standards",
+        "reference"
       ],
       "categories": [
         {
@@ -30207,7 +30403,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "reverse-engineering",
+        "malware-analysis"
       ],
       "categories": [
         {
@@ -30230,8 +30427,7 @@
       "url": "https://0x41.cf/",
       "tags": [
         "security",
-        "researchers-blogs",
-        "not-reviewed"
+        "researchers-blogs"
       ],
       "categories": [
         {
@@ -30255,8 +30451,7 @@
       "tags": [
         "security",
         "learning",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30283,7 +30478,10 @@
       "url": "https://www.robtex.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "osint",
+        "networking",
+        "dns",
+        "tools"
       ],
       "categories": [
         {
@@ -30302,7 +30500,9 @@
       "url": "https://malapi.io/",
       "tags": [
         "security",
-        "not-reviewed"
+        "malware-analysis",
+        "windows-internals",
+        "reference"
       ],
       "categories": [
         {
@@ -30320,8 +30520,7 @@
       "title": "ThreatMiner",
       "url": "https://www.threatminer.org/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -30340,8 +30539,7 @@
       "url": "https://www.ired.team/miscellaneous-reversing-forensics/windows-kernel-internals",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -30365,7 +30563,10 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "reverse-engineering",
+        "malware-analysis",
+        "tools",
+        "reference"
       ],
       "categories": [
         {
@@ -30390,7 +30591,7 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "reverse-engineering"
       ],
       "categories": [
         {
@@ -30419,7 +30620,8 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "powershell",
+        "coding-practice"
       ],
       "categories": [
         {
@@ -30449,7 +30651,8 @@
         "reading",
         "learning",
         "programming",
-        "not-reviewed"
+        "cpp",
+        "ebooks"
       ],
       "categories": [
         {
@@ -30482,7 +30685,8 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "education",
+        "exploit-development"
       ],
       "categories": [
         {
@@ -30511,7 +30715,9 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "ebooks",
+        "reading",
+        "reference"
       ],
       "categories": [
         {
@@ -30539,8 +30745,7 @@
       "tags": [
         "security",
         "learning",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30568,7 +30773,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -30592,7 +30797,8 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education",
+        "pentesting"
       ],
       "categories": [
         {
@@ -30615,8 +30821,7 @@
       "url": "https://defendtheweb.net/?hackthis",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30639,8 +30844,7 @@
       "url": "https://flaws.cloud/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30663,8 +30867,7 @@
       "url": "https://flaws2.cloud/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30688,7 +30891,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "exploit-development"
       ],
       "categories": [
         {
@@ -30712,7 +30915,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -30736,7 +30939,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -30760,7 +30963,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "exploit-development"
       ],
       "categories": [
         {
@@ -30783,8 +30986,7 @@
       "url": "https://www.root-me.org/?lang=en",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30807,8 +31009,7 @@
       "url": "https://www.wechall.net/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30831,8 +31032,7 @@
       "url": "https://www.hacking-lab-ctf.com/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30856,7 +31056,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -30880,7 +31080,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -30904,7 +31104,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -30927,8 +31127,7 @@
       "url": "https://io.netgarage.org/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -30952,7 +31151,8 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "events",
+        "writeups"
       ],
       "categories": [
         {
@@ -30975,7 +31175,9 @@
       "url": "https://www.exploit-db.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "exploit-development",
+        "vulnerability-research",
+        "reference"
       ],
       "categories": [
         {
@@ -30995,7 +31197,9 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education",
+        "application-security",
+        "bug-bounty"
       ],
       "categories": [
         {
@@ -31019,7 +31223,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "exploit-development"
       ],
       "categories": [
         {
@@ -31042,8 +31246,7 @@
       "url": "https://www.underthewire.tech/wargames.htm",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31066,8 +31269,7 @@
       "url": "https://ctf365.com/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31091,7 +31293,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -31114,8 +31316,7 @@
       "url": "https://microcorruption.com/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31138,8 +31339,7 @@
       "url": "https://ctflearn.com/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31163,7 +31363,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "reverse-engineering"
       ],
       "categories": [
         {
@@ -31187,7 +31387,7 @@
       "tags": [
         "security",
         "ctf",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -31210,8 +31410,7 @@
       "url": "https://backdoor.sdslabs.co/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31234,8 +31433,7 @@
       "url": "https://smashthestack.org/wargames.html",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31258,8 +31456,7 @@
       "url": "https://www.hackertest.net/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31282,8 +31479,7 @@
       "url": "https://captf.com/practice-ctf/",
       "tags": [
         "security",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31308,7 +31504,7 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "reference"
       ],
       "categories": [
         {
@@ -31337,7 +31533,7 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "reference"
       ],
       "categories": [
         {
@@ -31366,7 +31562,9 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "application-security",
+        "education",
+        "open-source"
       ],
       "categories": [
         {
@@ -31394,7 +31592,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "osint",
+        "reference"
       ],
       "categories": [
         {
@@ -31418,7 +31617,9 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "cti",
+        "reference",
+        "detection-engineering"
       ],
       "categories": [
         {
@@ -31442,7 +31643,8 @@
       "tags": [
         "security",
         "learning",
-        "not-reviewed"
+        "open-source",
+        "reference"
       ],
       "categories": [
         {
@@ -31465,8 +31667,7 @@
       "url": "https://allinfosecnews.com/",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -31489,8 +31690,7 @@
       "url": "https://community.turgensec.com/cyber-security-books/#Zero_Day_Exploits_Books",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -31513,8 +31713,7 @@
       "url": "https://www.fuzzysecurity.com/",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -31538,8 +31737,7 @@
       "tags": [
         "security",
         "reading",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -31568,7 +31766,8 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "open-source",
+        "reference"
       ],
       "categories": [
         {
@@ -31595,8 +31794,7 @@
       "url": "https://bugmenot.com/",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -31619,8 +31817,7 @@
       "url": "https://www.kernelmode.info/forum/",
       "tags": [
         "security",
-        "learning",
-        "not-reviewed"
+        "learning"
       ],
       "categories": [
         {
@@ -31645,7 +31842,7 @@
         "security",
         "learning",
         "ctf",
-        "not-reviewed"
+        "reverse-engineering"
       ],
       "categories": [
         {
@@ -31673,8 +31870,7 @@
       "tags": [
         "security",
         "learning",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31700,10 +31896,8 @@
       "title": "MIT Open Learning Library",
       "url": "https://openlearning.mit.edu/courses-programs/open-learning-library",
       "tags": [
-        "security",
-        "reading",
         "learning",
-        "not-reviewed"
+        "education"
       ],
       "categories": [
         {
@@ -31731,8 +31925,7 @@
       "tags": [
         "security",
         "learning",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -31761,7 +31954,8 @@
         "tech",
         "learning",
         "programming",
-        "not-reviewed"
+        "coding-practice",
+        "education"
       ],
       "categories": [
         {
@@ -31789,7 +31983,9 @@
       "tags": [
         "news",
         "reading",
-        "not-reviewed"
+        "politics",
+        "podcasts",
+        "newsletters"
       ],
       "categories": [
         {
@@ -31812,7 +32008,7 @@
       "url": "https://podcasts.apple.com/us/browse",
       "tags": [
         "entertainment",
-        "not-reviewed"
+        "podcasts"
       ],
       "categories": [
         {
@@ -31831,7 +32027,9 @@
       "url": "https://radio.garden/",
       "tags": [
         "entertainment",
-        "not-reviewed"
+        "music",
+        "radio",
+        "streaming"
       ],
       "categories": [
         {
@@ -31851,7 +32049,7 @@
       "tags": [
         "entertainment",
         "games",
-        "not-reviewed"
+        "puzzles"
       ],
       "categories": [
         {
@@ -31871,7 +32069,7 @@
       "tags": [
         "entertainment",
         "games",
-        "not-reviewed"
+        "geography"
       ],
       "categories": [
         {
@@ -31890,8 +32088,7 @@
       "url": "https://g.nepo.lt/",
       "tags": [
         "entertainment",
-        "games",
-        "not-reviewed"
+        "games"
       ],
       "categories": [
         {
@@ -31911,8 +32108,7 @@
       "tags": [
         "entertainment",
         "e-shop",
-        "games",
-        "not-reviewed"
+        "games"
       ],
       "categories": [
         {
@@ -31936,8 +32132,7 @@
       "tags": [
         "entertainment",
         "e-shop",
-        "games",
-        "not-reviewed"
+        "games"
       ],
       "categories": [
         {
@@ -31959,10 +32154,9 @@
       "title": "HowLongToBeat",
       "url": "https://howlongtobeat.com/",
       "tags": [
-        "entertainment-tracking",
+        "tracking",
         "entertainment",
-        "games",
-        "not-reviewed"
+        "games"
       ],
       "categories": [
         {
@@ -31986,7 +32180,7 @@
       "tags": [
         "lifestyle",
         "health",
-        "not-reviewed"
+        "parenting"
       ],
       "categories": [
         {
@@ -32009,7 +32203,9 @@
       "url": "https://mudubudu.lt/",
       "tags": [
         "lifestyle",
-        "not-reviewed"
+        "gardening",
+        "parenting",
+        "diy"
       ],
       "categories": [
         {
@@ -32028,8 +32224,7 @@
       "url": "https://fandom.com/",
       "tags": [
         "entertainment",
-        "lifestyle",
-        "not-reviewed"
+        "lifestyle"
       ],
       "categories": [
         {
@@ -32053,7 +32248,8 @@
       "tags": [
         "entertainment",
         "lifestyle",
-        "not-reviewed"
+        "events",
+        "community"
       ],
       "categories": [
         {
@@ -32075,8 +32271,8 @@
       "title": "Auto-Data",
       "url": "https://www.auto-data.net/en/",
       "tags": [
-        "automotive",
-        "not-reviewed"
+        "cars",
+        "reference"
       ],
       "categories": [
         {
@@ -32094,8 +32290,7 @@
       "title": "NinjaJobs",
       "url": "https://ninjajobs.org/",
       "tags": [
-        "lifestyle",
-        "not-reviewed"
+        "lifestyle"
       ],
       "categories": [
         {
@@ -32113,8 +32308,7 @@
       "title": "Upwork",
       "url": "https://www.upwork.com/",
       "tags": [
-        "lifestyle",
-        "not-reviewed"
+        "lifestyle"
       ],
       "categories": [
         {
@@ -32132,8 +32326,7 @@
       "title": "Motointegrator",
       "url": "https://motointegrator.com/lt/lt/",
       "tags": [
-        "automotive",
-        "not-reviewed"
+        "cars"
       ],
       "categories": [
         {
@@ -32151,9 +32344,9 @@
       "title": "MLfree - Website devoted to car, technology, text ...",
       "url": "https://mlfree.com/",
       "tags": [
-        "tech",
-        "automotive",
-        "not-reviewed"
+        "cars",
+        "car-repair",
+        "car-reviews"
       ],
       "categories": [
         {
@@ -32175,8 +32368,9 @@
       "title": "ManoGaražas.lt",
       "url": "https://www.manogarazas.lt/",
       "tags": [
-        "automotive",
-        "not-reviewed"
+        "cars",
+        "tracking",
+        "personal-finance"
       ],
       "categories": [
         {
@@ -32195,7 +32389,7 @@
       "url": "https://flipboard.com/",
       "tags": [
         "news",
-        "not-reviewed"
+        "news-aggregation"
       ],
       "categories": [
         {
@@ -32213,9 +32407,10 @@
       "title": "Wikihoops",
       "url": "https://wikihoops.com/",
       "tags": [
-        "entertainment-tracking",
+        "tracking",
         "entertainment",
-        "not-reviewed"
+        "sport-motorsport",
+        "basketball"
       ],
       "categories": [
         {
@@ -32237,8 +32432,8 @@
       "title": "CAB",
       "url": "https://www.cab.lt/",
       "tags": [
-        "automotive",
-        "not-reviewed"
+        "cars",
+        "insurance"
       ],
       "categories": [
         {
@@ -32256,8 +32451,8 @@
       "title": "Draudimo įvykiai",
       "url": "https://draudimoivykiai.lt/",
       "tags": [
-        "automotive",
-        "not-reviewed"
+        "cars",
+        "insurance"
       ],
       "categories": [
         {
@@ -32276,7 +32471,8 @@
       "url": "https://www.aic.lt/80-miegmaisiai",
       "tags": [
         "e-shop",
-        "not-reviewed"
+        "camping",
+        "outdoors"
       ],
       "categories": [
         {
@@ -32294,8 +32490,7 @@
       "title": "Automobile-Catalog",
       "url": "https://www.automobile-catalog.com/",
       "tags": [
-        "automotive",
-        "not-reviewed"
+        "cars"
       ],
       "categories": [
         {
@@ -32315,7 +32510,8 @@
       "tags": [
         "entertainment",
         "games",
-        "not-reviewed"
+        "puzzles",
+        "word-games"
       ],
       "categories": [
         {
@@ -32333,8 +32529,7 @@
       "title": "AutoEvolution Cars",
       "url": "https://www.autoevolution.com/cars/",
       "tags": [
-        "automotive",
-        "not-reviewed"
+        "cars"
       ],
       "categories": [
         {
@@ -32353,8 +32548,10 @@
       "url": "https://isaiprofitable.com/",
       "tags": [
         "tech",
-        "ai",
-        "not-reviewed"
+        "ai-machine-learning",
+        "business-finance",
+        "economics",
+        "tracking"
       ],
       "categories": [
         {
@@ -32380,7 +32577,9 @@
         "entertainment",
         "learning",
         "games",
-        "not-reviewed"
+        "kids",
+        "education",
+        "open-source"
       ],
       "categories": [
         {
@@ -32406,9 +32605,8 @@
       "title": "Amazon Your Books",
       "url": "https://www.amazon.com/your-books",
       "tags": [
-        "entertainment-tracking",
-        "reading",
-        "not-reviewed"
+        "tracking",
+        "reading"
       ],
       "categories": [
         {
@@ -32431,8 +32629,8 @@
       "url": "https://gemini.google.com/app",
       "tags": [
         "tech",
-        "ai",
-        "not-reviewed"
+        "ai-machine-learning",
+        "ai-assistants"
       ],
       "categories": [
         {
@@ -32454,9 +32652,9 @@
       "title": "Instapaper",
       "url": "https://www.instapaper.com/u",
       "tags": [
-        "entertainment-tracking",
         "reading",
-        "not-reviewed"
+        "productivity",
+        "read-later"
       ],
       "categories": [
         {
@@ -32479,7 +32677,8 @@
       "url": "https://musudarzelis.com/",
       "tags": [
         "lifestyle",
-        "not-reviewed"
+        "parenting",
+        "education"
       ],
       "categories": [
         {
@@ -32497,8 +32696,9 @@
       "title": "OneDrive Photos",
       "url": "https://photos.onedrive.com/",
       "tags": [
-        "entertainment",
-        "not-reviewed"
+        "productivity",
+        "cloud-storage",
+        "photos"
       ],
       "categories": [
         {
@@ -32517,7 +32717,8 @@
       "url": "https://www.manodienynas.lt/",
       "tags": [
         "lifestyle",
-        "not-reviewed"
+        "education",
+        "parenting"
       ],
       "categories": [
         {
@@ -32535,8 +32736,8 @@
       "title": "Luminor Internet Bank",
       "url": "https://ib.luminor.lt/login.aspx?NoRedirect=1&SetLanguage=LIT",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "banking"
       ],
       "categories": [
         {
@@ -32554,8 +32755,8 @@
       "title": "PayPal",
       "url": "https://www.paypal.com/myaccount/summary",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "payments"
       ],
       "categories": [
         {
@@ -32573,8 +32774,9 @@
       "title": "Paysera Web",
       "url": "https://bank.paysera.com/lt/login",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "banking",
+        "payments"
       ],
       "categories": [
         {
@@ -32592,8 +32794,8 @@
       "title": "SEB Web",
       "url": "https://e.seb.lt/mainib/web.p",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "banking"
       ],
       "categories": [
         {
@@ -32611,8 +32813,9 @@
       "title": "Gosavy",
       "url": "https://gosavy.com/lt/prisijungti/",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "lending",
+        "investing"
       ],
       "categories": [
         {
@@ -32630,8 +32833,9 @@
       "title": "FinBee",
       "url": "https://p2p.finbee.lt/prisijungti",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "lending",
+        "investing"
       ],
       "categories": [
         {
@@ -32649,8 +32853,10 @@
       "title": "Röntgen",
       "url": "https://www.rontgen.lt/login",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "personal-finance",
+        "investing",
+        "crowdfunding",
+        "real-estate"
       ],
       "categories": [
         {
@@ -32668,8 +32874,9 @@
       "title": "Sodra",
       "url": "https://gyventojai.sodra.lt/sodra-login/select",
       "tags": [
-        "finance-tracking",
-        "not-reviewed"
+        "government",
+        "personal-finance",
+        "social-insurance"
       ],
       "categories": [
         {
@@ -32689,8 +32896,7 @@
       "tags": [
         "security",
         "learning",
-        "ctf",
-        "not-reviewed"
+        "ctf"
       ],
       "categories": [
         {
@@ -32717,8 +32923,7 @@
       "url": "https://medium.com/@olafhartong",
       "tags": [
         "security",
-        "researchers-blogs",
-        "not-reviewed"
+        "researchers-blogs"
       ],
       "categories": [
         {
@@ -32740,8 +32945,8 @@
       "title": "Banjooz on Bandcamp",
       "url": "https://sfera.bandcamp.com/",
       "tags": [
-        "entertainment",
-        "not-reviewed"
+        "music",
+        "hip-hop"
       ],
       "categories": [
         {
@@ -32759,8 +32964,7 @@
       "title": "Banjooz on SoundCloud",
       "url": "https://soundcloud.com/banjooz-sfera-konan-mc",
       "tags": [
-        "entertainment",
-        "not-reviewed"
+        "music"
       ],
       "categories": [
         {
@@ -32778,10 +32982,9 @@
       "title": "BoardGameGeek",
       "url": "https://boardgamegeek.com/",
       "tags": [
-        "entertainment-tracking",
+        "tracking",
         "entertainment",
-        "games",
-        "not-reviewed"
+        "games"
       ],
       "categories": [
         {
@@ -32804,7 +33007,8 @@
       "url": "https://app.dokobit.com/",
       "tags": [
         "tech",
-        "not-reviewed"
+        "productivity",
+        "e-signatures"
       ],
       "categories": [
         {
@@ -32823,7 +33027,8 @@
       "url": "https://discord.com/channels/@me",
       "tags": [
         "entertainment",
-        "not-reviewed"
+        "communication",
+        "community"
       ],
       "categories": [
         {
@@ -32842,7 +33047,9 @@
       "url": "https://takeout.google.com/",
       "tags": [
         "tech",
-        "not-reviewed"
+        "data-export",
+        "backup",
+        "productivity"
       ],
       "categories": [
         {
@@ -32861,7 +33068,7 @@
       "url": "https://howlongtoread.com/",
       "tags": [
         "reading",
-        "not-reviewed"
+        "reading-time"
       ],
       "categories": [
         {
@@ -32879,8 +33086,8 @@
       "title": "Wishlistr",
       "url": "https://www.wishlistr.com/",
       "tags": [
-        "entertainment-tracking",
-        "not-reviewed"
+        "tracking",
+        "wishlists"
       ],
       "categories": [
         {
@@ -32899,7 +33106,9 @@
       "url": "https://news.risky.biz/",
       "tags": [
         "security",
-        "not-reviewed"
+        "newsletters",
+        "podcasts",
+        "news"
       ],
       "categories": [
         {
@@ -32918,7 +33127,9 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-xdr-blog/bg-p/MicrosoftThreatProtectionBlog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "xdr"
       ],
       "categories": [
         {
@@ -32937,7 +33148,9 @@
       "url": "https://www.truesec.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "soc",
+        "incident-response"
       ],
       "categories": [
         {
@@ -32956,7 +33169,10 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-for-office/bg-p/MicrosoftDefenderforOffice365Blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "email-security",
+        "microsoft-365"
       ],
       "categories": [
         {
@@ -32975,7 +33191,9 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-for-cloud/bg-p/MicrosoftDefenderCloudBlog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "cloud-security"
       ],
       "categories": [
         {
@@ -32995,7 +33213,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "dfir",
+        "windows-security"
       ],
       "categories": [
         {
@@ -33018,8 +33237,7 @@
       "url": "https://medium.com/@anton.chuvakin",
       "tags": [
         "security",
-        "researchers-blogs",
-        "not-reviewed"
+        "researchers-blogs"
       ],
       "categories": [
         {
@@ -33043,7 +33261,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "red-team",
+        "ai-security"
       ],
       "categories": [
         {
@@ -33066,7 +33285,9 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-for-endpoint/bg-p/MicrosoftDefenderATPBlog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "endpoint-security"
       ],
       "categories": [
         {
@@ -33085,7 +33306,9 @@
       "url": "https://blog.sigmahq.io/",
       "tags": [
         "security",
-        "not-reviewed"
+        "detection-engineering",
+        "open-source",
+        "blogs"
       ],
       "categories": [
         {
@@ -33104,7 +33327,8 @@
       "url": "https://dispatch.thorcollective.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "threat-hunting",
+        "newsletters"
       ],
       "categories": [
         {
@@ -33122,8 +33346,10 @@
       "title": "The Old New Thing",
       "url": "https://devblogs.microsoft.com/oldnewthing/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "programming",
+        "windows-internals",
+        "blogs",
+        "vendor"
       ],
       "categories": [
         {
@@ -33142,7 +33368,8 @@
       "url": "https://detection.fyi/",
       "tags": [
         "security",
-        "not-reviewed"
+        "detection-engineering",
+        "reference"
       ],
       "categories": [
         {
@@ -33161,7 +33388,9 @@
       "url": "https://falconforce.nl/",
       "tags": [
         "security",
-        "not-reviewed"
+        "red-team",
+        "blue-team",
+        "vendor"
       ],
       "categories": [
         {
@@ -33180,7 +33409,8 @@
       "url": "https://www.sans.org/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "blogs",
+        "education"
       ],
       "categories": [
         {
@@ -33199,7 +33429,10 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/bg-p/MicrosoftSentinelBlog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "siem",
+        "soc"
       ],
       "categories": [
         {
@@ -33217,8 +33450,7 @@
       "title": "Detect FYI",
       "url": "https://detect.fyi/",
       "tags": [
-        "security",
-        "not-reviewed"
+        "security"
       ],
       "categories": [
         {
@@ -33238,7 +33470,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "active-directory",
+        "windows-security"
       ],
       "categories": [
         {
@@ -33262,7 +33495,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "osint",
+        "news"
       ],
       "categories": [
         {
@@ -33285,7 +33519,8 @@
       "url": "https://detections-digest.rulecheck.io/",
       "tags": [
         "security",
-        "not-reviewed"
+        "detection-engineering",
+        "newsletters"
       ],
       "categories": [
         {
@@ -33304,7 +33539,11 @@
       "url": "https://techcommunity.microsoft.com/t5/sysinternals-blog/bg-p/Sysinternals-Blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "sysadmin",
+        "windows-internals",
+        "tools"
       ],
       "categories": [
         {
@@ -33323,7 +33562,9 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-vulnerability/bg-p/Vulnerability-Management",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "vulnerability-management"
       ],
       "categories": [
         {
@@ -33343,7 +33584,9 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "pentesting",
+        "malware-analysis",
+        "detection-engineering"
       ],
       "categories": [
         {
@@ -33366,8 +33609,7 @@
       "url": "https://medium.com/anton-on-security",
       "tags": [
         "security",
-        "researchers-blogs",
-        "not-reviewed"
+        "researchers-blogs"
       ],
       "categories": [
         {
@@ -33390,7 +33632,8 @@
       "url": "https://ctid.mitre.org/",
       "tags": [
         "security",
-        "not-reviewed"
+        "research",
+        "cti"
       ],
       "categories": [
         {
@@ -33409,7 +33652,10 @@
       "url": "https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/bg-p/CoreInfrastructureandSecurityBlog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "sysadmin",
+        "cloud-computing"
       ],
       "categories": [
         {
@@ -33429,7 +33675,8 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "programming",
+        "windows-internals"
       ],
       "categories": [
         {
@@ -33453,7 +33700,10 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "tech",
+        "ai-machine-learning",
+        "philosophy",
+        "soc"
       ],
       "categories": [
         {
@@ -33476,7 +33726,10 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-security-copilot-blog/bg-p/SecurityCopilotBlog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "ai-security",
+        "ai-machine-learning"
       ],
       "categories": [
         {
@@ -33496,7 +33749,9 @@
       "tags": [
         "security",
         "researchers-blogs",
-        "not-reviewed"
+        "soc",
+        "ai-security",
+        "newsletters"
       ],
       "categories": [
         {
@@ -33519,7 +33774,9 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-defender-threat/bg-p/DefenderThreatIntelligence",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "xdr"
       ],
       "categories": [
         {
@@ -33538,7 +33795,9 @@
       "url": "https://www.tenable.com/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "vulnerability-management"
       ],
       "categories": [
         {
@@ -33557,7 +33816,9 @@
       "url": "https://www.thedfirspot.com/blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "dfir",
+        "blue-team",
+        "blogs"
       ],
       "categories": [
         {
@@ -33576,7 +33837,9 @@
       "url": "https://windows-internals.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "windows-internals",
+        "education",
+        "dfir"
       ],
       "categories": [
         {
@@ -33595,7 +33858,9 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-entra-blog/bg-p/microsoft-entra-blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs",
+        "identity-access-management"
       ],
       "categories": [
         {
@@ -33614,7 +33879,8 @@
       "url": "https://techcommunity.microsoft.com/t5/microsoft-security-community/bg-p/microsoft-security-blog",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "blogs"
       ],
       "categories": [
         {
@@ -33633,7 +33899,9 @@
       "url": "https://dailyredteam.substack.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "red-team",
+        "offensive-security",
+        "newsletters"
       ],
       "categories": [
         {
@@ -33652,7 +33920,10 @@
       "url": "https://unit42.paloaltonetworks.com/",
       "tags": [
         "security",
-        "not-reviewed"
+        "vendor",
+        "research",
+        "cti",
+        "incident-response"
       ],
       "categories": [
         {
@@ -33671,7 +33942,9 @@
       "url": "https://tldr.tech/",
       "tags": [
         "tech",
-        "not-reviewed"
+        "newsletters",
+        "news",
+        "startups"
       ],
       "categories": [
         {
@@ -33690,7 +33963,8 @@
       "url": "https://tldr.tech/devops",
       "tags": [
         "tech",
-        "not-reviewed"
+        "newsletters",
+        "devops"
       ],
       "categories": [
         {
@@ -33709,8 +33983,8 @@
       "url": "https://tldr.tech/ai",
       "tags": [
         "tech",
-        "ai",
-        "not-reviewed"
+        "ai-machine-learning",
+        "newsletters"
       ],
       "categories": [
         {
@@ -33733,7 +34007,8 @@
       "url": "https://tldr.tech/dev",
       "tags": [
         "tech",
-        "not-reviewed"
+        "newsletters",
+        "programming"
       ],
       "categories": [
         {
@@ -33752,7 +34027,10 @@
       "url": "https://research.google/blog/",
       "tags": [
         "tech",
-        "not-reviewed"
+        "vendor",
+        "research",
+        "ai-machine-learning",
+        "blogs"
       ],
       "categories": [
         {
@@ -33823,8 +34101,10 @@
       "title": "Anthropic Research",
       "url": "https://www.anthropic.com/research",
       "tags": [
-        "ai",
-        "vendor"
+        "ai-machine-learning",
+        "vendor",
+        "research",
+        "ai-safety"
       ],
       "categories": [],
       "placement": {
@@ -33837,10 +34117,12 @@
       "title": "Anthropic Threat Intelligence",
       "url": "https://www.anthropic.com/threat-intelligence",
       "tags": [
-        "ai",
+        "ai-machine-learning",
         "vendor",
         "security",
-        "cti"
+        "cti",
+        "ai-security",
+        "research"
       ],
       "categories": [],
       "placement": {
@@ -33868,7 +34150,8 @@
       "url": "https://www.lrt.lt/",
       "tags": [
         "news",
-        "daily"
+        "daily",
+        "politics"
       ],
       "categories": [
         {
@@ -33887,7 +34170,9 @@
       "url": "https://www.disneyplus.com/en-gb/home",
       "tags": [
         "entertainment",
-        "daily"
+        "daily",
+        "movies-tv",
+        "streaming"
       ],
       "categories": [
         {
@@ -33906,7 +34191,8 @@
       "url": "https://github.com/ILetAIWriteThis?tab=repositories",
       "tags": [
         "daily",
-        "dev"
+        "programming",
+        "open-source"
       ],
       "categories": [],
       "placement": {
@@ -33920,7 +34206,8 @@
       "url": "https://mail.google.com/mail/u/0/#inbox",
       "tags": [
         "productivity",
-        "daily"
+        "daily",
+        "email"
       ],
       "categories": [],
       "placement": {
@@ -33934,7 +34221,8 @@
       "url": "https://calendar.google.com/calendar/u/0/r",
       "tags": [
         "productivity",
-        "daily"
+        "daily",
+        "calendar"
       ],
       "categories": [],
       "placement": {
@@ -33948,7 +34236,8 @@
       "url": "https://keep.google.com/u/0/#home",
       "tags": [
         "productivity",
-        "daily"
+        "daily",
+        "note-taking"
       ],
       "categories": [],
       "placement": {
@@ -33962,7 +34251,8 @@
       "url": "https://www.youtube.com/playlist?list=WL",
       "tags": [
         "entertainment",
-        "daily"
+        "daily",
+        "read-later"
       ],
       "categories": [],
       "placement": {
@@ -33975,8 +34265,9 @@
       "title": "OneDrive",
       "url": "https://onedrive.live.com/",
       "tags": [
-        "finance-tracking",
-        "daily"
+        "productivity",
+        "daily",
+        "cloud-storage"
       ],
       "categories": [
         {
@@ -33996,7 +34287,8 @@
       "tags": [
         "tech",
         "daily",
-        "ai"
+        "ai-machine-learning",
+        "ai-assistants"
       ],
       "categories": [
         {
@@ -34016,7 +34308,8 @@
       "tags": [
         "tech",
         "daily",
-        "ai"
+        "ai-machine-learning",
+        "programming"
       ],
       "categories": [
         {
@@ -34036,7 +34329,8 @@
       "tags": [
         "tech",
         "daily",
-        "ai"
+        "ai-machine-learning",
+        "ai-assistants"
       ],
       "categories": [
         {

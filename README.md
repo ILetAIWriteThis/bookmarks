@@ -17,13 +17,15 @@ The default `/bookmarks/` page shows Web bookmarks. `#/youtube` opens the YouTub
 
 All bookmarks have a collection placement. Tags use the bookmark's saved tags; select multiple tags to match all of them, or select **All** to clear the filter. Each collection remembers its selections while switching; reloading resets them. Collection totals are not shown.
 
-Media and Travel categories and their bookmarks have been removed. Bookmarks awaiting content review carry `not-reviewed`. Review channel descriptions, published content, or organizer recording archives before assigning topics. The remaining YouTube review queue has been processed; unavailable content is recorded separately in the review log. The YouTube Travel topic remains.
+Media and Travel categories and their bookmarks have been removed. Bookmarks awaiting content review carry `not-reviewed`. Review public site or channel descriptions, published content, or organizer recording archives before assigning topics. The current Web and YouTube review queues have been processed; unavailable content is recorded separately in the review logs. The YouTube Travel topic remains.
 
 ### Tagging conventions
 
 Use tags for topics and content formats, with lowercase, hyphenated names. Reuse existing tags such as `security`, `conferences`, and `podcasts`; add narrower topics only when the channel's content supports them. Conference recordings use `conferences`; interviews or recurring audio shows use `podcasts`. Collection and category metadata already identify YouTube channels, so omit redundant `youtube` and `youtuber` tags. Removing a redundant tag does not count as a content review.
 
 The [security conference channel review](docs/security-conference-review.md) records the sources and tags for the 51 channels placed at YouTube positions 50–100. The 106 bookmarks originally tagged sport/motorsport were moved to positions 1000–1105. The [remaining YouTube channel review](docs/youtube-channel-review.md) covers all 1,113 remaining records, including seven with unavailable content. Topic corrections preserve saved positions.
+
+The [Web bookmark review](docs/web-bookmark-review.md) covers all 483 Web records, consolidates equivalent tag names with the YouTube vocabulary, and records unavailable or changed destinations. It uses public publisher descriptions for selected account links; account contents are not inspected.
 
 ## Manage bookmark data
 
