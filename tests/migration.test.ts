@@ -10,10 +10,10 @@ it('removes Media and Travel categories and their bookmarks', () => {
   expect(data.bookmarks.some(({ id }) => id === 'cave-of-zeus' || id === 'puckoriu-piliakalnis' || id === 'the-avengers-2012')).toBe(false)
 })
 
-it('preserves Web and YouTube placements and existing tags', () => {
+it('preserves Web and YouTube placements and reviewed topic tags', () => {
   const data = validateBookmarkData(bookmarkData)
   expect(data.bookmarks.find((bookmark) => bookmark.id === 'youtube-baltic-defence-review')).toMatchObject({
-    tags: ['youtube', 'politics', 'not-reviewed'],
+    tags: ['politics', 'military', 'geopolitics'],
     placement: { collection: 'youtube' },
   })
   expect(data.categories.some(({ id }) => id === 'youtube-travel')).toBe(true)
