@@ -30,6 +30,34 @@ function navigate(hash: string) {
   fireEvent(window, new HashChangeEvent('hashchange'))
 }
 
+it('opens a random bookmark from the active collection and current results', async () => {
+  const user = userEvent.setup()
+  const open = vi.spyOn(window, 'open').mockImplementation(() => null)
+  const random = vi.spyOn(Math, 'random').mockReturnValue(0)
+  window.location.hash = '#/'
+  render(<App data={data} />)
+  const lucky = screen.getByRole('button', { name: 'Get Lucky' })
+  await user.click(lucky)
+  expect(open).toHaveBeenLastCalledWith('https://alpha.example/news', '_blank', 'noopener,noreferrer')
+  random.mockReturnValue(0.999)
+  await user.click(lucky)
+  expect(open).toHaveBeenLastCalledWith('https://example.com/journal', '_blank', 'noopener,noreferrer')
+  navigate('#/youtube')
+  await user.click(lucky)
+  expect(open).toHaveBeenLastCalledWith('https://www.youtube.com/@later', '_blank', 'noopener,noreferrer')
+  await user.click(screen.getByText('Filter by tags'))
+  await user.click(screen.getByRole('button', { name: '#science' }))
+  await user.click(lucky)
+  expect(open).toHaveBeenLastCalledWith('https://www.youtube.com/@first', '_blank', 'noopener,noreferrer')
+  await user.type(screen.getByRole('searchbox'), 'no matching bookmark')
+  expect(lucky).toBeDisabled()
+  open.mockClear()
+  await user.click(lucky)
+  expect(open).not.toHaveBeenCalled()
+  random.mockRestore()
+  open.mockRestore()
+})
+
 it('projects the seed collections without mutating data and prioritizes position over subscription', () => {
   const original = JSON.stringify(data)
   expect(v2Bookmarks(data, 'web').map((entry) => entry.bookmark.id)).toEqual(['alpha', 'example'])

@@ -21,6 +21,11 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
     selected.every((tag) => bookmarkTags.includes(tag))
     && (!query || normalizeSearch([bookmark.title, bookmark.description ?? '', bookmark.url, ...bookmarkTags].join(' ')).includes(query)))
   const title = spaces.find((space) => space.id === collection)!.title
+  const getLucky = () => {
+    if (!visible.length) return
+    const { bookmark } = visible[Math.floor(Math.random() * visible.length)]
+    window.open(bookmark.url, '_blank', 'noopener,noreferrer')
+  }
   const toggleTag = (tag: string) => setFilters((current) => ({
     ...current,
     [collection]: current[collection].includes(tag)
@@ -60,6 +65,10 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
       <section className="v2-collection" aria-labelledby="v2-collection-title">
         <div className="v2-heading">
           <h2 id="v2-collection-title">{title} bookmarks</h2>
+          <button type="button" className="v2-lucky" onClick={getLucky} disabled={!visible.length}
+            title={`Open a random ${title} bookmark from the current results in a new tab`}>
+            Get Lucky <Icon name="external" size={16} />
+          </button>
         </div>
         <div className="v2-search search-box">
           <Icon name="search" size={22} />
