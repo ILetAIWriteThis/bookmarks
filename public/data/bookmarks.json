@@ -15256,26 +15256,6 @@
       }
     },
     {
-      "id": "youtube-the-pragmatic-engineer",
-      "title": "The Pragmatic Engineer",
-      "url": "https://www.youtube.com/@pragmaticengineer/videos",
-      "tags": [
-        "tech-programming",
-        "careers",
-        "podcasts"
-      ],
-      "categories": [
-        {
-          "categoryId": "youtube-tech-programming",
-          "position": 37
-        }
-      ],
-      "placement": {
-        "collection": "youtube",
-        "position": 636
-      }
-    },
-    {
       "id": "youtube-visual-studio-code",
       "title": "Visual Studio Code",
       "url": "https://www.youtube.com/@code/videos",
@@ -34341,6 +34321,68 @@
       "placement": {
         "collection": "web",
         "position": 6
+      }
+    },
+    {
+      "id": "youtube-the-pragmatic-engineer",
+      "title": "The Pragmatic Engineer",
+      "url": "https://www.youtube.com/@pragmaticengineer/videos",
+      "tags": [
+        "tech-programming",
+        "careers",
+        "podcasts",
+        "software-engineering",
+        "engineering-leadership"
+      ],
+      "categories": [
+        {
+          "categoryId": "youtube-tech-programming",
+          "position": 37
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 636
+      }
+    },
+    {
+      "id": "youtube-geography-effect",
+      "title": "Geography Effect",
+      "url": "https://www.youtube.com/@geographyeffect/videos",
+      "tags": [
+        "geography",
+        "education"
+      ],
+      "categories": [
+        {
+          "categoryId": "youtube-geography",
+          "position": 2
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1182
+      }
+    },
+    {
+      "id": "youtube-leaddev",
+      "title": "LeadDev",
+      "url": "https://www.youtube.com/@LeadDev/videos",
+      "tags": [
+        "tech-programming",
+        "software-engineering",
+        "engineering-leadership",
+        "conferences"
+      ],
+      "categories": [
+        {
+          "categoryId": "youtube-tech-programming",
+          "position": 1048
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1183
       }
     }
   ]
