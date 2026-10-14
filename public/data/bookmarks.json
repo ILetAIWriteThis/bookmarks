@@ -34384,6 +34384,27 @@
         "collection": "youtube",
         "position": 1183
       }
+    },
+    {
+      "id": "youtube-wendover-productions",
+      "title": "Wendover Productions",
+      "url": "https://www.youtube.com/@Wendoverproductions/videos",
+      "tags": [
+        "geography",
+        "education",
+        "logistics",
+        "economics"
+      ],
+      "categories": [
+        {
+          "categoryId": "youtube-geography",
+          "position": 3
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1184
+      }
     }
   ]
 }
