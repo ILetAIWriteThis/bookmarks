@@ -1132,7 +1132,7 @@
     {
       "id": "youtube-lietuvos-kariuomene",
       "title": "Lietuvos kariuomenė",
-      "url": "https://www.youtube.com/@Lietuvoskariuomen%25C4%2597-k6b/videos",
+      "url": "https://www.youtube.com/@Lietuvoskariuomen%C4%97-k6b/videos",
       "tags": [
         "podcasts",
         "military"
@@ -34404,6 +34404,51 @@
       "placement": {
         "collection": "youtube",
         "position": 1184
+      }
+    },
+    {
+      "id": "youtube-tesla",
+      "title": "Tesla",
+      "url": "https://www.youtube.com/@tesla/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-cars",
+          "position": 88
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1185
+      }
+    },
+    {
+      "id": "youtube-cleo-abram",
+      "title": "Cleo Abram",
+      "url": "https://www.youtube.com/@CleoAbram/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-science",
+          "position": 80
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1186
+      }
+    },
+    {
+      "id": "youtube-freethink",
+      "title": "Freethink",
+      "url": "https://www.youtube.com/@freethink/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-science",
+          "position": 81
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1187
       }
     }
   ]
