@@ -34450,6 +34450,21 @@
         "collection": "youtube",
         "position": 1187
       }
+    },
+    {
+      "id": "youtube-ingenius",
+      "title": "InGenius",
+      "url": "https://www.youtube.com/@InGeniusOfficial/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-science",
+          "position": 82
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1188
+      }
     }
   ]
 }
