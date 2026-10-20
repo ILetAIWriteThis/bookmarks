@@ -31,6 +31,6 @@ test('reports simulated blocking and opens only remaining bookmarks on the next 
   await expect(page.getByRole('status')).toContainText('Your browser blocked 1 tab.')
   await expect.poll(() => context.pages().length).toBe(3)
   const tabs = context.pages().filter((tab) => tab !== page)
-  await expect(tabs[0]).toHaveURL(bookmarks[0].url)
+  await expect(tabs[0]).toHaveURL(bookmarks[2].url)
   await expect(tabs[1]).toHaveURL(bookmarks[1].url)
 })
