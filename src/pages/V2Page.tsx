@@ -1,21 +1,50 @@
 import { useEffect, useMemo, useState } from 'react'
 import { normalizeSearch } from '../data'
+import { useFavorites } from '../favorites'
 import { Icon } from '../icons'
 import type { BookmarkData } from '../types'
 import { v2Bookmarks, type V2Collection } from '../v2'
 
-const spaces: { id: V2Collection; title: string; icon: string; href: string }[] = [
-  { id: 'web', title: 'Web', icon: 'bookmark', href: '#/' },
-  { id: 'youtube', title: 'YouTube', icon: 'play', href: '#/youtube' },
+type View = V2Collection | 'starred'
+type StarredScope = 'all' | V2Collection
+
+const starredScopes: { id: StarredScope; title: string }[] = [
+  { id: 'all', title: 'All' },
+  { id: 'web', title: 'Web' },
+  { id: 'youtube', title: 'YouTube' },
 ]
 
-export function V2Page({ data, collection }: { data: BookmarkData; collection: V2Collection }) {
-  const collections = useMemo(() => Object.fromEntries(spaces.map(({ id }) => [id, v2Bookmarks(data, id)])) as Record<V2Collection, ReturnType<typeof v2Bookmarks>>, [data])
-  const [filters, setFilters] = useState<Record<V2Collection, string[]>>({ web: [], youtube: [] })
-  const [queries, setQueries] = useState<Record<V2Collection, string>>({ web: '', youtube: '' })
-  const entries = collections[collection]
-  const tags = [...new Set(entries.flatMap((entry) => entry.tags))].sort((a, b) => a.localeCompare(b))
+const spaces: { id: View; title: string; icon: string; href: string }[] = [
+  { id: 'web', title: 'Web', icon: 'bookmark', href: '#/' },
+  { id: 'youtube', title: 'YouTube', icon: 'play', href: '#/youtube' },
+  { id: 'starred', title: 'Starred', icon: 'star', href: '#/starred' },
+]
+
+export function V2Page({ data, collection }: { data: BookmarkData; collection: View }) {
+  const favorites = useFavorites()
+  const collections = useMemo(() => ({ web: v2Bookmarks(data, 'web'), youtube: v2Bookmarks(data, 'youtube') }), [data])
+  const [filters, setFilters] = useState<Record<View, string[]>>({ web: [], youtube: [], starred: [] })
+  const [queries, setQueries] = useState<Record<View, string>>({ web: '', youtube: '', starred: '' })
+  const [starredScope, setStarredScope] = useState<StarredScope>('all')
+  const [tagQuery, setTagQuery] = useState('')
+  const [showAllTags, setShowAllTags] = useState(false)
+  useEffect(() => { setTagQuery(''); setShowAllTags(false) }, [collection])
+  const starred = [...collections.web, ...collections.youtube].filter(({ bookmark }) => favorites.ids.includes(bookmark.id))
+  const starredCounts = {
+    all: starred.length,
+    web: starred.filter(({ bookmark }) => bookmark.placement?.collection === 'web').length,
+    youtube: starred.filter(({ bookmark }) => bookmark.placement?.collection === 'youtube').length,
+  }
+  const scopeTitle = starredScopes.find((scope) => scope.id === starredScope)!.title
+  const entries = collection === 'starred'
+    ? starred.filter(({ bookmark }) => starredScope === 'all' || bookmark.placement?.collection === starredScope)
+    : collections[collection]
+  const tagCounts = new Map<string, number>()
+  for (const entry of entries) for (const tag of entry.tags) tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)
+  const tags = [...tagCounts.keys()].sort((a, b) => (tagCounts.get(b)! - tagCounts.get(a)!) || a.localeCompare(b))
   const selected = filters[collection]
+  const matchingTags = tags.filter((tag) => normalizeSearch(tag).includes(normalizeSearch(tagQuery).replace(/^#/, '')))
+  const displayedTags = [...new Set([...selected, ...(tagQuery || showAllTags ? matchingTags : matchingTags.slice(0, 12))])]
   const query = normalizeSearch(queries[collection]).replace(/^#/, '')
   const visible = entries.filter(({ bookmark, tags: bookmarkTags }) =>
     selected.every((tag) => bookmarkTags.includes(tag))
@@ -62,6 +91,8 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
         ))}
       </nav>
 
+      {favorites.storageError && <p role="status">Your browser couldn’t save these stars. They’ll last until you reload this page.</p>}
+      {collection === 'starred' && <p className="v2-personal-note">Your current favorites, saved in this browser. Star or unstar a bookmark anytime; its saved position stays the same.</p>}
       <section className="v2-collection" aria-labelledby="v2-collection-title">
         <div className="v2-heading">
           <h2 id="v2-collection-title">{title} bookmarks</h2>
@@ -70,6 +101,21 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
             Get Lucky <Icon name="external" size={16} />
           </button>
         </div>
+        {collection === 'starred' && (
+          <div className="v2-starred-scopes" role="group" aria-label="Filter starred by collection">
+            {starredScopes.map((scope) => (
+              <button key={scope.id} type="button" aria-pressed={starredScope === scope.id}
+                onClick={() => {
+                  setStarredScope(scope.id)
+                  setFilters((current) => ({ ...current, starred: [] }))
+                  setTagQuery('')
+                  setShowAllTags(false)
+                }}>
+                {scope.title}<span aria-hidden="true">{starredCounts[scope.id]}</span>
+              </button>
+            ))}
+          </div>
+        )}
         <div className="v2-search search-box">
           <Icon name="search" size={22} />
           <label className="sr-only" htmlFor="v2-search">Search {title} bookmarks</label>
@@ -84,19 +130,27 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
           <summary className="v2-filter-heading"><span>Filter by tags</span>
             <span className="v2-filter-hint">{selected.length ? `${selected.length} selected · Matching all selected tags` : 'Choose any tags to focus your list'}</span>
           </summary>
+          <label className="v2-tag-search">Find a tag
+            <input type="text" value={tagQuery} onChange={(event) => setTagQuery(event.target.value)}
+              placeholder={`Search ${tags.length} tags…`} />
+          </label>
+          <p className="v2-tag-hint">{tagQuery ? `${matchingTags.length} matching tags` : showAllTags ? `All ${tags.length} tags` : `Most-used tags · ${tags.length} total`} · Select tags to match all.</p>
           <div className="v2-filter-options">
             <button type="button" className="v2-filter" aria-pressed={selected.length === 0}
               onClick={() => setFilters((current) => ({ ...current, [collection]: [] }))}>All</button>
-            {tags.map((tag) => (
-              <button type="button" key={tag} className="v2-filter" aria-pressed={selected.includes(tag)} onClick={() => toggleTag(tag)}>#{tag}</button>
+            {displayedTags.map((tag) => (
+              <button type="button" key={tag} className="v2-filter" aria-pressed={selected.includes(tag)} onClick={() => toggleTag(tag)}>#{tag}<span className="v2-tag-count" aria-hidden="true">{tagCounts.get(tag) ?? 0}</span></button>
             ))}
           </div>
+          {tagQuery && !matchingTags.length && <p className="v2-tag-hint" role="status">No tags found. Try another word.</p>}
+          {tags.length > 12 && !tagQuery && <button className="v2-tags-toggle" type="button" aria-expanded={showAllTags}
+            onClick={() => setShowAllTags((current) => !current)}>{showAllTags ? 'Show fewer tags' : `Show all ${tags.length} tags`}</button>}
         </details>
 
-        <div className="v2-list-heading" aria-hidden="true"><span>Position</span><span>Bookmark & tags</span><span>Open</span></div>
+        <div className="v2-list-heading" aria-hidden="true"><span>Position</span><span>Bookmark & tags</span><span>Star</span></div>
         <ol className="v2-list" aria-label={`${title} bookmarks`}>
           {visible.map(({ bookmark, position, tags: bookmarkTags }) => (
-            <li key={bookmark.id}>
+            <li key={bookmark.id} className="v2-item">
               <a className="v2-row" href={bookmark.url} target="_blank" rel="noopener noreferrer"
                 aria-label={`${bookmark.title} — opens in a new tab`}>
                 <span className="v2-position" aria-label={`Position ${position}`}>{String(position).padStart(2, '0')}</span>
@@ -105,14 +159,17 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
                 </span>
                 <Icon name="external" size={17} />
               </a>
+              <button type="button" className="v2-star" aria-pressed={favorites.ids.includes(bookmark.id)}
+                aria-label={`${favorites.ids.includes(bookmark.id) ? 'Unstar' : 'Star'} ${bookmark.title}`}
+                onClick={() => favorites.toggle(bookmark.id)}><Icon name="star" size={21} /></button>
             </li>
           ))}
         </ol>
         {!visible.length && <div className="v2-empty">
-          <h3>{entries.length ? query ? 'No bookmarks match your search and tags.' : 'No bookmarks match these tags.' : 'No bookmarks here yet.'}</h3>
-          <p>{entries.length ? query ? 'Clear your search or change the selected tags.' : 'Select All or deselect a tag to widen your list.' : `Promote a bookmark to the ${title} collection to see it here.`}</p>
+          <h3>{entries.length ? query ? 'No bookmarks match your search and tags.' : 'No bookmarks match these tags.' : collection === 'starred' ? starredScope === 'all' ? 'No starred bookmarks yet.' : `No starred ${scopeTitle} bookmarks yet.` : 'No bookmarks here yet.'}</h3>
+          <p>{entries.length ? query ? 'Clear your search or change the selected tags.' : 'Select All or deselect a tag to widen your list.' : collection === 'starred' ? starredScope === 'all' ? 'Use the star beside a Web bookmark or YouTube channel to keep it here.' : `Star a bookmark in ${scopeTitle} to keep it here, or select All to see your other favorites.` : `Promote a bookmark to the ${title} collection to see it here.`}</p>
         </div>}
-        <p className="v2-order-note">Saved order · {title} collection</p>
+        <p className="v2-order-note">{collection === 'starred' ? 'Saved collection order · Stored only in this browser' : `Saved order · ${title} collection`}</p>
       </section>
     </main>
   )

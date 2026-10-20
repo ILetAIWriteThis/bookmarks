@@ -10,10 +10,11 @@ interface AppProps {
   data?: BookmarkData
 }
 
-type Route = 'web' | 'youtube'
+type Route = 'web' | 'youtube' | 'starred'
 
 function readRoute(): Route {
   const hash = window.location.hash
+  if (/^#\/starred\/?$/.test(hash)) return 'starred'
   if (/^#\/(?:youtube|v2\/youtube)\/?$/.test(hash)) return 'youtube'
   return 'web'
 }

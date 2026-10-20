@@ -164,7 +164,109 @@ it.each(['#/media', '#/travel'])('falls back to Web for removed route %s', (hash
   render(<App data={data} />)
   expect(screen.getByRole('list', { name: 'Web bookmarks' }).children).toHaveLength(2)
   const navigation = screen.getByRole('navigation', { name: 'Bookmark collections' })
-  expect(within(navigation).getAllByRole('link')).toHaveLength(2)
+  expect(within(navigation).getAllByRole('link')).toHaveLength(3)
   expect(within(navigation).queryByRole('link', { name: 'Media' })).not.toBeInTheDocument()
   expect(within(navigation).queryByRole('link', { name: 'Travel' })).not.toBeInTheDocument()
+})
+
+
+it('keeps stars across reloads without changing saved order and allows removing them', async () => {
+  const user = userEvent.setup()
+  const original = JSON.stringify(data)
+  window.location.hash = '#/youtube'
+  const { unmount } = render(<App data={data} />)
+  await user.click(screen.getByRole('button', { name: 'Star Later channel' }))
+  await user.click(screen.getByRole('button', { name: 'Star First channel' }))
+  expect(screen.getByRole('button', { name: 'Unstar Later channel' })).toHaveAttribute('aria-pressed', 'true')
+  unmount()
+  window.location.hash = '#/starred'
+  render(<App data={data} />)
+  const list = screen.getByRole('list', { name: 'Starred bookmarks' })
+  expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
+    'https://www.youtube.com/@first', 'https://www.youtube.com/@later',
+  ])
+  expect(within(list).getByLabelText('Position 8')).toBeInTheDocument()
+  await user.click(screen.getByRole('button', { name: 'Unstar First channel' }))
+  await user.click(screen.getByRole('button', { name: 'Unstar Later channel' }))
+  expect(screen.getByText('No starred bookmarks yet.')).toBeInTheDocument()
+  navigate('#/youtube')
+  expect(screen.getByRole('list').children).toHaveLength(2)
+  expect(JSON.stringify(data)).toBe(original)
+})
+
+it('handles invalid stored stars and reports unavailable browser storage', async () => {
+  localStorage.setItem('bookmarks:starred:v1', '{broken')
+  window.location.hash = '#/starred'
+  const user = userEvent.setup()
+  render(<App data={data} />)
+  expect(screen.getByText('No starred bookmarks yet.')).toBeInTheDocument()
+  navigate('#/youtube')
+  const storage = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('Storage blocked') })
+  try {
+    await user.click(screen.getByRole('button', { name: 'Star First channel' }))
+    expect(screen.getByRole('status')).toHaveTextContent('Your browser couldn’t save these stars.')
+    navigate('#/starred')
+    expect(screen.getByRole('list').children).toHaveLength(1)
+  } finally {
+    storage.mockRestore()
+  }
+})
+
+it('limits a large tag list, searches all tags, and keeps selected tags accessible', async () => {
+  const user = userEvent.setup()
+  window.location.hash = '#/youtube'
+  const tags = Array.from({ length: 110 }, (_, index) => `topic-${String(index).padStart(3, '0')}`)
+  render(<App data={{ ...data, bookmarks: data.bookmarks.map((bookmark) => bookmark.id === 'first' ? { ...bookmark, tags } : bookmark) }} />)
+  await user.click(screen.getByText('Filter by tags'))
+  const filters = screen.getByText('Filter by tags').closest('details')!
+  expect(within(filters).getAllByRole('button', { name: /^#topic-/ })).toHaveLength(12)
+  expect(screen.queryByRole('button', { name: '#topic-109' })).not.toBeInTheDocument()
+  await user.type(screen.getByRole('textbox', { name: 'Find a tag' }), '#TOPIC-109')
+  await user.click(screen.getByRole('button', { name: '#topic-109' }))
+  expect(screen.getByRole('list').children).toHaveLength(1)
+  await user.clear(screen.getByRole('textbox', { name: 'Find a tag' }))
+  expect(screen.getByRole('button', { name: '#topic-109' })).toHaveAttribute('aria-pressed', 'true')
+  await user.click(screen.getByRole('button', { name: 'Show all 110 tags' }))
+  expect(within(filters).getAllByRole('button', { name: /^#topic-/ })).toHaveLength(110)
+  await user.click(screen.getByRole('button', { name: 'Show fewer tags' }))
+  expect(within(filters).getAllByRole('button', { name: /^#topic-/ })).toHaveLength(13)
+  await user.click(screen.getByRole('button', { name: '#topic-109' }))
+  expect(screen.getByRole('list').children).toHaveLength(2)
+})
+
+
+it('filters starred bookmarks by collection with counts and keeps search active', async () => {
+  const user = userEvent.setup()
+  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['alpha', 'first', 'later']))
+  window.location.hash = '#/starred'
+  render(<App data={data} />)
+  const scopes = screen.getByRole('group', { name: 'Filter starred by collection' })
+  const list = screen.getByRole('list', { name: 'Starred bookmarks' })
+  expect(list.children).toHaveLength(3)
+  expect(within(scopes).getByRole('button', { name: 'Web' })).toHaveTextContent('Web1')
+  expect(within(scopes).getByRole('button', { name: 'YouTube' })).toHaveTextContent('YouTube2')
+  await user.click(within(scopes).getByRole('button', { name: 'YouTube' }))
+  expect(list.children).toHaveLength(2)
+  expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
+    'https://www.youtube.com/@first', 'https://www.youtube.com/@later',
+  ])
+  await user.click(screen.getByText('Filter by tags'))
+  await user.click(screen.getByRole('button', { name: '#science' }))
+  expect(list.children).toHaveLength(1)
+  await user.click(within(scopes).getByRole('button', { name: 'Web' }))
+  expect(list.children).toHaveLength(1)
+  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://alpha.example/news')
+  expect(screen.queryByRole('button', { name: '#science' })).not.toBeInTheDocument()
+  await user.type(screen.getByRole('searchbox'), 'First')
+  expect(list.children).toHaveLength(0)
+  await user.click(within(scopes).getByRole('button', { name: 'YouTube' }))
+  expect(list.children).toHaveLength(1)
+  await user.click(screen.getByRole('button', { name: 'Clear search' }))
+  await user.click(screen.getByRole('button', { name: 'Unstar First channel' }))
+  await user.click(screen.getByRole('button', { name: 'Unstar Later channel' }))
+  expect(screen.getByText('No starred YouTube bookmarks yet.')).toBeInTheDocument()
+  await user.click(within(scopes).getByRole('button', { name: 'All' }))
+  expect(list.children).toHaveLength(1)
+  navigate('#/')
+  expect(screen.queryByRole('group', { name: 'Filter starred by collection' })).not.toBeInTheDocument()
 })
