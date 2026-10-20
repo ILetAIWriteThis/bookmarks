@@ -54,6 +54,11 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
     && !excluded.some((tag) => bookmarkTags.includes(tag))
     && (!query || normalizeSearch([bookmark.title, bookmark.description ?? '', bookmark.url, ...bookmarkTags].join(' ')).includes(query)))
   const title = spaces.find((space) => space.id === collection)!.title
+  const openAll = () => {
+    for (const { bookmark } of visible) {
+      window.open(bookmark.url, '_blank', 'noopener,noreferrer')
+    }
+  }
   const getLucky = () => {
     if (!visible.length) return
     const { bookmark } = visible[Math.floor(Math.random() * visible.length)]
@@ -108,10 +113,18 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
       <section className="v2-collection" aria-labelledby="v2-collection-title">
         <div className="v2-heading">
           <h2 id="v2-collection-title">{title} bookmarks</h2>
-          <button type="button" className="v2-lucky" onClick={getLucky} disabled={!visible.length}
-            title={`Open a random ${title} bookmark from the current results in a new tab`}>
-            Get Lucky <Icon name="external" size={16} />
-          </button>
+          <div className="v2-heading-actions">
+            {collection === 'starred' && (
+              <button type="button" className="v2-lucky" onClick={openAll} disabled={!visible.length}
+                title={`Open all ${visible.length} bookmarks in the current view in new tabs`}>
+                Open all ({visible.length}) <Icon name="external" size={16} />
+              </button>
+            )}
+            <button type="button" className="v2-lucky" onClick={getLucky} disabled={!visible.length}
+              title={`Open a random ${title} bookmark from the current results in a new tab`}>
+              Get Lucky <Icon name="external" size={16} />
+            </button>
+          </div>
         </div>
         {collection === 'starred' && (
           <div className="v2-starred-scopes" role="group" aria-label="Filter starred by collection">

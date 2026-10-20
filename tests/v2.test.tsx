@@ -58,6 +58,47 @@ it('opens a random bookmark from the active collection and current results', asy
   open.mockRestore()
 })
 
+it('opens only the currently visible starred bookmarks in separate tabs', async () => {
+  const user = userEvent.setup()
+  const open = vi.spyOn(window, 'open').mockImplementation(() => null)
+  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['alpha', 'example', 'first', 'later']))
+  window.location.hash = '#/starred'
+  render(<App data={data} />)
+  const list = screen.getByRole('list', { name: 'Starred bookmarks' })
+  const openVisible = async (count: number) => {
+    open.mockClear()
+    const urls = within(list).getAllByRole('link').map((link) => link.getAttribute('href'))
+    await user.click(screen.getByRole('button', { name: `Open all (${count})` }))
+    expect(open.mock.calls).toEqual(urls.map((url) => [url, '_blank', 'noopener,noreferrer']))
+    expect(open).toHaveBeenCalledTimes(count)
+  }
+  try {
+    await openVisible(4)
+    const scopes = screen.getByRole('group', { name: 'Filter starred by collection' })
+    await user.click(within(scopes).getByRole('button', { name: 'YouTube' }))
+    await openVisible(2)
+    await user.click(screen.getByText('Filter by tags'))
+    await user.click(screen.getByRole('button', { name: '#science' }))
+    await openVisible(1)
+    await user.click(within(scopes).getByRole('button', { name: 'All' }))
+    await user.click(screen.getByRole('button', { name: 'Exclude tags' }))
+    await user.click(screen.getByRole('button', { name: '#science' }))
+    await openVisible(3)
+    await user.type(screen.getByRole('searchbox'), 'channel')
+    await openVisible(1)
+    await user.type(screen.getByRole('searchbox'), ' no match')
+    open.mockClear()
+    const empty = screen.getByRole('button', { name: 'Open all (0)' })
+    expect(empty).toBeDisabled()
+    await user.click(empty)
+    expect(open).not.toHaveBeenCalled()
+    navigate('#/')
+    expect(screen.queryByRole('button', { name: /^Open all/ })).not.toBeInTheDocument()
+  } finally {
+    open.mockRestore()
+  }
+})
+
 it('projects the seed collections without mutating data and prioritizes position over subscription', () => {
   const original = JSON.stringify(data)
   expect(v2Bookmarks(data, 'web').map((entry) => entry.bookmark.id)).toEqual(['alpha', 'example'])

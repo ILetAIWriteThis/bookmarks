@@ -13,6 +13,7 @@
 .v2-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
 .v2-heading h2 { font-size: 1.6rem; margin: 0; }
 .v2-heading { flex-wrap: wrap; }
+.v2-heading-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .v2-lucky { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 16px; border: 1px solid var(--blue); border-radius: 9px; background: var(--blue); color: #fffaf0; font: inherit; font-weight: 650; cursor: pointer; }
 .v2-lucky:hover:not(:disabled) { background: #fffaf0; color: var(--blue); }
 .v2-lucky:disabled { opacity: .5; cursor: default; }
