@@ -19,7 +19,7 @@ test('opens every visible bookmark with isolated tabs when pop-ups are allowed',
   await expect.poll(() => context.pages().length).toBe(4)
   const tabs = context.pages().filter((tab) => tab !== page)
   for (let index = 0; index < tabs.length; index++) {
-    await expect(tabs[index]).toHaveURL(bookmarks[bookmarks.length - 1 - index].url)
+    await expect(tabs[index]).toHaveURL(bookmarks[index].url)
     expect(await tabs[index].evaluate(() => window.opener)).toBeNull()
     expect(await tabs[index].evaluate(() => document.referrer)).toBe('')
   }

@@ -58,7 +58,7 @@ it('opens a random bookmark from the active collection and current results', asy
   open.mockRestore()
 })
 
-it('opens only the currently visible starred bookmarks in separate tabs from bottom to top', async () => {
+it('opens only the currently visible starred bookmarks in separate tabs', async () => {
   const user = userEvent.setup()
   const tabs: { document: Document; opener: unknown; location: { replace: ReturnType<typeof vi.fn> } }[] = []
   const open = vi.spyOn(window, 'open').mockImplementation(() => {
@@ -76,8 +76,7 @@ it('opens only the currently visible starred bookmarks in separate tabs from bot
     const urls = within(list).getAllByRole('link').map((link) => link.getAttribute('href'))
     await user.click(screen.getByRole('button', { name: `Open all (${count})` }))
     expect(open.mock.calls).toEqual(urls.map(() => ['about:blank', '_blank']))
-    expect(tabs.map((tab) => tab.document.querySelector('a')?.href)).toEqual([...urls].reverse())
-    expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual(urls)
+    expect(tabs.map((tab) => tab.document.querySelector('a')?.href)).toEqual(urls)
     for (const tab of tabs) {
       expect(tab.opener).toBeNull()
       expect(tab.document.querySelector('a')?.rel).toBe('noopener noreferrer')
@@ -132,13 +131,13 @@ it('reports blocked tabs and retries only remaining bookmarks until the view cha
   try {
     await user.click(screen.getByRole('button', { name: 'Open all (4)' }))
     expect(screen.getByRole('status')).toHaveTextContent('Your browser blocked 3 tabs. Allow pop-ups for this site')
-    expect(replace).toHaveBeenCalledExactlyOnceWith('https://www.youtube.com/@later')
+    expect(replace).toHaveBeenCalledExactlyOnceWith('https://alpha.example/news')
     open.mockClear()
     replace.mockClear()
     open.mockImplementation(openedTab)
     await user.click(screen.getByRole('button', { name: 'Open remaining (3)' }))
     expect(replace.mock.calls).toEqual([
-      ['https://www.youtube.com/@first'], ['https://example.com/journal'], ['https://alpha.example/news'],
+      ['https://example.com/journal'], ['https://www.youtube.com/@first'], ['https://www.youtube.com/@later'],
     ])
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
     open.mockImplementation(() => null)

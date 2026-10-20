@@ -60,8 +60,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
   const remaining = blockedTabs?.view === viewKey ? blockedTabs.ids : null
   const openAll = () => {
     const blocked: string[] = []
-    // Browsers may insert each new tab beside this page, reversing creation order.
-    for (const { bookmark } of [...visible].reverse()) {
+    for (const { bookmark } of visible) {
       if (remaining && !remaining.includes(bookmark.id)) continue
       // Opening a blank tab first lets us detect blocking: noopener/noreferrer
       // return null even when a tab opened successfully.
