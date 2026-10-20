@@ -66,7 +66,7 @@ it('opens only the currently visible starred bookmarks in separate tabs', async 
     tabs.push(tab)
     return tab as unknown as Window
   })
-  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['alpha', 'example', 'first', 'later']))
+  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['later', 'example', 'first', 'alpha']))
   window.location.hash = '#/starred'
   render(<App data={data} />)
   const list = screen.getByRole('list', { name: 'Starred bookmarks' })
@@ -125,19 +125,19 @@ it('reports blocked tabs and retries only remaining bookmarks until the view cha
     return { document: tabDocument, opener: window } as unknown as Window
   }
   const open = vi.spyOn(window, 'open').mockImplementation(() => null).mockImplementationOnce(openedTab)
-  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['alpha', 'example', 'first', 'later']))
+  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['later', 'example', 'first', 'alpha']))
   window.location.hash = '#/starred'
   render(<App data={data} />)
   try {
     await user.click(screen.getByRole('button', { name: 'Open all (4)' }))
     expect(screen.getByRole('status')).toHaveTextContent('Your browser blocked 3 tabs. Allow pop-ups for this site')
-    expect(replace).toHaveBeenCalledExactlyOnceWith('https://alpha.example/news')
+    expect(replace).toHaveBeenCalledExactlyOnceWith('https://www.youtube.com/@later')
     open.mockClear()
     replace.mockClear()
     open.mockImplementation(openedTab)
     await user.click(screen.getByRole('button', { name: 'Open remaining (3)' }))
     expect(replace.mock.calls).toEqual([
-      ['https://example.com/journal'], ['https://www.youtube.com/@first'], ['https://www.youtube.com/@later'],
+      ['https://example.com/journal'], ['https://www.youtube.com/@first'], ['https://alpha.example/news'],
     ])
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
     open.mockImplementation(() => null)
@@ -263,7 +263,7 @@ it.each(['#/media', '#/travel'])('falls back to Web for removed route %s', (hash
 })
 
 
-it('keeps stars across reloads without changing saved order and allows removing them', async () => {
+it('keeps first-starred order across reloads without changing saved collection positions', async () => {
   const user = userEvent.setup()
   const original = JSON.stringify(data)
   window.location.hash = '#/youtube'
@@ -271,16 +271,37 @@ it('keeps stars across reloads without changing saved order and allows removing 
   await user.click(screen.getByRole('button', { name: 'Star Later channel' }))
   await user.click(screen.getByRole('button', { name: 'Star First channel' }))
   expect(screen.getByRole('button', { name: 'Unstar Later channel' })).toHaveAttribute('aria-pressed', 'true')
+  navigate('#/')
+  await user.click(screen.getByRole('button', { name: 'Star Alpha News' }))
   unmount()
   window.location.hash = '#/starred'
   render(<App data={data} />)
   const list = screen.getByRole('list', { name: 'Starred bookmarks' })
   expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
-    'https://www.youtube.com/@first', 'https://www.youtube.com/@later',
+    'https://www.youtube.com/@later', 'https://www.youtube.com/@first', 'https://alpha.example/news',
   ])
   expect(within(list).getByLabelText('Position 8')).toBeInTheDocument()
+  const scopes = screen.getByRole('group', { name: 'Filter starred by collection' })
+  await user.click(within(scopes).getByRole('button', { name: 'YouTube' }))
+  expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
+    'https://www.youtube.com/@later', 'https://www.youtube.com/@first',
+  ])
+  await user.type(screen.getByRole('searchbox'), 'channel')
+  expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
+    'https://www.youtube.com/@later', 'https://www.youtube.com/@first',
+  ])
+  await user.click(screen.getByRole('button', { name: 'Clear search' }))
+  await user.click(within(scopes).getByRole('button', { name: 'All' }))
+  await user.click(screen.getByRole('button', { name: 'Unstar Later channel' }))
+  navigate('#/youtube')
+  await user.click(screen.getByRole('button', { name: 'Star Later channel' }))
+  navigate('#/starred')
+  expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
+    'https://www.youtube.com/@first', 'https://alpha.example/news', 'https://www.youtube.com/@later',
+  ])
   await user.click(screen.getByRole('button', { name: 'Unstar First channel' }))
   await user.click(screen.getByRole('button', { name: 'Unstar Later channel' }))
+  await user.click(screen.getByRole('button', { name: 'Unstar Alpha News' }))
   expect(screen.getByText('No starred bookmarks yet.')).toBeInTheDocument()
   navigate('#/youtube')
   expect(screen.getByRole('list').children).toHaveLength(2)

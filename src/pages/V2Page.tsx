@@ -32,7 +32,11 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
   const [showAllTags, setShowAllTags] = useState(false)
   const [blockedTabs, setBlockedTabs] = useState<{ view: string; ids: string[] } | null>(null)
   useEffect(() => { setTagQuery(''); setShowAllTags(false) }, [collection])
-  const starred = [...collections.web, ...collections.youtube].filter(({ bookmark }) => favorites.ids.includes(bookmark.id))
+  const entriesById = new Map([...collections.web, ...collections.youtube].map((entry) => [entry.bookmark.id, entry]))
+  const starred = favorites.ids.flatMap((id) => {
+    const entry = entriesById.get(id)
+    return entry ? [entry] : []
+  })
   const starredCounts = {
     all: starred.length,
     web: starred.filter(({ bookmark }) => bookmark.placement?.collection === 'web').length,
@@ -230,7 +234,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
           <h3>{entries.length ? query ? 'No bookmarks match your search and tags.' : 'No bookmarks match these tags.' : collection === 'starred' ? starredScope === 'all' ? 'No starred bookmarks yet.' : `No starred ${scopeTitle} bookmarks yet.` : 'No bookmarks here yet.'}</h3>
           <p>{entries.length ? query ? 'Clear your search or change the selected tags.' : 'Select All or deselect a tag to widen your list.' : collection === 'starred' ? starredScope === 'all' ? 'Use the star beside a Web bookmark or YouTube channel to keep it here.' : `Star a bookmark in ${scopeTitle} to keep it here, or select All to see your other favorites.` : `Promote a bookmark to the ${title} collection to see it here.`}</p>
         </div>}
-        <p className="v2-order-note">{collection === 'starred' ? 'Saved collection order · Stored only in this browser' : `Saved order · ${title} collection`}</p>
+        <p className="v2-order-note">{collection === 'starred' ? 'First starred first · Stored only in this browser' : `Saved order · ${title} collection`}</p>
       </section>
     </main>
   )
