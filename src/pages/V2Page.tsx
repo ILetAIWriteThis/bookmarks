@@ -30,6 +30,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
   const [tagMode, setTagMode] = useState<'include' | 'exclude'>('include')
   const [tagQuery, setTagQuery] = useState('')
   const [showAllTags, setShowAllTags] = useState(false)
+  const [blockedTabs, setBlockedTabs] = useState<{ view: string; ids: string[] } | null>(null)
   useEffect(() => { setTagQuery(''); setShowAllTags(false) }, [collection])
   const starred = [...collections.web, ...collections.youtube].filter(({ bookmark }) => favorites.ids.includes(bookmark.id))
   const starredCounts = {
@@ -54,10 +55,29 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
     && !excluded.some((tag) => bookmarkTags.includes(tag))
     && (!query || normalizeSearch([bookmark.title, bookmark.description ?? '', bookmark.url, ...bookmarkTags].join(' ')).includes(query)))
   const title = spaces.find((space) => space.id === collection)!.title
+  const viewKey = JSON.stringify([collection, starredScope, selected, excluded, query, visible.map(({ bookmark }) => [bookmark.id, bookmark.url])])
+  useEffect(() => { setBlockedTabs(null) }, [viewKey])
+  const remaining = blockedTabs?.view === viewKey ? blockedTabs.ids : null
   const openAll = () => {
+    const blocked: string[] = []
     for (const { bookmark } of visible) {
-      window.open(bookmark.url, '_blank', 'noopener,noreferrer')
+      if (remaining && !remaining.includes(bookmark.id)) continue
+      // Opening a blank tab first lets us detect blocking: noopener/noreferrer
+      // return null even when a tab opened successfully.
+      const tab = window.open('about:blank', '_blank')
+      if (!tab) {
+        blocked.push(bookmark.id)
+        continue
+      }
+      tab.opener = null
+      const link = tab.document.createElement('a')
+      link.href = bookmark.url
+      link.rel = 'noopener noreferrer'
+      link.referrerPolicy = 'no-referrer'
+      tab.document.body.append(link)
+      link.click()
     }
+    setBlockedTabs(blocked.length ? { view: viewKey, ids: blocked } : null)
   }
   const getLucky = () => {
     if (!visible.length) return
@@ -116,8 +136,8 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
           <div className="v2-heading-actions">
             {collection === 'starred' && (
               <button type="button" className="v2-lucky" onClick={openAll} disabled={!visible.length}
-                title={`Open all ${visible.length} bookmarks in the current view in new tabs`}>
-                Open all ({visible.length}) <Icon name="external" size={16} />
+                title={`Open ${remaining ? 'remaining' : 'all'} ${remaining?.length ?? visible.length} bookmarks in the current view in new tabs`}>
+                {remaining ? 'Open remaining' : 'Open all'} ({remaining?.length ?? visible.length}) <Icon name="external" size={16} />
               </button>
             )}
             <button type="button" className="v2-lucky" onClick={getLucky} disabled={!visible.length}
@@ -126,6 +146,9 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
             </button>
           </div>
         </div>
+        {collection === 'starred' && remaining && (
+          <p role="status">Your browser blocked {remaining.length} {remaining.length === 1 ? 'tab' : 'tabs'}. Allow pop-ups for this site using your browser’s address bar or site settings, then click Open remaining. Already opened bookmarks will not open again.</p>
+        )}
         {collection === 'starred' && (
           <div className="v2-starred-scopes" role="group" aria-label="Filter starred by collection">
             {starredScopes.map((scope) => (

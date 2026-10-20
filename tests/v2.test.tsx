@@ -60,16 +60,28 @@ it('opens a random bookmark from the active collection and current results', asy
 
 it('opens only the currently visible starred bookmarks in separate tabs', async () => {
   const user = userEvent.setup()
-  const open = vi.spyOn(window, 'open').mockImplementation(() => null)
+  const tabs: { document: Document; opener: unknown; location: { replace: ReturnType<typeof vi.fn> } }[] = []
+  const open = vi.spyOn(window, 'open').mockImplementation(() => {
+    const tab = { document: document.implementation.createHTMLDocument(), opener: window, location: { replace: vi.fn() } }
+    tabs.push(tab)
+    return tab as unknown as Window
+  })
   localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['alpha', 'example', 'first', 'later']))
   window.location.hash = '#/starred'
   render(<App data={data} />)
   const list = screen.getByRole('list', { name: 'Starred bookmarks' })
   const openVisible = async (count: number) => {
     open.mockClear()
+    tabs.length = 0
     const urls = within(list).getAllByRole('link').map((link) => link.getAttribute('href'))
     await user.click(screen.getByRole('button', { name: `Open all (${count})` }))
-    expect(open.mock.calls).toEqual(urls.map((url) => [url, '_blank', 'noopener,noreferrer']))
+    expect(open.mock.calls).toEqual(urls.map(() => ['about:blank', '_blank']))
+    expect(tabs.map((tab) => tab.document.querySelector('a')?.href)).toEqual(urls)
+    for (const tab of tabs) {
+      expect(tab.opener).toBeNull()
+      expect(tab.document.querySelector('a')?.rel).toBe('noopener noreferrer')
+      expect(tab.document.querySelector('a')?.referrerPolicy).toBe('no-referrer')
+    }
     expect(open).toHaveBeenCalledTimes(count)
   }
   try {
@@ -94,6 +106,46 @@ it('opens only the currently visible starred bookmarks in separate tabs', async 
     expect(open).not.toHaveBeenCalled()
     navigate('#/')
     expect(screen.queryByRole('button', { name: /^Open all/ })).not.toBeInTheDocument()
+  } finally {
+    open.mockRestore()
+  }
+})
+
+it('reports blocked tabs and retries only remaining bookmarks until the view changes', async () => {
+  const user = userEvent.setup()
+  const replace = vi.fn()
+  const openedTab = () => {
+    const tabDocument = document.implementation.createHTMLDocument()
+    const createElement = tabDocument.createElement.bind(tabDocument)
+    vi.spyOn(tabDocument, 'createElement').mockImplementation((tag: string) => {
+      const element = createElement(tag)
+      if (element instanceof HTMLAnchorElement) element.click = () => replace(element.href)
+      return element
+    })
+    return { document: tabDocument, opener: window } as unknown as Window
+  }
+  const open = vi.spyOn(window, 'open').mockImplementation(() => null).mockImplementationOnce(openedTab)
+  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['alpha', 'example', 'first', 'later']))
+  window.location.hash = '#/starred'
+  render(<App data={data} />)
+  try {
+    await user.click(screen.getByRole('button', { name: 'Open all (4)' }))
+    expect(screen.getByRole('status')).toHaveTextContent('Your browser blocked 3 tabs. Allow pop-ups for this site')
+    expect(replace).toHaveBeenCalledExactlyOnceWith('https://alpha.example/news')
+    open.mockClear()
+    replace.mockClear()
+    open.mockImplementation(openedTab)
+    await user.click(screen.getByRole('button', { name: 'Open remaining (3)' }))
+    expect(replace.mock.calls).toEqual([
+      ['https://example.com/journal'], ['https://www.youtube.com/@first'], ['https://www.youtube.com/@later'],
+    ])
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
+    open.mockImplementation(() => null)
+    await user.click(screen.getByRole('button', { name: 'Open all (4)' }))
+    expect(screen.getByRole('button', { name: 'Open remaining (4)' })).toBeInTheDocument()
+    await user.type(screen.getByRole('searchbox'), 'First')
+    expect(screen.getByRole('button', { name: 'Open all (1)' })).toBeInTheDocument()
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
   } finally {
     open.mockRestore()
   }
