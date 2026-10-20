@@ -28,6 +28,8 @@
 .v2-filter { min-height: 36px; padding: 7px 11px; border: 1px solid #d2ccbf; border-radius: 7px; background: #fffaf0; color: #4f5e60; font: .73rem ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; cursor: pointer; }
 .v2-filter:hover { border-color: var(--blue); }
 .v2-filter[aria-pressed="true"] { color: #fff; background: var(--blue); border-color: var(--blue); }
+.v2-filter--excluded[aria-pressed="true"] { background: #7c2932; border-color: #7c2932; }
+.v2-tag-modes { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
 .v2-list-heading, .v2-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) 30px; align-items: center; gap: 12px; padding: 0 18px; }
 .v2-list-heading { padding-bottom: 12px; color: #62675f; font: .65rem ui-monospace, monospace; }
 .v2-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
