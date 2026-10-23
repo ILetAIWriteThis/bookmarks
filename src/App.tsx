@@ -39,7 +39,7 @@ export function App({ data: providedData }: AppProps) {
   useEffect(() => {
     if (providedData || data) return
     const controller = new AbortController()
-    fetch(`${import.meta.env.BASE_URL}data/bookmarks.json`, { signal: controller.signal })
+    fetch(`${import.meta.env.BASE_URL}data/bookmarks.json`, { signal: controller.signal, cache: 'no-store' })
       .then((response) => {
         setOfflineCache(response.headers.get('X-Bookmarks-Offline') === 'true')
         if (!response.ok) throw new Error(`Could not load bookmark data (${response.status})`)

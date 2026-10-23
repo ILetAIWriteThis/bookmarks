@@ -1,4 +1,4 @@
-const VERSION = 'bookmarks-shell-v12'
+const VERSION = 'bookmarks-shell-v13'
 const scopeUrl = new URL(self.registration.scope)
 const indexUrl = new URL('./index.html', scopeUrl)
 const dataUrl = new URL('./data/bookmarks.json', scopeUrl)
@@ -20,7 +20,7 @@ function offlineResponse(response) {
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(VERSION)
-    await cache.addAll(shellFiles)
+    await cache.addAll(shellFiles.map((url) => new Request(url, { cache: 'reload' })))
     const index = await cache.match(indexUrl)
     const markup = await index.clone().text()
     const assetUrls = [...markup.matchAll(/(?:src|href)=["']([^"']+)["']/g)]
@@ -51,7 +51,7 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate' || url.href === dataUrl.href) {
     event.respondWith((async () => {
       try {
-        const response = await fetch(request)
+        const response = await fetch(request, { cache: 'no-store' })
         if (response.ok) {
           const cache = await caches.open(VERSION)
           await cache.put(request.mode === 'navigate' ? indexUrl : request, response.clone())
