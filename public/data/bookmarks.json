@@ -318,7 +318,8 @@
       "tags": [
         "podcasts",
         "politics",
-        "entertainment"
+        "entertainment",
+        "listening"
       ],
       "categories": [
         {
@@ -346,7 +347,8 @@
       "tags": [
         "podcasts",
         "security",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -365,7 +367,8 @@
       "url": "https://www.youtube.com/@mokslosriuba/videos",
       "tags": [
         "podcasts",
-        "science"
+        "science",
+        "listening"
       ],
       "categories": [
         {
@@ -391,7 +394,8 @@
       "title": "Anton Chuvakin",
       "url": "https://www.youtube.com/@antonchuvakin4628/videos",
       "tags": [
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -411,7 +415,8 @@
       "tags": [
         "podcasts",
         "security",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -435,7 +440,8 @@
       "tags": [
         "podcasts",
         "entertainment",
-        "true-stories"
+        "true-stories",
+        "listening"
       ],
       "categories": [
         {
@@ -454,7 +460,8 @@
       "url": "https://www.youtube.com/@Terminalas.Katkus/videos",
       "tags": [
         "podcasts",
-        "politics"
+        "politics",
+        "listening"
       ],
       "categories": [
         {
@@ -873,7 +880,8 @@
       "tags": [
         "podcasts",
         "security",
-        "true-stories"
+        "true-stories",
+        "listening"
       ],
       "categories": [
         {
@@ -912,7 +920,8 @@
       "tags": [
         "podcasts",
         "ai",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -933,7 +942,8 @@
         "podcasts",
         "ai",
         "security",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -975,7 +985,8 @@
         "podcasts",
         "security",
         "reverse-engineering",
-        "vulnerability-research"
+        "vulnerability-research",
+        "listening"
       ],
       "categories": [
         {
@@ -995,7 +1006,8 @@
       "tags": [
         "podcasts",
         "security",
-        "cloud-security"
+        "cloud-security",
+        "listening"
       ],
       "categories": [
         {
@@ -1016,7 +1028,8 @@
         "podcasts",
         "security",
         "bug-bounty",
-        "application-security"
+        "application-security",
+        "listening"
       ],
       "categories": [
         {
@@ -1036,7 +1049,8 @@
       "tags": [
         "podcasts",
         "politics",
-        "comedy"
+        "comedy",
+        "listening"
       ],
       "categories": [
         {
@@ -1056,7 +1070,8 @@
       "tags": [
         "podcasts",
         "security",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -1076,7 +1091,8 @@
       "tags": [
         "podcasts",
         "security",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -1116,7 +1132,8 @@
       "tags": [
         "podcasts",
         "ai-machine-learning",
-        "history"
+        "history",
+        "listening"
       ],
       "categories": [
         {
@@ -1135,7 +1152,8 @@
       "url": "https://www.youtube.com/@Lietuvoskariuomen%C4%97-k6b/videos",
       "tags": [
         "podcasts",
-        "military"
+        "military",
+        "listening"
       ],
       "categories": [
         {
@@ -1155,7 +1173,8 @@
       "tags": [
         "podcasts",
         "politics",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -1175,7 +1194,8 @@
       "tags": [
         "podcasts",
         "leadership",
-        "business-finance"
+        "business-finance",
+        "listening"
       ],
       "categories": [
         {
@@ -1194,7 +1214,8 @@
       "url": "https://www.youtube.com/@TheBenasPodcast/videos",
       "tags": [
         "podcasts",
-        "sport-motorsport"
+        "sport-motorsport",
+        "listening"
       ],
       "categories": [
         {
@@ -1214,7 +1235,8 @@
       "tags": [
         "podcasts",
         "politics",
-        "comedy"
+        "comedy",
+        "listening"
       ],
       "categories": [
         {
@@ -1255,7 +1277,8 @@
       "tags": [
         "podcasts",
         "security",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -1275,7 +1298,8 @@
       "tags": [
         "podcasts",
         "comedy",
-        "entertainment"
+        "entertainment",
+        "listening"
       ],
       "categories": [
         {
@@ -1295,7 +1319,8 @@
       "tags": [
         "podcasts",
         "comedy",
-        "entertainment"
+        "entertainment",
+        "listening"
       ],
       "categories": [
         {
@@ -1315,7 +1340,8 @@
       "tags": [
         "podcasts",
         "security",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -1336,7 +1362,8 @@
         "podcasts",
         "security",
         "cti",
-        "malware-analysis"
+        "malware-analysis",
+        "listening"
       ],
       "categories": [
         {
@@ -1356,7 +1383,8 @@
       "tags": [
         "podcasts",
         "security",
-        "pentesting"
+        "pentesting",
+        "listening"
       ],
       "categories": [
         {
@@ -1376,7 +1404,8 @@
       "tags": [
         "podcasts",
         "careers",
-        "ai-safety"
+        "ai-safety",
+        "listening"
       ],
       "categories": [
         {
@@ -1395,7 +1424,8 @@
       "url": "https://www.youtube.com/@AIPapersDecodedPodcast/videos",
       "tags": [
         "podcasts",
-        "ai-machine-learning"
+        "ai-machine-learning",
+        "listening"
       ],
       "categories": [
         {
@@ -1415,7 +1445,8 @@
       "tags": [
         "podcasts",
         "security",
-        "ai-security"
+        "ai-security",
+        "listening"
       ],
       "categories": [
         {
@@ -1436,7 +1467,8 @@
         "podcasts",
         "science",
         "health",
-        "neuroscience"
+        "neuroscience",
+        "listening"
       ],
       "categories": [
         {
@@ -1456,7 +1488,8 @@
       "tags": [
         "podcasts",
         "history",
-        "archaeology"
+        "archaeology",
+        "listening"
       ],
       "categories": [
         {
@@ -1476,7 +1509,8 @@
       "tags": [
         "podcasts",
         "history",
-        "archaeology"
+        "archaeology",
+        "listening"
       ],
       "subscribed": false,
       "categories": [
@@ -1496,7 +1530,8 @@
       "url": "https://www.youtube.com/@ExponentialView/videos",
       "tags": [
         "podcasts",
-        "ai-machine-learning"
+        "ai-machine-learning",
+        "listening"
       ],
       "categories": [
         {
@@ -1516,7 +1551,8 @@
       "tags": [
         "podcasts",
         "tech",
-        "cloud-computing"
+        "cloud-computing",
+        "listening"
       ],
       "categories": [
         {
@@ -1536,7 +1572,8 @@
       "tags": [
         "podcasts",
         "security",
-        "cloud-security"
+        "cloud-security",
+        "listening"
       ],
       "categories": [
         {
@@ -1556,7 +1593,8 @@
       "tags": [
         "podcasts",
         "leadership",
-        "business-finance"
+        "business-finance",
+        "listening"
       ],
       "categories": [
         {
@@ -1576,7 +1614,8 @@
       "tags": [
         "podcasts",
         "self-improvement-philosophy",
-        "philosophy"
+        "philosophy",
+        "listening"
       ],
       "categories": [
         {
@@ -1596,7 +1635,8 @@
       "tags": [
         "podcasts",
         "security",
-        "ai-security"
+        "ai-security",
+        "listening"
       ],
       "categories": [
         {
@@ -1616,7 +1656,8 @@
       "tags": [
         "podcasts",
         "politics",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -1636,7 +1677,8 @@
       "tags": [
         "podcasts",
         "security",
-        "application-security"
+        "application-security",
+        "listening"
       ],
       "categories": [
         {
@@ -1656,7 +1698,8 @@
       "tags": [
         "podcasts",
         "security",
-        "leadership"
+        "leadership",
+        "listening"
       ],
       "categories": [
         {
@@ -1676,7 +1719,8 @@
       "tags": [
         "podcasts",
         "security",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -1695,7 +1739,8 @@
       "url": "https://www.youtube.com/@restishistorypod/videos",
       "tags": [
         "podcasts",
-        "history"
+        "history",
+        "listening"
       ],
       "categories": [
         {
@@ -1714,7 +1759,8 @@
       "url": "https://www.youtube.com/@thisdayinai/videos",
       "tags": [
         "podcasts",
-        "ai-machine-learning"
+        "ai-machine-learning",
+        "listening"
       ],
       "categories": [
         {
@@ -1772,7 +1818,8 @@
       "tags": [
         "sport-motorsport",
         "basketball",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -2059,7 +2106,8 @@
       "tags": [
         "sport-motorsport",
         "basketball",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -2231,7 +2279,8 @@
       "tags": [
         "sport-motorsport",
         "basketball",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -2402,7 +2451,8 @@
       "tags": [
         "sport-motorsport",
         "american-football",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -3354,7 +3404,8 @@
         "sport-motorsport",
         "rally",
         "cars",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -4727,7 +4778,8 @@
       "url": "https://www.youtube.com/@svaras1418/videos",
       "tags": [
         "music",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -5200,7 +5252,8 @@
       "tags": [
         "music",
         "podcasts",
-        "religion"
+        "religion",
+        "listening"
       ],
       "categories": [
         {
@@ -5522,7 +5575,8 @@
         "music",
         "ukulele",
         "education",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -6313,7 +6367,8 @@
       "tags": [
         "security",
         "conferences",
-        "vulnerability-research"
+        "vulnerability-research",
+        "listening"
       ],
       "categories": [
         {
@@ -6496,7 +6551,8 @@
         "security",
         "podcasts",
         "cybercrime",
-        "history"
+        "history",
+        "listening"
       ],
       "categories": [
         {
@@ -6815,7 +6871,8 @@
       "tags": [
         "security",
         "podcasts",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -6953,7 +7010,8 @@
       "tags": [
         "security",
         "podcasts",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -7749,7 +7807,8 @@
       "tags": [
         "security",
         "podcasts",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -7795,7 +7854,8 @@
         "engineering",
         "electronics",
         "hardware",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -8032,7 +8092,8 @@
         "security",
         "ai-security",
         "podcasts",
-        "ai-machine-learning"
+        "ai-machine-learning",
+        "listening"
       ],
       "categories": [
         {
@@ -8304,7 +8365,8 @@
       "tags": [
         "security",
         "podcasts",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -8482,7 +8544,8 @@
       "tags": [
         "security",
         "podcasts",
-        "zero-trust"
+        "zero-trust",
+        "listening"
       ],
       "categories": [
         {
@@ -8620,7 +8683,8 @@
       "tags": [
         "security",
         "incident-response",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -9946,7 +10010,8 @@
       "url": "https://www.youtube.com/@H4unt3dHacker/videos",
       "tags": [
         "security",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -9967,7 +10032,8 @@
         "security",
         "podcasts",
         "cybercrime",
-        "privacy"
+        "privacy",
+        "listening"
       ],
       "categories": [
         {
@@ -9986,7 +10052,8 @@
       "url": "https://www.youtube.com/@HackerValleyMedia/videos",
       "tags": [
         "security",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -10412,7 +10479,8 @@
       "tags": [
         "history",
         "espionage",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -10451,7 +10519,8 @@
       "url": "https://www.youtube.com/@itauditlabs/videos",
       "tags": [
         "security",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -11639,7 +11708,8 @@
         "security",
         "podcasts",
         "networking",
-        "network-security"
+        "network-security",
+        "listening"
       ],
       "categories": [
         {
@@ -12047,7 +12117,8 @@
       "tags": [
         "security",
         "application-security",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -12087,7 +12158,8 @@
       "tags": [
         "security",
         "podcasts",
-        "cybercrime"
+        "cybercrime",
+        "listening"
       ],
       "categories": [
         {
@@ -13333,7 +13405,8 @@
       "url": "https://www.youtube.com/@dancarlinpodcaster/videos",
       "tags": [
         "history",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -13353,7 +13426,8 @@
       "tags": [
         "cars",
         "car-reviews",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -13722,7 +13796,8 @@
         "podcasts",
         "science",
         "tech",
-        "self-improvement-philosophy"
+        "self-improvement-philosophy",
+        "listening"
       ],
       "categories": [
         {
@@ -13878,7 +13953,8 @@
       "tags": [
         "entertainment",
         "comedy",
-        "talk-show"
+        "talk-show",
+        "listening"
       ],
       "categories": [
         {
@@ -13897,7 +13973,8 @@
       "url": "https://www.youtube.com/@pasikalbejimai/videos",
       "tags": [
         "comedy",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -14013,7 +14090,8 @@
       "tags": [
         "entertainment",
         "comedy",
-        "talk-show"
+        "talk-show",
+        "listening"
       ],
       "categories": [
         {
@@ -14224,7 +14302,8 @@
       "title": "Antras Kanalas",
       "url": "https://www.youtube.com/@antraskanalas9124/videos",
       "tags": [
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -14360,7 +14439,8 @@
       "url": "https://www.youtube.com/@LAHWF/videos",
       "tags": [
         "comedy",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -14380,7 +14460,8 @@
       "tags": [
         "entertainment",
         "comedy",
-        "talk-show"
+        "talk-show",
+        "listening"
       ],
       "categories": [
         {
@@ -14455,7 +14536,8 @@
       "url": "https://www.youtube.com/@KongtroversialHighlights/videos",
       "tags": [
         "comedy",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -14476,7 +14558,8 @@
         "comedy",
         "podcasts",
         "politics",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -14497,7 +14580,8 @@
         "comedy",
         "podcasts",
         "politics",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -14961,7 +15045,8 @@
       "tags": [
         "security",
         "podcasts",
-        "news"
+        "news",
+        "listening"
       ],
       "categories": [
         {
@@ -15222,7 +15307,8 @@
       "tags": [
         "tech-programming",
         "careers",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -15631,7 +15717,8 @@
       "url": "https://www.youtube.com/@deep.future/videos",
       "tags": [
         "tech-programming",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -15934,7 +16021,8 @@
       "url": "https://www.youtube.com/@KongPham/videos",
       "tags": [
         "podcasts",
-        "entertainment"
+        "entertainment",
+        "listening"
       ],
       "categories": [
         {
@@ -17984,7 +18072,8 @@
       "tags": [
         "languages",
         "writing",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -18339,7 +18428,8 @@
       "tags": [
         "podcasts",
         "learning",
-        "lifestyle"
+        "lifestyle",
+        "listening"
       ],
       "categories": [
         {
@@ -18420,7 +18510,8 @@
         "science",
         "research",
         "news",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -18518,7 +18609,8 @@
       "url": "https://www.youtube.com/@TheSkepticsGuide/videos",
       "tags": [
         "science",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -19036,7 +19128,8 @@
       "tags": [
         "ai-machine-learning",
         "news",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -19133,7 +19226,8 @@
       "tags": [
         "ai-machine-learning",
         "research",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -19332,7 +19426,8 @@
         "ai-machine-learning",
         "programming",
         "podcasts",
-        "conferences"
+        "conferences",
+        "listening"
       ],
       "categories": [
         {
@@ -19767,7 +19862,8 @@
       "url": "https://www.youtube.com/@unsupervised-learning/videos",
       "tags": [
         "ai-machine-learning",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -19966,7 +20062,8 @@
       "url": "https://www.youtube.com/@timferriss/videos",
       "tags": [
         "self-improvement-philosophy",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -20004,7 +20101,8 @@
       "url": "https://www.youtube.com/@ChrisWillx/videos",
       "tags": [
         "self-improvement-philosophy",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -20084,7 +20182,8 @@
       "tags": [
         "self-improvement-philosophy",
         "philosophy",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -20163,7 +20262,8 @@
       "tags": [
         "self-improvement-philosophy",
         "podcasts",
-        "philosophy"
+        "philosophy",
+        "listening"
       ],
       "categories": [
         {
@@ -20242,7 +20342,8 @@
       "tags": [
         "self-improvement-philosophy",
         "podcasts",
-        "health"
+        "health",
+        "listening"
       ],
       "categories": [
         {
@@ -20319,7 +20420,8 @@
       "tags": [
         "self-improvement-philosophy",
         "podcasts",
-        "psychology"
+        "psychology",
+        "listening"
       ],
       "categories": [
         {
@@ -20339,7 +20441,8 @@
       "tags": [
         "self-improvement-philosophy",
         "podcasts",
-        "leadership"
+        "leadership",
+        "listening"
       ],
       "categories": [
         {
@@ -20456,7 +20559,8 @@
       "url": "https://www.youtube.com/@JordanHarbingerShow/videos",
       "tags": [
         "self-improvement-philosophy",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -20496,7 +20600,8 @@
       "tags": [
         "self-improvement-philosophy",
         "podcasts",
-        "communication"
+        "communication",
+        "listening"
       ],
       "categories": [
         {
@@ -20804,7 +20909,8 @@
       "tags": [
         "history",
         "documentary",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -21055,7 +21161,8 @@
       "url": "https://www.youtube.com/@kotyliistorikai1852/videos",
       "tags": [
         "history",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -21170,7 +21277,8 @@
       "url": "https://www.youtube.com/@StuffYouMissedinHistoryClass/videos",
       "tags": [
         "history",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -21774,7 +21882,8 @@
       "url": "https://www.youtube.com/@marklingwood9/videos",
       "tags": [
         "podcasts",
-        "reading"
+        "reading",
+        "listening"
       ],
       "categories": [
         {
@@ -21834,7 +21943,8 @@
       "tags": [
         "business-finance",
         "podcasts",
-        "history"
+        "history",
+        "listening"
       ],
       "categories": [
         {
@@ -21912,7 +22022,8 @@
       "tags": [
         "sport-motorsport",
         "basketball",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -22652,7 +22763,8 @@
       "title": "Club Metaverse",
       "url": "https://www.youtube.com/@ClubMetaverse/videos",
       "tags": [
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -23022,7 +23134,8 @@
       "tags": [
         "podcasts",
         "careers",
-        "programming"
+        "programming",
+        "listening"
       ],
       "categories": [
         {
@@ -23699,7 +23812,8 @@
       "url": "https://www.youtube.com/@tikriejiZAS/videos",
       "tags": [
         "music",
-        "podcasts"
+        "podcasts",
+        "listening"
       ],
       "categories": [
         {
@@ -23785,7 +23899,8 @@
       "tags": [
         "podcasts",
         "politics",
-        "geopolitics"
+        "geopolitics",
+        "listening"
       ],
       "categories": [
         {
@@ -34116,7 +34231,8 @@
       "url": "https://www.youtube.com/@zenitylabs",
       "tags": [
         "podcasts",
-        "security"
+        "security",
+        "listening"
       ],
       "categories": [],
       "placement": {
@@ -34332,7 +34448,8 @@
         "careers",
         "podcasts",
         "software-engineering",
-        "engineering-leadership"
+        "engineering-leadership",
+        "listening"
       ],
       "categories": [
         {
@@ -34425,6 +34542,11 @@
       "id": "youtube-cleo-abram",
       "title": "Cleo Abram",
       "url": "https://www.youtube.com/@CleoAbram/videos",
+      "tags": [
+        "science",
+        "tech",
+        "education"
+      ],
       "categories": [
         {
           "categoryId": "youtube-science",
@@ -34531,6 +34653,21 @@
       "placement": {
         "collection": "web",
         "position": 486
+      }
+    },
+    {
+      "id": "youtube-the-art-of-storytelling",
+      "title": "The Art Of Storytelling",
+      "url": "https://www.youtube.com/@theartofstorytelling1/videos",
+      "categories": [
+        {
+          "categoryId": "youtube-other",
+          "position": 74
+        }
+      ],
+      "placement": {
+        "collection": "youtube",
+        "position": 1189
       }
     }
   ]
