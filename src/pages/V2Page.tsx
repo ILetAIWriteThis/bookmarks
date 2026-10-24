@@ -26,8 +26,8 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
   const [filters, setFilters] = useState<Record<View, string[]>>({ web: [], youtube: [], starred: [] })
   const [queries, setQueries] = useState<Record<View, string>>({ web: '', youtube: '', starred: '' })
   const [starredScope, setStarredScope] = useState<StarredScope>('all')
-  const [excludedTags, setExcludedTags] = useState<string[]>([])
-  const [tagMode, setTagMode] = useState<'include' | 'exclude'>('include')
+  const [excludedTags, setExcludedTags] = useState<Record<View, string[]>>({ web: [], youtube: [], starred: [] })
+  const [tagModes, setTagModes] = useState<Record<View, 'include' | 'exclude'>>({ web: 'include', youtube: 'include', starred: 'include' })
   const [tagQuery, setTagQuery] = useState('')
   const [showAllTags, setShowAllTags] = useState(false)
   const [blockedTabs, setBlockedTabs] = useState<{ view: string; ids: string[] } | null>(null)
@@ -50,7 +50,9 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
   for (const entry of entries) for (const tag of entry.tags) tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)
   const tags = [...tagCounts.keys()].sort((a, b) => (tagCounts.get(b)! - tagCounts.get(a)!) || a.localeCompare(b))
   const selected = filters[collection]
-  const excluded = collection === 'starred' ? excludedTags : []
+  const supportsExclusion = collection === 'starred' || collection === 'youtube'
+  const tagMode = tagModes[collection]
+  const excluded = excludedTags[collection]
   const matchingTags = tags.filter((tag) => normalizeSearch(tag).includes(normalizeSearch(tagQuery).replace(/^#/, '')))
   const displayedTags = [...new Set([...selected, ...excluded, ...(tagQuery || showAllTags ? matchingTags : matchingTags.slice(0, 12))])]
   const query = normalizeSearch(queries[collection]).replace(/^#/, '')
@@ -89,16 +91,19 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
     window.open(bookmark.url, '_blank', 'noopener,noreferrer')
   }
   const toggleTag = (tag: string) => {
-    if (collection === 'starred' && tagMode === 'exclude') {
-      setExcludedTags((current) => current.includes(tag) ? current.filter((item) => item !== tag) : [...current, tag])
-      setFilters((current) => ({ ...current, starred: current.starred.filter((item) => item !== tag) }))
+    if (supportsExclusion && tagMode === 'exclude') {
+      setExcludedTags((current) => ({
+        ...current,
+        [collection]: current[collection].includes(tag) ? current[collection].filter((item) => item !== tag) : [...current[collection], tag],
+      }))
+      setFilters((current) => ({ ...current, [collection]: current[collection].filter((item) => item !== tag) }))
     } else {
       setFilters((current) => ({
         ...current,
         [collection]: current[collection].includes(tag)
           ? current[collection].filter((item) => item !== tag) : [...current[collection], tag],
       }))
-      if (collection === 'starred') setExcludedTags((current) => current.filter((item) => item !== tag))
+      setExcludedTags((current) => ({ ...current, [collection]: current[collection].filter((item) => item !== tag) }))
     }
   }
 
@@ -166,7 +171,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
                 onClick={() => {
                   setStarredScope(scope.id)
                   setFilters((current) => ({ ...current, starred: [] }))
-                  setExcludedTags([])
+                  setExcludedTags((current) => ({ ...current, starred: [] }))
                   setTagQuery('')
                   setShowAllTags(false)
                 }}>
@@ -189,22 +194,22 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
           <summary className="v2-filter-heading"><span>Filter by tags</span>
             <span className="v2-filter-hint">{excluded.length ? `${selected.length} included · ${excluded.length} excluded` : selected.length ? `${selected.length} selected · Matching all selected tags` : 'Choose any tags to focus your list'}</span>
           </summary>
-          {collection === 'starred' && (
+          {supportsExclusion && (
             <div className="v2-tag-modes" role="group" aria-label="Tag filter mode">
-              <button type="button" className="v2-filter" aria-pressed={tagMode === 'include'} onClick={() => setTagMode('include')}>Include tags</button>
-              <button type="button" className="v2-filter" aria-pressed={tagMode === 'exclude'} onClick={() => setTagMode('exclude')}>Exclude tags</button>
+              <button type="button" className="v2-filter" aria-pressed={tagMode === 'include'} onClick={() => setTagModes((current) => ({ ...current, [collection]: 'include' }))}>Include tags</button>
+              <button type="button" className="v2-filter" aria-pressed={tagMode === 'exclude'} onClick={() => setTagModes((current) => ({ ...current, [collection]: 'exclude' }))}>Exclude tags</button>
             </div>
           )}
           <label className="v2-tag-search">Find a tag
             <input type="text" value={tagQuery} onChange={(event) => setTagQuery(event.target.value)}
               placeholder={`Search ${tags.length} tags…`} />
           </label>
-          <p className="v2-tag-hint">{tagQuery ? `${matchingTags.length} matching tags` : showAllTags ? `All ${tags.length} tags` : `Most-used tags · ${tags.length} total`} · {collection === 'starred' && tagMode === 'exclude' ? 'Select tags to hide bookmarks with any of them.' : 'Select tags to match all.'}</p>
+          <p className="v2-tag-hint">{tagQuery ? `${matchingTags.length} matching tags` : showAllTags ? `All ${tags.length} tags` : `Most-used tags · ${tags.length} total`} · {supportsExclusion && tagMode === 'exclude' ? 'Select tags to hide bookmarks with any of them.' : 'Select tags to match all.'}</p>
           <div className="v2-filter-options">
             <button type="button" className="v2-filter" aria-pressed={selected.length === 0 && excluded.length === 0}
               onClick={() => {
                 setFilters((current) => ({ ...current, [collection]: [] }))
-                if (collection === 'starred') setExcludedTags([])
+                setExcludedTags((current) => ({ ...current, [collection]: [] }))
               }}>All</button>
             {displayedTags.map((tag) => (
               <button type="button" key={tag} className={`v2-filter${excluded.includes(tag) ? ' v2-filter--excluded' : ''}`}
