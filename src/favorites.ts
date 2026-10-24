@@ -24,8 +24,7 @@ export function useFavorites() {
     return () => window.removeEventListener('storage', sync)
   }, [])
 
-  const toggle = (id: string) => {
-    const next = ids.includes(id) ? ids.filter((item) => item !== id) : [...ids, id]
+  const save = (next: string[]) => {
     setIds(next)
     try {
       localStorage.setItem(storageKey, JSON.stringify(next))
@@ -35,5 +34,8 @@ export function useFavorites() {
     }
   }
 
-  return { ids, toggle, storageError }
+  const toggle = (id: string) => save(ids.includes(id) ? ids.filter((item) => item !== id) : [...ids, id])
+  const clear = () => save([])
+
+  return { ids, toggle, clear, storageError }
 }

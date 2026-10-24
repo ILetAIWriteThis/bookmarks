@@ -139,10 +139,16 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
           <h2 id="v2-collection-title">{title} bookmarks</h2>
           <div className="v2-heading-actions">
             {collection === 'starred' && (
-              <button type="button" className="v2-lucky" onClick={openAll} disabled={!visible.length}
-                title={`Open ${remaining ? 'remaining' : 'all'} ${remaining?.length ?? visible.length} bookmarks in the current view in new tabs`}>
-                {remaining ? 'Open remaining' : 'Open all'} ({remaining?.length ?? visible.length}) <Icon name="external" size={16} />
-              </button>
+              <>
+                <button type="button" className="v2-lucky" onClick={favorites.clear} disabled={!favorites.ids.length}
+                  title="Remove all stars across every collection, including bookmarks hidden by filters">
+                  Remove all stars
+                </button>
+                <button type="button" className="v2-lucky" onClick={openAll} disabled={!visible.length}
+                  title={`Open ${remaining ? 'remaining' : 'all'} ${remaining?.length ?? visible.length} bookmarks in the current view in new tabs`}>
+                  {remaining ? 'Open remaining' : 'Open all'} ({remaining?.length ?? visible.length}) <Icon name="external" size={16} />
+                </button>
+              </>
             )}
             <button type="button" className="v2-lucky" onClick={getLucky} disabled={!visible.length}
               title={`Open a random ${title} bookmark from the current results in a new tab`}>
