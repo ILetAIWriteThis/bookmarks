@@ -82,7 +82,8 @@
   .v2-star { margin-right: 0; }
 }
 
-.v2-starred-scopes { display: flex; gap: 4px; width: fit-content; max-width: 100%; padding: 4px; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 12px; background: #f0ebdf; }
+.v2-starred-scopes { display: flex; flex-wrap: wrap; gap: 4px; width: fit-content; max-width: 100%; padding: 4px; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 12px; background: #f0ebdf; }
+.v2-starred-youtube { display: flex; gap: 4px; padding-left: 4px; border-left: 1px solid var(--line); }
 .v2-starred-scopes button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 9px 16px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #4f5e60; font: inherit; font-size: .85rem; font-weight: 650; cursor: pointer; }
 .v2-starred-scopes button:hover { background: #fffaf0; }
 .v2-starred-scopes button[aria-pressed="true"] { background: var(--blue); color: #fffaf0; }
@@ -90,4 +91,5 @@
 @media (max-width: 600px) {
   .v2-starred-scopes { width: 100%; }
   .v2-starred-scopes button { flex: 1; padding: 9px 10px; }
+  .v2-starred-youtube { flex: 1 0 100%; padding: 4px 0 0; border-left: 0; border-top: 1px solid var(--line); }
 }

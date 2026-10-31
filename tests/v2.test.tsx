@@ -385,6 +385,82 @@ it('filters starred bookmarks by collection with counts and keeps search active'
   expect(screen.queryByRole('group', { name: 'Filter starred by collection' })).not.toBeInTheDocument()
 })
 
+it('splits starred YouTube bookmarks by the normalized listening tag and preserves starred order', async () => {
+  const user = userEvent.setup()
+  const splitData: BookmarkData = {
+    ...data,
+    bookmarks: [
+      ...data.bookmarks.map((bookmark) => ['first', 'alpha'].includes(bookmark.id)
+        ? { ...bookmark, tags: [...(bookmark.tags ?? []), 'LISTENING'] } : bookmark),
+      { id: 'audio', title: 'Audio channel', url: 'https://www.youtube.com/@audio', tags: ['listening'],
+        placement: { collection: 'youtube', position: 9 }, categories: [] },
+      { id: 'unstarred', title: 'Unstarred audio', url: 'https://www.youtube.com/@unstarred', tags: ['listening'],
+        placement: { collection: 'youtube', position: 10 }, categories: [] },
+    ],
+  }
+  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['later', 'alpha', 'audio', 'first']))
+  window.location.hash = '#/starred'
+  render(<App data={splitData} />)
+  const scopes = screen.getByRole('group', { name: 'Filter starred by collection' })
+  const list = screen.getByRole('list', { name: 'Starred bookmarks' })
+  const titles = () => within(list).queryAllByRole('link').map((link) => link.querySelector('strong')!.textContent)
+  const listen = within(scopes).getByRole('button', { name: 'YouTube Listen' })
+  const watch = within(scopes).getByRole('button', { name: 'YouTube Watch' })
+  expect(listen).toHaveTextContent('Listen2')
+  expect(watch).toHaveTextContent('Watch1')
+  await user.click(listen)
+  expect(listen).toHaveAttribute('aria-pressed', 'true')
+  expect(titles()).toEqual(['Audio channel', 'First channel'])
+  await user.click(screen.getByText('Filter by tags'))
+  const filters = screen.getByText('Filter by tags').closest('details')!
+  await user.click(screen.getByRole('button', { name: '#science' }))
+  expect(titles()).toEqual(['First channel'])
+  await user.click(within(filters).getByRole('button', { name: 'All' }))
+  expect(titles()).toEqual(['Audio channel', 'First channel'])
+  await user.click(screen.getByRole('button', { name: 'Exclude tags' }))
+  await user.click(screen.getByRole('button', { name: '#science' }))
+  expect(titles()).toEqual(['Audio channel'])
+  await user.click(within(filters).getByRole('button', { name: 'All' }))
+  await user.type(screen.getByRole('searchbox'), 'First')
+  expect(titles()).toEqual(['First channel'])
+  await user.click(watch)
+  expect(watch).toHaveAttribute('aria-pressed', 'true')
+  expect(listen).toHaveAttribute('aria-pressed', 'false')
+  expect(titles()).toEqual([])
+  await user.click(screen.getByRole('button', { name: 'Clear search' }))
+  expect(titles()).toEqual(['Later channel'])
+  await user.click(screen.getByRole('button', { name: 'Unstar Later channel' }))
+  expect(watch).toHaveTextContent('Watch0')
+  expect(screen.getByText('No starred YouTube Watch bookmarks yet.')).toBeInTheDocument()
+  await user.click(within(scopes).getByRole('button', { name: 'YouTube' }))
+  expect(titles()).toEqual(['Audio channel', 'First channel'])
+  await user.click(within(scopes).getByRole('button', { name: 'All' }))
+  expect(titles()).toEqual(['Alpha News', 'Audio channel', 'First channel'])
+})
+
+it.each([
+  { scope: 'YouTube Listen', tags: ['listening'], empty: 'YouTube Watch' },
+  { scope: 'YouTube Watch', tags: [], empty: 'YouTube Listen' },
+])('keeps additional include and exclude tag filters available in $scope', async ({ scope, tags, empty }) => {
+  const user = userEvent.setup()
+  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['first', 'later']))
+  window.location.hash = '#/starred'
+  render(<App data={{ ...data, bookmarks: data.bookmarks.map((bookmark) =>
+    bookmark.placement?.collection === 'youtube' ? { ...bookmark, tags: [...(bookmark.tags ?? []), ...tags] } : bookmark) }} />)
+  const scopes = screen.getByRole('group', { name: 'Filter starred by collection' })
+  await user.click(within(scopes).getByRole('button', { name: scope }))
+  const list = screen.getByRole('list', { name: 'Starred bookmarks' })
+  expect(list.children).toHaveLength(2)
+  await user.click(screen.getByText('Filter by tags'))
+  await user.click(screen.getByRole('button', { name: '#science' }))
+  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://www.youtube.com/@first')
+  await user.click(screen.getByRole('button', { name: 'Exclude tags' }))
+  await user.click(screen.getByRole('button', { name: '#science' }))
+  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://www.youtube.com/@later')
+  await user.click(within(scopes).getByRole('button', { name: empty }))
+  expect(screen.getByText(`No starred ${empty} bookmarks yet.`)).toBeInTheDocument()
+})
+
 it('excludes starred tags across collections and combines exclusions with search', async () => {
   const user = userEvent.setup()
   localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['alpha', 'example', 'first', 'later']))

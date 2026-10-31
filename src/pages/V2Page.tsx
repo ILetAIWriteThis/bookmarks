@@ -3,16 +3,25 @@ import { normalizeSearch } from '../data'
 import { useFavorites } from '../favorites'
 import { Icon } from '../icons'
 import type { BookmarkData } from '../types'
-import { v2Bookmarks, type V2Collection } from '../v2'
+import { v2Bookmarks, type V2Bookmark, type V2Collection } from '../v2'
 
 type View = V2Collection | 'starred'
-type StarredScope = 'all' | V2Collection
+type StarredScope = 'all' | V2Collection | 'youtube-listen' | 'youtube-watch'
 
-const starredScopes: { id: StarredScope; title: string }[] = [
+const starredScopes: { id: StarredScope; title: string; label?: string }[] = [
   { id: 'all', title: 'All' },
   { id: 'web', title: 'Web' },
   { id: 'youtube', title: 'YouTube' },
+  { id: 'youtube-listen', title: 'YouTube Listen', label: 'Listen' },
+  { id: 'youtube-watch', title: 'YouTube Watch', label: 'Watch' },
 ]
+
+function matchesStarredScope({ bookmark, tags }: V2Bookmark, scope: StarredScope) {
+  if (scope === 'all') return true
+  if (scope === 'web') return bookmark.placement?.collection === 'web'
+  return bookmark.placement?.collection === 'youtube'
+    && (scope === 'youtube' || tags.includes('listening') === (scope === 'youtube-listen'))
+}
 
 const spaces: { id: View; title: string; icon: string; href: string }[] = [
   { id: 'web', title: 'Web', icon: 'bookmark', href: '#/' },
@@ -37,14 +46,14 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
     const entry = entriesById.get(id)
     return entry ? [entry] : []
   })
-  const starredCounts = {
-    all: starred.length,
-    web: starred.filter(({ bookmark }) => bookmark.placement?.collection === 'web').length,
-    youtube: starred.filter(({ bookmark }) => bookmark.placement?.collection === 'youtube').length,
-  }
-  const scopeTitle = starredScopes.find((scope) => scope.id === starredScope)!.title
+  const scopes = starredScopes.map((scope) => ({
+    ...scope,
+    entries: starred.filter((entry) => matchesStarredScope(entry, scope.id)),
+  }))
+  const activeScope = scopes.find((scope) => scope.id === starredScope)!
+  const scopeTitle = activeScope.title
   const entries = collection === 'starred'
-    ? starred.filter(({ bookmark }) => starredScope === 'all' || bookmark.placement?.collection === starredScope)
+    ? activeScope.entries
     : collections[collection]
   const tagCounts = new Map<string, number>()
   for (const entry of entries) for (const tag of entry.tags) tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)
@@ -107,6 +116,20 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
     }
   }
 
+  const scopeButton = (scope: typeof scopes[number]) => (
+    <button key={scope.id} type="button" aria-label={scope.title} aria-pressed={starredScope === scope.id}
+      title={scope.id === 'youtube-listen' ? 'YouTube bookmarks tagged listening' : scope.id === 'youtube-watch' ? 'YouTube bookmarks without the listening tag' : undefined}
+      onClick={() => {
+        setStarredScope(scope.id)
+        setFilters((current) => ({ ...current, starred: [] }))
+        setExcludedTags((current) => ({ ...current, starred: [] }))
+        setTagQuery('')
+        setShowAllTags(false)
+      }}>
+      {scope.label ?? scope.title}<span aria-hidden="true">{scope.entries.length}</span>
+    </button>
+  )
+
   useEffect(() => {
     const focusSearch = (event: KeyboardEvent) => {
       if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return
@@ -166,18 +189,10 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
         )}
         {collection === 'starred' && (
           <div className="v2-starred-scopes" role="group" aria-label="Filter starred by collection">
-            {starredScopes.map((scope) => (
-              <button key={scope.id} type="button" aria-pressed={starredScope === scope.id}
-                onClick={() => {
-                  setStarredScope(scope.id)
-                  setFilters((current) => ({ ...current, starred: [] }))
-                  setExcludedTags((current) => ({ ...current, starred: [] }))
-                  setTagQuery('')
-                  setShowAllTags(false)
-                }}>
-                {scope.title}<span aria-hidden="true">{starredCounts[scope.id]}</span>
-              </button>
-            ))}
+            {scopes.filter((scope) => scope.id === 'all' || scope.id === 'web').map(scopeButton)}
+            <div className="v2-starred-youtube" role="group" aria-label="YouTube filters">
+              {scopes.filter((scope) => scope.id.startsWith('youtube')).map(scopeButton)}
+            </div>
           </div>
         )}
         <div className="v2-search search-box">

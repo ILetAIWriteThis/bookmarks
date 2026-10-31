@@ -103,3 +103,32 @@ test('stars persist after reload and remain separate from saved channel order', 
   await stars.getByRole('button', { name: `Unstar ${title}`, exact: true }).click()
   await expect(page.getByText('No starred YouTube bookmarks yet.')).toBeVisible()
 })
+
+test('starred YouTube Listen and Watch split by listening tags and fit narrow screens', async ({ page }) => {
+  const listening = youtubeBookmarks.filter(({ tags }) => tags?.includes('listening')).slice(0, 2)
+  const watching = youtubeBookmarks.filter(({ tags }) => !tags?.includes('listening')).slice(0, 2)
+  expect(listening.length).toBeGreaterThan(0)
+  expect(watching.length).toBeGreaterThan(0)
+  const starred = [...watching, ...listening].reverse()
+  await page.goto('./')
+  await page.evaluate((ids) => localStorage.setItem('bookmarks:starred:v1', JSON.stringify(ids)),
+    [...starred.map(({ id }) => id), webBookmarks[0].id])
+  await page.goto('./#/starred')
+  await page.reload()
+  await page.setViewportSize({ width: 320, height: 740 })
+  const scopes = page.getByRole('group', { name: 'Filter starred by collection' })
+  const list = page.getByRole('list', { name: 'Starred bookmarks' })
+  for (const mode of ['Listen', 'Watch']) {
+    const button = scopes.getByRole('button', { name: `YouTube ${mode}`, exact: true })
+    await button.click()
+    await expect(button).toHaveAttribute('aria-pressed', 'true')
+    const expected = starred.filter(({ tags }) => Boolean(tags?.includes('listening')) === (mode === 'Listen'))
+    await expect(list.getByRole('link')).toHaveCount(expected.length)
+    expect(await list.getByRole('link').evaluateAll((links) => links.map((link) => link.getAttribute('href'))))
+      .toEqual(expected.map(({ url }) => url))
+    expect((await button.boundingBox())!.height).toBeGreaterThanOrEqual(44)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+  }
+  await scopes.getByRole('button', { name: 'YouTube', exact: true }).click()
+  await expect(list.getByRole('link')).toHaveCount(starred.length)
+})
