@@ -10,8 +10,8 @@ test('migrated bookmarks use the Web and YouTube routes', async ({ page }) => {
   const web = page.getByRole('list', { name: 'Web bookmarks' })
   await expect(web.getByRole('link')).toHaveCount(webBookmarks.length)
   await expect(web.getByRole('link').first()).toHaveAccessibleName(/LRT/)
-  const rows = await web.getByRole('link').evaluateAll((links) => links.map((link) => {
-    const rect = link.getBoundingClientRect()
+  const rows = await web.locator('.v2-row').evaluateAll((rows) => rows.map((row) => {
+    const rect = row.getBoundingClientRect()
     return { x: rect.x, y: rect.y, bottom: rect.bottom, width: rect.width }
   }))
   for (let index = 1; index < rows.length; index++) {
@@ -19,7 +19,7 @@ test('migrated bookmarks use the Web and YouTube routes', async ({ page }) => {
     expect(rows[index].width).toBe(rows[0].width)
     expect(rows[index].y).toBeGreaterThanOrEqual(rows[index - 1].bottom)
   }
-  const fonts = await web.getByRole('link').first().evaluate((row) => ({
+  const fonts = await web.locator('.v2-row').first().evaluate((row) => ({
     title: getComputedStyle(row.querySelector('strong')!).fontFamily,
     tags: getComputedStyle(row.querySelector('.v2-row__tags')!).fontFamily,
   }))
@@ -102,6 +102,44 @@ test('stars persist after reload and remain separate from saved channel order', 
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
   await stars.getByRole('button', { name: `Unstar ${title}`, exact: true }).click()
   await expect(page.getByText('No starred YouTube bookmarks yet.')).toBeVisible()
+})
+
+test('listening choices persist, move starred channels to Watch, and reset with browser storage', async ({ page }) => {
+  const bookmark = youtubeBookmarks.find(({ tags }) => tags?.includes('listening'))!
+  await page.goto('./#/youtube')
+  await page.setViewportSize({ width: 320, height: 740 })
+  const toggle = page.getByRole('button', { name: `Listening for ${bookmark.title}`, exact: true })
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true')
+  const row = page.locator('.v2-item').filter({ has: toggle })
+  const position = await row.locator('.v2-position').innerText()
+  await row.getByRole('button', { name: `Star ${bookmark.title}`, exact: true }).click()
+  await toggle.click()
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false')
+  await expect(toggle).toHaveText('+ listening')
+  expect(page.context().pages()).toHaveLength(1)
+  expect((await toggle.boundingBox())!.height).toBeLessThanOrEqual(26)
+  await expect(toggle.locator('xpath=ancestor::a')).toHaveCount(0)
+  await expect(row.locator('.v2-row__tags')).not.toContainText('#listening')
+  await expect(row.locator('.v2-position')).toHaveText(position)
+  await page.reload()
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false')
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+  await page.getByRole('link', { name: 'Starred', exact: true }).click()
+  const scopes = page.getByRole('group', { name: 'Filter starred by collection' })
+  await scopes.getByRole('button', { name: 'YouTube Listen', exact: true }).click()
+  await expect(page.getByText('No starred YouTube Listen bookmarks yet.')).toBeVisible()
+  await scopes.getByRole('button', { name: 'YouTube Watch', exact: true }).click()
+  await expect(page.getByRole('list').locator('strong')).toHaveText(bookmark.title)
+  await page.getByRole('button', { name: 'Reset listening choices' }).click()
+  await expect(page.getByText('No starred YouTube Watch bookmarks yet.')).toBeVisible()
+  await scopes.getByRole('button', { name: 'YouTube Listen', exact: true }).click()
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true')
+  await toggle.click()
+  await page.evaluate(() => localStorage.clear())
+  await page.goto('./#/youtube')
+  await page.reload()
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByRole('button', { name: `Star ${bookmark.title}`, exact: true })).toHaveAttribute('aria-pressed', 'false')
 })
 
 test('starred YouTube Listen and Watch split by listening tags and fit narrow screens', async ({ page }) => {

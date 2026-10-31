@@ -12,7 +12,7 @@ export interface V2Bookmark {
 const tagName = (value: string) => normalizeSearch(value).replace(/^#+/, '').replace(/\s+/g, '-')
 
 /** Bookmarks in their chosen collection and saved order. */
-export function v2Bookmarks(data: BookmarkData, collection: V2Collection): V2Bookmark[] {
+export function v2Bookmarks(data: BookmarkData, collection: V2Collection, listeningOverrides: Readonly<Record<string, boolean>> = {}): V2Bookmark[] {
   return data.bookmarks.flatMap((bookmark) => {
     if (bookmark.placement?.collection !== collection) return []
     const position = bookmark.placement.position
@@ -21,6 +21,11 @@ export function v2Bookmarks(data: BookmarkData, collection: V2Collection): V2Boo
     for (const tag of bookmark.tags ?? []) {
       const normalized = tagName(tag)
       if (normalized) tags.add(normalized)
+    }
+    const listening = listeningOverrides[bookmark.id]
+    if (collection === 'youtube' && typeof listening === 'boolean') {
+      if (listening) tags.add('listening')
+      else tags.delete('listening')
     }
     return [{ bookmark, position, tags: [...tags] }]
   }).sort((a, b) => comparePositionAndTitle(a.position, a.bookmark.title, b.position, b.bookmark.title))

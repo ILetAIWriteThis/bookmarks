@@ -17,6 +17,8 @@ The default `/bookmarks/` page shows Web bookmarks. `#/youtube` opens the YouTub
 
 All bookmarks have a collection placement. Tags use the bookmark's saved tags; select multiple tags to match all of them, or select **All** to clear the filter. Each collection remembers its selections while switching; reloading resets them. Collection totals are not shown.
 
+Click **×** on a YouTube bookmark's `#listening` tag to turn listening off, or **+ listening** beside its tags to turn it on. This updates tag filters, search, and the Starred Listen/Watch split immediately. Choices persist across reloads in local storage, like stars. **Reset listening choices** or clearing the site's browser storage restores the tags from the JSON data. Other tags and saved positions stay the same.
+
 Media and Travel categories and their bookmarks have been removed. Bookmarks awaiting content review carry `not-reviewed`. Review public site or channel descriptions, published content, or organizer recording archives before assigning topics. The current Web and YouTube review queues have been processed; unavailable content is recorded separately in the review logs. The YouTube Travel topic remains.
 
 ### Tagging conventions

@@ -35,13 +35,16 @@
 .v2-list-heading { padding-bottom: 12px; color: #62675f; font: .65rem ui-monospace, monospace; }
 .v2-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .v2-list > li { border-bottom: 1px solid var(--line); }
-.v2-row { min-height: 70px; padding-top: 17px; padding-bottom: 17px; text-decoration: none; border-radius: 6px; }
+.v2-row { position: relative; min-height: 70px; padding-top: 17px; padding-bottom: 17px; text-decoration: none; border-radius: 6px; }
 .v2-row:hover { background: #fffaf0; }
-.v2-row:focus-visible { position: relative; }
+.v2-row__link { text-decoration: none; }
+.v2-row__link::after { content: ''; position: absolute; inset: 0; border-radius: 6px; }
+.v2-row__link:focus-visible { outline: none; }
+.v2-row__link:focus-visible::after { outline: 3px solid #177e9a; outline-offset: 4px; }
 .v2-position { font: .78rem ui-monospace, SFMono-Regular, Consolas, monospace; color: #62675f; }
 .v2-row__body { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; min-width: 0; }
 .v2-row__body strong { font-size: .98rem; font-weight: 650; overflow-wrap: anywhere; }
-.v2-row__tags { display: flex; flex-wrap: wrap; gap: 5px 12px; color: #59675b; font: .72rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; min-width: 0; }
+.v2-row__tags { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 12px; color: #59675b; font: .72rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; min-width: 0; }
 .v2-row > svg { justify-self: end; color: #687269; }
 .v2-order-note { color: #62675f; font-size: .72rem; margin: 18px 0 0; }
 .v2-empty { padding: 30px 18px; border-bottom: 1px solid var(--line); }
@@ -74,6 +77,9 @@
 .v2-star:hover { background: #eee7d8; }
 .v2-star[aria-pressed="true"] { color: #805d00; }
 .v2-star[aria-pressed="true"] svg { fill: var(--yellow); }
+.v2-listening { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 4px; min-height: 24px; padding: 1px 5px; border: 1px dashed #c5c4b7; border-radius: 4px; color: #62675f; background: transparent; font: inherit; white-space: nowrap; cursor: pointer; }
+.v2-listening[aria-pressed="true"] { color: #46604a; background: #edf0e5; border-style: solid; border-color: #cbd4c2; }
+.v2-listening:hover { color: var(--blue); background: #e4e9df; border-color: #84947d; }
 @media (max-width: 600px) {
   .v2-spaces { gap: 7px; }
   .v2-space { padding: 14px 9px; }

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { normalizeSearch } from '../data'
 import { useFavorites } from '../favorites'
 import { Icon } from '../icons'
+import { useListening } from '../listening'
 import type { BookmarkData } from '../types'
 import { v2Bookmarks, type V2Bookmark, type V2Collection } from '../v2'
 
@@ -31,7 +32,8 @@ const spaces: { id: View; title: string; icon: string; href: string }[] = [
 
 export function V2Page({ data, collection }: { data: BookmarkData; collection: View }) {
   const favorites = useFavorites()
-  const collections = useMemo(() => ({ web: v2Bookmarks(data, 'web'), youtube: v2Bookmarks(data, 'youtube') }), [data])
+  const listening = useListening()
+  const collections = useMemo(() => ({ web: v2Bookmarks(data, 'web'), youtube: v2Bookmarks(data, 'youtube', listening.overrides) }), [data, listening.overrides])
   const [filters, setFilters] = useState<Record<View, string[]>>({ web: [], youtube: [], starred: [] })
   const [queries, setQueries] = useState<Record<View, string>>({ web: '', youtube: '', starred: '' })
   const [starredScope, setStarredScope] = useState<StarredScope>('all')
@@ -161,11 +163,18 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
       </nav>
 
       {favorites.storageError && <p role="status">Your browser couldn’t save these stars. They’ll last until you reload this page.</p>}
+      {listening.storageError && <p role="status">Your browser couldn’t save your listening choices. They’ll last until you reload this page.</p>}
       {collection === 'starred' && <p className="v2-personal-note">Your current favorites, saved in this browser. Star or unstar a bookmark anytime; its saved position stays the same.</p>}
       <section className="v2-collection" aria-labelledby="v2-collection-title">
         <div className="v2-heading">
           <h2 id="v2-collection-title">{title} bookmarks</h2>
           <div className="v2-heading-actions">
+            {Object.keys(listening.overrides).length > 0 && (
+              <button type="button" className="v2-lucky" onClick={listening.reset}
+                title="Restore the saved listening tags for every channel in this browser">
+                Reset listening choices
+              </button>
+            )}
             {collection === 'starred' && (
               <>
                 <button type="button" className="v2-lucky" onClick={favorites.clear} disabled={!favorites.ids.length}
@@ -238,18 +247,31 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
             onClick={() => setShowAllTags((current) => !current)}>{showAllTags ? 'Show fewer tags' : `Show all ${tags.length} tags`}</button>}
         </details>
 
+        {collection !== 'web' && <p className="v2-personal-note">Click × on #listening to move a channel to Watch, or + listening to move it to Listen. Your choice is saved in this browser.</p>}
         <div className="v2-list-heading" aria-hidden="true"><span>Position</span><span>Bookmark & tags</span><span>Star</span></div>
         <ol className="v2-list" aria-label={`${title} bookmarks`}>
           {visible.map(({ bookmark, position, tags: bookmarkTags }) => (
             <li key={bookmark.id} className="v2-item">
-              <a className="v2-row" href={bookmark.url} target="_blank" rel="noopener noreferrer"
-                aria-label={`${bookmark.title} — opens in a new tab`}>
+              <div className="v2-row">
                 <span className="v2-position" aria-label={`Position ${position}`}>{String(position).padStart(2, '0')}</span>
-                <span className="v2-row__body"><strong>{bookmark.title}</strong>
-                  <span className="v2-row__tags">{bookmarkTags.map((tag) => <span key={tag}>#{tag}</span>)}</span>
+                <span className="v2-row__body">
+                  <a className="v2-row__link" href={bookmark.url} target="_blank" rel="noopener noreferrer"
+                    aria-label={`${bookmark.title} — opens in a new tab`}><strong>{bookmark.title}</strong></a>
+                  <span className="v2-row__tags">
+                    {bookmarkTags.filter((tag) => tag !== 'listening' || bookmark.placement?.collection !== 'youtube')
+                      .map((tag) => <span key={tag}>#{tag}</span>)}
+                    {bookmark.placement?.collection === 'youtube' && (
+                      <button type="button" className="v2-listening" aria-pressed={bookmarkTags.includes('listening')}
+                        aria-label={`Listening for ${bookmark.title}`}
+                        title={`Move to ${bookmarkTags.includes('listening') ? 'Watch' : 'Listen'} in this browser`}
+                        onClick={() => listening.toggle(bookmark.id, bookmarkTags.includes('listening'))}>
+                        {bookmarkTags.includes('listening') ? <>#listening <Icon name="close" size={11} /></> : '+ listening'}
+                      </button>
+                    )}
+                  </span>
                 </span>
                 <Icon name="external" size={17} />
-              </a>
+              </div>
               <button type="button" className="v2-star" aria-pressed={favorites.ids.includes(bookmark.id)}
                 aria-label={`${favorites.ids.includes(bookmark.id) ? 'Unstar' : 'Star'} ${bookmark.title}`}
                 onClick={() => favorites.toggle(bookmark.id)}><Icon name="star" size={21} /></button>
