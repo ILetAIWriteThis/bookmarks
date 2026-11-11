@@ -62,7 +62,7 @@ it('keeps listening choices across reloads without changing stars, other tags, o
   expect(JSON.stringify(listeningData)).toBe(original)
 })
 
-it('updates starred Listen and Watch immediately and restores JSON defaults from a filtered view', async () => {
+it('controls starred Listen and Watch independently and restores defaults from a filtered view', async () => {
   const user = userEvent.setup()
   localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['later', 'first', 'alpha']))
   window.location.hash = '#/starred'
@@ -75,10 +75,10 @@ it('updates starred Listen and Watch immediately and restores JSON defaults from
   expect(list.children).toHaveLength(0)
   await user.click(within(scopes).getByRole('button', { name: 'YouTube Watch' }))
   expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
-    'https://www.youtube.com/@later', 'https://www.youtube.com/@first',
+    'https://www.youtube.com/@later',
   ])
   await user.click(screen.getByRole('button', { name: 'Listening for Later channel' }))
-  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://www.youtube.com/@first')
+  expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://www.youtube.com/@later')
   navigate('#/youtube')
   await user.click(screen.getByText('Filter by tags'))
   await user.click(screen.getByRole('button', { name: '#listening' }))
@@ -88,6 +88,61 @@ it('updates starred Listen and Watch immediately and restores JSON defaults from
   expect(within(screen.getByRole('list')).getByRole('link')).toHaveAttribute('href', 'https://www.youtube.com/@first')
   navigate('#/starred')
   expect(within(list).getByRole('link')).toHaveAttribute('href', 'https://www.youtube.com/@later')
+})
+
+it('keeps channels in both starred scopes across reloads and controls Watch independently', async () => {
+  const user = userEvent.setup()
+  const original = JSON.stringify(listeningData)
+  localStorage.setItem('bookmarks:starred:v1', '["later","first"]')
+  window.location.hash = '#/starred'
+  const view = render(<App data={listeningData} />)
+  const scope = (name: string) => within(screen.getByRole('group', { name: 'Filter starred by collection' }))
+    .getByRole('button', { name })
+  const titles = () => within(screen.getByRole('list', { name: 'Starred bookmarks' }))
+    .queryAllByRole('link').map((link) => link.querySelector('strong')!.textContent)
+  await user.click(screen.getByRole('button', { name: 'Watching for First channel' }))
+  await user.click(screen.getByRole('button', { name: 'Listening for Later channel' }))
+  for (const name of ['YouTube Watch', 'YouTube Listen']) {
+    await user.click(scope(name))
+    expect(titles()).toEqual(['Later channel', 'First channel'])
+    expect(scope(name)).toHaveTextContent('2')
+  }
+  view.unmount()
+  render(<App data={listeningData} />)
+  await user.click(scope('YouTube Watch'))
+  expect(titles()).toEqual(['Later channel', 'First channel'])
+  await user.click(screen.getByRole('button', { name: 'Watching for First channel' }))
+  expect(titles()).toEqual(['Later channel'])
+  await user.click(scope('YouTube Listen'))
+  expect(titles()).toEqual(['Later channel', 'First channel'])
+  expect(screen.getByRole('button', { name: 'Watching for First channel' })).toHaveAttribute('aria-pressed', 'false')
+  await user.click(screen.getByRole('button', { name: 'Reset listening choices' }))
+  await user.click(screen.getByRole('button', { name: 'Reset Watch choices' }))
+  await user.click(scope('YouTube Watch'))
+  expect(titles()).toEqual(['Later channel'])
+  expect(localStorage.getItem('bookmarks:watching:v1')).toBeNull()
+  expect(localStorage.getItem('bookmarks:starred:v1')).toBe('["later","first"]')
+  expect(JSON.stringify(listeningData)).toBe(original)
+})
+
+it.each(['invalid json', '[]', 'null', '{"first":"true"}'])('uses Watch defaults for invalid stored choices: %s', (stored) => {
+  localStorage.setItem('bookmarks:watching:v1', stored)
+  window.location.hash = '#/youtube'
+  render(<App data={listeningData} />)
+  expect(screen.getByRole('button', { name: 'Watching for First channel' })).toHaveAttribute('aria-pressed', 'false')
+  expect(screen.getByRole('button', { name: 'Watching for Later channel' })).toHaveAttribute('aria-pressed', 'true')
+})
+
+it('syncs Watch choices and storage clearing from another tab', () => {
+  window.location.hash = '#/youtube'
+  render(<App data={listeningData} />)
+  const toggle = screen.getByRole('button', { name: 'Watching for First channel' })
+  localStorage.setItem('bookmarks:watching:v1', '{"first":true}')
+  fireEvent(window, new StorageEvent('storage', { key: 'bookmarks:watching:v1' }))
+  expect(toggle).toHaveAttribute('aria-pressed', 'true')
+  localStorage.clear()
+  fireEvent(window, new StorageEvent('storage', { key: null }))
+  expect(toggle).toHaveAttribute('aria-pressed', 'false')
 })
 
 it.each(['invalid json', '[]', 'null', '{"first":"false"}'])('uses saved listening tags when local storage contains %s', (stored) => {
@@ -118,7 +173,8 @@ it('keeps listening usable for the session if saving is blocked', async () => {
     const toggle = screen.getByRole('button', { name: 'Listening for First channel' })
     await user.click(toggle)
     expect(toggle).toHaveAttribute('aria-pressed', 'false')
-    expect(screen.getByRole('status')).toHaveTextContent('couldn’t save your listening choices')
+    expect(screen.getByText(/couldn’t save your listening choices/)).toHaveAttribute('role', 'status')
+    expect(screen.getByText(/couldn’t save your Watch choices/)).toHaveAttribute('role', 'status')
   } finally {
     save.mockRestore()
   }

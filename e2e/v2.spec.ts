@@ -104,7 +104,7 @@ test('stars persist after reload and remain separate from saved channel order', 
   await expect(page.getByText('No starred YouTube bookmarks yet.')).toBeVisible()
 })
 
-test('listening choices persist, move starred channels to Watch, and reset with browser storage', async ({ page }) => {
+test('independent listening and watching choices persist and reset with browser storage', async ({ page }) => {
   const bookmark = youtubeBookmarks.find(({ tags }) => tags?.includes('listening'))!
   await page.goto('./#/youtube')
   await page.setViewportSize({ width: 320, height: 740 })
@@ -113,6 +113,7 @@ test('listening choices persist, move starred channels to Watch, and reset with 
   const row = page.locator('.v2-item').filter({ has: toggle })
   const position = await row.locator('.v2-position').innerText()
   await row.getByRole('button', { name: `Star ${bookmark.title}`, exact: true }).click()
+  await row.getByRole('button', { name: `Watching for ${bookmark.title}`, exact: true }).click()
   await toggle.click()
   await expect(toggle).toHaveAttribute('aria-pressed', 'false')
   await expect(toggle).toHaveText('+ listening')
@@ -131,7 +132,7 @@ test('listening choices persist, move starred channels to Watch, and reset with 
   await scopes.getByRole('button', { name: 'YouTube Watch', exact: true }).click()
   await expect(page.getByRole('list').locator('strong')).toHaveText(bookmark.title)
   await page.getByRole('button', { name: 'Reset listening choices' }).click()
-  await expect(page.getByText('No starred YouTube Watch bookmarks yet.')).toBeVisible()
+  await expect(page.getByRole('list').locator('strong')).toHaveText(bookmark.title)
   await scopes.getByRole('button', { name: 'YouTube Listen', exact: true }).click()
   await expect(toggle).toHaveAttribute('aria-pressed', 'true')
   await toggle.click()

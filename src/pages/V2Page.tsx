@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { normalizeSearch } from '../data'
 import { useFavorites } from '../favorites'
 import { Icon } from '../icons'
-import { useListening } from '../listening'
+import { useListening, useWatching } from '../listening'
 import type { BookmarkData } from '../types'
 import { v2Bookmarks, type V2Bookmark, type V2Collection } from '../v2'
 
@@ -17,11 +17,13 @@ const starredScopes: { id: StarredScope; title: string; label?: string }[] = [
   { id: 'youtube-watch', title: 'YouTube Watch', label: 'Watch' },
 ]
 
-function matchesStarredScope({ bookmark, tags }: V2Bookmark, scope: StarredScope) {
+function matchesStarredScope({ bookmark, tags }: V2Bookmark, scope: StarredScope, watching: Readonly<Record<string, boolean>>) {
   if (scope === 'all') return true
   if (scope === 'web') return bookmark.placement?.collection === 'web'
   return bookmark.placement?.collection === 'youtube'
-    && (scope === 'youtube' || tags.includes('listening') === (scope === 'youtube-listen'))
+    && (scope === 'youtube' || (scope === 'youtube-listen'
+      ? tags.includes('listening')
+      : watching[bookmark.id] ?? !tags.includes('listening')))
 }
 
 const spaces: { id: View; title: string; icon: string; href: string }[] = [
@@ -33,6 +35,7 @@ const spaces: { id: View; title: string; icon: string; href: string }[] = [
 export function V2Page({ data, collection }: { data: BookmarkData; collection: View }) {
   const favorites = useFavorites()
   const listening = useListening()
+  const watching = useWatching()
   const collections = useMemo(() => ({ web: v2Bookmarks(data, 'web'), youtube: v2Bookmarks(data, 'youtube', listening.overrides) }), [data, listening.overrides])
   const [filters, setFilters] = useState<Record<View, string[]>>({ web: [], youtube: [], starred: [] })
   const [queries, setQueries] = useState<Record<View, string>>({ web: '', youtube: '', starred: '' })
@@ -50,7 +53,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
   })
   const scopes = starredScopes.map((scope) => ({
     ...scope,
-    entries: starred.filter((entry) => matchesStarredScope(entry, scope.id)),
+    entries: starred.filter((entry) => matchesStarredScope(entry, scope.id, watching.overrides)),
   }))
   const activeScope = scopes.find((scope) => scope.id === starredScope)!
   const scopeTitle = activeScope.title
@@ -120,7 +123,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
 
   const scopeButton = (scope: typeof scopes[number]) => (
     <button key={scope.id} type="button" aria-label={scope.title} aria-pressed={starredScope === scope.id}
-      title={scope.id === 'youtube-listen' ? 'YouTube bookmarks tagged listening' : scope.id === 'youtube-watch' ? 'YouTube bookmarks without the listening tag' : undefined}
+      title={scope.id === 'youtube-listen' ? 'YouTube bookmarks tagged listening' : scope.id === 'youtube-watch' ? 'YouTube bookmarks selected for Watch' : undefined}
       onClick={() => {
         setStarredScope(scope.id)
         setFilters((current) => ({ ...current, starred: [] }))
@@ -164,6 +167,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
 
       {favorites.storageError && <p role="status">Your browser couldn’t save these stars. They’ll last until you reload this page.</p>}
       {listening.storageError && <p role="status">Your browser couldn’t save your listening choices. They’ll last until you reload this page.</p>}
+      {watching.storageError && <p role="status">Your browser couldn’t save your Watch choices. They’ll last until you reload this page.</p>}
       {collection === 'starred' && <p className="v2-personal-note">Your current favorites, saved in this browser. Star or unstar a bookmark anytime; its saved position stays the same.</p>}
       <section className="v2-collection" aria-labelledby="v2-collection-title">
         <div className="v2-heading">
@@ -174,6 +178,10 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
                 title="Restore the saved listening tags for every channel in this browser">
                 Reset listening choices
               </button>
+            )}
+            {Object.keys(watching.overrides).length > 0 && (
+              <button type="button" className="v2-lucky" onClick={watching.reset}
+                title="Restore Watch defaults based on listening choices">Reset Watch choices</button>
             )}
             {collection === 'starred' && (
               <>
@@ -247,7 +255,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
             onClick={() => setShowAllTags((current) => !current)}>{showAllTags ? 'Show fewer tags' : `Show all ${tags.length} tags`}</button>}
         </details>
 
-        {collection !== 'web' && <p className="v2-personal-note">Click × on #listening to move a channel to Watch, or + listening to move it to Listen. Your choice is saved in this browser.</p>}
+        {collection !== 'web' && <p className="v2-personal-note">Choose watching, listening, or both for each channel. These controls decide where starred channels appear in Watch and Listen. Your choices are saved in this browser.</p>}
         <div className="v2-list-heading" aria-hidden="true"><span>Position</span><span>Bookmark & tags</span><span>Star</span></div>
         <ol className="v2-list" aria-label={`${title} bookmarks`}>
           {visible.map(({ bookmark, position, tags: bookmarkTags }) => (
@@ -261,12 +269,26 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
                     {bookmarkTags.filter((tag) => tag !== 'listening' || bookmark.placement?.collection !== 'youtube')
                       .map((tag) => <span key={tag}>#{tag}</span>)}
                     {bookmark.placement?.collection === 'youtube' && (
-                      <button type="button" className="v2-listening" aria-pressed={bookmarkTags.includes('listening')}
-                        aria-label={`Listening for ${bookmark.title}`}
-                        title={`Move to ${bookmarkTags.includes('listening') ? 'Watch' : 'Listen'} in this browser`}
-                        onClick={() => listening.toggle(bookmark.id, bookmarkTags.includes('listening'))}>
-                        {bookmarkTags.includes('listening') ? <>#listening <Icon name="close" size={11} /></> : '+ listening'}
-                      </button>
+                      <>
+                        <button type="button" className="v2-listening"
+                          aria-pressed={watching.overrides[bookmark.id] ?? !bookmarkTags.includes('listening')}
+                          aria-label={`Watching for ${bookmark.title}`}
+                          title="Show or hide this channel in starred Watch"
+                          onClick={() => watching.toggle(bookmark.id, watching.overrides[bookmark.id] ?? !bookmarkTags.includes('listening'))}>
+                          {(watching.overrides[bookmark.id] ?? !bookmarkTags.includes('listening'))
+                            ? <>#watching <Icon name="close" size={11} /></> : '+ watching'}
+                        </button>
+                        <button type="button" className="v2-listening" aria-pressed={bookmarkTags.includes('listening')}
+                          aria-label={`Listening for ${bookmark.title}`}
+                          title="Show or hide this channel in starred Listen"
+                          onClick={() => {
+                            // Preserve Watch membership when changing Listen for the first time.
+                            if (watching.overrides[bookmark.id] === undefined) watching.set(bookmark.id, !bookmarkTags.includes('listening'))
+                            listening.toggle(bookmark.id, bookmarkTags.includes('listening'))
+                          }}>
+                          {bookmarkTags.includes('listening') ? <>#listening <Icon name="close" size={11} /></> : '+ listening'}
+                        </button>
+                      </>
                     )}
                   </span>
                 </span>

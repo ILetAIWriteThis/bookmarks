@@ -29,6 +29,10 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      # Avoid the Azure mirror DNS failure that blocked browser dependency setup.
+      - name: Use the Ubuntu archive for browser dependencies
+        run: |
+          sudo sed -i 's|https\?://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/apt-mirrors.txt
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - uses: actions/upload-pages-artifact@v3
