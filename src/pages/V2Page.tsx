@@ -164,7 +164,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
 
       {favorites.storageError && <p role="status">Your browser couldn’t save these stars. They’ll last until you reload this page.</p>}
       {listening.storageError && <p role="status">Your browser couldn’t save your listening choices. They’ll last until you reload this page.</p>}
-      {collection === 'starred' && <p className="v2-personal-note">Your current favorites, saved in this browser. Channels get a review reminder after 30 days; prolong them or remove their star.</p>}
+      {collection === 'starred' && <p className="v2-personal-note">Your current favorites, saved in this browser. Star or unstar a bookmark anytime; its saved position stays the same.</p>}
       <section className="v2-collection" aria-labelledby="v2-collection-title">
         <div className="v2-heading">
           <h2 id="v2-collection-title">{title} bookmarks</h2>
@@ -269,16 +269,6 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
                       </button>
                     )}
                   </span>
-                  {collection === 'starred' && bookmark.placement?.collection === 'youtube' && favorites.isOverdue(bookmark.id) && (
-                    <span className="v2-star-review" role="group" aria-label={`Review ${bookmark.title}`}>
-                      <span className="v2-star-review__warning">Review due · Older than 30d</span>
-                      <span className="v2-star-review__date">Starred {new Date(favorites.dates[bookmark.id].addedAt).toLocaleDateString()}</span>
-                      <span className="v2-star-review__actions">
-                        <button type="button" onClick={() => favorites.prolong(bookmark.id)}>Prolong for 30d</button>
-                        <button type="button" onClick={() => favorites.remove(bookmark.id)} title="Remove from Starred">Remove</button>
-                      </span>
-                    </span>
-                  )}
                 </span>
                 <Icon name="external" size={17} />
               </div>
