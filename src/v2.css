@@ -99,3 +99,15 @@
   .v2-starred-scopes button { flex: 1; padding: 9px 10px; }
   .v2-starred-youtube { flex: 1 0 100%; padding: 4px 0 0; border-left: 0; border-top: 1px solid var(--line); }
 }
+
+.v2-star-review { position: relative; z-index: 1; flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 10px 12px; border: 1px solid #e5b6b8; border-left: 3px solid #bd2735; border-radius: 8px; background: #fff0f0; color: #a21d2b; font-size: .76rem; }
+.v2-star-review__warning { font-weight: 750; }
+.v2-star-review__date { color: #84363e; }
+.v2-star-review__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.v2-star-review button { min-height: 36px; padding: 6px 10px; border: 1px solid #c6878e; border-radius: 6px; background: #fffafa; color: #9a1b29; font: inherit; font-weight: 650; cursor: pointer; }
+.v2-star-review button:hover { background: #f9dadd; border-color: #a21d2b; }
+.v2-star-review button:focus-visible { outline: 3px solid #a21d2b; outline-offset: 2px; }
+@media (max-width: 600px) {
+  .v2-star-review__actions { flex-basis: 100%; }
+  .v2-star-review button { min-height: 44px; }
+}
