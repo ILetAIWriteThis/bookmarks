@@ -99,3 +99,62 @@
   .v2-starred-scopes button { flex: 1; padding: 9px 10px; }
   .v2-starred-youtube { flex: 1 0 100%; padding: 4px 0 0; border-left: 0; border-top: 1px solid var(--line); }
 }
+
+/* Moonlit archive and personal channel shelves. */
+.theme-toggle { padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; background: var(--cream); color: var(--ink); cursor: pointer; }
+.v2-page--starred .v2-hero { position: relative; padding: 30px; border: 1px solid var(--line); border-radius: 24px 24px 80px 24px; background: radial-gradient(ellipse at 90% 20%, #c8a6e333, transparent 65%), radial-gradient(ellipse at 70% 90%, #e8b95333, transparent 65%); }
+.v2-page--starred .v2-hero::after { content: '✧'; position: absolute; right: 7%; top: 15%; font-size: clamp(3rem, 10vw, 7rem); color: #a98a51; opacity: .4; pointer-events: none; }
+.v2-page--starred h1, .bucket-intro h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.04em; }
+.v2-page--starred h1 em { color: #805898; }
+.bucket-board { margin: 24px 0 36px; padding: clamp(14px, 3vw, 28px); border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(135deg, #9474b010, #b5913c10); }
+.bucket-intro h2 { font-size: 2.2rem; margin: 8px 0; }
+.bucket-intro p, .bucket-board > p, .bucket-tray p { color: var(--muted); font-size: .82rem; line-height: 1.6; }
+.bucket-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.bucket { min-width: 0; padding: 16px; background: var(--cream); border: 1px solid var(--line); border-top: 3px solid #a58a56; border-radius: 14px; box-shadow: 0 8px 24px #00000008; }
+.bucket:nth-child(even) { border-top-color: #9a81b9; }
+.bucket-heading { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.bucket-heading > span { color: #a58a56; font-size: 1.5rem; }
+.bucket-heading input { width: 100%; min-width: 0; color: var(--ink); background: transparent; border: 1px solid transparent; padding: 6px; font-family: Georgia, serif; font-size: 1.15rem; }
+.bucket-heading input:hover, .bucket-heading input:focus { border-color: var(--line); }
+.bucket-heading small { color: var(--muted); }
+.bucket-slots { padding: 0; margin: 0; list-style: none; display: grid; gap: 8px; }
+.bucket-slot { display: flex; align-items: center; gap: 8px; min-height: 57px; padding: 5px 9px; border: 1px dashed var(--line); border-radius: 9px; background: var(--paper); }
+.bucket-slot:has(button:hover), .bucket-slot:focus-within { border-color: #a58a56; background: #a58a5615; }
+.bucket-slot.is-filled { border-style: solid; }
+.slot-number { font: .65rem monospace; color: var(--muted); }
+.bucket-slot button { min-height: 40px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.bucket-slot .slot-channel, .bucket-slot .empty-slot { flex: 1; min-width: 0; text-align: left; font-size: .8rem; overflow-wrap: anywhere; }
+.bucket-slot .empty-slot { color: var(--muted); }
+.slot-channel[aria-pressed="true"] { outline: 2px solid #a58a56; border-radius: 5px; }
+.bucket-slot a { padding: 8px; text-decoration: none; }
+.bucket-controls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.bucket-controls button { padding: 8px 4px; background: transparent; border: 0; color: var(--muted); font-size: .7rem; cursor: pointer; }
+.bucket-controls button:last-child { margin-left: auto; }
+.bucket-controls button:disabled { opacity: .4; cursor: default; }
+.bucket-create { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; margin: 22px 0; }
+.bucket-create label { display: grid; gap: 5px; color: var(--muted); font-size: .75rem; }
+.bucket-create label:first-child { flex: 1; min-width: 150px; }
+.bucket-create input, .bucket-create select, .bucket-create button { min-height: 42px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); }
+.bucket-create input { width: 100%; }
+.bucket-create button { cursor: pointer; background: var(--blue); color: white; }
+.bucket-tray { border-top: 1px solid var(--line); padding-top: 20px; }
+.bucket-tray h3 { font-size: .9rem; margin: 0 0 5px; }
+.bucket-tray h3 span { color: var(--muted); font-weight: 400; }
+.bucket-tray > div { display: flex; flex-wrap: wrap; gap: 8px; max-height: 300px; overflow: auto; padding: 5px; }
+.bucket-tray button { padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); font-size: .8rem; cursor: grab; text-align: left; overflow-wrap: anywhere; }
+.bucket-tray button[aria-pressed="true"] { border-color: #ac8ad1; box-shadow: 0 0 0 2px #ac8ad133; }
+.bucket-board > p { margin: 18px 0 0; }
+:root[data-theme="dark"] { color-scheme: dark; color: #ebe5f3; background: #111019; --ink: #ebe5f3; --muted: #b3aabd; --paper: #111019; --cream: #201c2b; --line: #3d344c; --blue: #655087; --yellow: #e5bc6a; }
+[data-theme="dark"] body { background: radial-gradient(ellipse at 80% 0%, #30213e, transparent 65%) fixed, var(--paper); }
+[data-theme="dark"] .app-header { background: #17131ee8; border-color: var(--line); }
+[data-theme="dark"] :is(.v2-space, .search-box, .v2-filter, .v2-tag-search input, .v2-row:hover, .v2-star:hover, .v2-starred-scopes button:hover, .search-box kbd) { background: var(--cream); color: var(--ink); border-color: var(--line); }
+[data-theme="dark"] :is(.v2-filters, .v2-starred-scopes) { background: #1a1622; }
+[data-theme="dark"] :is(.v2-hero > p:last-child, .v2-personal-note, .v2-filter-hint, .v2-tag-hint, .v2-list-heading, .v2-position, .v2-row__tags, .v2-order-note, .v2-empty p, .v2-starred-scopes button, .v2-listening, footer, .header-nav a) { color: var(--muted); }
+[data-theme="dark"] :is(.v2-space[aria-current="page"], .v2-filter[aria-pressed="true"], .v2-starred-scopes button[aria-pressed="true"]) { background: #655087; color: #fff; }
+[data-theme="dark"] .v2-listening[aria-pressed="true"] { background: #243b34; color: #b9ddc7; border-color: #436252; }
+[data-theme="dark"] .v2-star[aria-pressed="true"], [data-theme="dark"] .eyebrow { color: #e5bc6a; }
+[data-theme="dark"] .v2-page--starred h1 em { color: #c6a7e8; }
+[data-theme="dark"] .v2-tags-toggle { color: #c6a7e8; }
+@media (max-width: 650px) { .bucket-grid { grid-template-columns: 1fr; } .v2-page--starred .v2-hero { padding: 24px 16px; } .theme-toggle { font-size: .75rem; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+.bucket-open { width: 100%; margin-bottom: 14px; font-size: .8rem; }

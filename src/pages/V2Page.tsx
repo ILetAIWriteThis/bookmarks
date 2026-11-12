@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { normalizeSearch } from '../data'
 import { useFavorites } from '../favorites'
 import { Icon } from '../icons'
+import { BucketBoard } from '../components/BucketBoard'
 import { useListening, useWatching } from '../listening'
 import type { BookmarkData } from '../types'
 import { v2Bookmarks, type V2Bookmark, type V2Collection } from '../v2'
@@ -148,10 +149,10 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
   }, [])
 
   return (
-    <main id="main-content" className="v2-page">
+    <main id="main-content" className={`v2-page${collection === 'starred' ? ' v2-page--starred' : ''}`}>
       <header className="v2-hero">
-        <p className="eyebrow">Bookmarks</p>
-        <h1>A little less browsing.<br />A little more finding.</h1>
+        <p className="eyebrow">{collection === 'starred' ? '✧ The enchanted archive' : 'Bookmarks'}</p>
+        <h1>{collection === 'starred' ? <>A home for your<br /><em>favorite discoveries.</em></> : <>A little less browsing.<br />A little more finding.</>}</h1>
         <p>Your links, one at a time. Pick a space, then narrow it down.</p>
       </header>
 
@@ -212,6 +213,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
             </div>
           </div>
         )}
+        {collection === 'starred' && (starredScope === 'youtube-listen' || starredScope === 'youtube-watch') && <BucketBoard key={starredScope} scope={starredScope} entries={activeScope.entries} />}
         <div className="v2-search search-box">
           <Icon name="search" size={22} />
           <label className="sr-only" htmlFor="v2-search">Search {title} bookmarks</label>
