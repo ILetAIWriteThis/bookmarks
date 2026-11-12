@@ -571,7 +571,7 @@ it('splits starred YouTube bookmarks by the normalized listening tag and preserv
   await user.click(screen.getByRole('button', { name: '#science' }))
   expect(titles()).toEqual(['Audio channel'])
   await user.click(within(filters).getByRole('button', { name: 'All' }))
-  await user.type(screen.getByRole('searchbox'), 'First')
+  await user.type(screen.getByRole('searchbox', { name: 'Search Starred bookmarks' }), 'First')
   expect(titles()).toEqual(['First channel'])
   await user.click(watch)
   expect(watch).toHaveAttribute('aria-pressed', 'true')

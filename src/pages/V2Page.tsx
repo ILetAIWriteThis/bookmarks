@@ -213,7 +213,7 @@ export function V2Page({ data, collection }: { data: BookmarkData; collection: V
             </div>
           </div>
         )}
-        {collection === 'starred' && (starredScope === 'youtube-listen' || starredScope === 'youtube-watch') && <BucketBoard key={starredScope} scope={starredScope} entries={activeScope.entries} />}
+        {collection === 'starred' && (starredScope === 'youtube-listen' || starredScope === 'youtube-watch') && <BucketBoard key={starredScope} scope={starredScope} entries={collections.youtube} />}
         <div className="v2-search search-box">
           <Icon name="search" size={22} />
           <label className="sr-only" htmlFor="v2-search">Search {title} bookmarks</label>

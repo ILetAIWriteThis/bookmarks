@@ -236,6 +236,8 @@ footer span:first-child { color: var(--ink); font-weight: 850; }
 }
 
 @media (max-width: 480px) {
+  .app-header { height: auto; min-height: 68px; padding-block: 12px; flex-wrap: wrap; gap: 12px; }
+  .header-actions { flex-wrap: wrap; }
   .brand > span:last-child { font-size: .92rem; }
   .install-button { padding: 8px 12px; }
   .home-page { width: calc(100% - 24px); padding-top: 38px; }

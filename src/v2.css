@@ -108,8 +108,8 @@
 .v2-page--starred h1 em { color: #805898; }
 .bucket-board { margin: 24px 0 36px; padding: clamp(14px, 3vw, 28px); border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(135deg, #9474b010, #b5913c10); }
 .bucket-intro h2 { font-size: 2.2rem; margin: 8px 0; }
-.bucket-intro p, .bucket-board > p, .bucket-tray p { color: var(--muted); font-size: .82rem; line-height: 1.6; }
-.bucket-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.bucket-intro p, .bucket-board > p { color: var(--muted); font-size: .82rem; line-height: 1.6; }
+.bucket-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }
 .bucket { min-width: 0; padding: 16px; background: var(--cream); border: 1px solid var(--line); border-top: 3px solid #a58a56; border-radius: 14px; box-shadow: 0 8px 24px #00000008; }
 .bucket:nth-child(even) { border-top-color: #9a81b9; }
 .bucket-heading { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
@@ -137,12 +137,19 @@
 .bucket-create input, .bucket-create select, .bucket-create button { min-height: 42px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); }
 .bucket-create input { width: 100%; }
 .bucket-create button { cursor: pointer; background: var(--blue); color: white; }
-.bucket-tray { border-top: 1px solid var(--line); padding-top: 20px; }
-.bucket-tray h3 { font-size: .9rem; margin: 0 0 5px; }
-.bucket-tray h3 span { color: var(--muted); font-weight: 400; }
-.bucket-tray > div { display: flex; flex-wrap: wrap; gap: 8px; max-height: 300px; overflow: auto; padding: 5px; }
-.bucket-tray button { padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); font-size: .8rem; cursor: grab; text-align: left; overflow-wrap: anywhere; }
-.bucket-tray button[aria-pressed="true"] { border-color: #ac8ad1; box-shadow: 0 0 0 2px #ac8ad133; }
+.bucket-search { margin-bottom: 16px; }
+.bucket-search label { display: grid; gap: 6px; font-size: .8rem; font-weight: 650; }
+.bucket-search input { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font: inherit; }
+.bucket-search p, .bucket-search small { color: var(--muted); font-size: .75rem; line-height: 1.5; }
+.bucket-search-clear { min-height: 36px; padding: 4px 0; border: 0; background: transparent; color: var(--ink); text-decoration: underline; cursor: pointer; }
+.bucket-search-results { list-style: none; padding: 3px; margin: 0; max-height: 280px; overflow-y: auto; overscroll-behavior: contain; }
+.bucket-search-results li { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.bucket-search-results li > div { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.bucket-search-results strong { font-size: .8rem; }
+.bucket-search-results p { margin: 4px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.bucket-search-results small { display: block; }
+.bucket-search-results button { flex-shrink: 0; min-height: 44px; max-width: 90px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--blue); color: white; cursor: pointer; }
+.bucket-search-results button:disabled { opacity: .5; cursor: default; }
 .bucket-board > p { margin: 18px 0 0; }
 :root[data-theme="dark"] { color-scheme: dark; color: #ebe5f3; background: #111019; --ink: #ebe5f3; --muted: #b3aabd; --paper: #111019; --cream: #201c2b; --line: #3d344c; --blue: #655087; --yellow: #e5bc6a; }
 [data-theme="dark"] body { background: radial-gradient(ellipse at 80% 0%, #30213e, transparent 65%) fixed, var(--paper); }
