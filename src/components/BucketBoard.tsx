@@ -122,7 +122,14 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
         const bookmark = id ? byId.get(id) : undefined
         return <li key={index} className={`bucket-slot${bookmark ? ' is-filled' : ''}`} onDragOver={e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move' }} onDrop={e => { e.preventDefault(); place(e.dataTransfer.getData('text/plain'), bucket.id, index) }}>
           <span className="slot-number">{String(index + 1).padStart(2, '0')}</span>
-          {bookmark ? <><button className="slot-channel" draggable onDragStart={e => { e.dataTransfer.setData('text/plain', bookmark.id); setSelected(bookmark.id) }} aria-pressed={selected === bookmark.id} onClick={() => setSelected(selected === bookmark.id ? null : bookmark.id)}>{bookmark.title}</button><a href={bookmark.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${bookmark.title}`}>↗</a><button aria-label={`Remove ${bookmark.title} from ${bucket.name}`} onClick={() => {
+          {bookmark ? <>
+            <a className="slot-channel" href={bookmark.url} target="_blank" rel="noopener noreferrer" draggable={false}>{bookmark.title}</a>
+            <button type="button" className="slot-drag" draggable
+              aria-label={`Move ${bookmark.title}`} aria-pressed={selected === bookmark.id}
+              title="Drag to an empty slot, or click then choose an empty slot"
+              onDragStart={e => { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', bookmark.id); setSelected(bookmark.id) }}
+              onClick={() => setSelected(selected === bookmark.id ? null : bookmark.id)}>⠿</button>
+            <button aria-label={`Remove ${bookmark.title} from ${bucket.name}`} onClick={() => {
             save(buckets.map(b => b.id === bucket.id ? { ...b, slots: b.slots.map((s, i) => i === index ? null : s) } : b))
             if (selected === bookmark.id) setSelected(null)
           }}>×</button></> : <button className="empty-slot" onClick={() => {

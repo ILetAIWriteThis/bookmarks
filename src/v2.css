@@ -120,14 +120,17 @@
 .bucket-heading small { color: var(--muted); }
 .bucket-slots { padding: 0; margin: 0; list-style: none; display: grid; gap: 8px; }
 .bucket-slot { display: flex; align-items: center; gap: 8px; min-height: 57px; padding: 5px 9px; border: 1px dashed var(--line); border-radius: 9px; background: var(--paper); }
-.bucket-slot:has(button:hover), .bucket-slot:focus-within { border-color: #a58a56; background: #a58a5615; }
+.bucket-slot:has(button:hover, a:hover), .bucket-slot:focus-within { border-color: #a58a56; background: #a58a5615; }
 .bucket-slot.is-filled { border-style: solid; }
 .slot-number { font: .65rem monospace; color: var(--muted); }
 .bucket-slot button { min-height: 40px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
 .bucket-slot .slot-channel, .bucket-slot .empty-slot { flex: 1; min-width: 0; text-align: left; font-size: .8rem; overflow-wrap: anywhere; }
 .bucket-slot .empty-slot { color: var(--muted); }
-.slot-channel[aria-pressed="true"] { outline: 2px solid #a58a56; border-radius: 5px; }
-.bucket-slot a { padding: 8px; text-decoration: none; }
+.bucket-slot .slot-drag { flex-shrink: 0; cursor: grab; }
+.bucket-slot .slot-drag:active { cursor: grabbing; }
+.slot-drag[aria-pressed="true"] { outline: 2px solid #a58a56; border-radius: 5px; }
+.bucket-slot a { padding: 8px; color: var(--ink); text-decoration: none; }
+.bucket-slot a:hover { text-decoration: underline; }
 .bucket-controls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .bucket-controls button { padding: 8px 4px; background: transparent; border: 0; color: var(--muted); font-size: .7rem; cursor: pointer; }
 .bucket-controls button:last-child { margin-left: auto; }
