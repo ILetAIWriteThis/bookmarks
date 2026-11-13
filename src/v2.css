@@ -110,6 +110,7 @@
 .bucket-intro h2 { font-size: 2.2rem; margin: 8px 0; }
 .bucket-intro p, .bucket-board > p { color: var(--muted); font-size: .82rem; line-height: 1.6; }
 .bucket-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }
+@media (min-width: 960px) { .bucket-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .bucket { min-width: 0; padding: 16px; background: var(--cream); border: 1px solid var(--line); border-top: 3px solid #a58a56; border-radius: 14px; box-shadow: 0 8px 24px #00000008; }
 .bucket:nth-child(even) { border-top-color: #9a81b9; }
 .bucket-heading { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
