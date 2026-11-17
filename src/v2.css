@@ -109,6 +109,12 @@
 .bucket-board { margin: 24px 0 36px; padding: clamp(14px, 3vw, 28px); border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(135deg, #9474b010, #b5913c10); }
 .bucket-intro h2 { font-size: 2.2rem; margin: 8px 0; }
 .bucket-intro p, .bucket-board > p { color: var(--muted); font-size: .82rem; line-height: 1.6; }
+.bucket-group { min-width: 0; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); }
+.bucket-group-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-bottom: 16px; }
+.bucket-group-heading label { display: grid; gap: 4px; min-width: 0; max-width: 100%; color: var(--muted); font-size: .75rem; }
+.bucket-group-heading input { width: 100%; min-width: 0; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); font: 1.2rem Georgia, serif; }
+.bucket-group-heading span, .bucket-group-empty { color: var(--muted); font-size: .75rem; line-height: 1.5; }
+.bucket-group-heading button { min-height: 40px; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); cursor: pointer; }
 .bucket-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }
 @media (min-width: 960px) { .bucket-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .bucket { min-width: 0; padding: 16px; background: var(--cream); border: 1px solid var(--line); border-top: 3px solid #a58a56; border-radius: 14px; box-shadow: 0 8px 24px #00000008; }
@@ -136,10 +142,11 @@
 .bucket-controls button:last-child { margin-left: auto; }
 .bucket-controls button:disabled { opacity: .4; cursor: default; }
 .bucket-create { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; margin: 22px 0; }
-.bucket-create label { display: grid; gap: 5px; color: var(--muted); font-size: .75rem; }
+.bucket-create label { display: grid; gap: 5px; max-width: 100%; min-width: 0; color: var(--muted); font-size: .75rem; }
 .bucket-create label:first-child { flex: 1; min-width: 150px; }
 .bucket-create input, .bucket-create select, .bucket-create button { min-height: 42px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); }
 .bucket-create input { width: 100%; }
+.bucket-create select { max-width: 100%; min-width: 0; }
 .bucket-create button { cursor: pointer; background: var(--blue); color: white; }
 .bucket-search { margin-bottom: 16px; }
 .bucket-search label { display: grid; gap: 6px; font-size: .8rem; font-weight: 650; }

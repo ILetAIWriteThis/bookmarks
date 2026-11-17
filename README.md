@@ -19,6 +19,8 @@ All bookmarks have a collection placement. Tags use the bookmark's saved tags; s
 
 Click **×** on a YouTube bookmark's `#listening` tag to turn listening off, or **+ listening** beside its tags to turn it on. This updates tag filters, search, and the Starred Listen/Watch split immediately. Choices persist across reloads in local storage, like stars. **Reset listening choices** or clearing the site's browser storage restores the tags from the JSON data. Other tags and saved positions stay the same.
 
+Listen and Watch buckets are organized into named groups, each starting on a new row. Create a group for each way you want to organize channels, then choose it under **In group** when creating buckets. A channel can appear once per group: search offers **Move here** when it is already in another bucket in that group, and **Add** in a different group. Dragging or selecting a channel and choosing an empty slot follows the same rule. Existing buckets stay together in the first group, preserving their names, slots, and order. Groups are saved in this browser, separately for Listen and Watch.
+
 Media and Travel categories and their bookmarks have been removed. Bookmarks awaiting content review carry `not-reviewed`. Review public site or channel descriptions, published content, or organizer recording archives before assigning topics. The current Web and YouTube review queues have been processed; unavailable content is recorded separately in the review logs. The YouTube Travel topic remains.
 
 ### Tagging conventions

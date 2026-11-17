@@ -34719,6 +34719,34 @@
         "collection": "youtube",
         "position": 119
       }
+    },
+    {
+      "id": "one-useful-thing",
+      "title": "One Useful Thing",
+      "url": "https://www.oneusefulthing.org/",
+      "description": "Ethan Mollick’s research-based newsletter on AI and its implications for work, education, and everyday life.",
+      "tags": [
+        "tech",
+        "ai-machine-learning",
+        "newsletters",
+        "research",
+        "education",
+        "productivity"
+      ],
+      "categories": [
+        {
+          "categoryId": "tech-ai-ai",
+          "position": 1004
+        },
+        {
+          "categoryId": "reading",
+          "position": 1003
+        }
+      ],
+      "placement": {
+        "collection": "web",
+        "position": 487
+      }
     }
   ]
 }
