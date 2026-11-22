@@ -249,6 +249,85 @@ it('moves search results directly between buckets and prevents overfilling', () 
   expect(screen.getByRole('button', { name: 'Remove Beta from Recurring' })).toBeInTheDocument()
 })
 
+it('limits channels across a group’s buckets while allowing empty slots and moves inside the group', () => {
+  localStorage.setItem('bookmarks:buckets:v2:youtube', JSON.stringify([
+    { id: 'first', name: 'First', buckets: [
+      { id: 'one', name: 'One', slots: [null, null] },
+      { id: 'two', name: 'Two', slots: [null] },
+    ] },
+    { id: 'second', name: 'Second', buckets: [{ id: 'three', name: 'Three', slots: ['Beta', null] }] },
+  ]))
+  render(<BucketBoard collection="youtube" entries={entries} />)
+  fireEvent.click(screen.getByText('Buckets settings'))
+  fireEvent.change(screen.getByRole('spinbutton', { name: 'Max channels per group' }), { target: { value: '1' } })
+  fireEvent.click(screen.getByRole('button', { name: 'Save limit' }))
+  const first = within(screen.getByRole('region', { name: 'Bucket group First' }))
+  const second = within(screen.getByRole('region', { name: 'Bucket group Second' }))
+  expect(first.getByText('0 / 1 channels')).toBeInTheDocument()
+  fireEvent.change(first.getByRole('searchbox', { name: 'Search library for One' }), { target: { value: 'Alpha' } })
+  fireEvent.click(first.getByRole('button', { name: 'Add Alpha to One' }))
+  expect(first.getByText('1 / 1 channels · Limit reached')).toBeInTheDocument()
+
+  const search = first.getByRole('searchbox', { name: 'Search library for Two' })
+  fireEvent.change(search, { target: { value: 'Beta' } })
+  expect(first.getByRole('button', { name: 'Add Beta to Two' })).toBeDisabled()
+  fireEvent.click(second.getByRole('button', { name: 'Move Beta' }))
+  const slot = first.getByRole('button', { name: 'Place selected channel in Two slot 1' })
+  const two = within(slot.closest('article')!)
+  expect(slot).toBeDisabled()
+  fireEvent.drop(slot.closest('li')!, { dataTransfer: { getData: () => 'Beta' } })
+  expect(screen.getByRole('status')).toHaveTextContent('First has reached its channel limit of 1.')
+  expect(first.queryByRole('link', { name: 'Beta' })).toBeNull()
+  expect(second.getByRole('link', { name: 'Beta' })).toBeInTheDocument()
+
+  fireEvent.click(first.getByRole('button', { name: 'Move Alpha' }))
+  expect(slot).toBeEnabled()
+  fireEvent.click(slot)
+  expect(first.getByRole('button', { name: 'Remove Alpha from Two' })).toBeInTheDocument()
+  expect(first.queryByRole('button', { name: 'Remove Alpha from One' })).toBeNull()
+  fireEvent.click(two.getByRole('button', { name: '+ Slot' }))
+  expect(two.getByRole('button', { name: 'Place selected channel in Two slot 2' })).toBeInTheDocument()
+  expect(two.getByRole('button', { name: 'Add Beta to Two' })).toBeDisabled()
+  fireEvent.click(two.getByRole('button', { name: 'Remove Alpha from Two' }))
+  fireEvent.click(two.getByRole('button', { name: 'Add Beta to Two' }))
+  expect(first.getByRole('link', { name: 'Beta' })).toBeInTheDocument()
+  expect(second.getByRole('link', { name: 'Beta' })).toBeInTheDocument()
+})
+
+it('persists the channel limit with categories and rejects a limit below the current group count', () => {
+  localStorage.setItem('bookmarks:buckets:v2:youtube', JSON.stringify([
+    { id: 'group', name: 'My buckets', buckets: [{ id: 'one', name: 'One', slots: ['Alpha', 'Beta', null] }] },
+  ]))
+  localStorage.setItem('bookmarks:buckets:categories:v1:youtube', JSON.stringify({
+    categories: [{ id: 'checked', name: 'Fully checked', displayName: 'checked' }],
+    assignments: { Alpha: 'checked' },
+  }))
+  const { unmount } = render(<BucketBoard collection="youtube" entries={entries} />)
+  fireEvent.click(screen.getByText('Buckets settings'))
+  const limit = screen.getByRole('spinbutton', { name: 'Max channels per group' })
+  const save = screen.getByRole('button', { name: 'Save limit' })
+  expect(limit).toHaveValue(null)
+  fireEvent.change(limit, { target: { value: '2' } })
+  fireEvent.click(save)
+  expect(screen.getByRole('button', { name: '#checked 1' })).toBeInTheDocument()
+  fireEvent.change(limit, { target: { value: '1' } })
+  fireEvent.click(save)
+  expect(screen.getByRole('alert')).toHaveTextContent('A group already has 2 channels.')
+  expect(screen.getByText('2 / 2 channels · Limit reached')).toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: 'Delete Fully checked category' }))
+
+  unmount()
+  render(<BucketBoard collection="youtube" entries={entries} />)
+  fireEvent.click(screen.getByText('Buckets settings'))
+  const savedLimit = screen.getByRole('spinbutton', { name: 'Max channels per group' })
+  expect(savedLimit).toHaveValue(2)
+  expect(screen.queryByRole('button', { name: 'Delete Fully checked category' })).toBeNull()
+  fireEvent.change(savedLimit, { target: { value: '' } })
+  fireEvent.click(screen.getByRole('button', { name: 'Save limit' }))
+  expect(screen.queryByText(/Limit reached/)).toBeNull()
+  expect(savedLimit).toHaveValue(null)
+})
+
 it('places, moves, and persists channels without replacing occupied slots', () => {
   const { unmount } = render(<BucketBoard collection="youtube" entries={entries} />)
   expect(screen.getAllByText('+ Empty slot')).toHaveLength(10)

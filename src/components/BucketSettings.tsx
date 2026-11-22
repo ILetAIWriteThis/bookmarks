@@ -1,12 +1,17 @@
 import { useState } from 'react'
-import type { BucketCategorySettings } from '../buckets'
+import { isChannelLimit, type BucketSettingsData } from '../buckets'
 
 type Props = {
-  categories: BucketCategorySettings['categories']
-  onChange: (update: (current: BucketCategorySettings) => BucketCategorySettings) => void
+  categories: BucketSettingsData['categories']
+  channelLimit: number | null
+  onSaveChannelLimit: (limit: number | null) => string | undefined
+  onChange: (update: (current: BucketSettingsData) => BucketSettingsData) => void
 }
 
-export function BucketSettings({ categories, onChange }: Props) {
+export function BucketSettings({ categories, channelLimit, onSaveChannelLimit, onChange }: Props) {
+  const [limitDraft, setLimitDraft] = useState<string | null>(null)
+  const [limitError, setLimitError] = useState('')
+  const limitValue = limitDraft ?? channelLimit?.toString() ?? ''
   const [editingId, setEditingId] = useState('')
   const [name, setName] = useState('')
   const [displayName, setDisplayName] = useState('')
@@ -20,6 +25,28 @@ export function BucketSettings({ categories, onChange }: Props) {
 
   return <details className="bucket-settings">
     <summary className="v2-filter-heading">Buckets settings</summary>
+    <form className="bucket-create bucket-limit-form" onSubmit={event => {
+      event.preventDefault()
+      const limit = limitValue === '' ? null : Number(limitValue)
+      if (limit !== null && !isChannelLimit(limit)) {
+        setLimitError('Enter a positive whole number or leave the field blank.')
+        return
+      }
+      const error = onSaveChannelLimit(limit)
+      setLimitError(error ?? '')
+      if (!error) setLimitDraft(null)
+    }}>
+      <label>Max channels per group
+        <input type="number" min={1} placeholder="Unlimited" value={limitValue}
+          aria-describedby="bucket-channel-limit-hint" onChange={event => {
+            setLimitDraft(event.target.value)
+            setLimitError('')
+          }} />
+      </label>
+      <button type="submit">Save limit</button>
+    </form>
+    <p id="bucket-channel-limit-hint">The limit applies to each group across all its buckets. Leave blank for unlimited.</p>
+    {limitError && <p role="alert">{limitError}</p>}
     <h3>Channel categories</h3>
     <p>Each channel can have one category across all its buckets. Its display name appears as a hashtag.</p>
     {!!categories.length && <ul className="bucket-settings-categories">
@@ -33,6 +60,7 @@ export function BucketSettings({ categories, onChange }: Props) {
         }}>Edit</button>
         <button type="button" aria-label={`Delete ${category.name} category`} onClick={() => {
           onChange(current => ({
+            ...current,
             categories: current.categories.filter(item => item.id !== category.id),
             assignments: Object.fromEntries(Object.entries(current.assignments).filter(([, id]) => id !== category.id)),
           }))

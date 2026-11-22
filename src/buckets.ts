@@ -3,13 +3,14 @@ import type { V2Collection } from './v2'
 export type Bucket = { id: string; name: string; slots: (string | null)[] }
 export type BucketGroup = { id: string; name: string; buckets: Bucket[] }
 export type BucketCategory = { id: string; name: string; displayName: string }
-export type BucketCategorySettings = {
+export type BucketSettingsData = {
   categories: BucketCategory[]
   assignments: Record<string, string>
+  channelLimit: number | null
 }
 
 export const bucketStorageKey = 'bookmarks:buckets:v2:'
-export const bucketCategoryStorageKey = 'bookmarks:buckets:categories:v1:youtube'
+export const bucketSettingsStorageKey = 'bookmarks:buckets:categories:v1:youtube'
 const legacyBucketStorageKey = 'bookmarks:buckets:v1:'
 const legacyYouTubeScopes = ['youtube-listen', 'youtube-watch'] as const
 
@@ -52,8 +53,12 @@ function isBucketCategory(value: unknown): value is BucketCategory {
     && typeof category.displayName === 'string' && !!category.displayName.trim()
 }
 
-export function readBucketCategorySettings(): BucketCategorySettings {
-  const stored = readStorage(bucketCategoryStorageKey) as Partial<BucketCategorySettings> | null
+export function isChannelLimit(value: unknown): value is number {
+  return typeof value === 'number' && Number.isSafeInteger(value) && value > 0
+}
+
+export function readBucketSettings(): BucketSettingsData {
+  const stored = readStorage(bucketSettingsStorageKey) as Partial<BucketSettingsData> | null
   const candidates = Array.isArray(stored?.categories) ? stored.categories.filter(isBucketCategory) : []
   const categories = uniqueIds(candidates) ? candidates : []
   const categoryIds = new Set(categories.map(category => category.id))
@@ -61,7 +66,8 @@ export function readBucketCategorySettings(): BucketCategorySettings {
   const assignments = savedAssignments && typeof savedAssignments === 'object' && !Array.isArray(savedAssignments)
     ? Object.fromEntries(Object.entries(savedAssignments).filter(([, categoryId]) => categoryIds.has(categoryId)))
     : {}
-  return { categories, assignments }
+  const channelLimit = isChannelLimit(stored?.channelLimit) ? stored.channelLimit : null
+  return { categories, assignments, channelLimit }
 }
 
 function readGroups(key: string): BucketGroup[] | undefined {
@@ -79,7 +85,7 @@ function readLegacyYouTubeGroups(scope: typeof legacyYouTubeScopes[number]): Buc
   }
 }
 
-export function readBucketGroups(collection: V2Collection): BucketGroup[] {
+export function readBucketGroups(collection: V2Collection, fallback?: BucketGroup[]): BucketGroup[] {
   const saved = readGroups(bucketStorageKey + collection)
   if (saved) return saved
 
@@ -97,6 +103,8 @@ export function readBucketGroups(collection: V2Collection): BucketGroup[] {
     }
     if (listen || watch) return listen?.length ? listen : watch ?? []
   }
+
+  if (fallback) return fallback
 
   const names = collection === 'youtube' ? ['Recurring', 'Good Stories'] : ['Reference', 'To read']
   const buckets = names.map((name, i) => ({ id: `starter-${i}`, name, slots: Array(5).fill(null) }))

@@ -79,6 +79,8 @@ test('wraps long group names and keeps category totals inside the group heading'
   expect(await name.evaluate(element => element.scrollHeight <= element.clientHeight)).toBe(true)
 
   await page.getByText('Buckets settings', { exact: true }).click()
+  await page.getByRole('spinbutton', { name: 'Max channels per group', exact: true }).fill('1')
+  await page.getByRole('button', { name: 'Save limit', exact: true }).click()
   await page.getByLabel('Name', { exact: true }).fill('Fully checked')
   await page.getByLabel('Display name', { exact: true }).fill('checked')
   await page.getByRole('button', { name: 'Add category', exact: true }).click()
@@ -87,6 +89,7 @@ test('wraps long group names and keeps category totals inside the group heading'
   await group.getByLabel(`Category when adding ${channel.title} to Recurring`, { exact: true }).selectOption({ label: 'Fully checked' })
   await group.getByRole('button', { name: `Add ${channel.title} to Recurring`, exact: true }).click()
   await page.reload()
+  await expect(group.getByText('1 / 1 channels · Limit reached')).toBeVisible()
   await expect(group.locator('.bucket-group-heading').getByRole('list')).toHaveText('#checked 1')
   await expect(group.locator('.bucket-slot').getByText('#checked', { exact: true })).toBeVisible()
   const filter = group.getByRole('button', { name: '#checked 1', exact: true })

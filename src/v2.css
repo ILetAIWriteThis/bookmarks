@@ -99,6 +99,7 @@
 .bucket-group-name::after, .bucket-group-name textarea { grid-area: 1 / 1; min-width: 0; padding: 8px; border: 1px solid var(--line); border-radius: 8px; font: 1.2rem/1.25 Georgia, serif; white-space: pre-wrap; overflow-wrap: anywhere; }
 .bucket-group-name::after { content: attr(data-value) ' '; visibility: hidden; }
 .bucket-group-name textarea { width: 100%; resize: none; overflow: hidden; background: var(--cream); color: var(--ink); }
+.bucket-group-capacity { align-self: end; margin-bottom: 7px; color: var(--muted); font-size: .75rem; }
 .bucket-category-counts { display: flex; flex-wrap: wrap; gap: 6px; align-self: end; list-style: none; padding: 0; margin: 0 0 7px; }
 .bucket-category-counts strong { font-variant-numeric: tabular-nums; }
 .bucket-category-counts .bucket-category-label { min-height: 30px; padding: 3px 7px; }
@@ -123,6 +124,7 @@
 .bucket-slot .slot-title, .bucket-slot .empty-slot { flex: 1; min-width: 0; text-align: left; font-size: .8rem; overflow-wrap: anywhere; }
 .bucket-slot .slot-title { padding: 5px 8px; }
 .bucket-slot .empty-slot { color: var(--muted); }
+.bucket-slot .empty-slot:disabled { opacity: .5; cursor: default; }
 .bucket-slot .slot-drag { flex-shrink: 0; cursor: grab; }
 .bucket-slot .slot-drag:active { cursor: grabbing; }
 .slot-drag[aria-pressed="true"] { outline: 2px solid #a58a56; border-radius: 5px; }
@@ -147,6 +149,9 @@
 .bucket-settings { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--cream); }
 .bucket-settings h3 { margin: 16px 0 4px; font-size: .9rem; }
 .bucket-settings p { margin: 0 0 12px; color: var(--muted); font-size: .78rem; line-height: 1.5; }
+.bucket-limit-form { margin: 16px 0 6px; }
+.bucket-limit-form label:first-child { flex: 0 1 12rem; min-width: 0; }
+.bucket-limit-form input { background: var(--paper); }
 .bucket-settings-categories { list-style: none; padding: 0; margin: 0; }
 .bucket-settings-categories li { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--line); font-size: .82rem; }
 .bucket-settings-category { flex: 1; min-width: 0; overflow-wrap: anywhere; }
