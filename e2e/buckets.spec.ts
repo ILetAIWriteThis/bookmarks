@@ -63,6 +63,35 @@ test('organizes six buckets into separate groups and reuses channels between gro
   }
 })
 
+test('wraps long group names and keeps category totals inside the group heading', async ({ page }) => {
+  const channel = bookmarkData.bookmarks.find(bookmark => bookmark.placement.collection === 'youtube')!
+  await page.setViewportSize({ width: 320, height: 740 })
+  await page.goto('./#/buckets')
+
+  const originalName = page.getByLabel('Rename My buckets group')
+  const originalHeight = (await originalName.boundingBox())!.height
+  const longName = 'W'.repeat(60)
+  await originalName.fill(longName)
+  const group = page.getByRole('region', { name: `Bucket group ${longName}`, exact: true })
+  const name = group.getByLabel(`Rename ${longName} group`, { exact: true })
+  await expect(name).toHaveValue(longName)
+  expect((await name.boundingBox())!.height).toBeGreaterThan(originalHeight)
+  expect(await name.evaluate(element => element.scrollHeight <= element.clientHeight)).toBe(true)
+
+  await page.getByText('Buckets settings', { exact: true }).click()
+  await page.getByLabel('Name', { exact: true }).fill('Fully checked')
+  await page.getByLabel('Display name', { exact: true }).fill('checked')
+  await page.getByRole('button', { name: 'Add category', exact: true }).click()
+  await page.getByText('Buckets settings', { exact: true }).click()
+  await group.getByRole('searchbox', { name: 'Search library for Recurring' }).fill(channel.title)
+  await group.getByLabel(`Category when adding ${channel.title} to Recurring`, { exact: true }).selectOption({ label: 'Fully checked' })
+  await group.getByRole('button', { name: `Add ${channel.title} to Recurring`, exact: true }).click()
+  await page.reload()
+  await expect(group.locator('.bucket-group-heading').getByRole('list')).toHaveText('#checked 1')
+  await expect(group.locator('.bucket-slot').getByText('#checked', { exact: true })).toBeVisible()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+})
+
 test('fills and moves channels in a six-bucket board using bucket search', async ({ page, isMobile }) => {
   const channel = bookmarkData.bookmarks.find(bookmark => bookmark.placement.collection === 'youtube')!
   await page.goto('./#/buckets')

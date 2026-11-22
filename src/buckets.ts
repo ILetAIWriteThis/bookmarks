@@ -2,8 +2,14 @@ import type { V2Collection } from './v2'
 
 export type Bucket = { id: string; name: string; slots: (string | null)[] }
 export type BucketGroup = { id: string; name: string; buckets: Bucket[] }
+export type BucketCategory = { id: string; name: string; displayName: string }
+export type BucketCategorySettings = {
+  categories: BucketCategory[]
+  assignments: Record<string, string>
+}
 
 export const bucketStorageKey = 'bookmarks:buckets:v2:'
+export const bucketCategoryStorageKey = 'bookmarks:buckets:categories:v1:youtube'
 const legacyBucketStorageKey = 'bookmarks:buckets:v1:'
 const legacyYouTubeScopes = ['youtube-listen', 'youtube-watch'] as const
 
@@ -36,6 +42,26 @@ function readStorage(key: string): unknown {
 
 function uniqueIds(items: { id: string }[]) {
   return new Set(items.map(item => item.id)).size === items.length
+}
+
+function isBucketCategory(value: unknown): value is BucketCategory {
+  if (!value || typeof value !== 'object') return false
+  const category = value as Partial<BucketCategory>
+  return typeof category.id === 'string' && !!category.id
+    && typeof category.name === 'string' && !!category.name.trim()
+    && typeof category.displayName === 'string' && !!category.displayName.trim()
+}
+
+export function readBucketCategorySettings(): BucketCategorySettings {
+  const stored = readStorage(bucketCategoryStorageKey) as Partial<BucketCategorySettings> | null
+  const candidates = Array.isArray(stored?.categories) ? stored.categories.filter(isBucketCategory) : []
+  const categories = uniqueIds(candidates) ? candidates : []
+  const categoryIds = new Set(categories.map(category => category.id))
+  const savedAssignments = stored?.assignments
+  const assignments = savedAssignments && typeof savedAssignments === 'object' && !Array.isArray(savedAssignments)
+    ? Object.fromEntries(Object.entries(savedAssignments).filter(([, categoryId]) => categoryIds.has(categoryId)))
+    : {}
+  return { categories, assignments }
 }
 
 function readGroups(key: string): BucketGroup[] | undefined {

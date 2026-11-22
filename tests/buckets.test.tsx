@@ -41,6 +41,64 @@ it('preserves existing buckets in one group and allows a channel once in each ne
   expect(screen.getByRole('button', { name: 'Remove Alpha from Curious' })).toBeInTheDocument()
 })
 
+it('assigns one YouTube category per channel and counts it in every group containing that channel', () => {
+  localStorage.setItem('bookmarks:buckets:v2:youtube', JSON.stringify([
+    { id: 'first', name: 'First', buckets: [
+      { id: 'one', name: 'One', slots: [null] },
+      { id: 'another', name: 'Another', slots: ['Beta'] },
+    ] },
+    { id: 'second', name: 'Second', buckets: [{ id: 'two', name: 'Two', slots: [null] }] },
+  ]))
+  const initial = render(<BucketBoard collection="youtube" entries={entries} />)
+  fireEvent.click(screen.getByText('Buckets settings'))
+  for (const [name, displayName] of [['Fully checked', 'checked'], ['Review later', 'later']]) {
+    fireEvent.change(screen.getByLabelText('Name', { exact: true }), { target: { value: name } })
+    fireEvent.change(screen.getByLabelText('Display name'), { target: { value: displayName } })
+    fireEvent.click(screen.getByRole('button', { name: 'Add category' }))
+  }
+  const checked = screen.getByRole<HTMLOptionElement>('option', { name: 'Fully checked' }).value
+  const later = screen.getByRole<HTMLOptionElement>('option', { name: 'Review later' }).value
+  fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for One' }), { target: { value: 'Alpha' } })
+  fireEvent.change(screen.getByLabelText('Category when adding Alpha to One'), { target: { value: checked } })
+  expect(screen.queryByRole('list', { name: 'Category totals for First' })).not.toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: 'Add Alpha to One' }))
+  const alphaSlot = screen.getByRole('link', { name: 'Alpha' }).closest('li')!
+  expect(within(alphaSlot).getByText('#checked')).toBeInTheDocument()
+
+  fireEvent.change(screen.getByLabelText('Category for Beta in Another'), { target: { value: checked } })
+  fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for Two' }), { target: { value: '#checked' } })
+  expect(screen.getByLabelText('Category when adding Alpha to Two')).toHaveValue(checked)
+  fireEvent.click(screen.getByRole('button', { name: 'Add Alpha to Two' }))
+  const totals = (group: string) => screen.getByRole('list', { name: `Category totals for ${group}` })
+  expect(totals('First')).toHaveTextContent('#checked 2')
+  expect(totals('Second')).toHaveTextContent('#checked 1')
+
+  fireEvent.click(screen.getByRole('button', { name: 'Edit Fully checked category' }))
+  fireEvent.change(screen.getByLabelText('Display name'), { target: { value: 'done' } })
+  fireEvent.click(screen.getByRole('button', { name: 'Save category' }))
+  initial.unmount()
+  const reloaded = render(<BucketBoard collection="youtube" entries={entries} />)
+  expect(totals('First')).toHaveTextContent('#done 2')
+  expect(totals('Second')).toHaveTextContent('#done 1')
+  fireEvent.change(screen.getByLabelText('Category for Alpha in Two'), { target: { value: later } })
+  expect(screen.getByLabelText('Category for Alpha in One')).toHaveValue(later)
+  expect(totals('First')).toHaveTextContent('#done 1')
+  expect(totals('First')).toHaveTextContent('#later 1')
+  expect(totals('Second')).toHaveTextContent('#later 1')
+  fireEvent.click(screen.getByRole('button', { name: 'Remove Alpha from One' }))
+  expect(totals('First')).toHaveTextContent('#done 1')
+  expect(totals('First')).not.toHaveTextContent('#later')
+
+  fireEvent.click(screen.getByText('Buckets settings'))
+  fireEvent.click(screen.getByRole('button', { name: 'Delete Review later category' }))
+  expect(screen.getByLabelText('Category for Alpha in Two')).toHaveValue('')
+  expect(screen.queryByRole('list', { name: 'Category totals for Second' })).not.toBeInTheDocument()
+  reloaded.unmount()
+  render(<BucketBoard collection="web" entries={entries} />)
+  expect(screen.queryByText('Buckets settings')).not.toBeInTheDocument()
+  expect(screen.queryByRole('list', { name: /^Category totals/ })).not.toBeInTheDocument()
+})
+
 it('merges both old YouTube boards without losing groups, duplicate entries across groups, or slot order', () => {
   localStorage.setItem('bookmarks:buckets:v1:youtube-listen', JSON.stringify([
     { id: 'starter-0', name: 'Recurring', slots: [null, 'Alpha'] },

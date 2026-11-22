@@ -1,13 +1,45 @@
 import { useEffect, useRef, useState } from 'react'
 import { normalizeSearch } from '../data'
 import type { V2Bookmark, V2Collection } from '../v2'
-import { bucketStorageKey, legacyYouTubeBucketKeys, readBucketGroups, type Bucket, type BucketGroup } from '../buckets'
+import {
+  bucketCategoryStorageKey, bucketStorageKey, legacyYouTubeBucketKeys, readBucketCategorySettings, readBucketGroups,
+  type Bucket, type BucketCategory, type BucketCategorySettings, type BucketGroup,
+} from '../buckets'
+import { BucketSettings } from './BucketSettings'
+
+function CategoryOptions({ categories }: { categories: BucketCategory[] }) {
+  return <>
+    <option value="">No category</option>
+    {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
+  </>
+}
+
+function GroupCategoryCounts({ name, categories, counts }: {
+  name: string
+  categories: BucketCategory[]
+  counts: Map<string, number>
+}) {
+  if (!counts.size) return null
+  return <ul className="bucket-category-counts" aria-label={`Category totals for ${name}`}>
+    {categories.filter(category => counts.has(category.id)).map(category => <li key={category.id} className="bucket-category-label" title={category.name}>
+      #{category.displayName} <strong>{counts.get(category.id)}</strong>
+    </li>)}
+  </ul>
+}
 
 export function BucketBoard({ collection, entries }: { collection: V2Collection; entries: V2Bookmark[] }) {
   const [groups, setGroups] = useState(() => readBucketGroups(collection))
   const storageKey = bucketStorageKey + collection
   const title = collection === 'youtube' ? 'YouTube buckets' : 'Web buckets'
   const item = collection === 'youtube' ? 'channel' : 'bookmark'
+  const [categorySettings, setCategorySettings] = useState<BucketCategorySettings>(() => (
+    collection === 'youtube' ? readBucketCategorySettings() : { categories: [], assignments: {} }
+  ))
+  const [categoryError, setCategoryError] = useState(false)
+  const categories = collection === 'youtube' ? categorySettings.categories : []
+  const categoriesById = new Map(categories.map(category => [category.id, category]))
+  const categoryOptionsKey = JSON.stringify([...categoriesById.keys()])
+  const categoryFor = (id: string) => categoriesById.get(categorySettings.assignments[id])
   const buckets = groups.flatMap(group => group.buckets)
   const [selected, setSelected] = useState<{ id: string; bucketId: string } | null>(null)
   const [name, setName] = useState('')
@@ -28,6 +60,10 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
         setGroups(readBucketGroups(collection))
         setSelected(null)
       }
+      if (collection === 'youtube' && (event.key === bucketCategoryStorageKey || event.key === null)) {
+        setCategorySettings(readBucketCategorySettings())
+        setCategoryError(false)
+      }
     }
     window.addEventListener('storage', sync)
     return () => window.removeEventListener('storage', sync)
@@ -39,7 +75,27 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
   const save = (next: Bucket[]) => saveGroups(groups.map(group => ({
     ...group, buckets: next.filter(bucket => group.buckets.some(existing => existing.id === bucket.id)),
   })))
-  const place = (id: string, bucketId: string, index: number) => {
+  const updateCategorySettings = (update: (current: BucketCategorySettings) => BucketCategorySettings) => {
+    const current = categoryError ? categorySettings : readBucketCategorySettings()
+    const next = update(current)
+    setCategorySettings(next)
+    if (next === current) return
+    try {
+      localStorage.setItem(bucketCategoryStorageKey, JSON.stringify(next))
+      setCategoryError(false)
+    } catch {
+      setCategoryError(true)
+    }
+  }
+  const assignCategory = (id: string, categoryId: string) => {
+    updateCategorySettings(current => {
+      if (categoryId && !current.categories.some(category => category.id === categoryId)) return current
+      const assignments = { ...current.assignments, [id]: categoryId }
+      if (!categoryId) delete assignments[id]
+      return { ...current, assignments }
+    })
+  }
+  const place = (id: string, bucketId: string, index: number, categoryId?: string) => {
     if (!byId.has(id)) return
     const target = buckets.find(b => b.id === bucketId)
     const group = groups.find(group => group.buckets.some(bucket => bucket.id === bucketId))
@@ -48,10 +104,22 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
     save(buckets.map(b => group?.buckets.some(bucket => bucket.id === b.id)
       ? { ...b, slots: b.slots.map((s, i) => b.id === bucketId && i === index ? id : s === id ? null : s) }
       : b))
+    if (categoryId !== undefined) assignCategory(id, categoryId)
     setSelected(null)
     setMessage(`${byId.get(id)!.title} placed in ${target.name}.`)
   }
   const bucketEntries = (bucket: Bucket) => [...new Set(bucket.slots)].flatMap(id => id && byId.has(id) ? [byId.get(id)!] : [])
+  const countGroupCategories = (group: BucketGroup) => {
+    const counts = new Map<string, number>()
+    if (!categories.length) return counts
+    const ids = new Set(group.buckets.flatMap(bucket => bucket.slots))
+    for (const id of ids) {
+      if (!id || !byId.has(id)) continue
+      const category = categoryFor(id)
+      if (category) counts.set(category.id, (counts.get(category.id) ?? 0) + 1)
+    }
+    return counts
+  }
   const signature = (bucket: Bucket) => JSON.stringify(bucketEntries(bucket).map(b => [b.id, b.url]))
   const remaining = (bucket: Bucket) => blocked[bucket.id]?.signature === signature(bucket) ? blocked[bucket.id].ids : undefined
   const openBucket = (bucket: Bucket) => {
@@ -81,10 +149,20 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       <h2 id="bucket-title">{title}</h2>
       <p>Use Move here to switch buckets within a group. You can add the same {item} to another group.</p>
     </div>
+    {collection === 'youtube' && <BucketSettings categories={categories} onChange={updateCategorySettings} />}
     {groups.map(group => <section className="bucket-group" key={group.id} aria-label={`Bucket group ${group.name}`}>
       <div className="bucket-group-heading">
-        <label>Group<input aria-label={`Rename ${group.name} group`} maxLength={60} value={group.name}
-          onChange={event => saveGroups(groups.map(item => item.id === group.id ? { ...item, name: event.target.value } : item))} /></label>
+        <label>Group
+          <span className="bucket-group-name" data-value={group.name}>
+            <textarea aria-label={`Rename ${group.name} group`} rows={1} maxLength={60} value={group.name}
+              onKeyDown={event => { if (event.key === 'Enter' && !event.nativeEvent.isComposing) event.preventDefault() }}
+              onChange={event => {
+                const name = event.target.value.replace(/[\r\n]+/g, ' ')
+                saveGroups(groups.map(item => item.id === group.id ? { ...item, name } : item))
+              }} />
+          </span>
+        </label>
+        <GroupCategoryCounts name={group.name} categories={categories} counts={countGroupCategories(group)} />
         {!group.buckets.length && <button type="button" onClick={() => saveGroups(groups.filter(item => item.id !== group.id))}>Delete empty group</button>}
       </div>
       {!group.buckets.length && <p className="bucket-group-empty">Add your first bucket to this group using the form below.</p>}
@@ -92,7 +170,8 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       const query = queries[bucket.id] ?? ''
       const terms = normalizeSearch(query).split(/\s+/).map(term => term.replace(/^#/, '')).filter(Boolean)
       const matches = terms.length ? entries.filter(({ bookmark, tags }) => {
-        const text = normalizeSearch([bookmark.title, bookmark.description ?? '', bookmark.url, ...tags].join(' '))
+        const category = categoryFor(bookmark.id)
+        const text = normalizeSearch([bookmark.title, bookmark.description ?? '', bookmark.url, ...tags, category?.name, category?.displayName].join(' '))
         return terms.every(term => text.includes(term))
       }) : []
       const requestedSlot = targetSlots[bucket.id]
@@ -124,14 +203,30 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
             {matches.map(({ bookmark, tags }) => {
               const source = group.buckets.find(b => b.slots.includes(bookmark.id))
               const added = source?.id === bucket.id
+              const category = categoryFor(bookmark.id)
               return <li key={bookmark.id}>
-                <div><strong>{bookmark.title}</strong>{bookmark.description && <p>{bookmark.description}</p>}
+                <div><strong>{bookmark.title}</strong>
+                  {category && <> <span className="bucket-category-label" title={category.name}>#{category.displayName}</span></>}
+                  {bookmark.description && <p>{bookmark.description}</p>}
                   {!!tags.length && <small>{tags.map(tag => `#${tag}`).join(' ')}</small>}
                   {source && !added && <small>In {source.name}</small>}
                 </div>
-                <button type="button" disabled={added || emptySlot < 0}
-                  aria-label={`${added ? 'Added' : source ? 'Move' : 'Add'} ${bookmark.title} to ${bucket.name}`}
-                  onClick={() => place(bookmark.id, bucket.id, emptySlot)}>{added ? 'Added' : source ? 'Move here' : 'Add'}</button>
+                <form className="bucket-result-actions" onSubmit={event => {
+                  event.preventDefault()
+                  if (added || emptySlot < 0) return
+                  const chosen = new FormData(event.currentTarget).get('category')
+                  const categoryId = typeof chosen === 'string' && chosen !== (category?.id ?? '') ? chosen : undefined
+                  place(bookmark.id, bucket.id, emptySlot, categoryId)
+                }}>
+                  {!!categories.length && !added && <select key={`${category?.id ?? ''}:${categoryOptionsKey}`} name="category" defaultValue={category?.id ?? ''}
+                    aria-label={`Category when adding ${bookmark.title} to ${bucket.name}`} disabled={emptySlot < 0}>
+                    <CategoryOptions categories={categories} />
+                  </select>}
+                  <button type="submit" disabled={added || emptySlot < 0}
+                    aria-label={`${added ? 'Added' : source ? 'Move' : 'Add'} ${bookmark.title} to ${bucket.name}`}>
+                    {added ? 'Added' : source ? 'Move here' : 'Add'}
+                  </button>
+                </form>
               </li>
             })}
           </ul>
@@ -139,10 +234,20 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       </div>
       <ol className="bucket-slots">{bucket.slots.map((id, index) => {
         const bookmark = id ? byId.get(id) : undefined
+        const category = bookmark ? categoryFor(bookmark.id) : undefined
         return <li key={index} className={`bucket-slot${bookmark ? ' is-filled' : ''}`} onDragOver={e => { e.preventDefault(); e.dataTransfer.dropEffect = selected && group.buckets.some(item => item.id === selected.bucketId) ? 'move' : 'copy' }} onDrop={e => { e.preventDefault(); place(e.dataTransfer.getData('text/plain'), bucket.id, index) }}>
           <span className="slot-number">{String(index + 1).padStart(2, '0')}</span>
           {bookmark ? <>
-            <a className="slot-channel" href={bookmark.url} target="_blank" rel="noopener noreferrer" draggable={false}>{bookmark.title}</a>
+            <div className="slot-title">
+              <a className="slot-channel" href={bookmark.url} target="_blank" rel="noopener noreferrer" draggable={false}>{bookmark.title}</a>
+              {!!categories.length && <>{' '}<span className="slot-category" title={category?.name ?? 'Set channel category'}>
+                <span className="bucket-category-label" aria-hidden="true">{category ? `#${category.displayName}` : '+#'}</span>
+                <select aria-label={`Category for ${bookmark.title} in ${bucket.name}`} value={category?.id ?? ''}
+                  onChange={event => assignCategory(bookmark.id, event.target.value)}>
+                  <CategoryOptions categories={categories} />
+                </select>
+              </span></>}
+            </div>
             <button type="button" className="slot-drag" draggable
               aria-label={`Move ${bookmark.title}`} aria-pressed={selected?.id === bookmark.id && selected.bucketId === bucket.id}
               title="Choose an empty slot: move within this group, copy to another group"
@@ -183,6 +288,6 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       setName('')
     }}><label>New bucket<input required maxLength={60} value={name} placeholder="Dream up a shelf…" onChange={e => setName(e.target.value)} /></label><label>In group<select value={activeGroup?.id ?? ''} onChange={event => setNewBucketGroup(event.target.value)}>{groups.map(group => <option key={group.id} value={group.id}>{group.name}</option>)}</select></label><label>Slots<select value={count} onChange={e => setCount(Number(e.target.value))}>{Array.from({ length: 20 }, (_, i) => <option key={i} value={i + 1}>{i + 1}</option>)}</select></label><button type="submit">+ Create bucket</button></form>}
     {!entries.length && <p>Your {collection === 'youtube' ? 'YouTube' : 'Web'} library is empty.</p>}
-    <p role="status">{error ? 'Browser storage is unavailable. Bucket changes will last until you reload.' : message || 'Saved in this browser.'}</p>
+    <p role="status">{error || categoryError ? 'Browser storage is unavailable. Unsaved changes will last until you reload.' : message || 'Saved in this browser.'}</p>
   </section>
 }

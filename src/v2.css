@@ -94,8 +94,13 @@
 .bucket-intro p, .bucket-board > p { color: var(--muted); font-size: .82rem; line-height: 1.6; }
 .bucket-group { min-width: 0; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); }
 .bucket-group-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-bottom: 16px; }
-.bucket-group-heading label { display: grid; gap: 4px; min-width: 0; max-width: 100%; color: var(--muted); font-size: .75rem; }
-.bucket-group-heading input { width: 100%; min-width: 0; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); font: 1.2rem Georgia, serif; }
+.bucket-group-heading label { display: grid; gap: 4px; min-width: min(100%, 9rem); max-width: min(100%, 18rem); color: var(--muted); font-size: .75rem; }
+.bucket-group-name { display: grid; min-width: 0; }
+.bucket-group-name::after, .bucket-group-name textarea { grid-area: 1 / 1; min-width: 0; padding: 8px; border: 1px solid var(--line); border-radius: 8px; font: 1.2rem/1.25 Georgia, serif; white-space: pre-wrap; overflow-wrap: anywhere; }
+.bucket-group-name::after { content: attr(data-value) ' '; visibility: hidden; }
+.bucket-group-name textarea { width: 100%; resize: none; overflow: hidden; background: var(--cream); color: var(--ink); }
+.bucket-category-counts { display: flex; flex-wrap: wrap; gap: 6px; align-self: end; list-style: none; padding: 0; margin: 0 0 7px; }
+.bucket-category-counts strong { font-variant-numeric: tabular-nums; }
 .bucket-group-empty { color: var(--muted); font-size: .75rem; line-height: 1.5; }
 .bucket-group-heading button { min-height: 40px; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); cursor: pointer; }
 .bucket-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }
@@ -112,13 +117,19 @@
 .bucket-slot.is-filled { border-style: solid; }
 .slot-number { font: .65rem monospace; color: var(--muted); }
 .bucket-slot button { min-height: 40px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
-.bucket-slot .slot-channel, .bucket-slot .empty-slot { flex: 1; min-width: 0; text-align: left; font-size: .8rem; overflow-wrap: anywhere; }
+.bucket-slot .slot-title, .bucket-slot .empty-slot { flex: 1; min-width: 0; text-align: left; font-size: .8rem; overflow-wrap: anywhere; }
+.bucket-slot .slot-title { padding: 5px 8px; }
 .bucket-slot .empty-slot { color: var(--muted); }
 .bucket-slot .slot-drag { flex-shrink: 0; cursor: grab; }
 .bucket-slot .slot-drag:active { cursor: grabbing; }
 .slot-drag[aria-pressed="true"] { outline: 2px solid #a58a56; border-radius: 5px; }
-.bucket-slot a { padding: 8px; color: var(--ink); text-decoration: none; }
+.bucket-slot a { color: var(--ink); text-decoration: none; }
 .bucket-slot a:hover { text-decoration: underline; }
+.bucket-category-label { display: inline-block; max-width: 100%; padding: 2px 5px; border: 1px solid var(--line); border-radius: 4px; background: var(--cream); color: var(--muted); font: .7rem/1.3 ui-monospace, monospace; overflow-wrap: anywhere; }
+.slot-category { position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 28px; min-height: 28px; max-width: 100%; vertical-align: middle; border-radius: 4px; }
+.slot-category:hover .bucket-category-label { border-color: var(--muted); }
+.slot-category:has(select:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
+.slot-category select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 .bucket-controls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .bucket-controls button { padding: 8px 4px; background: transparent; border: 0; color: var(--muted); font-size: .7rem; cursor: pointer; }
 .bucket-controls button:last-child { margin-left: auto; }
@@ -130,6 +141,17 @@
 .bucket-create input { width: 100%; }
 .bucket-create select { max-width: 100%; min-width: 0; }
 .bucket-create button { cursor: pointer; background: var(--blue); color: white; }
+.bucket-settings { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--cream); }
+.bucket-settings h3 { margin: 16px 0 4px; font-size: .9rem; }
+.bucket-settings p { margin: 0 0 12px; color: var(--muted); font-size: .78rem; line-height: 1.5; }
+.bucket-settings-categories { list-style: none; padding: 0; margin: 0; }
+.bucket-settings-categories li { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--line); font-size: .82rem; }
+.bucket-settings-category { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.bucket-settings-categories button, .bucket-category-form button[type="button"] { min-height: 36px; padding: 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: var(--ink); cursor: pointer; }
+.bucket-category-form { margin: 12px 0 0; }
+.bucket-category-form label { flex: 1; min-width: 130px; }
+.bucket-category-form input { background: var(--paper); }
+.bucket-category-form + p { margin: 8px 0 0; }
 .bucket-search { margin-bottom: 16px; }
 .bucket-search label { display: grid; gap: 6px; font-size: .8rem; font-weight: 650; }
 .bucket-search input { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font: inherit; }
@@ -141,6 +163,8 @@
 .bucket-search-results strong { font-size: .8rem; }
 .bucket-search-results p { margin: 4px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .bucket-search-results small { display: block; }
+.bucket-result-actions { display: grid; justify-items: end; gap: 6px; min-width: 0; max-width: 52%; margin: 0; }
+.bucket-result-actions select { width: 100%; min-width: 0; min-height: 36px; max-width: 100%; padding: 4px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: var(--ink); font-size: .73rem; }
 .bucket-search-results button { flex-shrink: 0; min-height: 44px; max-width: 90px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--blue); color: white; cursor: pointer; }
 .bucket-search-results button:disabled { opacity: .5; cursor: default; }
 .bucket-board > p { margin: 18px 0 0; }
