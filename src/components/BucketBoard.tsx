@@ -14,15 +14,20 @@ function CategoryOptions({ categories }: { categories: BucketCategory[] }) {
   </>
 }
 
-function GroupCategoryCounts({ name, categories, counts }: {
+function GroupCategoryCounts({ name, categories, counts, activeCategoryId, onToggle }: {
   name: string
   categories: BucketCategory[]
   counts: Map<string, number>
+  activeCategoryId: string | undefined
+  onToggle: (categoryId: string) => void
 }) {
-  if (!counts.size) return null
+  if (!counts.size && !activeCategoryId) return null
   return <ul className="bucket-category-counts" aria-label={`Category totals for ${name}`}>
-    {categories.filter(category => counts.has(category.id)).map(category => <li key={category.id} className="bucket-category-label" title={category.name}>
-      #{category.displayName} <strong>{counts.get(category.id)}</strong>
+    {categories.filter(category => counts.has(category.id) || category.id === activeCategoryId).map(category => <li key={category.id}>
+      <button type="button" className="bucket-category-label" title={category.name}
+        aria-pressed={category.id === activeCategoryId} onClick={() => onToggle(category.id)}>
+        #{category.displayName} <strong>{counts.get(category.id) ?? 0}</strong>
+      </button>
     </li>)}
   </ul>
 }
@@ -52,6 +57,7 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
   const [blocked, setBlocked] = useState<Record<string, { signature: string; ids: string[] }>>({})
   const [queries, setQueries] = useState<Record<string, string>>({})
   const [targetSlots, setTargetSlots] = useState<Record<string, number>>({})
+  const [categoryFilters, setCategoryFilters] = useState<Record<string, string>>({})
   const searchInputs = useRef<Record<string, HTMLInputElement | null>>({})
   const byId = new Map(entries.map(e => [e.bookmark.id, e.bookmark]))
   useEffect(() => {
@@ -120,14 +126,11 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
     }
     return counts
   }
-  const signature = (bucket: Bucket) => JSON.stringify(bucketEntries(bucket).map(b => [b.id, b.url]))
-  const remaining = (bucket: Bucket) => blocked[bucket.id]?.signature === signature(bucket) ? blocked[bucket.id].ids : undefined
-  const openBucket = (bucket: Bucket) => {
-    const pending = remaining(bucket)
-    const retry = pending?.length ? pending : undefined
+  const signature = (bookmarks: ReturnType<typeof bucketEntries>) => JSON.stringify(bookmarks.map(b => [b.id, b.url]))
+  const openBucket = (bucket: Bucket, bookmarks: ReturnType<typeof bucketEntries>, pending: string[] | undefined) => {
     const failed: string[] = []
-    for (const bookmark of bucketEntries(bucket)) {
-      if (retry && !retry.includes(bookmark.id)) continue
+    for (const bookmark of bookmarks) {
+      if (pending?.length && !pending.includes(bookmark.id)) continue
       // Opening a blank tab first lets us distinguish blocking from a tab with no opener.
       const tab = window.open('about:blank', '_blank')
       if (!tab) { failed.push(bookmark.id); continue }
@@ -139,7 +142,7 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       tab.document.body.append(link)
       link.click()
     }
-    setBlocked(current => ({ ...current, [bucket.id]: { signature: signature(bucket), ids: failed } }))
+    setBlocked(current => ({ ...current, [bucket.id]: { signature: signature(bookmarks), ids: failed } }))
     setMessage(failed.length
       ? `${bucket.name}: your browser blocked ${failed.length} ${failed.length === 1 ? 'tab' : 'tabs'}. Allow pop-ups for this site, then use this bucket’s Open remaining button.`
       : `${bucket.name}: all ${item}s opened.`)
@@ -150,7 +153,11 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       <p>Use Move here to switch buckets within a group. You can add the same {item} to another group.</p>
     </div>
     {collection === 'youtube' && <BucketSettings categories={categories} onChange={updateCategorySettings} />}
-    {groups.map(group => <section className="bucket-group" key={group.id} aria-label={`Bucket group ${group.name}`}>
+    {groups.map(group => {
+      const activeCategoryId = categoriesById.get(categoryFilters[group.id])?.id
+      const counts = countGroupCategories(group)
+      const matchesCategory = (id: string) => !activeCategoryId || categoryFor(id)?.id === activeCategoryId
+      return <section className="bucket-group" key={group.id} aria-label={`Bucket group ${group.name}`}>
       <div className="bucket-group-heading">
         <label>Group
           <span className="bucket-group-name" data-value={group.name}>
@@ -162,14 +169,24 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
               }} />
           </span>
         </label>
-        <GroupCategoryCounts name={group.name} categories={categories} counts={countGroupCategories(group)} />
+        <GroupCategoryCounts name={group.name} categories={categories} counts={counts} activeCategoryId={activeCategoryId}
+          onToggle={categoryId => {
+            setCategoryFilters(current => ({ ...current, [group.id]: activeCategoryId === categoryId ? '' : categoryId }))
+            setSelected(null)
+          }} />
         {!group.buckets.length && <button type="button" onClick={() => saveGroups(groups.filter(item => item.id !== group.id))}>Delete empty group</button>}
       </div>
       {!group.buckets.length && <p className="bucket-group-empty">Add your first bucket to this group using the form below.</p>}
+      {activeCategoryId && !counts.has(activeCategoryId) && <p className="bucket-group-empty">No channels match this category.</p>}
     <div className="bucket-grid">{group.buckets.map(bucket => {
+      const visibleEntries = bucketEntries(bucket).filter(bookmark => matchesCategory(bookmark.id))
+      if (activeCategoryId && !visibleEntries.length) return null
+      const pending = blocked[bucket.id]?.signature === signature(visibleEntries) ? blocked[bucket.id].ids : undefined
+      const openLabel = pending?.length ? 'Open remaining' : activeCategoryId ? 'Open matching' : 'Open all'
       const query = queries[bucket.id] ?? ''
       const terms = normalizeSearch(query).split(/\s+/).map(term => term.replace(/^#/, '')).filter(Boolean)
       const matches = terms.length ? entries.filter(({ bookmark, tags }) => {
+        if (!matchesCategory(bookmark.id)) return false
         const category = categoryFor(bookmark.id)
         const text = normalizeSearch([bookmark.title, bookmark.description ?? '', bookmark.url, ...tags, category?.name, category?.displayName].join(' '))
         return terms.every(term => text.includes(term))
@@ -180,11 +197,11 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
         ? requestedSlot : bucket.slots.findIndex(isEmpty)
       return <article className="bucket" key={bucket.id}>
       <div className="bucket-heading"><input aria-label={`Rename ${bucket.name} bucket`} maxLength={60} value={bucket.name} onChange={e => save(buckets.map(b => b.id === bucket.id ? { ...b, name: e.target.value } : b))} /><small>{bucket.slots.filter(id => id && byId.has(id)).length}/{bucket.slots.length}</small></div>
-      <button type="button" className="v2-lucky bucket-open" disabled={!bucketEntries(bucket).length}
-        aria-label={`${remaining(bucket)?.length ? 'Open remaining' : 'Open all'} in ${bucket.name}`}
-        title={`Open this bucket’s ${item}s in new tabs, in slot order`}
-        onClick={() => openBucket(bucket)}>
-        {remaining(bucket)?.length ? 'Open remaining' : 'Open all'} ({remaining(bucket)?.length || bucketEntries(bucket).length}) ↗
+      <button type="button" className="v2-lucky bucket-open" disabled={!visibleEntries.length}
+        aria-label={`${openLabel} in ${bucket.name}`}
+        title={`Open the shown ${item}s in new tabs, in slot order`}
+        onClick={() => openBucket(bucket, visibleEntries, pending)}>
+        {openLabel} ({pending?.length || visibleEntries.length}) ↗
       </button>
       <div className="bucket-search">
         <label>Find a {item}
@@ -235,6 +252,7 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       <ol className="bucket-slots">{bucket.slots.map((id, index) => {
         const bookmark = id ? byId.get(id) : undefined
         const category = bookmark ? categoryFor(bookmark.id) : undefined
+        if (activeCategoryId && (bookmark ? category?.id !== activeCategoryId : !selected)) return null
         return <li key={index} className={`bucket-slot${bookmark ? ' is-filled' : ''}`} onDragOver={e => { e.preventDefault(); e.dataTransfer.dropEffect = selected && group.buckets.some(item => item.id === selected.bucketId) ? 'move' : 'copy' }} onDrop={e => { e.preventDefault(); place(e.dataTransfer.getData('text/plain'), bucket.id, index) }}>
           <span className="slot-number">{String(index + 1).padStart(2, '0')}</span>
           {bookmark ? <>
@@ -269,7 +287,7 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       })}</ol>
       <div className="bucket-controls"><button disabled={bucket.slots.length >= 20} onClick={() => save(buckets.map(b => b.id === bucket.id ? { ...b, slots: [...b.slots, null] } : b))}>+ Slot</button><button disabled={bucket.slots.length <= 1 || !!bucket.slots.at(-1)} onClick={() => save(buckets.map(b => b.id === bucket.id ? { ...b, slots: b.slots.slice(0, -1) } : b))}>− Empty slot</button><button onClick={() => { save(buckets.filter(b => b.id !== bucket.id)); setSelected(null); setMessage('Bucket removed.') }}>Delete bucket</button></div>
     </article>})}</div>
-    </section>)}
+    </section>})}
     <form className="bucket-create" onSubmit={event => {
       event.preventDefault()
       if (!groupName.trim()) return

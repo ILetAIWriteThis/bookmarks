@@ -101,6 +101,9 @@
 .bucket-group-name textarea { width: 100%; resize: none; overflow: hidden; background: var(--cream); color: var(--ink); }
 .bucket-category-counts { display: flex; flex-wrap: wrap; gap: 6px; align-self: end; list-style: none; padding: 0; margin: 0 0 7px; }
 .bucket-category-counts strong { font-variant-numeric: tabular-nums; }
+.bucket-category-counts .bucket-category-label { min-height: 30px; padding: 3px 7px; }
+.bucket-category-counts .bucket-category-label:hover { border-color: var(--muted); }
+.bucket-category-counts .bucket-category-label[aria-pressed="true"] { border-color: var(--blue); background: var(--blue); color: white; }
 .bucket-group-empty { color: var(--muted); font-size: .75rem; line-height: 1.5; }
 .bucket-group-heading button { min-height: 40px; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink); cursor: pointer; }
 .bucket-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }

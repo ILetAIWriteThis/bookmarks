@@ -99,6 +99,57 @@ it('assigns one YouTube category per channel and counts it in every group contai
   expect(screen.queryByRole('list', { name: /^Category totals/ })).not.toBeInTheDocument()
 })
 
+it('toggles category filters within a group and opens only the matching slots', () => {
+  const groups = [
+    { id: 'first', name: 'First', buckets: [
+      { id: 'mixed', name: 'Mixed', slots: ['Alpha', 'Beta', null] },
+      { id: 'unsorted', name: 'Unsorted', slots: ['Gamma'] },
+    ] },
+    { id: 'second', name: 'Second', buckets: [{ id: 'two', name: 'Two', slots: ['Alpha', 'Beta'] }] },
+  ]
+  localStorage.setItem('bookmarks:buckets:v2:youtube', JSON.stringify(groups))
+  localStorage.setItem('bookmarks:buckets:categories:v1:youtube', JSON.stringify({
+    categories: [
+      { id: 'checked', name: 'Fully checked', displayName: 'checked' },
+      { id: 'later', name: 'Review later', displayName: 'later' },
+    ],
+    assignments: { Alpha: 'checked', Beta: 'later' },
+  }))
+  const gamma = { ...entries[0], bookmark: { ...entries[0].bookmark, id: 'Gamma', title: 'Gamma' } }
+  const open = vi.spyOn(window, 'open').mockReturnValue(null)
+  render(<BucketBoard collection="youtube" entries={[...entries, gamma]} />)
+  const first = within(screen.getByRole('region', { name: 'Bucket group First' }))
+  const second = within(screen.getByRole('region', { name: 'Bucket group Second' }))
+  const checked = first.getByRole('button', { name: '#checked 1' })
+  const later = first.getByRole('button', { name: '#later 1' })
+  fireEvent.change(first.getByRole('searchbox', { name: 'Search library for Mixed' }), { target: { value: 'youtube.com' } })
+
+  fireEvent.click(checked)
+  expect(checked).toHaveAttribute('aria-pressed', 'true')
+  expect(first.getAllByRole('link').map(link => link.textContent)).toEqual(['Alpha'])
+  expect(first.queryByLabelText('Rename Unsorted bucket')).not.toBeInTheDocument()
+  expect(within(first.getByRole('list', { name: 'Library results for Mixed' })).getAllByRole('listitem')).toHaveLength(1)
+  expect(second.getAllByRole('link').map(link => link.textContent)).toEqual(['Alpha', 'Beta'])
+  fireEvent.click(first.getByRole('button', { name: 'Open matching in Mixed' }))
+  expect(open).toHaveBeenCalledTimes(1)
+  expect(first.getByRole('button', { name: 'Open remaining in Mixed' })).toBeEnabled()
+
+  fireEvent.click(later)
+  expect(checked).toHaveAttribute('aria-pressed', 'false')
+  expect(later).toHaveAttribute('aria-pressed', 'true')
+  expect(first.getAllByRole('link').map(link => link.textContent)).toEqual(['Beta'])
+  fireEvent.click(later)
+  expect(later).toHaveAttribute('aria-pressed', 'false')
+  expect(first.getAllByRole('link').map(link => link.textContent)).toEqual(['Alpha', 'Beta', 'Gamma'])
+  expect(JSON.parse(localStorage.getItem('bookmarks:buckets:v2:youtube')!)).toEqual(groups)
+
+  fireEvent.click(checked)
+  fireEvent.change(first.getByLabelText('Category for Alpha in Mixed'), { target: { value: 'later' } })
+  expect(first.getByText('No channels match this category.')).toBeInTheDocument()
+  fireEvent.click(first.getByRole('button', { name: '#checked 0', pressed: true }))
+  expect(first.getByRole('link', { name: 'Alpha' })).toBeInTheDocument()
+})
+
 it('merges both old YouTube boards without losing groups, duplicate entries across groups, or slot order', () => {
   localStorage.setItem('bookmarks:buckets:v1:youtube-listen', JSON.stringify([
     { id: 'starter-0', name: 'Recurring', slots: [null, 'Alpha'] },
