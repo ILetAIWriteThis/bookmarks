@@ -17,9 +17,13 @@ The default `/bookmarks/` page shows Web bookmarks. `#/youtube` opens the YouTub
 
 All bookmarks have a collection placement. Tags use the bookmark's saved tags; select multiple tags to match all of them, or select **All** to clear the filter. Each collection remembers its selections while switching; reloading resets them. Collection totals are not shown.
 
-Click **×** on a YouTube bookmark's `#listening` tag to turn listening off, or **+ listening** beside its tags to turn it on. This updates tag filters, search, and the Starred Listen/Watch split immediately. Choices persist across reloads in local storage, like stars. **Reset listening choices** or clearing the site's browser storage restores the tags from the JSON data. Other tags and saved positions stay the same.
+Click **×** on a YouTube bookmark's `#listening` tag to turn listening off, or **+ listening** beside its tags to turn it on. This updates tag filters and search. Choices are saved in this browser. **Reset listening choices** restores the saved tags.
 
-Listen and Watch buckets are organized into named groups, each starting on a new row. Create a group for each way you want to organize channels, then choose it under **In group** when creating buckets. A channel can appear once per group: search offers **Move here** when it is already in another bucket in that group, and **Add** in a different group. Dragging or selecting a channel and choosing an empty slot follows the same rule. Existing buckets stay together in the first group, preserving their names, slots, and order. Groups are saved in this browser, separately for Listen and Watch.
+**Buckets** opens the YouTube board at `#/buckets`. Select **Web** for the Web board at `#/buckets/web`. The old `#/starred` link opens YouTube Buckets.
+
+Create named groups and choose **In group** when creating buckets with numbered slots. A bookmark can appear once per group. Use **Move here** to switch buckets within a group or **Add** to place it in another group. You can also drag or select a bookmark and choose an empty slot. Each bucket can open its bookmarks in slot order.
+
+Both boards save independently in this browser. Saved Listen and Watch groups appear together on the YouTube board in their original order with their buckets and slots. If both boards had a group with the same name, the second gets a **(Watch)** suffix.
 
 Media and Travel categories and their bookmarks have been removed. Bookmarks awaiting content review carry `not-reviewed`. Review public site or channel descriptions, published content, or organizer recording archives before assigning topics. The current Web and YouTube review queues have been processed; unavailable content is recorded separately in the review logs. The YouTube Travel topic remains.
 

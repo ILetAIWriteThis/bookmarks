@@ -2,7 +2,6 @@ import { cleanup, fireEvent, render, screen, within } from '@testing-library/rea
 import { afterEach, expect, it, vi } from 'vitest'
 import { BucketBoard } from '../src/components/BucketBoard'
 import { AppHeader } from '../src/components/AppHeader'
-import { V2Page } from '../src/pages/V2Page'
 
 const entries = ['Alpha', 'Beta'].map((title, i) => ({ bookmark: { id: title, title, url: `https://youtube.com/@${title}`, categories: [] }, position: i + 1, tags: ['listening'] }))
 afterEach(() => { cleanup(); vi.restoreAllMocks() })
@@ -14,7 +13,7 @@ it('preserves existing buckets in one group and allows a channel once in each ne
     { id: 'three', name: 'Favorites', slots: [null] },
   ]
   localStorage.setItem('bookmarks:buckets:v1:youtube-listen', JSON.stringify(original))
-  const view = render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  const view = render(<BucketBoard collection="youtube" entries={entries} />)
   const firstGroup = screen.getByRole('region', { name: 'Bucket group My buckets' })
   expect(within(firstGroup).getAllByRole('article')).toHaveLength(3)
   fireEvent.change(screen.getByLabelText('New group'), { target: { value: 'By mood' } })
@@ -24,7 +23,7 @@ it('preserves existing buckets in one group and allows a channel once in each ne
     fireEvent.click(screen.getByRole('button', { name: '+ Create bucket' }))
   }
   expect(within(screen.getByRole('region', { name: 'Bucket group By mood' })).getAllByRole('article')).toHaveLength(3)
-  expect(JSON.parse(localStorage.getItem('bookmarks:buckets:v2:youtube-listen')!)[0].buckets).toEqual(original)
+  expect(JSON.parse(localStorage.getItem('bookmarks:buckets:v2:youtube')!)[0].buckets).toEqual(original)
   fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for Quiet' }), { target: { value: 'Alpha' } })
   fireEvent.click(screen.getByRole('button', { name: 'Add Alpha to Quiet' }))
   expect(screen.getByRole('button', { name: 'Added Alpha to Quiet' })).toBeDisabled()
@@ -36,10 +35,35 @@ it('preserves existing buckets in one group and allows a channel once in each ne
   expect(screen.getByRole('button', { name: 'Remove Alpha from Curious' })).toBeInTheDocument()
   fireEvent.change(screen.getByLabelText('Rename By mood group'), { target: { value: 'A different angle' } })
   view.unmount()
-  render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  render(<BucketBoard collection="youtube" entries={entries} />)
   expect(screen.getByRole('region', { name: 'Bucket group A different angle' })).toBeInTheDocument()
   expect(screen.getByRole('button', { name: 'Remove Alpha from Recurring' })).toBeInTheDocument()
   expect(screen.getByRole('button', { name: 'Remove Alpha from Curious' })).toBeInTheDocument()
+})
+
+it('merges both old YouTube boards without losing groups, duplicate entries across groups, or slot order', () => {
+  localStorage.setItem('bookmarks:buckets:v1:youtube-listen', JSON.stringify([
+    { id: 'starter-0', name: 'Recurring', slots: [null, 'Alpha'] },
+  ]))
+  localStorage.setItem('bookmarks:buckets:v2:youtube-watch', JSON.stringify([
+    { id: 'starter-group', name: 'My buckets', buckets: [
+      { id: 'starter-0', name: 'Next adventures', slots: ['Beta', null, 'Alpha'] },
+    ] },
+    { id: 'another', name: 'By mood', buckets: [] },
+  ]))
+  const { unmount } = render(<BucketBoard collection="youtube" entries={entries} />)
+  expect(screen.getAllByRole('region', { name: /^Bucket group/ }).map(group => group.getAttribute('aria-label'))).toEqual([
+    'Bucket group My buckets', 'Bucket group My buckets (Watch)', 'Bucket group By mood',
+  ])
+  expect(screen.getAllByRole('link', { name: 'Alpha' })).toHaveLength(2)
+  fireEvent.change(screen.getByLabelText('Rename Recurring bucket'), { target: { value: 'Regulars' } })
+  unmount()
+  render(<BucketBoard collection="youtube" entries={entries} />)
+  expect(screen.getByRole('button', { name: 'Remove Alpha from Regulars' })).toBeInTheDocument()
+  const saved = JSON.parse(localStorage.getItem('bookmarks:buckets:v2:youtube')!)
+  expect(saved.map((group: { buckets: { slots: (string | null)[] }[] }) => group.buckets.map(bucket => bucket.slots))).toEqual([
+    [[null, 'Alpha']], [['Beta', null, 'Alpha']], [],
+  ])
 })
 
 it('copies across groups using selection and drag, while moving only inside the target group', () => {
@@ -50,7 +74,7 @@ it('copies across groups using selection and drag, while moving only inside the 
       { id: 'three', name: 'Three', slots: [null, 'Beta'] },
     ] },
   ]))
-  render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  render(<BucketBoard collection="youtube" entries={entries} />)
   const first = screen.getByRole('region', { name: 'Bucket group First' })
   fireEvent.click(within(first).getByRole('button', { name: 'Move Alpha' }))
   fireEvent.click(screen.getByRole('button', { name: 'Place selected channel in Two slot 1' }))
@@ -70,7 +94,7 @@ it('copies across groups using selection and drag, while moving only inside the 
 
 it('syncs grouped storage from another tab and recovers from malformed grouped data', () => {
   localStorage.setItem('bookmarks:buckets:v2:youtube-listen', JSON.stringify([{ id: 'bad', name: 'Bad', buckets: null }]))
-  render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  render(<BucketBoard collection="youtube" entries={entries} />)
   expect(screen.getByLabelText('Rename Recurring bucket')).toBeInTheDocument()
   localStorage.setItem('bookmarks:buckets:v2:youtube-listen', JSON.stringify([
     { id: 'group', name: 'Synced', buckets: [{ id: 'one', name: 'Elsewhere', slots: ['Alpha'] }] },
@@ -82,7 +106,7 @@ it('syncs grouped storage from another tab and recovers from malformed grouped d
 
 it('searches across names, descriptions, URLs and tags and adds to the chosen slot', () => {
   const library = [{ ...entries[0], bookmark: { ...entries[0].bookmark, title: 'Álpha', description: 'Stories about ancient worlds' }, tags: ['history'] }, entries[1]]
-  render(<BucketBoard scope="youtube-listen" entries={library} />)
+  render(<BucketBoard collection="youtube" entries={library} />)
   fireEvent.click(screen.getByRole('button', { name: 'Place selected channel in Recurring slot 3' }))
   const search = screen.getByRole('searchbox', { name: 'Search library for Recurring' })
   expect(search).toHaveFocus()
@@ -91,7 +115,7 @@ it('searches across names, descriptions, URLs and tags and adds to the chosen sl
   expect(within(results).getAllByRole('listitem')).toHaveLength(1)
   fireEvent.click(within(results).getByRole('button', { name: 'Add Álpha to Recurring' }))
   expect(screen.getByRole('button', { name: 'Added Álpha to Recurring' })).toBeDisabled()
-  expect(JSON.parse(localStorage.getItem('bookmarks:buckets:v2:youtube-listen')!)[0].buckets[0].slots).toEqual([null, null, 'Alpha', null, null])
+  expect(JSON.parse(localStorage.getItem('bookmarks:buckets:v2:youtube')!)[0].buckets[0].slots).toEqual([null, null, 'Alpha', null, null])
   fireEvent.change(search, { target: { value: 'nothing matches' } })
   expect(screen.getByText('No channels found. Try another name, topic, or tag.')).toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: 'Clear search for Recurring' }))
@@ -104,7 +128,7 @@ it('moves search results directly between buckets and prevents overfilling', () 
     { id: 'one', name: 'Recurring', slots: ['Alpha'] },
     { id: 'two', name: 'Good Stories', slots: [null] },
   ]))
-  render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  render(<BucketBoard collection="youtube" entries={entries} />)
   fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for Recurring' }), { target: { value: 'Beta' } })
   expect(screen.getByRole('button', { name: 'Add Beta to Recurring' })).toBeDisabled()
   fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for Good Stories' }), { target: { value: 'Alpha' } })
@@ -116,29 +140,8 @@ it('moves search results directly between buckets and prevents overfilling', () 
   expect(screen.getByRole('button', { name: 'Remove Beta from Recurring' })).toBeInTheDocument()
 })
 
-it('adds unstarred channels from the full library in both scopes and keeps them after clearing stars', () => {
-  const data = { categories: [], bookmarks: entries.map(({ bookmark }, index) => ({
-    ...bookmark, tags: index === 0 ? ['listening'] : [], placement: { collection: 'youtube' as const, position: index },
-  })) }
-  const view = render(<V2Page data={data} collection="starred" />)
-  fireEvent.click(screen.getByRole('button', { name: 'YouTube Listen' }))
-  fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for Recurring' }), { target: { value: 'Beta' } })
-  fireEvent.click(screen.getByRole('button', { name: 'Add Beta to Recurring' }))
-  expect(localStorage.getItem('bookmarks:starred:v1')).toBeNull()
-  fireEvent.click(screen.getByRole('button', { name: 'YouTube Watch' }))
-  fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for Next adventures' }), { target: { value: 'Alpha' } })
-  fireEvent.click(screen.getByRole('button', { name: 'Add Alpha to Next adventures' }))
-  view.unmount()
-  localStorage.setItem('bookmarks:starred:v1', JSON.stringify(['Alpha', 'Beta']))
-  render(<V2Page data={data} collection="starred" />)
-  fireEvent.click(screen.getByRole('button', { name: 'Remove all stars' }))
-  fireEvent.click(screen.getByRole('button', { name: 'YouTube Listen' }))
-  expect(screen.getByRole('button', { name: 'Remove Beta from Recurring' })).toBeInTheDocument()
-  fireEvent.click(screen.getByRole('button', { name: 'YouTube Watch' }))
-  expect(screen.getByRole('button', { name: 'Remove Alpha from Next adventures' })).toBeInTheDocument()
-})
 it('places, moves, and persists channels without replacing occupied slots', () => {
-  const { unmount } = render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  const { unmount } = render(<BucketBoard collection="youtube" entries={entries} />)
   expect(screen.getAllByText('+ Empty slot')).toHaveLength(10)
   fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for Recurring' }), { target: { value: 'Alpha' } })
   fireEvent.click(screen.getByRole('button', { name: 'Add Alpha to Recurring' }))
@@ -162,26 +165,26 @@ it('places, moves, and persists channels without replacing occupied slots', () =
   fireEvent.drop(slot, { dataTransfer: { getData: () => 'Beta' } })
   expect(screen.getByRole('status')).toHaveTextContent('occupied')
   unmount()
-  render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  render(<BucketBoard collection="youtube" entries={entries} />)
   expect(screen.getByRole('button', { name: 'Remove Alpha from Good Stories' })).toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: 'Remove Alpha from Good Stories' }))
   fireEvent.change(screen.getByRole('searchbox', { name: 'Search library for Good Stories' }), { target: { value: 'Alpha' } })
   expect(screen.getByRole('button', { name: 'Add Alpha to Good Stories' })).toBeEnabled()
 })
-it('creates custom buckets and keeps Listen separate from Watch', () => {
-  const { unmount } = render(<BucketBoard scope="youtube-listen" entries={entries} />)
+it('creates custom buckets and keeps YouTube separate from Web', () => {
+  const { unmount } = render(<BucketBoard collection="youtube" entries={entries} />)
   fireEvent.change(screen.getByLabelText('New bucket'), { target: { value: 'Campfire tales' } })
   fireEvent.change(screen.getByLabelText('Slots'), { target: { value: '3' } })
   fireEvent.click(screen.getByRole('button', { name: '+ Create bucket' }))
   expect(screen.getByLabelText('Rename Campfire tales bucket')).toBeInTheDocument()
   expect(screen.getAllByText('+ Empty slot')).toHaveLength(13)
   unmount()
-  render(<BucketBoard scope="youtube-watch" entries={entries} />)
+  render(<BucketBoard collection="web" entries={entries} />)
   expect(screen.queryByLabelText('Rename Campfire tales bucket')).not.toBeInTheDocument()
 })
 it('recovers from malformed storage and supports drag and drop', () => {
   localStorage.setItem('bookmarks:buckets:v1:youtube-listen', '{broken')
-  render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  render(<BucketBoard collection="youtube" entries={entries} />)
   const target = screen.getByRole('button', { name: 'Place selected channel in Recurring slot 1' }).closest('li')!
   fireEvent.drop(target, { dataTransfer: { getData: () => 'Alpha' } })
   expect(screen.getByRole('button', { name: 'Remove Alpha from Recurring' })).toBeInTheDocument()
@@ -211,7 +214,7 @@ it('opens only the bucket channels and retries only blocked tabs', () => {
     body: { append: () => undefined },
   } }
   const open = vi.spyOn(window, 'open').mockReturnValueOnce(tab as unknown as Window).mockReturnValueOnce(null).mockReturnValue(tab as unknown as Window)
-  render(<BucketBoard scope="youtube-listen" entries={entries} />)
+  render(<BucketBoard collection="youtube" entries={entries} />)
   expect(screen.getByRole('button', { name: 'Open all in Stories' })).toBeDisabled()
   fireEvent.click(screen.getByRole('button', { name: 'Open all in Recurring' }))
   expect(open).toHaveBeenCalledTimes(2)

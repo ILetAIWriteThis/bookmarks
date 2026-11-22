@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { AppHeader } from './components/AppHeader'
 import { validateBookmarkData } from './data'
 import { Icon } from './icons'
-import { V2Page } from './pages/V2Page'
+import { V2Page, type V2Route } from './pages/V2Page'
 import { activateUpdate, usePwa } from './pwa'
 import type { BookmarkData } from './types'
 
@@ -10,11 +10,10 @@ interface AppProps {
   data?: BookmarkData
 }
 
-type Route = 'web' | 'youtube' | 'starred'
-
-function readRoute(): Route {
+function readRoute(): V2Route {
   const hash = window.location.hash
-  if (/^#\/starred\/?$/.test(hash)) return 'starred'
+  if (/^#\/buckets\/web\/?$/.test(hash)) return 'buckets-web'
+  if (/^#\/(?:starred|buckets(?:\/youtube)?)\/?$/.test(hash)) return 'buckets'
   if (/^#\/(?:youtube|v2\/youtube)\/?$/.test(hash)) return 'youtube'
   return 'web'
 }
@@ -67,7 +66,7 @@ export function App({ data: providedData }: AppProps) {
           <button type="button" onClick={() => window.location.reload()}>Try again</button>
         </main>
       )}
-      {data && <V2Page data={data} collection={route} />}
+      {data && <V2Page data={data} route={route} />}
 
       {(!pwa.online || offlineCache) && <div className="notice" role="status"><span>You’re offline</span><small>Saved pages still work; external bookmarks need a connection.</small></div>}
       {pwa.update && (

@@ -11,7 +11,7 @@ const paths: Record<string, React.ReactNode> = {
   chart: <><path d="M5 19V5m0 14h15"/><path d="m8 15 3-4 3 2 5-6"/></>,
   shield: <path d="M12 3 5 6v5c0 4.6 2.8 7.8 7 10 4.2-2.2 7-5.4 7-10V6z"/>,
   spark: <><path d="m12 3 1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5z"/><path d="m18 16 .7 2.3L21 19l-2.3.7L18 22l-.7-2.3L15 19l2.3-.7z"/></>,
-  star: <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>,
+  buckets: <><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16m-8 0v9"/></>,
   document: <><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h4M9 12h6m-6 4h6"/></>,
   bookmark: <path d="M6 3h12v18l-6-4-6 4z"/>,
   arrow: <path d="m9 18 6-6-6-6"/>,

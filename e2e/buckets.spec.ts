@@ -1,16 +1,38 @@
 import { expect, test } from '@playwright/test'
 import bookmarkData from '../public/data/bookmarks.json' with { type: 'json' }
 
+test('replaces Starred with YouTube Buckets and keeps Web slots on the second page', async ({ page }) => {
+  const bookmark = bookmarkData.bookmarks.find(bookmark => bookmark.placement.collection === 'web')!
+  await page.goto('./#/starred')
+  const navigation = page.getByRole('navigation', { name: 'Bookmark collections' })
+  const buckets = page.getByRole('navigation', { name: 'Bucket collections' })
+  await expect(navigation.getByRole('link', { name: 'Buckets', exact: true })).toHaveAttribute('aria-current', 'page')
+  await expect(navigation.getByRole('link', { name: 'Starred', exact: true })).toHaveCount(0)
+  await expect(buckets.getByRole('link')).toHaveText(['YouTube', 'Web'])
+  await expect(page.getByRole('heading', { name: 'YouTube buckets', exact: true })).toBeVisible()
+  await buckets.getByRole('link', { name: 'Web', exact: true }).click()
+
+  const board = page.getByRole('region', { name: 'Web buckets', exact: true })
+  await board.getByRole('button', { name: 'Place selected bookmark in Reference slot 2' }).click()
+  await board.getByRole('searchbox', { name: 'Search library for Reference' }).fill(bookmark.title)
+  await board.getByRole('button', { name: `Add ${bookmark.title} to Reference`, exact: true }).click()
+  await page.reload()
+  await expect(board.locator('.bucket').first().locator('.bucket-slot').nth(1).getByRole('link')).toHaveAttribute('href', bookmark.url)
+
+  await navigation.getByRole('link', { name: 'Buckets', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'YouTube buckets', exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: bookmark.title, exact: true })).toHaveCount(0)
+})
+
 test('organizes six buckets into separate groups and reuses channels between groups', async ({ page }) => {
   const channel = bookmarkData.bookmarks.find(bookmark => bookmark.placement.collection === 'youtube')!
-  await page.goto('./#/starred')
+  await page.goto('./#/buckets')
   await page.evaluate(() => {
     localStorage.setItem('bookmarks:buckets:v1:youtube-listen', JSON.stringify(
       Array.from({ length: 3 }, (_, index) => ({ id: `bucket-${index}`, name: `Original ${index + 1}`, slots: [null, null] })),
     ))
   })
   await page.reload()
-  await page.getByRole('button', { name: 'YouTube Listen', exact: true }).click()
   await page.getByLabel('New group', { exact: true }).fill('By mood')
   await page.getByRole('button', { name: '+ Create group', exact: true }).click()
   for (const name of ['Calm', 'Curious', 'Lively']) {
@@ -36,22 +58,20 @@ test('organizes six buckets into separate groups and reuses channels between gro
   await page.setViewportSize({ width: 320, height: 740 })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
   await page.reload()
-  await page.getByRole('button', { name: 'YouTube Listen', exact: true }).click()
   for (const bucket of ['Original 1', 'Curious']) {
     await expect(page.getByRole('button', { name: `Remove ${channel.title} from ${bucket}`, exact: true })).toBeVisible()
   }
 })
 
-test('fills and moves channels in a six-bucket board without stars or dragging', async ({ page, isMobile }) => {
+test('fills and moves channels in a six-bucket board using bucket search', async ({ page, isMobile }) => {
   const channel = bookmarkData.bookmarks.find(bookmark => bookmark.placement.collection === 'youtube')!
-  await page.goto('./#/starred')
+  await page.goto('./#/buckets')
   await page.evaluate(() => {
     localStorage.setItem('bookmarks:buckets:v1:youtube-listen', JSON.stringify(
       Array.from({ length: 6 }, (_, index) => ({ id: `bucket-${index}`, name: `Shelf ${index + 1}`, slots: Array(5).fill(null) })),
     ))
   })
   await page.reload()
-  await page.getByRole('button', { name: 'YouTube Listen', exact: true }).click()
   const buckets = page.locator('.bucket')
   await expect(buckets).toHaveCount(6)
   const first = await buckets.nth(0).boundingBox()
@@ -65,10 +85,8 @@ test('fills and moves channels in a six-bucket board without stars or dragging',
   await page.getByRole('button', { name: `Move ${channel.title} to Shelf 6`, exact: true }).click()
   await expect(page.getByRole('button', { name: `Remove ${channel.title} from Shelf 1`, exact: true })).toHaveCount(0)
   await expect(page.getByRole('button', { name: `Remove ${channel.title} from Shelf 6`, exact: true })).toBeVisible()
-  expect(await page.evaluate(() => localStorage.getItem('bookmarks:starred:v1'))).toBeNull()
   await page.setViewportSize({ width: 320, height: 740 })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
   await page.reload()
-  await page.getByRole('button', { name: 'YouTube Listen', exact: true }).click()
   await expect(page.getByRole('button', { name: `Remove ${channel.title} from Shelf 6`, exact: true })).toBeVisible()
 })

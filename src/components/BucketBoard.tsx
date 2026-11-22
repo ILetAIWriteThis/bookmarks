@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { normalizeSearch } from '../data'
-import type { V2Bookmark } from '../v2'
-import { bucketStorageKey, legacyBucketStorageKey, readBucketGroups, type Bucket, type BucketGroup } from '../buckets'
+import type { V2Bookmark, V2Collection } from '../v2'
+import { bucketStorageKey, legacyYouTubeBucketKeys, readBucketGroups, type Bucket, type BucketGroup } from '../buckets'
 
-export function BucketBoard({ scope, entries }: { scope: string; entries: V2Bookmark[] }) {
-  const [groups, setGroups] = useState(() => readBucketGroups(scope))
+export function BucketBoard({ collection, entries }: { collection: V2Collection; entries: V2Bookmark[] }) {
+  const [groups, setGroups] = useState(() => readBucketGroups(collection))
+  const storageKey = bucketStorageKey + collection
+  const title = collection === 'youtube' ? 'YouTube buckets' : 'Web buckets'
+  const item = collection === 'youtube' ? 'channel' : 'bookmark'
   const buckets = groups.flatMap(group => group.buckets)
   const [selected, setSelected] = useState<{ id: string; bucketId: string } | null>(null)
   const [name, setName] = useState('')
@@ -21,17 +24,17 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
   const byId = new Map(entries.map(e => [e.bookmark.id, e.bookmark]))
   useEffect(() => {
     const sync = (event: StorageEvent) => {
-      if (event.key === bucketStorageKey + scope || event.key === legacyBucketStorageKey + scope || event.key === null) {
-        setGroups(readBucketGroups(scope))
+      if (event.key === storageKey || event.key === null || (collection === 'youtube' && legacyYouTubeBucketKeys.some(key => key === event.key))) {
+        setGroups(readBucketGroups(collection))
         setSelected(null)
       }
     }
     window.addEventListener('storage', sync)
     return () => window.removeEventListener('storage', sync)
-  }, [scope])
+  }, [collection, storageKey])
   const saveGroups = (next: BucketGroup[]) => {
     setGroups(next)
-    try { localStorage.setItem(bucketStorageKey + scope, JSON.stringify(next)); setError(false) } catch { setError(true) }
+    try { localStorage.setItem(storageKey, JSON.stringify(next)); setError(false) } catch { setError(true) }
   }
   const save = (next: Bucket[]) => saveGroups(groups.map(group => ({
     ...group, buckets: next.filter(bucket => group.buckets.some(existing => existing.id === bucket.id)),
@@ -57,7 +60,7 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
     const failed: string[] = []
     for (const bookmark of bucketEntries(bucket)) {
       if (retry && !retry.includes(bookmark.id)) continue
-      // Detect blocked tabs before navigating, matching the collection's Open all behavior.
+      // Opening a blank tab first lets us distinguish blocking from a tab with no opener.
       const tab = window.open('about:blank', '_blank')
       if (!tab) { failed.push(bookmark.id); continue }
       tab.opener = null
@@ -70,16 +73,18 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
     }
     setBlocked(current => ({ ...current, [bucket.id]: { signature: signature(bucket), ids: failed } }))
     setMessage(failed.length
-      ? `${bucket.name}: your browser blocked ${failed.length} tabs. Allow pop-ups for this site, then use this bucket’s Open remaining button.`
-      : `${bucket.name}: all channels opened.`)
+      ? `${bucket.name}: your browser blocked ${failed.length} ${failed.length === 1 ? 'tab' : 'tabs'}. Allow pop-ups for this site, then use this bucket’s Open remaining button.`
+      : `${bucket.name}: all ${item}s opened.`)
   }
-  return <section className="bucket-board" aria-label="YouTube buckets">
-    <div className="bucket-intro"><span className="eyebrow">✧ Your personal inventory</span><h2>{scope === 'youtube-listen' ? 'The listening grove' : 'The watching tower'}</h2><p>Each group is a different way to organize your channels. A channel appears only once per group: use Move here to switch buckets. Add it again in another group to explore a different angle.</p></div>
+  return <section className="bucket-board" aria-labelledby="bucket-title">
+    <div className="bucket-intro">
+      <h2 id="bucket-title">{title}</h2>
+      <p>Use Move here to switch buckets within a group. You can add the same {item} to another group.</p>
+    </div>
     {groups.map(group => <section className="bucket-group" key={group.id} aria-label={`Bucket group ${group.name}`}>
       <div className="bucket-group-heading">
         <label>Group<input aria-label={`Rename ${group.name} group`} maxLength={60} value={group.name}
           onChange={event => saveGroups(groups.map(item => item.id === group.id ? { ...item, name: event.target.value } : item))} /></label>
-        <span>One place per channel · Reuse channels in other groups</span>
         {!group.buckets.length && <button type="button" onClick={() => saveGroups(groups.filter(item => item.id !== group.id))}>Delete empty group</button>}
       </div>
       {!group.buckets.length && <p className="bucket-group-empty">Add your first bucket to this group using the form below.</p>}
@@ -95,16 +100,16 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
       const emptySlot = requestedSlot !== undefined && requestedSlot < bucket.slots.length && isEmpty(bucket.slots[requestedSlot])
         ? requestedSlot : bucket.slots.findIndex(isEmpty)
       return <article className="bucket" key={bucket.id}>
-      <div className="bucket-heading"><span aria-hidden="true">{scope === 'youtube-listen' ? '♫' : '✦'}</span><input aria-label={`Rename ${bucket.name} bucket`} maxLength={60} value={bucket.name} onChange={e => save(buckets.map(b => b.id === bucket.id ? { ...b, name: e.target.value } : b))} /><small>{bucket.slots.filter(id => id && byId.has(id)).length}/{bucket.slots.length}</small></div>
+      <div className="bucket-heading"><input aria-label={`Rename ${bucket.name} bucket`} maxLength={60} value={bucket.name} onChange={e => save(buckets.map(b => b.id === bucket.id ? { ...b, name: e.target.value } : b))} /><small>{bucket.slots.filter(id => id && byId.has(id)).length}/{bucket.slots.length}</small></div>
       <button type="button" className="v2-lucky bucket-open" disabled={!bucketEntries(bucket).length}
         aria-label={`${remaining(bucket)?.length ? 'Open remaining' : 'Open all'} in ${bucket.name}`}
-        title="Open this bucket’s channels in new tabs, in slot order"
+        title={`Open this bucket’s ${item}s in new tabs, in slot order`}
         onClick={() => openBucket(bucket)}>
         {remaining(bucket)?.length ? 'Open remaining' : 'Open all'} ({remaining(bucket)?.length || bucketEntries(bucket).length}) ↗
       </button>
       <div className="bucket-search">
-        <label>Find a channel
-          <input type="search" aria-label={`Search library for ${bucket.name}`} placeholder="Channel, topic, or #tags…" autoComplete="off"
+        <label>Find a {item}
+          <input type="search" aria-label={`Search library for ${bucket.name}`} placeholder={`${item === 'channel' ? 'Channel' : 'Title'}, topic, or #tags…`} autoComplete="off"
             ref={input => { searchInputs.current[bucket.id] = input }} value={query}
             onChange={event => setQueries(current => ({ ...current, [bucket.id]: event.target.value }))} />
         </label>
@@ -112,9 +117,9 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
           setQueries(current => ({ ...current, [bucket.id]: '' }))
           searchInputs.current[bucket.id]?.focus()
         }}>Clear search</button>}
-        {emptySlot < 0 && <p>Bucket full. Add a slot or remove a channel to make room.</p>}
+        {emptySlot < 0 && <p>Bucket full. Add a slot or remove a {item} to make room.</p>}
         {!!terms.length && <>
-          <p aria-live="polite">{matches.length ? `${matches.length} matching channels` : 'No channels found. Try another name, topic, or tag.'}</p>
+          <p aria-live="polite">{matches.length ? `${matches.length} matching ${item}${matches.length === 1 ? '' : 's'}` : `No ${item}s found. Try another name, topic, or tag.`}</p>
           <ul className="bucket-search-results" aria-label={`Library results for ${bucket.name}`}>
             {matches.map(({ bookmark, tags }) => {
               const source = group.buckets.find(b => b.slots.includes(bookmark.id))
@@ -152,12 +157,12 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
             else {
               setTargetSlots(current => ({ ...current, [bucket.id]: index }))
               searchInputs.current[bucket.id]?.focus()
-              setMessage(`Search for a channel to fill ${bucket.name} slot ${index + 1}.`)
+              setMessage(`Search for a ${item} to fill ${bucket.name} slot ${index + 1}.`)
             }
-          }} aria-label={`Place selected channel in ${bucket.name} slot ${index + 1}`}>{selected ? '✧ Place here' : '+ Empty slot'}</button>}
+          }} aria-label={`Place selected ${item} in ${bucket.name} slot ${index + 1}`}>{selected ? '✧ Place here' : '+ Empty slot'}</button>}
         </li>
       })}</ol>
-      <div className="bucket-controls"><button disabled={bucket.slots.length >= 20} onClick={() => save(buckets.map(b => b.id === bucket.id ? { ...b, slots: [...b.slots, null] } : b))}>+ Slot</button><button disabled={bucket.slots.length <= 1 || !!bucket.slots.at(-1)} onClick={() => save(buckets.map(b => b.id === bucket.id ? { ...b, slots: b.slots.slice(0, -1) } : b))}>− Empty slot</button><button onClick={() => { save(buckets.filter(b => b.id !== bucket.id)); setSelected(null); setMessage('Bucket removed. Its channels are still in your library.') }}>Delete bucket</button></div>
+      <div className="bucket-controls"><button disabled={bucket.slots.length >= 20} onClick={() => save(buckets.map(b => b.id === bucket.id ? { ...b, slots: [...b.slots, null] } : b))}>+ Slot</button><button disabled={bucket.slots.length <= 1 || !!bucket.slots.at(-1)} onClick={() => save(buckets.map(b => b.id === bucket.id ? { ...b, slots: b.slots.slice(0, -1) } : b))}>− Empty slot</button><button onClick={() => { save(buckets.filter(b => b.id !== bucket.id)); setSelected(null); setMessage('Bucket removed.') }}>Delete bucket</button></div>
     </article>})}</div>
     </section>)}
     <form className="bucket-create" onSubmit={event => {
@@ -167,7 +172,7 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
       saveGroups([...groups, { id, name: groupName.trim(), buckets: [] }])
       setNewBucketGroup(id)
       setGroupName('')
-      setMessage('Group created. Add buckets below to explore another angle.')
+      setMessage('Group created. Add buckets below.')
     }}><label>New group<input required maxLength={60} value={groupName} placeholder="Another angle…" onChange={event => setGroupName(event.target.value)} /></label><button type="submit">+ Create group</button></form>
     {!!groups.length && <form className="bucket-create" onSubmit={e => {
       e.preventDefault()
@@ -177,7 +182,7 @@ export function BucketBoard({ scope, entries }: { scope: string; entries: V2Book
       } : group))
       setName('')
     }}><label>New bucket<input required maxLength={60} value={name} placeholder="Dream up a shelf…" onChange={e => setName(e.target.value)} /></label><label>In group<select value={activeGroup?.id ?? ''} onChange={event => setNewBucketGroup(event.target.value)}>{groups.map(group => <option key={group.id} value={group.id}>{group.name}</option>)}</select></label><label>Slots<select value={count} onChange={e => setCount(Number(e.target.value))}>{Array.from({ length: 20 }, (_, i) => <option key={i} value={i + 1}>{i + 1}</option>)}</select></label><button type="submit">+ Create bucket</button></form>}
-    {!entries.length && <p>Your YouTube library is empty. Add channels to your library to start filling buckets.</p>}
-    <p role="status">{error ? 'Browser storage is unavailable. Bucket changes will last until you reload.' : message || 'Saved in this browser · Listen and Watch each have their own shelves.'}</p>
+    {!entries.length && <p>Your {collection === 'youtube' ? 'YouTube' : 'Web'} library is empty.</p>}
+    <p role="status">{error ? 'Browser storage is unavailable. Bucket changes will last until you reload.' : message || 'Saved in this browser.'}</p>
   </section>
 }

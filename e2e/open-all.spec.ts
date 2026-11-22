@@ -8,14 +8,16 @@ test.beforeEach(async ({ context, page }) => {
     if (new URL(route.request().url()).hostname === '127.0.0.1') return route.continue()
     return route.fulfill({ contentType: 'text/html', body: '<title>Bookmark destination</title>' })
   })
-  await page.goto('./')
-  await page.evaluate((ids) => localStorage.setItem('bookmarks:starred:v1', JSON.stringify(ids)), bookmarks.map(({ id }) => id))
-  await page.goto('./#/starred')
-  await page.reload()
+  await page.addInitScript((slots) => {
+    localStorage.setItem('bookmarks:buckets:v2:web', JSON.stringify([
+      { id: 'group', name: 'Group', buckets: [{ id: 'test', name: 'Reading list', slots }] },
+    ]))
+  }, bookmarks.map(({ id }) => id))
+  await page.goto('./#/buckets/web')
 })
 
-test('opens every visible bookmark with isolated tabs when pop-ups are allowed', async ({ page, context }) => {
-  await page.getByRole('button', { name: 'Open all (3)', exact: true }).click()
+test('opens filled bucket slots with isolated tabs when pop-ups are allowed', async ({ page, context }) => {
+  await page.getByRole('button', { name: 'Open all in Reading list', exact: true }).click()
   await expect.poll(() => context.pages().length).toBe(4)
   const tabs = context.pages().filter((tab) => tab !== page)
   for (let index = 0; index < tabs.length; index++) {
@@ -23,6 +25,5 @@ test('opens every visible bookmark with isolated tabs when pop-ups are allowed',
     expect(await tabs[index].evaluate(() => window.opener)).toBeNull()
     expect(await tabs[index].evaluate(() => document.referrer)).toBe('')
   }
-  await expect(page.getByRole('status')).toHaveCount(0)
+  await expect(page.getByRole('status')).toHaveText('Reading list: all bookmarks opened.')
 })
-
