@@ -59,8 +59,12 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
     setMessage(`${bookmark.title} placed in ${target.name}.`)
   }
 
+  const updateBucket = (bucketIndex: number, update: (bucket: Bucket) => Bucket) => {
+    saveBuckets(currentBuckets().map((bucket, index) => index === bucketIndex ? update(bucket) : bucket))
+  }
+
   const remove = (id: string, bucketIndex: number, slotIndex: number) => {
-    saveBuckets(currentBuckets().map((bucket, index) => index !== bucketIndex ? bucket : {
+    updateBucket(bucketIndex, bucket => ({
       ...bucket,
       slots: bucket.slots.map((slot, i) => i === slotIndex && slot === id ? null : slot),
     }))
@@ -110,10 +114,20 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
       const requestedSlot = targetSlots[bucketIndex]
       const emptySlot = requestedSlot !== undefined && !bookmarks[requestedSlot]
         ? requestedSlot : bookmarks.findIndex(bookmark => !bookmark)
-      const headingId = `bucket-name-${bucketIndex}`
-
-      return <article className="bucket" key={bucketIndex} aria-labelledby={headingId}>
-        <div className="bucket-heading"><h3 id={headingId}>{bucket.name}</h3><small>{filled.length}/{bucket.slots.length}</small></div>
+      return <article className="bucket" key={bucketIndex} aria-label={bucket.name}>
+        <div className="bucket-heading">
+          <input key={bucket.name} aria-label={`Rename bucket ${bucketIndex + 1}`} defaultValue={bucket.name}
+            maxLength={60} onBlur={event => {
+              const input = event.currentTarget
+              const name = input.value.trim() || bucket.name
+              input.value = name
+              if (name !== bucket.name) updateBucket(bucketIndex, current => ({ ...current, name }))
+            }}
+            onKeyDown={event => {
+              if (event.key === 'Enter' && !event.nativeEvent.isComposing) event.currentTarget.blur()
+            }} />
+          <small>{filled.length}/{bucket.slots.length}</small>
+        </div>
         <button type="button" className="v2-lucky bucket-open" disabled={!filled.length}
           aria-label={`${openLabel} in ${bucket.name}`} title={`Open ${item}s in new tabs, in slot order`}
           onClick={() => openBucket(bucketIndex, filled, signature, pending)}>

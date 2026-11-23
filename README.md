@@ -21,7 +21,7 @@ Click **×** on a YouTube bookmark's `#listening` tag to turn listening off, or 
 
 **Buckets** opens the YouTube board at `#/buckets`. Select **Web** for the Web board at `#/buckets/web`. The old `#/starred` link opens YouTube Buckets.
 
-Each board has three buckets with seven slots each. Search the bucket’s library to add a bookmark, or select an empty slot first to choose where it goes. Use **Move here** in search, or drag or select a saved bookmark and choose an empty slot. **Open all** opens the bucket’s bookmarks in slot order.
+Each board has three buckets with seven slots each. Edit a bucket’s title to rename it. Search the bucket’s library to add a bookmark, or select an empty slot first to choose where it goes. Use **Move here** in search, or drag or select a saved bookmark and choose an empty slot. **Open all** opens the bucket’s bookmarks in slot order.
 
 Both boards save independently in this browser. Existing layouts keep the first three bucket names and their first seven slots where possible. Unique bookmarks from extra slots and buckets fill any space left. The original layouts remain in browser storage.
 
