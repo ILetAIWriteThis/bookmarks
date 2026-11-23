@@ -21,9 +21,9 @@ Click **×** on a YouTube bookmark's `#listening` tag to turn listening off, or 
 
 **Buckets** opens the YouTube board at `#/buckets`. Select **Web** for the Web board at `#/buckets/web`. The old `#/starred` link opens YouTube Buckets.
 
-Create named groups and choose **In group** when creating buckets with numbered slots. A bookmark can appear once per group. Use **Move here** to switch buckets within a group or **Add** to place it in another group. You can also drag or select a bookmark and choose an empty slot. Each bucket can open its bookmarks in slot order.
+Each board has three buckets with seven slots each. Search the bucket’s library to add a bookmark, or select an empty slot first to choose where it goes. Use **Move here** in search, or drag or select a saved bookmark and choose an empty slot. **Open all** opens the bucket’s bookmarks in slot order.
 
-Both boards save independently in this browser. Saved Listen and Watch groups appear together on the YouTube board in their original order with their buckets and slots. If both boards had a group with the same name, the second gets a **(Watch)** suffix.
+Both boards save independently in this browser. Existing layouts keep the first three bucket names and their first seven slots where possible. Unique bookmarks from extra slots and buckets fill any space left. The original layouts remain in browser storage.
 
 Media and Travel categories and their bookmarks have been removed. Bookmarks awaiting content review carry `not-reviewed`. Review public site or channel descriptions, published content, or organizer recording archives before assigning topics. The current Web and YouTube review queues have been processed; unavailable content is recorded separately in the review logs. The YouTube Travel topic remains.
 
