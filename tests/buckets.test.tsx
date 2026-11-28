@@ -164,7 +164,11 @@ it('persists the dark mode toggle', () => {
   expect(localStorage.getItem('bookmarks:theme')).toBe('dark')
 })
 
-it('opens only the bucket channels and retries only blocked tabs', () => {
+it.each([
+  { browser: 'Chromium', userAgent: 'Chrome/131.0', first: 'Beta', second: 'Alpha' },
+  { browser: 'Firefox', userAgent: 'Firefox/133.0', first: 'Alpha', second: 'Beta' },
+])('opens only the bucket channels in $browser and retries only blocked tabs', ({ userAgent, first, second }) => {
+  vi.spyOn(navigator, 'userAgent', 'get').mockReturnValue(userAgent)
   localStorage.setItem('bookmarks:buckets:v1:youtube-listen', JSON.stringify([
     { id: 'one', name: 'Recurring', slots: ['Beta', null, 'Alpha'] },
     { id: 'two', name: 'Stories', slots: [null] },
@@ -179,9 +183,10 @@ it('opens only the bucket channels and retries only blocked tabs', () => {
   expect(screen.getByRole('button', { name: 'Open all in Stories' })).toBeDisabled()
   fireEvent.click(screen.getByRole('button', { name: 'Open all in Recurring' }))
   expect(open).toHaveBeenCalledTimes(2)
-  expect(links).toEqual(['https://youtube.com/@Beta'])
+  expect(links).toEqual([`https://youtube.com/@${first}`])
   fireEvent.click(screen.getByRole('button', { name: 'Open remaining in Recurring' }))
-  expect(links).toEqual(['https://youtube.com/@Beta', 'https://youtube.com/@Alpha'])
+  const expected = [first, second].map(title => `https://youtube.com/@${title}`)
+  expect(links).toEqual(expected)
   fireEvent.click(screen.getByRole('button', { name: 'Open all in Recurring' }))
-  expect(links).toEqual(['https://youtube.com/@Beta', 'https://youtube.com/@Alpha', 'https://youtube.com/@Beta', 'https://youtube.com/@Alpha'])
+  expect(links).toEqual([...expected, ...expected])
 })

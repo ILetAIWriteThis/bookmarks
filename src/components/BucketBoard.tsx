@@ -74,7 +74,9 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
 
   const openBucket = (bucketIndex: number, bookmarks: Bookmark[], signature: string, pending?: string[]) => {
     const failed: string[] = []
-    for (const bookmark of bookmarks) {
+    // Firefox can insert each new tab next to the bucket tab, ahead of the previous one.
+    const openingOrder = navigator.userAgent.includes('Firefox/') ? [...bookmarks].reverse() : bookmarks
+    for (const bookmark of openingOrder) {
       if (pending?.length && !pending.includes(bookmark.id)) continue
       // Opening a blank tab first lets us distinguish blocking from a tab with no opener.
       const tab = window.open('about:blank', '_blank')
