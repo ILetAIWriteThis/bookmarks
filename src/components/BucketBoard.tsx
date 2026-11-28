@@ -40,23 +40,30 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
     }
   }
 
-  const place = (id: string, targetIndex: number, slotIndex: number) => {
+  const place = (id: string, targetIndex: number, slotIndex: number, allowSwap = false) => {
     const bookmark = byId.get(id)
     if (!bookmark) return
     const current = currentBuckets()
     const target = current[targetIndex]
-    const occupant = target.slots[slotIndex]
-    if (occupant && byId.has(occupant)) {
+    const targetId = target.slots[slotIndex]
+    if (targetId === id) {
+      setSelected(null)
+      return
+    }
+    const occupant = targetId && byId.has(targetId) ? targetId : null
+    if (occupant && (!allowSwap || !current.some(bucket => bucket.slots.includes(id)))) {
       setMessage('That slot is occupied. Clear it first or choose an empty slot.')
       return
     }
 
     saveBuckets(current.map((bucket, index) => ({
       ...bucket,
-      slots: bucket.slots.map((slot, i) => index === targetIndex && i === slotIndex ? id : slot === id ? null : slot),
+      slots: bucket.slots.map((slot, i) => index === targetIndex && i === slotIndex ? id : slot === id ? occupant : slot),
     })))
     setSelected(null)
-    setMessage(`${bookmark.title} placed in ${target.name}.`)
+    setMessage(occupant
+      ? `${bookmark.title} swapped slots with ${byId.get(occupant)?.title}.`
+      : `${bookmark.title} placed in ${target.name}.`)
   }
 
   const updateBucket = (bucketIndex: number, update: (bucket: Bucket) => Bucket) => {
@@ -172,12 +179,12 @@ export function BucketBoard({ collection, entries }: { collection: V2Collection;
         <ol className="bucket-slots">{bookmarks.map((bookmark, index) => (
           <li key={index} className={`bucket-slot${bookmark ? ' is-filled' : ''}`}
             onDragOver={event => { event.preventDefault(); event.dataTransfer.dropEffect = selected ? 'move' : 'copy' }}
-            onDrop={event => { event.preventDefault(); place(event.dataTransfer.getData('text/plain'), bucketIndex, index) }}>
+            onDrop={event => { event.preventDefault(); place(event.dataTransfer.getData('text/plain'), bucketIndex, index, true) }}>
             <span className="slot-number">{String(index + 1).padStart(2, '0')}</span>
             {bookmark ? <>
               <a className="slot-title" href={bookmark.url} target="_blank" rel="noopener noreferrer" draggable={false}>{bookmark.title}</a>
               <button type="button" className="slot-drag" draggable aria-label={`Move ${bookmark.title}`}
-                aria-pressed={selected === bookmark.id} title="Move to an empty slot"
+                aria-pressed={selected === bookmark.id} title="Drag to move or swap slots"
                 onDragStart={event => {
                   event.dataTransfer.effectAllowed = 'move'
                   event.dataTransfer.setData('text/plain', bookmark.id)

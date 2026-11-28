@@ -157,6 +157,26 @@ it('recovers from malformed storage and supports drag and drop', () => {
   expect(screen.queryByRole('button', { name: 'Remove Alpha from Recurring' })).not.toBeInTheDocument()
 })
 
+it('swaps occupied slots in a full bucket and saves the new order', () => {
+  const original = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta']
+  const library = makeEntries(original)
+  localStorage.setItem('bookmarks:buckets:v1:youtube-listen', JSON.stringify([
+    { name: 'Recurring', slots: original },
+  ]))
+  const { unmount } = render(<BucketBoard collection="youtube" entries={library} />)
+  const dataTransfer = { setData: vi.fn(), getData: () => 'Eta' }
+  fireEvent.dragStart(screen.getByRole('button', { name: 'Move Eta' }), { dataTransfer })
+  fireEvent.drop(screen.getByRole('link', { name: 'Alpha' }).closest('li')!, { dataTransfer })
+
+  const slots = () => within(screen.getByRole('article', { name: 'Recurring' })).getAllByRole('link')
+    .map(link => link.textContent)
+  const expected = ['Eta', ...original.slice(1, -1), 'Alpha']
+  expect(slots()).toEqual(expected)
+  unmount()
+  render(<BucketBoard collection="youtube" entries={library} />)
+  expect(slots()).toEqual(expected)
+})
+
 it('persists the dark mode toggle', () => {
   render(<AppHeader />)
   fireEvent.click(screen.getByRole('button', { name: 'Dark mode' }))
